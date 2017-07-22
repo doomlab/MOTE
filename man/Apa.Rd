@@ -4,17 +4,19 @@
 \alias{apa}
 \title{apa}
 \usage{
-apa(x, k)
+apa(value, decimals, leading)
 }
 \arguments{
-\item{x}{input one}
+\item{value}{input value to convert}
 
-\item{k}{input two}
+\item{decimals}{input how many decimal places}
+  
+\item{leading}{input T for leading decimals F for no leading decimals}
 }
 \description{
 This function formats for APA style
 }
 \examples{
-Apa(x,k)
+apa(value, decimals, leading)
 }
 \keyword{APA}
