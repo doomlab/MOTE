@@ -17,6 +17,7 @@ apa <- function(value, decimals = 3, leading = T) {
   if (leading == F) {
     sub("^(-?)0.", "\\1.", sprintf(paste("%.", decimals, "f", sep = ""), value))
     } 
+  }
 
 ##get rid of this function after updating all to the list output   
   p.value <- function(p, k) {
