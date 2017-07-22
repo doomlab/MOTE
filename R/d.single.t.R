@@ -40,14 +40,14 @@ d.single.t = function (m = 0, u = 0, sd = 1, n = 10, a = .05, k = 3) {
   p = pt(abs(t), n-1, lower.tail = F)*2
   
   output = list("d" = apa(d, k), 
-                "dlow" = apa(dlow, k), 
-                "dhigh" = apa(dhigh, k), 
-                "Mlow" = apa(Mlow, k), 
-                "Mhigh" = apa(Mhigh, k),
-                "t" = apa(t, k),
-                "p" = p.value(p, k), 
-                "m" = apa(m, k),
-                "sd" = apa(sd, k),
+                "dlow" = apa(dlow, k, T), 
+                "dhigh" = apa(dhigh, k, T), 
+                "Mlow" = apa(Mlow, k, T), 
+                "Mhigh" = apa(Mhigh, k, T),
+                "t" = apa(t, k, T),
+                "p" = p.value(p, k, F), 
+                "m" = apa(m, k, T),
+                "sd" = apa(sd, k, T),
                 "df" = (n-1))
   return(output)
 }
