@@ -1,4 +1,4 @@
-#' APA
+#' apa
 #'
 #' A function that formats decimals and leading zeroes 
 #'
