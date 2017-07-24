@@ -1,31 +1,36 @@
-#' r.correl
+#' d.to.r
 #'
-#' This function displays transformation from r to r2 to calculate
+#' Calculates r from d and then translates r to r2 to calculate
 #' the non-central confidence interval for r2 using the F distribution.
 #'
-#' @param r correlation coefficient
-#' @param n sample size
+#' @param d effect size statistic
+#' @param n1 sample size group one
+#' @param n2 sample size group two 
 #' @param a significance level
 #' @keywords effect size, correlation
 #' @export
 #' @examples
-#' r.correl(r = .5, n = 100, a = .05)
+#' d.to.r(d = .5, n1 = 50, n2 = 50, a = .05)
 
 
-r.correl <- function (r, n, a = .05) {
+d.to.r <- function (d, n1, n2, a = .05) {
   # This function Displays transformation from r to r2 to calculate
   # the non-central confidence interval for r2.
   #
   # Args: 
-  #   r : correlation coefficient
-  #   n : sample size
-  #   a : significance level
+  #   d   : effect size statistic
+  #   n1  : sample size group one
+  #   n2  : sample size group two
+  #   a   : significance level
   #
   # Returns:
   #   List of r, r2, and sample size statistics
   
   library(MBESS)
   
+  correct = (n1 + n2)^2 / (n1*n2)
+  n = n1 + n2
+  r <- d / sqrt(d^2 + correct)
   rsq <- r ^ 2
   se <- sqrt(4 * rsq * ((1 - rsq) ^ 2) * ((n - 3) ^ 2) / ((n ^ 2 - 1) * (3 + n)))
   t <- r / sqrt((1 - rsq) / (n - 2))
@@ -37,7 +42,7 @@ r.correl <- function (r, n, a = .05) {
   rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
   ciforr <- ci.R(R = r, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
- 
+  
   output = list("r" = r, #r stats
                 "rlow" = ciforr$Lower.Conf.Limit.R, 
                 "rhigh" = ciforr$Upper.Conf.Limit.R, 

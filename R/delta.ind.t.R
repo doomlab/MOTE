@@ -1,42 +1,43 @@
-#' d.ind.t
+#' delta.ind.t
 #'
-#' This function displays d for between subjects data
+#' This function displays d-delta for between subjects data
 #' and the non-central confidence interval using the 
-#' pooled standard deviation as the denominator.
-#' 
-#' @param m1 mean group one
-#' @param m2 mean group two
-#' @param sd1 standard deviation group one
-#' @param sd2 standard deviation group two
-#' @param n1 sample size group one
-#' @param n2 sample size group two
+#' control group standard deviation as the denominator.
+#'
+#' @param m1 mean from control group
+#' @param m2 mean from experimental group
+#' @param sd1 standard deviation from control group
+#' @param sd2 standard deviation from experimental group
+#' @param n1 sample size from control group
+#' @param n2 sample size from experimental group
 #' @param a significance level
-#' @keywords effect size, independent t
+#' @keywords effect size, delta, independent t
 #' @export
 #' @examples
-#' d.ind.t(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n1 = 100, n2 = 100, a = .05)
+#' delta.ind.t(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n1 = 100, n2 = 100, a = .05)
 
 
-d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
-  # Displays d and confidence interval
-  # using the pooled standard deviation as the denominator.
+delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
+  # This function displays d-delta for between subjects data
+  # and the non-central confidence interval using the 
+  # control group standard deviation as the denominator.
   #
   # Args: 
-  #   m1 : mean group one
-  #   m2 : mean group two
-  #   sd1: standard deviation group one
-  #   sd2: standard deviation group two
-  #   n1 : sample size group one
-  #   n2 : sample size group two
+  #   m1 : mean from control group
+  #   m2 : mean from experimental group
+  #   sd1: standard deviation from control group
+  #   sd2: standard deviation from experimental group
+  #   n1 : sample size from control group
+  #   n2 : sample size from experimental group
   #   a  : significance level
   #
   # Returns:
   #   List of d, mean, and sample size statistics
+
+  library(MBESS)  
   
-  library(MBESS)
-  
-  spooled <- sqrt( ((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
-  d <- (m1 - m2) / spooled
+  spooled <- sqrt(((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
+  d <- (m1 - m2) / sd1
   se1 <- sd1 / sqrt(n1)
   se2 <- sd2 / sqrt(n2)
   sepooled <- sqrt((spooled ^ 2 / n1 + spooled ^ 2 / n2))
@@ -53,12 +54,12 @@ d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   output = list("d" = d, #d stats
                 "dlow" = dlow, 
                 "dhigh" = dhigh, 
-                "M1" = m1, #group 1 stats
+                "M1" = m1, #control group stats
                 "sd1" = sd1,
                 "se1" = se1,
                 "M1low" = M1low, 
                 "M1high" = M1high,
-                "M2" = m2, #group 2 stats
+                "M2" = m2, #experimental group stats
                 "sd2" = sd2,
                 "se2" = se2,
                 "M2low" = M2low,

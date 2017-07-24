@@ -1,21 +1,19 @@
 #' d.single.t
 #'
-#' This function Displays Cohen's d and confidence interval for single t from means. 
+#' This function displays d and non-central confidence interval for single t from means. 
 #'
 #' @param m sample mean
 #' @param u population mean
 #' @param sd sample standard deviation
 #' @param n sample size
 #' @param a significance level
-#' @param k significant digits to use for formatting
-#' @keywords effect size
+#' @keywords effect size, single t
 #' @export
 #' @examples
-#' d.single.t(m=20, u=17, sd=4, n=100, a = .05, k = 2)
+#' d.single.t(m = 20, u = 17, sd = 4, n = 100, a = .05)
 
-d.single.t = function (m = 0, u = 0, sd = 1, n = 10, a = .05, k = 3) {
-  # Displays Cohen's d and confidence interval for single t
-  # from means.
+d.single.t = function (m, u, sd, n, a = .05) {
+  # This function displays d and non-central confidence interval for single t from means. 
   #
   # Args: 
   #   m : sample mean
@@ -23,31 +21,35 @@ d.single.t = function (m = 0, u = 0, sd = 1, n = 10, a = .05, k = 3) {
   #   sd: sample standard deviation
   #   n : sample size
   #   a : significance level
-  #   k : significant digits to use for formatting
   #
   # Returns:
-  #   The output of the function will return a list of d, upper and lower CI for d, upper and lower CI for M, t-test value, p-value for t-test,  the original mean, the original standard deviation, and degrees of freedom. 
-
+  #   List of d, mean, and sample size statistics
+  
   library(MBESS)
-  se = sd / sqrt(n)
-  d = (m - u) / sd
-  t = (m - u) / se
-  ncpboth = conf.limits.nct(t, (n-1), conf.level = (1-a), sup.int.warns = TRUE)
+  
+  se <- sd / sqrt(n)
+  d <- (m - u) / sd
+  t <- (m - u) / se
+  ncpboth = conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow = ncpboth$Lower.Limit / sqrt(n)
   dhigh = ncpboth$Upper.Limit / sqrt(n)
-  Mlow = m - se*qt(a/2, n-1, lower.tail = FALSE)
-  Mhigh = m + se*qt(a/2, n-1, lower.tail = FALSE)
-  p = pt(abs(t), n-1, lower.tail = F)*2
+  Mlow = m - se*qt(a / 2, n - 1, lower.tail = FALSE)
+  Mhigh = m + se*qt(a / 2, n - 1, lower.tail = FALSE)
+  p = pt(abs(t), n - 1, lower.tail = F)*2
   
-  output = list("d" = apa(d, k), 
-                "dlow" = apa(dlow, k, T), 
-                "dhigh" = apa(dhigh, k, T), 
-                "Mlow" = apa(Mlow, k, T), 
-                "Mhigh" = apa(Mhigh, k, T),
-                "t" = apa(t, k, T),
-                "p" = p.value(p, k, F), 
-                "m" = apa(m, k, T),
-                "sd" = apa(sd, k, T),
-                "df" = (n-1))
+  output = list("d" = d, #d stats
+                "dlow" = dlow, 
+                "dhigh" = dhigh, 
+                "m" = m, #mean stats
+                "sd" = sd,
+                "se" = se,
+                "Mlow" = Mlow, 
+                "Mhigh" = Mhigh,
+                "u" = u,
+                "n" = n, #sample stats
+                "df" = (n - 1),
+                "t" = t, #sig stats,
+                "p" = p) 
+  
   return(output)
 }
