@@ -1,11 +1,10 @@
 Package: MOTE
-Title: Measure of the Effect
+Title: Effect Size and Confidence Interval Calculator
 Version: 0.0.0.9000
-Author: John Smith <JohnSmith@myemail.com>
-Maintaner: John Smith <JohnSmith@myemail.com>
-Description: This package calculates Effect Sizes. This can be a full paragraph.
-Depends: R (>= 3.3.1)
-License: LGPL-2.1
+Authors@R: person(“Erin”, “Buchanan”, email = “erinbuchanan@missouristate.edu”, role = c("aut", "cre"))
+Description: This package calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
+Depends: R (>= 3.4.0)
+License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.0.1
