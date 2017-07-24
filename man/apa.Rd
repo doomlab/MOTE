@@ -4,19 +4,21 @@
 \alias{apa}
 \title{apa}
 \usage{
-apa(value, decimals, leading)
+apa(value, decimals = 3, leading = T)
 }
 \arguments{
-\item{value}{input value to convert}
+\item{value}{the number you want to format}
 
-\item{decimals}{input how many decimal places}
-  
-\item{leading}{input T for leading decimals F for no leading decimals}
+\item{decimals}{the number of decimal points desired}
+
+\item{leading}{logical TRUE for leading zeroes on decimals and FALSE for no leading zeroes on decimals}
 }
 \description{
-This function formats for APA style
+A function that formats decimals and leading zeroes
 }
 \examples{
-apa(value, decimals, leading)
+Apa(x,k)
 }
-\keyword{APA}
+\keyword{APA,}
+\keyword{decimals,}
+\keyword{formatting}

@@ -4,26 +4,28 @@
 \alias{d.prop}
 \title{d.prop}
 \usage{
-d.prop(p1, p2, n1, n2, a = 0.05, k = 2)
+d.prop(p1, p2, n1, n2, a = 0.05)
 }
 \arguments{
-\item{p1}{proportion of people from group 1}
+\item{p1}{proportion of people group one}
 
-\item{p2}{proportion of people from group 2}
+\item{p2}{proportion of people group two}
 
-\item{n1}{sample size group 1}
+\item{n1}{sample size group one}
 
-\item{n2}{sample size group 2}
+\item{n2}{sample size group two}
 
 \item{a}{significance level}
-
-\item{k}{significant digits to use for formatting}
 }
 \description{
-This function Displays proportion differences, independent
+This function displays d and central confidence interval
+calculated from differences in independent proportions.
 }
 \examples{
-d.prop(p1 = .4, p2 = .6, n1 = 100, n2 = 100, a = .05, k = 2)
+d.prop(p1 = .4, p2 = .6, n1 = 100, n2 = 100, a = .05)
 }
 \keyword{effect}
-\keyword{size}
+\keyword{prop}
+\keyword{proportions}
+\keyword{size,}
+\keyword{test,}

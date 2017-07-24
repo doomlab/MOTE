@@ -4,30 +4,32 @@
 \alias{d.ind.t}
 \title{d.ind.t}
 \usage{
-d.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05, k = 2)
+d.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
 \arguments{
-\item{m1}{mean from first group}
+\item{m1}{mean group one}
 
-\item{m2}{mean from second group}
+\item{m2}{mean group two}
 
-\item{sd1}{standard deviation from first group}
+\item{sd1}{standard deviation group one}
 
-\item{sd2}{standard deviation from second group}
+\item{sd2}{standard deviation group two}
 
-\item{n1}{sample size group 1}
+\item{n1}{sample size group one}
 
-\item{n2}{sample size group 2}
+\item{n2}{sample size group two}
 
 \item{a}{significance level}
-
-\item{k}{significant digits to use for formatting}
 }
 \description{
-This function Displays Cohen's d and confidence interval for independent t from means.
+This function displays d for between subjects data
+and the non-central confidence interval using the 
+pooled standard deviation as the denominator.
 }
 \examples{
-d.ind.t(m1=20, m2=17, sd1=4, sd2=5, n1=100, n2 = 100, a = .05, k = 2)
+d.ind.t(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n1 = 100, n2 = 100, a = .05)
 }
 \keyword{effect}
-\keyword{size}
+\keyword{independent}
+\keyword{size,}
+\keyword{t}

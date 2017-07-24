@@ -7,23 +7,23 @@
 v.chi.sq(x2, n, r, c, a = 0.05, k = 2)
 }
 \arguments{
-\item{x2}{chi-square metric}
+\item{x2}{chi-square statistic}
 
 \item{n}{sample size}
 
-\item{r}{correlation}
+\item{r}{number of rows in the contingency table}
 
-\item{c}{number of columns in the contigency table}
+\item{c}{number of columns in the contingency table}
 
 \item{a}{significance level}
-
-\item{k}{significant digits to use for formatting}
 }
 \description{
-This function Displays the effect size and confidence interval for the specified chi-square metric using Cramer's V.
+This function displays V and non-central confidence interval 
+for the specified chi-square statistic.
 }
 \examples{
-v.chi.sq(x2, n, r, c, a = .05, k = 2)
+v.chi.sq(x2 = 4, n = 25, r = 2, c = 2, a = .05)
 }
+\keyword{chi-square}
 \keyword{effect}
-\keyword{size}
+\keyword{size,}

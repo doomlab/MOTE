@@ -4,7 +4,7 @@
 \alias{r.correl}
 \title{r.correl}
 \usage{
-r.correl(r, n, a = 0.05, k = 2)
+r.correl(r, n, a = 0.05)
 }
 \arguments{
 \item{r}{correlation coefficient}
@@ -12,14 +12,14 @@ r.correl(r, n, a = 0.05, k = 2)
 \item{n}{sample size}
 
 \item{a}{significance level}
-
-\item{k}{significant digits to use for formatting}
 }
 \description{
-This function Displays transformation from r to r2
+This function displays transformation from r to r2 to calculate
+the non-central confidence interval for r2 using the F distribution.
 }
 \examples{
-r.correl(r = .5, n = 100, a = .05, k = 2)
+r.correl(r = .5, n = 100, a = .05)
 }
+\keyword{correlation}
 \keyword{effect}
-\keyword{size}
+\keyword{size,}

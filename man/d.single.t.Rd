@@ -4,7 +4,7 @@
 \alias{d.single.t}
 \title{d.single.t}
 \usage{
-d.single.t(m, u, sd, n, a = 0.05, k = 2)
+d.single.t(m, u, sd, n, a = 0.05)
 }
 \arguments{
 \item{m}{sample mean}
@@ -16,14 +16,14 @@ d.single.t(m, u, sd, n, a = 0.05, k = 2)
 \item{n}{sample size}
 
 \item{a}{significance level}
-
-\item{k}{significant digits to use for formatting}
 }
 \description{
-This function Displays Cohen's d and confidence interval for single t from means.
+This function displays d and non-central confidence interval for single t from means.
 }
 \examples{
-d.single.t(m=20, u=17, sd=4, n=100, a = .05, k = 2)
+d.single.t(m = 20, u = 17, sd = 4, n = 100, a = .05)
 }
 \keyword{effect}
-\keyword{size}
+\keyword{single}
+\keyword{size,}
+\keyword{t}
