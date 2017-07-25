@@ -14,7 +14,7 @@
 #' v.chi.sq(x2 = 4, n = 25, r = 2, c = 2, a = .05)
 
 
-v.chi.sq <- function (x2, n, r, c, a = .05, k = 2) {
+v.chi.sq <- function (x2, n, r, c, a = .05) {
   # This function displays V and non-central confidence interval 
   # for the specified chi-square statistic.  
   #
