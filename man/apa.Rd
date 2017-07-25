@@ -17,7 +17,7 @@ apa(value, decimals = 3, leading = T)
 A function that formats decimals and leading zeroes
 }
 \examples{
-Apa(x,k)
+apa(value = 0.54674, decimals = 3, leading = T)
 }
 \keyword{APA,}
 \keyword{decimals,}
