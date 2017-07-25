@@ -8,7 +8,7 @@
 #' @keywords APA, decimals, formatting
 #' @export
 #' @examples
-#' Apa(x,k)
+#' apa(value = 0.54674, decimals = 3, leading = T)
 
 apa <- function(value, decimals = 3, leading = T) {
   # Function creates printable results from output
