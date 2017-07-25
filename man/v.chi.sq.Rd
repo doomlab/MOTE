@@ -4,7 +4,7 @@
 \alias{v.chi.sq}
 \title{v.chi.sq}
 \usage{
-v.chi.sq(x2, n, r, c, a = 0.05, k = 2)
+v.chi.sq(x2, n, r, c, a = 0.05)
 }
 \arguments{
 \item{x2}{chi-square statistic}
