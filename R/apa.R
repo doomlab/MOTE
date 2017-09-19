@@ -22,7 +22,7 @@ apa <- function(value, decimals = 3, leading = T) {
   #   Character of formatted values
   
   if (leading == T) {
-    formnumber <- format(value, digits = decimals, nsmall = decimals)
+    formnumber <- format(round(value, decimals), digits = decimals, nsmall = decimals)
     }
   if (leading == F) {
     formnumber <- sub("^(-?)0.", "\\1.", sprintf(paste("%.", decimals, "f", sep = ""), value))
