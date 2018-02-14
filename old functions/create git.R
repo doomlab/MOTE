@@ -9,7 +9,7 @@ devtools::create("MOTE")
 
 ##open that folder
     ##create a man folder within the folder you just made
-    ##empty R folder gets the function files 
+    ##empty R folder gets the function files
     ##fix the description file
         ##you can open this in R - edit the information in this file to be correct (use license() to get the current license)
 license()
@@ -24,13 +24,13 @@ license()
     #' @examples leave this blank
     #' now put in the examples here
 
-##set your working directory to package file 
-setwd("~/OneDrive - Missouri State University/RESEARCH/2 projects/MOTE/MOTE")
+##set your working directory to package file
+setwd("~/OneDrive - Missouri State University/RESEARCH/2 projects/MOTE")
 
 ##run this thing
 library(roxygen2)
 roxygen2::roxygenise()
-    ##it searches through folder looks for description 
-    ##and create the Rd files and put into man folder 
+    ##it searches through folder looks for description
+    ##and create the Rd files and put into man folder
 
 ##Then you put it on git hub
