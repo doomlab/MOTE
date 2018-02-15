@@ -34,3 +34,6 @@ roxygen2::roxygenise()
     ##and create the Rd files and put into man folder
 
 ##Then you put it on git hub
+
+##then run this to update
+devtools::install_github("doomlab/MOTE")
