@@ -44,7 +44,7 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
                 "Sigma" = sig, #population stats
                 "z" = z, #sig stats
                 "p" = p,
-                "n" = n, #sample stats
+                "n" = n #sample stats
                 ) 
                 
   return(output)
