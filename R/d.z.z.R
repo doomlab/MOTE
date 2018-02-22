@@ -29,7 +29,7 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
   library(MBESS)
   
   d <- z / sqrt(n)
-  if (sig == NA){
+  if (is.na(sig)){
     dlow <- NA
     dhigh <- NA
   } else {
