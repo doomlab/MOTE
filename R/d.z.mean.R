@@ -39,7 +39,7 @@ d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
   dlow <- d-qnorm(a/2, lower.tail = F)*sig
   dhigh <- d+qnorm(a/2, lower.tail = F)*sig
   z <- (mu - m1) / se1
-  p <- pnorm(z, lower.tail = FALSE)*2
+  p <- pnorm(abs(z), lower.tail = FALSE)*2
   M1low <- m1 - se2 * qnorm(a/2, lower.tail = FALSE)
   M1high <- m1 + se2 * qnorm(a/2, lower.tail = FALSE)
   
