@@ -31,7 +31,7 @@ v.chi.sq <- function (x2, n, r, c, a = .05) {
   library(MBESS)
   
   dfsmall <- min(r - 1, c - 1)
-  v <- sqrt(x2 / n * dfsmall)
+  v <- sqrt(x2 / (n * dfsmall))
   dftotal <- (r - 1) * (c - 1)
   ncpboth <- conf.limits.nc.chisq(x2, df = dftotal, conf.level = (1 - a))
   vlow <- sqrt((ncpboth$Lower.Limit + dftotal) / (n * dfsmall))
