@@ -2,7 +2,7 @@
 #'
 #' This function displays d for z-scores with the 
 #' population mean and standard deviation.
-#' The normoal confidence interval is also provided.
+#' The normal confidence interval is also provided.
 #'
 #' @param mu population mean
 #' @param m1 sample study mean
