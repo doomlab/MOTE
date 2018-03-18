@@ -22,7 +22,7 @@ d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 \description{
 This function displays d for z-scores with the 
 population mean and standard deviation.
-The normoal confidence interval is also provided.
+The normal confidence interval is also provided.
 }
 \examples{
 d.z.mean(mu = 20, m1 = 17, sig = 4, sd1 = 5, n = 100, a = .05)

@@ -21,7 +21,7 @@ The normoal confidence interval is also provided if you have sigma.
 If sigma is left blank, then you will not see a confidence interval.
 }
 \examples{
-d.z.z(z = 1.25, n = 10, a = .05)
+d.z.z(z = 1.25, sig = 3, n = 10, a = .05)
 }
 \keyword{effect}
 \keyword{size,}

@@ -11,7 +11,7 @@
 #' @keywords effect size, z-test
 #' @export
 #' @examples
-#' d.z.z(z = 1.25, n = 10, a = .05)
+#' d.z.z(z = 1.25, sig = 3, n = 10, a = .05)
 
 
 d.z.z <- function (z, sig = NA, n, a = .05) {
@@ -19,7 +19,8 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
   # mean and standard deviation. The normal confidence intervals are also provided.
   #
   # Args:
-  #   z  : z-test statistic
+  #   z   : z-test statistic
+  #   sig : population standard deviation can be NA
   #   n   : sample size
   #   a   : significance level
   #
@@ -41,7 +42,7 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
   output = list("d" = d, #d stats
                 "dlow" = dlow, 
                 "dhigh" = dhigh, 
-                "Sigma" = sig, #population stats
+                "sigma" = sig, #population stats
                 "z" = z, #sig stats
                 "p" = p,
                 "n" = n #sample stats
