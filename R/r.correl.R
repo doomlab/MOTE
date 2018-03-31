@@ -26,7 +26,7 @@ r.correl <- function (r, n, a = .05) {
   
   library(MBESS)
   
-  rsq <- r ^ 2
+  rsq <- (r) ^ 2
   se <- sqrt(4 * rsq * ((1 - rsq) ^ 2) * ((n - 3) ^ 2) / ((n ^ 2 - 1) * (3 + n)))
   t <- r / sqrt((1 - rsq) / (n - 2))
   Fvalue <- t ^ 2
@@ -35,12 +35,21 @@ r.correl <- function (r, n, a = .05) {
   ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   rsqlow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
   rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-  ciforr <- ci.R(R = r, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  ciforr <- ci.R(R = abs(r), df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
  
+  #deal with negative r / d values 
+  if (r < 0) { 
+    rlow = 0 - ciforr$Lower.Conf.Limit.R
+    rhigh = 0 - ciforr$Upper.Conf.Limit.R
+  } else {
+    rlow = ciforr$Lower.Conf.Limit.R
+    rhigh = ciforr$Upper.Conf.Limit.R
+  }
+  
   output = list("r" = r, #r stats
-                "rlow" = ciforr$Lower.Conf.Limit.R, 
-                "rhigh" = ciforr$Upper.Conf.Limit.R, 
+                "rlow" = rlow, 
+                "rhigh" = rhigh, 
                 "R2" = rsq, #R squared stats
                 "R2low" = rsqlow,
                 "R2high" = rsqhigh,
