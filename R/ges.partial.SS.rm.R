@@ -49,7 +49,7 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
   
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
-                 "geshigh" = limits$upper.Conf.Limit.R2,
+                 "geshigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
