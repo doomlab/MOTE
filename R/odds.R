@@ -1,14 +1,14 @@
 #' odds
 #'
 #' This function displays odds ratios and their normal confidence intervals.
-#' This statistic is calculated as (level1.1/level2.1) / (level1.2/level2.2),
-#' which can be considered the odds of level1.1 given level1 overall versus level1.2
+#' This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
+#' which can be considered the odds of level 1.1 given level1 overall versus level2.1 
 #' given level2 overall. 
 #'
-#' @param n11 sample size for level1.1, level2.1
-#' @param n12 sample size for level1.1, level2.2
-#' @param n21 sample size for level1.2, level2.1
-#' @param n22 sample size for level1.2, level 2.2
+#' @param n11 sample size for level 1.1
+#' @param n12 sample size for level 1.2
+#' @param n21 sample size for level 2.1
+#' @param n22 sample size for level 2.2
 #' @param a significance level
 #' @keywords effect size, odds ratios
 #' @export
@@ -20,10 +20,10 @@ odds <- function (n11, n12, n21, n22, a = .05) {
   # Displays odds ratios, sensitivity / specificity
   #
   # Args: 
-  #   n11 : sample size for level1.1, level2.1
-  #   n12 : sample size for level1.1, level2.2
-  #   n21 : sample size for level1.2, level2.1
-  #   n22 : sample size for level1.2, level 2.2  
+  #   n11 : sample size for level 1.1
+  #   n12 : sample size for level 1.2
+  #   n21 : sample size for level 2.1
+  #   n22 : sample size for level 2.2  
   #   a   : significance level
   #
   # Returns:

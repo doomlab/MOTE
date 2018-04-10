@@ -7,20 +7,20 @@
 odds(n11, n12, n21, n22, a = 0.05)
 }
 \arguments{
-\item{n11}{sample size for level1.1, level2.1}
+\item{n11}{sample size for level 1.1}
 
-\item{n12}{sample size for level1.1, level2.2}
+\item{n12}{sample size for level 1.2}
 
-\item{n21}{sample size for level1.2, level2.1}
+\item{n21}{sample size for level 2.1}
 
-\item{n22}{sample size for level1.2, level 2.2}
+\item{n22}{sample size for level 2.2}
 
 \item{a}{significance level}
 }
 \description{
 This function displays odds ratios and their normal confidence intervals.
-This statistic is calculated as (level1.1/level2.1) / (level1.2/level2.2),
-which can be considered the odds of level1.1 given level1 overall versus level1.2
+This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
+which can be considered the odds of level 1.1 given level1 overall versus level2.1 
 given level2 overall.
 }
 \examples{
