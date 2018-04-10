@@ -34,14 +34,18 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
   
   epsilon <- (dfm * (msm - mse)) / (sst)
   Fvalue <- msm / mse
-  ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
+  #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  limits <- ci.R2(R2 = epsilon, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
+  
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
   
   output <- list("epsilon" = epsilon, #epsilon stats
-                 "epsilonlow" = elow,
-                 "epsilonhigh" = ehigh,
+                 "epsilonlow" = limits$Lower.Conf.Limit.R2,
+                 "epsilonhigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,

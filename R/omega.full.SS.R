@@ -34,14 +34,18 @@ omega.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
   
   omega <- (dfm * (msm - mse)) / (sst + mse)
   Fvalue <- msm / mse
-  ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
+  #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
+  
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
   
   output <- list("omega" = omega, #omega stats
-                 "omegalow" = olow,
-                 "omegahigh" = ohigh,
+                 "omegalow" = limits$Lower.Conf.Limit.R2,
+                 "omegahigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,

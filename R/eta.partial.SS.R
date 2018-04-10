@@ -32,14 +32,18 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
   #   List of eta, F, and sample size statistics
   
   eta <- ssm / (ssm + sse)
-  ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
+  #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
+  
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
   
   output <- list("eta" = eta, #eta stats
-                 "etalow" = elow,
-                 "etahigh" = ehigh,
+                 "etalow" = limits$Lower.Conf.Limit.R2,
+                 "etahigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,

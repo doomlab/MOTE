@@ -37,9 +37,12 @@ d.to.r <- function (d, n1, n2, a = .05) {
   Fvalue <- t ^ 2
   dfm <- 1
   dfe <- n - 2
-  ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  rsqlow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  #rsqlow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
+  #rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  limits <- ci.R2(R2 = rsq, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
   ciforr <- ci.R(R = abs(r), df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
   
@@ -56,8 +59,8 @@ d.to.r <- function (d, n1, n2, a = .05) {
                 "rlow" = rlow, 
                 "rhigh" = rhigh, 
                 "R2" = rsq, #R squared stats
-                "R2low" = rsqlow,
-                "R2high" = rsqhigh,
+                "R2low" = limits$Lower.Conf.Limit.R2,
+                "R2high" = limits$Upper.Conf.Limit.R2,
                 "se" = se,
                 "n" = n, #sample stats
                 "dfm" = 1, #sig stats

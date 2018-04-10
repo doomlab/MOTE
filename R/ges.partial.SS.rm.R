@@ -38,14 +38,18 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
   #   List of ges, F, and sample size statistics
   
   ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
-  ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  glow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  ghigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
+  #glow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
+  #ghigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  
+  limits <- ci.R2(R2 = ges, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
+  
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
   
   output <- list("ges" = ges, #ges stats
-                 "geslow" = glow,
-                 "geshigh" = ghigh,
+                 "geslow" = limits$Lower.Conf.Limit.R2,
+                 "geshigh" = limits$upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
