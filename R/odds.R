@@ -2,8 +2,8 @@
 #'
 #' This function displays odds ratios and their normal confidence intervals.
 #' This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
-#' which can be considered the odds of level 1.1 given level1 overall versus level2.1 
-#' given level2 overall. 
+#' which can be considered the odds of level 1.1 given level1 overall versus level2.1
+#' given level2 overall.
 #'
 #' @param n11 sample size for level 1.1
 #' @param n12 sample size for level 1.2
@@ -19,26 +19,26 @@
 odds <- function (n11, n12, n21, n22, a = .05) {
   # Displays odds ratios, sensitivity / specificity
   #
-  # Args: 
+  # Args:
   #   n11 : sample size for level 1.1
   #   n12 : sample size for level 1.2
   #   n21 : sample size for level 2.1
-  #   n22 : sample size for level 2.2  
+  #   n22 : sample size for level 2.2
   #   a   : significance level
   #
   # Returns:
   #   List of odds and sample size statistics
-  
+
   odds <- (n11 / n12) / (n21 / n22)
   se <- sqrt((1 / n11) + (1 / n12) + (1 / n21) + (1 / n22))
-  olow <- exp(log(odds)) - qnorm(a / 2, lower.tail = F) * se
-  ohigh <- exp(log(odds)) + qnorm(a / 2, lower.tail = F) * se
-  
+  olow <- exp(log(odds) - qnorm(a / 2, lower.tail = F) * se)
+  ohigh <- exp(log(odds) + qnorm(a / 2, lower.tail = F) * se)
+
   output = list("odds" = odds, #odds stats
-                "olow" = olow, 
-                "ohigh" = ohigh, 
-                "se" = se) 
-  
+                "olow" = olow,
+                "ohigh" = ohigh,
+                "se" = se)
+
   return(output)
-  
+
 }
