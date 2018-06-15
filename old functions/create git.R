@@ -5,7 +5,7 @@ install.packages("roxygen2")
 setwd("~/Downloads")
 
 ##create the folder for everything
-devtools::create("MOTE")
+devtools::create("MeMoBootR")
 
 ##open that folder
     ##create a man folder within the folder you just made
