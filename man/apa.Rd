@@ -24,7 +24,7 @@ This function creates "pretty" character vectors from numeric variables
   matrix, vector, or multiple columns from a data frame, as long as they are
   numeric. The values will be coerced into numeric if they are characters or
   logical values, but this process may result in an error if values are
-  truly alphanumeric.
+  truly alphabetical.
 }
 \examples{
 apa(value = 0.54674, decimals = 3, leading = T)
