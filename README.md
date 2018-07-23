@@ -17,4 +17,4 @@ To install the package take the following steps:
 
 4) Enjoy MOTE. 
 
-You can also use the [Shiny App](http://shiny.aggieerin.com:3838/MOTE/)!
+You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)!
