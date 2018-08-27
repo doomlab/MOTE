@@ -1,7 +1,7 @@
-#' d.dep.t.avg
+#' d for Dependent t with Average SD Denominator
 #'
 #' This function displays d for repeated measures data
-#' and the non-central confidence interval using the 
+#' and the non-central confidence interval using the
 #' average standard deviation of each level as the denominator.
 #'
 #' @param m1 mean from first level
@@ -13,26 +13,37 @@
 #' @keywords effect size, dependent t-test
 #' @export
 #' @examples
-#' d.dep.t.avg(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n = 100, a = .05)
-
+#' In a study to test the effects of science fiction movies on people's
+#' belief in the supernatural, seven people completed a measure of belief
+#' in the supernatural before and after watching a popular science fiction
+#' movie. Participants' scores are shown with high scores indicating high
+#' levels of belief. The data is included at GitHub.
+#'
+#' You can type in the numbers directly:
+#' d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988, sd2 = 2.878, n = 14, a = .05)
+#'
+#' Or you can calculate from the data:
+#'
+#' Provided information is:
+#' d: the effect size
+#' dlow: the lower level confidence interval d value
+#' dhigh: the upper level confidence interval d value
+#' M1/M2: mean one and two
+#' M1low/M2low: the lower level confidence interval of mean one or two
+#' M1high/M2high: the upper level confidence interval of mean one or two
+#' sd1/sd2: the standard deviation of mean one and two
+#' se1/se2: the standard error of mean one and two
+#' n: the sample size
+#' df: the degrees of freedom (sample size - 1)
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
-  # Displays d and non-central confidence interval for repeated measures
-  # using average standard deviation of levels as the denominator.
-  #
-  # Args:
-  #   m1 : mean from first group
-  #   m2 : mean from second group
-  #   sd1: standard deviation from first group
-  #   sd2: standard deviation from second group
-  #   n  : sample size
-  #   a  : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
-  
+
   library(MBESS)
-  
+
+  if (m1 = NULL | m2 = NULL | sd1 = NULL | sd2 = NULL | n = NULL){
+    stop("Be sure you enter mean 1, mean 2, sd 1, sd 2, and n values.")
+    }
+
   d <- (m1 - m2) / ((sd1 + sd2) / 2)
   se1 <- sd1 / sqrt(n)
   se2 <- sd2 / sqrt(n)
@@ -44,14 +55,14 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
   M1high <- m1 + se1 * qt(a / 2, n - 1, lower.tail = FALSE)
   M2low <- m2 - se2 * qt(a / 2, n - 1, lower.tail = FALSE)
   M2high <- m2 + se2 *  qt(a / 2, n - 1, lower.tail = FALSE)
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "M1" = m1, #level 1 stats
                 "sd1" = sd1,
                 "se1" = se1,
-                "M1low" = M1low, 
+                "M1low" = M1low,
                 "M1high" = M1high,
                 "M2" = m2, #level 2 stats
                 "sd2" = sd2,
@@ -60,6 +71,9 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
                 "M2high" = M2high,
                 "n" = n, #sample stats
                 "df" = (n - 1)) #no t/p as not appropriate for sig testing
-                
+
   return(output)
-  }
+}
+
+#' @rdname d.dep.t.avg
+#' @export
