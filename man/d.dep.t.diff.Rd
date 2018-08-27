@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.dep.t.diff.R
 \name{d.dep.t.diff}
 \alias{d.dep.t.diff}
-\title{d.dep.t.diff}
+\title{d for Dependent t with SD Difference Scores Denominator}
 \usage{
 d.dep.t.diff(mdiff, sddiff, n, a = 0.05)
 }
@@ -17,8 +17,11 @@ d.dep.t.diff(mdiff, sddiff, n, a = 0.05)
 }
 \description{
 This function displays d for repeated measures data
-and the non-central confidence interval using the 
+and the non-central confidence interval using the
 standard deviation of the differences as the denominator.
+}
+\details{
+formula here
 }
 \examples{
 d.dep.t.diff(mdiff = 5, sddiff = 3, n = 100, a = .05)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.dep.t.avg.R
 \name{d.dep.t.avg}
 \alias{d.dep.t.avg}
-\title{d.dep.t.avg}
+\title{d for Dependent t with Average SD Denominator}
 \usage{
 d.dep.t.avg(m1, m2, sd1, sd2, n, a = 0.05)
 }
@@ -21,11 +21,34 @@ d.dep.t.avg(m1, m2, sd1, sd2, n, a = 0.05)
 }
 \description{
 This function displays d for repeated measures data
-and the non-central confidence interval using the 
+and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
 \examples{
-d.dep.t.avg(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n = 100, a = .05)
+In a study to test the effects of science fiction movies on people's
+belief in the supernatural, seven people completed a measure of belief
+in the supernatural before and after watching a popular science fiction
+movie. Participants' scores are shown with high scores indicating high
+levels of belief.
+
+You can type in the numbers directly:
+d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
+sd2 = 2.878, n = 14, a = .05)
+
+Or you can calculate from the data:
+d.dep.t.avg
+
+Provided information is:
+d: the effect size
+dlow: the lower level confidence interval d value
+dhigh: the upper level confidence interval d value
+M1/M2: mean one and two
+M1low/M2low: the lower level confidence interval of mean one or two
+M1high/M2high: the upper level confidence interval of mean one or two
+sd1/sd2: the standard deviation of mean one and two
+se1/se2: the standard error of mean one and two
+n: the sample size
+df: the degrees of freedom (sample size - 1)
 }
 \keyword{dependent}
 \keyword{effect}
