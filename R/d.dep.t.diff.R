@@ -1,9 +1,11 @@
-#' d.dep.t.diff
+#' d for Dependent t with SD Difference Scores Denominator
 #'
 #' This function displays d for repeated measures data
-#' and the non-central confidence interval using the 
+#' and the non-central confidence interval using the
 #' standard deviation of the differences as the denominator.
-#' 
+#'
+#' formula here
+#'
 #' @param mdiff mean difference score
 #' @param sddiff standard deviation of the difference scores
 #' @param n sample size
@@ -15,20 +17,9 @@
 
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
-  # Displays d and non-central confidence interval for repeated measures
-  # using the standard deviation of the differences as the denominator.
-  #
-  # Args: 
-  #   mdiff : mean difference score
-  #   sddiff: standard deviation of the differences scores
-  #   n     : sample size
-  #   a     : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
-  
+
   library(MBESS)
-  
+
   d <- mdiff / sddiff
   se <- sddiff / sqrt(n)
   t <- mdiff / se
@@ -38,12 +29,12 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
   Mlow <- mdiff - se * qt(a / 2, n - 1, lower.tail = FALSE)
   Mhigh <- mdiff + se * qt(a / 2, n - 1, lower.tail = FALSE)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "mdiff" = mdiff, #mean stats
-                "Mlow" = Mlow, 
+                "Mlow" = Mlow,
                 "Mhigh" = Mhigh,
                 "sddiff" = sddiff,
                 "se" = se,
@@ -51,7 +42,10 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
                 "df" = (n - 1),
                 "t" = t, #sig stats
                 "p" = p
-                ) 
-  
+                )
+
   return(output)
 }
+
+#' @rdname d.dep.t.diff
+#' @export

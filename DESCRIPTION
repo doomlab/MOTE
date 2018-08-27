@@ -5,13 +5,15 @@ Title: Effect Size and Confidence Interval Calculator
 Authors@R: c(person("Erin", "Buchanan", role = c("aut", "cre"),
                      email = "erinbuchanan@missouristate.edu"),
               person("John", "Scofield", role = "aut"),
-              person("K.D.", "Valentine", role = "aut"))
+              person("K.D.", "Valentine", role = "aut"),
+              person("Amber", "Gillenwaters", role = "aut"))
 Author: Erin M. Buchanan [aut, cre],
   John E. Scofield [aut],
-  K. D. Valentine [aut]
+  K. D. Valentine [aut],
+  Amber M. Gillenwaters [aut]
 Depends: R (>= 3.1.0), MBESS
 Description: This package calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

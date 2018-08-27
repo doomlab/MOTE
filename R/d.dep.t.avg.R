@@ -17,12 +17,14 @@
 #' belief in the supernatural, seven people completed a measure of belief
 #' in the supernatural before and after watching a popular science fiction
 #' movie. Participants' scores are shown with high scores indicating high
-#' levels of belief. The data is included at GitHub.
+#' levels of belief.
 #'
 #' You can type in the numbers directly:
-#' d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988, sd2 = 2.878, n = 14, a = .05)
+#' d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
+#' sd2 = 2.878, n = 14, a = .05)
 #'
 #' Or you can calculate from the data:
+#' d.dep.t.avg
 #'
 #' Provided information is:
 #' d: the effect size
@@ -40,7 +42,7 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
   library(MBESS)
 
-  if (m1 = NULL | m2 = NULL | sd1 = NULL | sd2 = NULL | n = NULL){
+  if (m1 == NULL | m2 == NULL | sd1 == NULL | sd2 == NULL | n == NULL){
     stop("Be sure you enter mean 1, mean 2, sd 1, sd 2, and n values.")
     }
 
