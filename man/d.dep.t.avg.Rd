@@ -24,6 +24,21 @@ This function displays d for repeated measures data
 and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
+\details{
+Provided information is:
+\itemize{
+  \item d: the effect size
+  \item dlow: the lower level confidence interval d value
+  \item dhigh: the upper level confidence interval d value
+  \item M1/M2: mean one and two
+  \item M1low/M2low: the lower level confidence interval of mean one or two
+  \item M1high/M2high: the upper level confidence interval of mean one or two
+  \item sd1/sd2: the standard deviation of mean one and two
+  \item se1/se2: the standard error of mean one and two
+  \item n: the sample size
+  \item df: the degrees of freedom (sample size - 1)
+}
+}
 \examples{
 In a study to test the effects of science fiction movies on people's
 belief in the supernatural, seven people completed a measure of belief
@@ -37,18 +52,6 @@ d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
 
 Or you can calculate from the data:
 d.dep.t.avg
-
-Provided information is:
-* d: the effect size
-* dlow: the lower level confidence interval d value
-* dhigh: the upper level confidence interval d value
-* M1/M2: mean one and two
-* M1low/M2low: the lower level confidence interval of mean one or two
-* M1high/M2high: the upper level confidence interval of mean one or two
-* sd1/sd2: the standard deviation of mean one and two
-* se1/se2: the standard error of mean one and two
-* n: the sample size
-* df: the degrees of freedom (sample size - 1)
 }
 \keyword{dependent}
 \keyword{effect}
