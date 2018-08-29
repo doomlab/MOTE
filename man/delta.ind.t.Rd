@@ -23,7 +23,7 @@ delta.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
 \description{
 This function displays d-delta for between subjects data
-and the non-central confidence interval using the 
+and the non-central confidence interval using the
 control group standard deviation as the denominator.
 }
 \examples{

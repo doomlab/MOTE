@@ -18,7 +18,7 @@ eta.F(dfm, dfe, Fvalue, a = 0.05)
 \description{
 This function displays eta, r squared, ICCs from ANOVA analyses
 and their non-central confidence interval based on the F distribution.
-These values are calculated directly from F statistics and can be used 
+These values are calculated directly from F statistics and can be used
 for between subjects and repeated measures designs.
 Remember if you have two or more IVs, these values are partial eta squared.
 }

@@ -16,4 +16,5 @@ Description: This package calculates various effect sizes (d, r, odds ratio, v) 
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0

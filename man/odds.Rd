@@ -20,7 +20,7 @@ odds(n11, n12, n21, n22, a = 0.05)
 \description{
 This function displays odds ratios and their normal confidence intervals.
 This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
-which can be considered the odds of level 1.1 given level1 overall versus level2.1 
+which can be considered the odds of level 1.1 given level1 overall versus level2.1
 given level2 overall.
 }
 \examples{

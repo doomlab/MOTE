@@ -15,7 +15,7 @@ d.dep.t.diff.t(t, n, a = 0.05)
 }
 \description{
 This function displays d for repeated measures data
-and the non-central confidence interval using the 
+and the non-central confidence interval using the
 standard deviation of the differences as the denominator
 estimating from the t-statistic.
 }
