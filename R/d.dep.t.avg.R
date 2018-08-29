@@ -38,7 +38,7 @@
 #'   \item se1/se2: the standard error of mean one and two
 #'   \item n: the sample size
 #'   \item df: the degrees of freedom (sample size - 1)
-#'   }
+#' }
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
