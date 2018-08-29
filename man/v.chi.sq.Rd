@@ -18,7 +18,7 @@ v.chi.sq(x2, n, r, c, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays V and non-central confidence interval
+This function displays V and non-central confidence interval 
 for the specified chi-square statistic.
 }
 \examples{

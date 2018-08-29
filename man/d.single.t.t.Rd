@@ -14,7 +14,7 @@ d.single.t.t(t, n, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays d and non-central confidence interval for single t
+This function displays d and non-central confidence interval for single t 
 estimated from the t-statistic.
 }
 \examples{

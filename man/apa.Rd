@@ -20,11 +20,11 @@ for creating reports in scientific style.
 }
 \details{
 This function creates "pretty" character vectors from numeric variables
-for printing as part of a report. The value can take a single number,
-matrix, vector, or multiple columns from a data frame, as long as they are
-numeric. The values will be coerced into numeric if they are characters or
-logical values, but this process may result in an error if values are
-truly alphabetical.
+  for printing as part of a report. The value can take a single number,
+  matrix, vector, or multiple columns from a data frame, as long as they are
+  numeric. The values will be coerced into numeric if they are characters or
+  logical values, but this process may result in an error if values are
+  truly alphabetical.
 }
 \examples{
 apa(value = 0.54674, decimals = 3, leading = T)
