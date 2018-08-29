@@ -50,7 +50,7 @@ Provided information is:
   \\item se1/se2: the standard error of mean one and two
   \\item n: the sample size
   \\item df: the degrees of freedom (sample size - 1)
-}
+  }
 }
 \keyword{dependent}
 \keyword{effect}

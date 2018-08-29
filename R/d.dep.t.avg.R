@@ -44,7 +44,7 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
   library(MBESS)
 
-  if (m1 == NULL | m2 == NULL | sd1 == NULL | sd2 == NULL | n == NULL){
+  if (missing(m1) || missing(m2) || missing(sd1) || missing(sd2) || missing(n)) {
     stop("Be sure you enter mean 1, mean 2, sd 1, sd 2, and n values.")
     }
 
