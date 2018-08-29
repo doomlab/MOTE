@@ -5,9 +5,7 @@
 \alias{indt_data}
 \title{Independent t Example Data}
 \format{A data frame including two groups, one recieving a hypnotism intervention, and one control
-group, to determine how hypnotism effects recall after witnessing a crime.
-
-object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.}
+group, to determine how hypnotism effects recall after witnessing a crime.}
 \usage{
 data(indt_data)
 }

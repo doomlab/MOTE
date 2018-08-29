@@ -26,6 +26,7 @@ license()
 
 ##set your working directory to package file
 setwd("~/OneDrive - Missouri State University/RESEARCH/2 projects/MOTE")
+setwd("~/GitHub/MOTE")
 
 ##run this thing
 library(roxygen2)
