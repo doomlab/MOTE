@@ -2,7 +2,7 @@
 % Please edit documentation in R/ges.partial.SS.mix.R
 \name{ges.partial.SS.mix}
 \alias{ges.partial.SS.mix}
-\title{Partial Generalized Eta-Squared (GES) for Mixed Design ANOVA from F}
+\title{Partial Generalized Eta-Squared for Mixed Design ANOVA from F}
 \usage{
 ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 }

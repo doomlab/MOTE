@@ -1,4 +1,4 @@
-#' Partial Generalized Eta-Squared (GES) for Mixed Design ANOVA from F
+#' Partial Generalized Eta-Squared for Mixed Design ANOVA from F
 #'
 #' This function displays partial generalized eta-squared (GES) from ANOVA analyses
 #' and its non-central confidence interval based on the F distribution.

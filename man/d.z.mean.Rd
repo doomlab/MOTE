@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.z.mean.R
 \name{d.z.mean}
 \alias{d.z.mean}
-\title{d for z-Scores from Population Mean and Standard Deviation}
+\title{d for z-Scores from Population Mean and SD}
 \usage{
 d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 }

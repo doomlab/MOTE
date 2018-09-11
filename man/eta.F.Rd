@@ -2,7 +2,7 @@
 % Please edit documentation in R/eta.F.R
 \name{eta.F}
 \alias{eta.F}
-\title{eta and Coefficient of Determination (R2) for ANOVA from F}
+\title{Eta and Coefficient of Determination (R2) for ANOVA from F}
 \usage{
 eta.F(dfm, dfe, Fvalue, a = 0.05)
 }

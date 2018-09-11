@@ -1,4 +1,4 @@
-#' d for z-Scores from Population Mean and Standard Deviation
+#' d for z-Scores from Population Mean and SD
 #'
 #' This function displays d for z-scores with the
 #' population mean and standard deviation.

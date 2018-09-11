@@ -1,4 +1,4 @@
-#' eta and Coefficient of Determination (R2) for ANOVA from F
+#' Eta and Coefficient of Determination (R2) for ANOVA from F
 #'
 #' This function displays eta, r squared, ICCs from ANOVA analyses
 #' and their non-central confidence interval based on the F distribution.
