@@ -1,6 +1,6 @@
-#' g.ind.t
+#' d-g Corrected for Independent t
 #'
-#' This function displays d-g corrected 
+#' This function displays d-g corrected
 #' and the non-central confidence interval for independent t.
 #'
 #' @param m1 mean group one
@@ -17,10 +17,10 @@
 
 
 g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
-  # This function displays d-g corrected 
+  # This function displays d-g corrected
   # and the non-central confidence interval for independent t.
   #
-  # Args: 
+  # Args:
   #   m1 : mean group one
   #   m2 : mean group two
   #   sd1: standard deviation group one
@@ -31,7 +31,7 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   #
   # Returns:
   #   List of d, mean, and sample size statistics
-  
+
   correction <- 1 - (3 / (4 * (n1 + n2) - 9))
   spooled <- sqrt( ((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
   d <- ((m1 - m2) / spooled) * correction
@@ -47,14 +47,14 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "M1" = m1, #group 1 stats
                 "sd1" = sd1,
                 "se1" = se1,
-                "M1low" = M1low, 
+                "M1low" = M1low,
                 "M1high" = M1high,
                 "M2" = m2, #group 2 stats
                 "sd2" = sd2,
@@ -68,7 +68,7 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
-                "p" = p) 
-  
+                "p" = p)
+
   return(output)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.single.t.R
 \name{d.single.t}
 \alias{d.single.t}
-\title{d.single.t}
+\title{d for Single t from Means}
 \usage{
 d.single.t(m, u, sd, n, a = 0.05)
 }

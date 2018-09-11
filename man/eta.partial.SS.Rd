@@ -2,7 +2,7 @@
 % Please edit documentation in R/eta.partial.SS.R
 \name{eta.partial.SS}
 \alias{eta.partial.SS}
-\title{eta.partial.SS}
+\title{Partial Eta Squared for ANOVA from F and Sum of Squares}
 \usage{
 eta.partial.SS(dfm, dfe, ssm, sse, Fvalue, a = 0.05)
 }

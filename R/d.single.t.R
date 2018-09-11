@@ -1,6 +1,6 @@
-#' d.single.t
+#' d for Single t from Means
 #'
-#' This function displays d and non-central confidence interval for single t from means. 
+#' This function displays d and non-central confidence interval for single t from means.
 #'
 #' @param m sample mean
 #' @param u population mean
@@ -13,9 +13,9 @@
 #' d.single.t(m = 20, u = 17, sd = 4, n = 100, a = .05)
 
 d.single.t = function (m, u, sd, n, a = .05) {
-  # This function displays d and non-central confidence interval for single t from means. 
+  # This function displays d and non-central confidence interval for single t from means.
   #
-  # Args: 
+  # Args:
   #   m : sample mean
   #   u : population mean
   #   sd: sample standard deviation
@@ -24,9 +24,9 @@ d.single.t = function (m, u, sd, n, a = .05) {
   #
   # Returns:
   #   List of d, mean, and sample size statistics
-  
+
   library(MBESS)
-  
+
   se <- sd / sqrt(n)
   d <- (m - u) / sd
   t <- (m - u) / se
@@ -36,20 +36,20 @@ d.single.t = function (m, u, sd, n, a = .05) {
   Mlow = m - se*qt(a / 2, n - 1, lower.tail = FALSE)
   Mhigh = m + se*qt(a / 2, n - 1, lower.tail = FALSE)
   p = pt(abs(t), n - 1, lower.tail = F)*2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "m" = m, #mean stats
                 "sd" = sd,
                 "se" = se,
-                "Mlow" = Mlow, 
+                "Mlow" = Mlow,
                 "Mhigh" = Mhigh,
                 "u" = u,
                 "n" = n, #sample stats
                 "df" = (n - 1),
                 "t" = t, #sig stats,
-                "p" = p) 
-  
+                "p" = p)
+
   return(output)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/eta.full.SS.R
 \name{eta.full.SS}
 \alias{eta.full.SS}
-\title{eta.full.SS}
+\title{Eta for ANOVA from F and Sum of Squares}
 \usage{
 eta.full.SS(dfm, dfe, ssm, sst, Fvalue, a = 0.05)
 }

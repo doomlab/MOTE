@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.ind.t.t.R
 \name{d.ind.t.t}
 \alias{d.ind.t.t}
-\title{d.ind.t.t}
+\title{d from t for Between Subjects}
 \usage{
 d.ind.t.t(t, n1, n2, a = 0.05)
 }

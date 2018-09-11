@@ -2,7 +2,7 @@
 % Please edit documentation in R/ges.partial.SS.rm.R
 \name{ges.partial.SS.rm}
 \alias{ges.partial.SS.rm}
-\title{ges.partial.SS.rm}
+\title{Partial Generalized Eta-Squared for ANOVA from F}
 \usage{
 ges.partial.SS.rm(dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a = 0.05)
 }

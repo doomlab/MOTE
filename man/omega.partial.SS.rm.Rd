@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.partial.SS.rm.R
 \name{omega.partial.SS.rm}
 \alias{omega.partial.SS.rm}
-\title{omega.partial.SS.rm}
+\title{Partial Omega Squared for Repeated Measures ANOVA from F}
 \usage{
 omega.partial.SS.rm(dfm, dfe, msm, mse, mss, ssm, sse, sss, a = 0.05)
 }
@@ -31,8 +31,8 @@ and its non-central confidence interval based on the F distribution.
 This formula is appropriate for multi-way repeated measures designs and mix level designs.
 }
 \examples{
-omega.partial.SS.rm(dfm = 2, dfe = 100, 
-                    msm = 214, mse = 100, mss = 20, 
+omega.partial.SS.rm(dfm = 2, dfe = 100,
+                    msm = 214, mse = 100, mss = 20,
                     ssm = 5339, sse = 435, sss = 53, a = .05)
 }
 \keyword{ANOVA}

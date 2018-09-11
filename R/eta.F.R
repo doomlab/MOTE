@@ -1,8 +1,8 @@
-#' eta.F
+#' eta and Coefficient of Determination (R2) for ANOVA from F
 #'
 #' This function displays eta, r squared, ICCs from ANOVA analyses
 #' and their non-central confidence interval based on the F distribution.
-#' These values are calculated directly from F statistics and can be used 
+#' These values are calculated directly from F statistics and can be used
 #' for between subjects and repeated measures designs.
 #' Remember if you have two or more IVs, these values are partial eta squared.
 #'
@@ -20,7 +20,7 @@ eta.F <- function (dfm, dfe, Fvalue, a = .05) {
   # This function displays eta, r squared, ICCs from ANOVA analyses
   # and their non-central confidence interval based on the F distribution.
   #
-  # Args: 
+  # Args:
   #   dfm     : degrees of freedom model/IV/between
   #   dfe     : degrees of freedom error/residual/within
   #   Fvalue  : F statistic
@@ -28,25 +28,25 @@ eta.F <- function (dfm, dfe, Fvalue, a = .05) {
   #
   # Returns:
   #   List of eta, F, and sample size statistics
-  
+
   eta <- (dfm * Fvalue) / (dfm * Fvalue + dfe)
-  
+
   #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
   #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-  
+
   limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
-  
+
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
-  
+
   output <- list("eta" = eta, #eta stats
                 "etalow" = limits$Lower.Conf.Limit.R2,
                 "etahigh" = limits$Upper.Conf.Limit.R2,
                 "dfm" = dfm, #sig stats
                 "dfe" = dfe,
                 "F" = Fvalue,
-                "p" = p) 
-  
+                "p" = p)
+
   return(output)
-  
+
 }

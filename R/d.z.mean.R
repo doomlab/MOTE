@@ -1,6 +1,6 @@
-#' d.z.mean
+#' d for z-Scores from Population Mean and Standard Deviation
 #'
-#' This function displays d for z-scores with the 
+#' This function displays d for z-scores with the
 #' population mean and standard deviation.
 #' The normal confidence interval is also provided.
 #'
@@ -30,9 +30,9 @@ d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
   #
   # Returns:
   #   List of d, mean, and sample size statistics
-  
+
   library(MBESS)
-  
+
   d <- (m1 - mu) / sig
   se1 <- sig / sqrt(n)
   se2 <- sd1 / sqrt(n)
@@ -42,22 +42,22 @@ d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
   p <- pnorm(abs(z), lower.tail = FALSE)*2
   M1low <- m1 - se2 * qnorm(a/2, lower.tail = FALSE)
   M1high <- m1 + se2 * qnorm(a/2, lower.tail = FALSE)
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "M1" = m1, #level 1 stats
                 "sd1" = sd1,
                 "se1" = se2,
-                "M1low" = M1low, 
+                "M1low" = M1low,
                 "M1high" = M1high,
                 "Mu" = mu,#population stats
                 "Sigma" = sig,
                 "se2" = se1,
-                "z" = z, 
+                "z" = z,
                 "p" = p,
                 "n" = n #sample stats
-                ) 
-                
+                )
+
   return(output)
   }

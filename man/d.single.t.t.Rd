@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.single.t.t.R
 \name{d.single.t.t}
 \alias{d.single.t.t}
-\title{d.single.t.t}
+\title{d for Single t from t}
 \usage{
 d.single.t.t(t, n, a = 0.05)
 }
@@ -14,7 +14,7 @@ d.single.t.t(t, n, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays d and non-central confidence interval for single t 
+This function displays d and non-central confidence interval for single t
 estimated from the t-statistic.
 }
 \examples{

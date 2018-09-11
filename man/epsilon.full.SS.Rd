@@ -2,7 +2,7 @@
 % Please edit documentation in R/epsilon.full.SS.R
 \name{epsilon.full.SS}
 \alias{epsilon.full.SS}
-\title{epsilon.full.SS}
+\title{Epsilon for ANOVA from F and Sum of Squares}
 \usage{
 epsilon.full.SS(dfm, dfe, msm, mse, sst, a = 0.05)
 }

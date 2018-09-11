@@ -1,4 +1,4 @@
-#' omega.gen.SS.rm
+#' Generalized Omega Squared for Multi-Way and Mixed ANOVA from F
 #'
 #' This function displays generalized omega squared from ANOVA analyses
 #' and its non-central confidence interval based on the F distribution.

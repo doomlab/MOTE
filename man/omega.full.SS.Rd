@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.full.SS.R
 \name{omega.full.SS}
 \alias{omega.full.SS}
-\title{omega.full.SS}
+\title{Omega Squared for One-Way and Multi-Way ANOVA from F}
 \usage{
 omega.full.SS(dfm, dfe, msm, mse, sst, a = 0.05)
 }

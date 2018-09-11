@@ -1,7 +1,7 @@
-#' delta.ind.t
+#' d-delta for Between Subjects with Control Group SD Denominator
 #'
 #' This function displays d-delta for between subjects data
-#' and the non-central confidence interval using the 
+#' and the non-central confidence interval using the
 #' control group standard deviation as the denominator.
 #'
 #' @param m1 mean from control group
@@ -19,10 +19,10 @@
 
 delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   # This function displays d-delta for between subjects data
-  # and the non-central confidence interval using the 
+  # and the non-central confidence interval using the
   # control group standard deviation as the denominator.
   #
-  # Args: 
+  # Args:
   #   m1 : mean from control group
   #   m2 : mean from experimental group
   #   sd1: standard deviation from control group
@@ -34,8 +34,8 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   # Returns:
   #   List of d, mean, and sample size statistics
 
-  library(MBESS)  
-  
+  library(MBESS)
+
   spooled <- sqrt(((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
   d <- (m1 - m2) / sd1
   se1 <- sd1 / sqrt(n1)
@@ -50,14 +50,14 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "M1" = m1, #control group stats
                 "sd1" = sd1,
                 "se1" = se1,
-                "M1low" = M1low, 
+                "M1low" = M1low,
                 "M1high" = M1high,
                 "M2" = m2, #experimental group stats
                 "sd2" = sd2,
@@ -70,7 +70,7 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
-                "p" = p) 
-  
+                "p" = p)
+
   return(output)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.partial.SS.bn.R
 \name{omega.partial.SS.bn}
 \alias{omega.partial.SS.bn}
-\title{omega.partial.SS.bn}
+\title{Partial Omega Squared for Between Subjects ANOVA from F}
 \usage{
 omega.partial.SS.bn(dfm, dfe, msm, mse, ssm, n, a = 0.05)
 }

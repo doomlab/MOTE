@@ -1,4 +1,4 @@
-#' d.z.z
+#' d for z-scores from z
 #'
 #' This function displays d for z-scores when all you have is the z-statistics.
 #' The normoal confidence interval is also provided if you have sigma.
@@ -26,9 +26,9 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
   #
   # Returns:
   #   List of d, z statistics
-  
+
   library(MBESS)
-  
+
   d <- z / sqrt(n)
   if (is.na(sig)){
     dlow <- NA
@@ -38,15 +38,15 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
     dhigh <- d+qnorm(a/2, lower.tail = F)*sig
   }
   p <- pnorm(z, lower.tail = FALSE)*2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "sigma" = sig, #population stats
                 "z" = z, #sig stats
                 "p" = p,
                 "n" = n #sample stats
-                ) 
-                
+                )
+
   return(output)
   }

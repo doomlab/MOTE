@@ -2,7 +2,7 @@
 % Please edit documentation in R/delta.ind.t.R
 \name{delta.ind.t}
 \alias{delta.ind.t}
-\title{delta.ind.t}
+\title{d-delta for Between Subjects with Control Group SD Denominator}
 \usage{
 delta.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
@@ -23,7 +23,7 @@ delta.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
 \description{
 This function displays d-delta for between subjects data
-and the non-central confidence interval using the 
+and the non-central confidence interval using the
 control group standard deviation as the denominator.
 }
 \examples{

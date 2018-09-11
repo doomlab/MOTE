@@ -1,4 +1,4 @@
-#' d.dep.t.rm
+#' d for Repeated Measures with Average SD Denominator
 #'
 #' This function displays d for repeated measures data controlling for r
 #' and the non-central confidence interval using the

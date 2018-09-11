@@ -2,7 +2,7 @@
 % Please edit documentation in R/r.correl.R
 \name{r.correl}
 \alias{r.correl}
-\title{r.correl}
+\title{r to Coefficient of Determination (R2) from F}
 \usage{
 r.correl(r, n, a = 0.05)
 }

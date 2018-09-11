@@ -1,7 +1,7 @@
-#' d.prop
+#' d for Independent Proportions
 #'
 #' This function displays d and central confidence interval
-#' calculated from differences in independent proportions. 
+#' calculated from differences in independent proportions.
 #'
 #' @param p1 proportion of people group one
 #' @param p2 proportion of people group two
@@ -16,9 +16,9 @@
 
 d.prop <- function (p1, p2, n1, n2, a = .05) {
   # This function displays d and central confidence interval
-  # calculated from differences in independent proportions. 
+  # calculated from differences in independent proportions.
   #
-  # Args: 
+  # Args:
   #   p1: proportion of people group one
   #   p2: proportion of people group two
   #   n1: sample size group one
@@ -27,7 +27,7 @@ d.prop <- function (p1, p2, n1, n2, a = .05) {
   #
   # Returns:
   #   List of d, proportions, and sample size statistics
-  
+
   ppooled <- (p1 * n1 + p2 * n2) / (n1 + n2)
   se <- sqrt(ppooled * (1 - ppooled) * ((1 / n1) + (1 / n2)))
   z <- (p1 - p2)/ se
@@ -43,26 +43,26 @@ d.prop <- function (p1, p2, n1, n2, a = .05) {
   d <- z1 - z2
   dlow <- d - qnorm(a / 2, lower.tail = F) * se
   dhigh <- d + qnorm(a / 2, lower.tail = F) * se
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "p1" = p1, #group 1 stats
                 "se1" = se1,
                 "z1" = z1,
-                "z1low" = z1low, 
+                "z1low" = z1low,
                 "z1high" = z1high,
                 "p2" = p2, #group 2 stats
                 "se2" = se2,
                 "z2" = z2,
-                "z2low" = z2low, 
+                "z2low" = z2low,
                 "z2high" = z2high,
                 "n1" = n1, #sample stats
                 "n2" = n2,
                 "z" = z, #sig stats,
                 "ppooled" = ppooled,
                 "se" = se,
-                "p" = p) 
-  
+                "p" = p)
+
   return(output)
 }

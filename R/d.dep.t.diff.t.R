@@ -1,10 +1,10 @@
-#' d.dep.t.diff
+#' d from t for Repeated Measures with SD Difference Scores Denominator
 #'
 #' This function displays d for repeated measures data
-#' and the non-central confidence interval using the 
+#' and the non-central confidence interval using the
 #' standard deviation of the differences as the denominator
 #' estimating from the t-statistic.
-#' 
+#'
 #' @param t t-test value
 #' @param n sample size
 #' @param a significance level
@@ -19,30 +19,30 @@ d.dep.t.diff.t <- function (t, n, a = .05) {
   # using the standard deviation of the differences as the denominator
   # estimating from the t-statistic.
   #
-  # Args: 
+  # Args:
   #   t : t-test value
-  #   n : sample size 
+  #   n : sample size
   #   a  : significance level
   #
   # Returns:
   #   List of d and sample size statistics
-  
+
   library(MBESS)
-  
+
   d <- t / sqrt(n)
   ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
-  
+
   output = list("d" = d, #d stats
-                "dlow" = dlow, 
-                "dhigh" = dhigh, 
+                "dlow" = dlow,
+                "dhigh" = dhigh,
                 "n" = n, #sample stats
                 "df" = (n - 1),
                 "t" = t, #sig stats
                 "p" = p
-                ) 
-  
+                )
+
   return(output)
 }

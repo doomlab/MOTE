@@ -2,7 +2,7 @@
 % Please edit documentation in R/ges.partial.SS.mix.R
 \name{ges.partial.SS.mix}
 \alias{ges.partial.SS.mix}
-\title{ges.partial.SS.mix}
+\title{Partial Generalized Eta-Squared (GES) for Mixed Design ANOVA from F}
 \usage{
 ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 }
@@ -22,7 +22,7 @@ ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays partial ges squared from ANOVA analyses
+This function displays partial generalized eta-squared (GES) from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula works for mixed designs.
 }

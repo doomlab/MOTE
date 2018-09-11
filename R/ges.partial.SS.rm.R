@@ -1,4 +1,4 @@
-#' ges.partial.SS.rm
+#' Partial Generalized Eta-Squared for ANOVA from F
 #'
 #' This function displays partial ges squared from ANOVA analyses
 #' and its non-central confidence interval based on the F distribution.
@@ -23,7 +23,7 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
   # This function displays ges squared from ANOVA analyses
   # and its non-central confidence interval based on the F distribution.
   #
-  # Args: 
+  # Args:
   #   dfm     : degrees of freedom for the model/IV/between
   #   dfe     : degrees of freedom for the error/residual/within
   #   ssm     : sum of squares for the model/IV/between
@@ -36,25 +36,25 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
   #
   # Returns:
   #   List of ges, F, and sample size statistics
-  
+
   ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
-  
+
   #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   #glow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
   #ghigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-  
+
   limits <- ci.R2(R2 = ges, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
-  
+
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
-  
+
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
                  "geshigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p) 
-  
+                 "p" = p)
+
   return(output)
-  
+
 }

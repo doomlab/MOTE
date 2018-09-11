@@ -1,4 +1,4 @@
-#' omega.partial.SS.rm
+#' Partial Omega Squared for Repeated Measures ANOVA from F
 #'
 #' This function displays omega squared from ANOVA analyses
 #' and its non-central confidence interval based on the F distribution.
@@ -16,15 +16,15 @@
 #' @keywords effect size, omega, ANOVA
 #' @export
 #' @examples
-#' omega.partial.SS.rm(dfm = 2, dfe = 100, 
-#'                     msm = 214, mse = 100, mss = 20, 
+#' omega.partial.SS.rm(dfm = 2, dfe = 100,
+#'                     msm = 214, mse = 100, mss = 20,
 #'                     ssm = 5339, sse = 435, sss = 53, a = .05)
 
 omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05) {
   # This function displays omega squared from ANOVA analyses
   # and its non-central confidence interval based on the F distribution.
   #
-  # Args: 
+  # Args:
   #   dfm     : degrees of freedom for the model/IV/between
   #   dfe     : degrees of freedom for the error/residual/within
   #   msm     : mean square for the model/IV/between
@@ -37,26 +37,26 @@ omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05
   #
   # Returns:
   #   List of omega, F, and sample size statistics
-  
+
   omega <- (dfm * (msm - mse)) / (ssm + sse + sss + mss)
   Fvalue <- msm / mse
-  
+
   #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
   #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-  
+
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
-  
+
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
-  
+
   output <- list("omega" = omega, #omega stats
                  "omegalow" = limits$Lower.Conf.Limit.R2,
                  "omegahigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p) 
-  
+                 "p" = p)
+
   return(output)
-  
+
 }

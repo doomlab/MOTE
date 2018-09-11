@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.z.mean.R
 \name{d.z.mean}
 \alias{d.z.mean}
-\title{d.z.mean}
+\title{d for z-Scores from Population Mean and Standard Deviation}
 \usage{
 d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 }
@@ -20,7 +20,7 @@ d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays d for z-scores with the 
+This function displays d for z-scores with the
 population mean and standard deviation.
 The normal confidence interval is also provided.
 }

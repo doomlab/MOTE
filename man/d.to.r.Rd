@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.to.r.R
 \name{d.to.r}
 \alias{d.to.r}
-\title{d.to.r}
+\title{r and Coefficient of Determination (R2) from d}
 \usage{
 d.to.r(d, n1, n2, a = 0.05)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/g.ind.t.R
 \name{g.ind.t}
 \alias{g.ind.t}
-\title{g.ind.t}
+\title{d-g Corrected for Independent t}
 \usage{
 g.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
@@ -22,7 +22,7 @@ g.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 \item{a}{significance level}
 }
 \description{
-This function displays d-g corrected 
+This function displays d-g corrected
 and the non-central confidence interval for independent t.
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.gen.SS.rm.R
 \name{omega.gen.SS.rm}
 \alias{omega.gen.SS.rm}
-\title{omega.gen.SS.rm}
+\title{Generalized Omega Squared for Multi-Way and Mixed ANOVA from F}
 \usage{
 omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 }

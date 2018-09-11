@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.z.z.R
 \name{d.z.z}
 \alias{d.z.z}
-\title{d.z.z}
+\title{d for z-scores from z}
 \usage{
 d.z.z(z, sig = NA, n, a = 0.05)
 }

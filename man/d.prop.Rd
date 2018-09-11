@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.prop.R
 \name{d.prop}
 \alias{d.prop}
-\title{d.prop}
+\title{d for Independent Proportions}
 \usage{
 d.prop(p1, p2, n1, n2, a = 0.05)
 }

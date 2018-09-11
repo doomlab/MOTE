@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.dep.t.rm.R
 \name{d.dep.t.rm}
 \alias{d.dep.t.rm}
-\title{d.dep.t.rm}
+\title{d for Repeated Measures with Average SD Denominator}
 \usage{
 d.dep.t.rm(m1, m2, sd1, sd2, r, n, a = 0.05)
 }

@@ -1,6 +1,6 @@
-#' ges.partial.SS.mix
+#' Partial Generalized Eta-Squared (GES) for Mixed Design ANOVA from F
 #'
-#' This function displays partial ges squared from ANOVA analyses
+#' This function displays partial generalized eta-squared (GES) from ANOVA analyses
 #' and its non-central confidence interval based on the F distribution.
 #' This formula works for mixed designs.
 #'
@@ -8,7 +8,7 @@
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between
 #' @param sss sum of squares subject variance
-#' @param sse sum of squares for the error/residual/within 
+#' @param sse sum of squares for the error/residual/within
 #' @param Fvalue F statistic
 #' @param a significance level
 #' @keywords effect size, ges, ANOVA
@@ -21,37 +21,37 @@ ges.partial.SS.mix <- function (dfm, dfe, ssm, sss, sse, Fvalue, a = .05) {
   # This function displays ges squared from ANOVA analyses
   # and its non-central confidence interval based on the F distribution.
   #
-  # Args: 
+  # Args:
   #   dfm     : degrees of freedom for the model/IV/between
   #   dfe     : degrees of freedom for the error/residual/within
   #   ssm     : sum of squares for the model/IV/between
   #   sss     : sum of squares subject variance
-  #   sse     : sum of squares for the error/residual/within 
+  #   sse     : sum of squares for the error/residual/within
   #   Fvalue  : F statistic
   #   a       : significance level
   #
   # Returns:
   #   List of ges, F, and sample size statistics
-  
+
   ges <- ssm / (ssm + sss+ sse)
-  
+
   #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
   #glow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
   #ghigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-  
+
   limits <- ci.R2(R2 = ges, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
-  
+
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
-  
-  
+
+
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
                  "geshigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p) 
-  
+                 "p" = p)
+
   return(output)
-  
+
 }
