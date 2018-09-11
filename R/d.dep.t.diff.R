@@ -4,7 +4,22 @@
 #' and the non-central confidence interval using the
 #' standard deviation of the differences as the denominator.
 #'
-#' formula here
+#' Provided information is:
+#'
+#' \itemize{
+#'   \item d: the effect size
+#'   \item dlow: the lower level confidence interval d value
+#'   \item dhigh: the upper level confidence interval d value
+#'   \item mdiff: mean of the differences
+#'   \item Mlow: the lower level confidence interval of mean
+#'   \item Mhigh: the upper level confidence interval of mean
+#'   \item sddiff: standard deviation of the differences
+#'   \item se: the standard error
+#'   \item n: the sample size
+#'   \item df: the degrees of freedom (sample size - 1)
+#'   \item t: t-statistic
+#'   \item p: p-value
+#' }
 #'
 #' @param mdiff mean difference score
 #' @param sddiff standard deviation of the difference scores
@@ -13,7 +28,15 @@
 #' @keywords effect size, dependent t-test
 #' @export
 #' @examples
-#' d.dep.t.diff(mdiff = 5, sddiff = 3, n = 100, a = .05)
+#' In a study to test the effects of science fiction movies on people's
+#' belief in the supernatural, seven people completed a measure of belief
+#' in the supernatural before and after watching a popular science fiction movie.
+#' Higher scores indicated high levels of belief. The mean difference score was 1.143,
+#' while the standard deviation of the difference scores was 2.116 (the standard error difference was .800).
+#'
+#' You can type in the numbers directly:
+#' d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 14, a = .05)
+#' or you can calculate from the data.
 
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
