@@ -21,10 +21,22 @@ and the non-central confidence interval using the
 standard deviation of the differences as the denominator.
 }
 \details{
-formula here
+Provided information is:
+
+\itemize{
+  \item d: the effect size
+  \item dlow: the lower level confidence interval d value
+  \item dhigh: the upper level confidence interval d value
+  \item mdiff: mean of the differences
+  \item Mlow: the lower level confidence interval of mean
+  \item Mhigh: the upper level confidence interval of mean
+  \item sddiff: standard deviation of the differences
+  \item se: the standard error
+  \item n: the sample size
+  \item df: the degrees of freedom (sample size - 1)
+  \item t: t-statistic
+  \item p: p-value
 }
-\examples{
-d.dep.t.diff(mdiff = 5, sddiff = 3, n = 100, a = .05)
 }
 \keyword{dependent}
 \keyword{effect}
