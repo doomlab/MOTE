@@ -16,20 +16,10 @@ d.dep.t.diff(mdiff, sddiff, n, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-\itemize{
-  item\ d: the effect size
-  item\ dlow: the lower level confidence interval d value
-  item\ dhigh: the upper level confidence interval d value
-  item\ mdiff: mean of the differences
-  item\ Mlow: the lower level confidence interval of mean
-  item\ Mhigh: the upper level confidence interval of mean
-  item\ sddiff: standard deviation of the differences
-  item\ se: the standard error
-  item\ n: the sample size
-  item\ df: the degrees of freedom (sample size - 1)
-  item\ t: t-statistic
-  item\ p: p-value
-  }
+The effect size and associated confidence intervals, mean
+differences with associated confidence intervals, standard
+deviation of the differences, standard error, sample size, degrees of
+freedom, the t-statistic, and the p-value.
 }
 \description{
 This function displays d for repeated measures data

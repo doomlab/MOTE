@@ -8,23 +8,10 @@
 #' @param sddiff standard deviation of the difference scores
 #' @param n sample size
 #' @param a significance level
-#' @return
-#'
-#' \itemize{
-#'   item\ d: the effect size
-#'   item\ dlow: the lower level confidence interval d value
-#'   item\ dhigh: the upper level confidence interval d value
-#'   item\ mdiff: mean of the differences
-#'   item\ Mlow: the lower level confidence interval of mean
-#'   item\ Mhigh: the upper level confidence interval of mean
-#'   item\ sddiff: standard deviation of the differences
-#'   item\ se: the standard error
-#'   item\ n: the sample size
-#'   item\ df: the degrees of freedom (sample size - 1)
-#'   item\ t: t-statistic
-#'   item\ p: p-value
-#'   }
-#'
+#' @return The effect size and associated confidence intervals, mean
+#' differences with associated confidence intervals, standard
+#' deviation of the differences, standard error, sample size, degrees of
+#' freedom, the t-statistic, and the p-value.
 #' @keywords effect size, dependent t-test
 #' @export
 #' @examples #In a study to test the effects of science fiction movies on people's
