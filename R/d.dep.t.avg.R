@@ -6,6 +6,9 @@
 #'
 #' @details
 #'
+#' To calculate d, mean two is subtracted from mean one, which is
+#' divided by the average standard deviation.
+#'
 #' Provided values are:
 #' \itemize{
 #'   \item d: the effect size

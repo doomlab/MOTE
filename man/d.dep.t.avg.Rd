@@ -25,6 +25,9 @@ and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
 \details{
+To calculate d, mean two is subtracted from mean one, which is
+divided by the average standard deviation.
+
 Provided values are:
 \itemize{
   \item d: the effect size
