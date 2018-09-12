@@ -21,7 +21,7 @@ and the non-central confidence interval using the
 standard deviation of the differences as the denominator.
 }
 \details{
-Provided information is:
+Provided values are:
 
 \itemize{
   \item d: the effect size

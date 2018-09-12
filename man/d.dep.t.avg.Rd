@@ -25,7 +25,7 @@ and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
 \details{
-Provided information is:
+Provided values are:
 \itemize{
   \item d: the effect size
   \item dlow: the lower level confidence interval d value

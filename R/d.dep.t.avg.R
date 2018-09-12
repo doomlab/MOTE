@@ -5,7 +5,7 @@
 #' average standard deviation of each level as the denominator.
 #'
 #' @details
-#' Provided information is:
+#' Provided values are:
 #' \itemize{
 #'   \item d: the effect size
 #'   \item dlow: the lower level confidence interval d value
@@ -28,7 +28,6 @@
 #'
 #' @keywords effect size, dependent t-test, cohen's d
 #' @export
-#' @value d the effect size
 #' @examples
 #'
 #' #The following example is derived from the dept_data dataset included
