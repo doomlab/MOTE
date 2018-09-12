@@ -38,17 +38,21 @@ Provided information is:
   \item n: the sample size
   \item df: the degrees of freedom (sample size - 1)
   }
-
-In a study to test the effects of science fiction movies on people's
-belief in the supernatural, seven people completed a measure of belief
-in the supernatural before and after watching a popular science fiction
-movie. Higher scores indicated higher levels of belief. The mean measure
-of belief on the pretest (dept_data$before) was M = 5.571, SD = 4.429,
-while the posttest (dept_data$after) scores were lower, M = 4.429, SD = 2.878.
-
-You can type in the numbers directly, or use the dataset as seen in the example below.
 }
 \examples{
+
+#The following example is derived from the dept_data dataset included
+in the MOTE library.
+
+#In a study to test the effects of science fiction movies on people's
+belief in the supernatural, seven people completed a measure of belief
+in the supernatural before and after watching a popular science fiction
+movie. Higher scores indicated higher levels of belief.
+
+t.test(dept_data$before, dept_data$after, paired = TRUE)
+
+#You can type in the numbers directly, or refer to the dataset,
+as shown below.
 
 d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
            sd2 = 2.878, n = 14, a = .05)
@@ -59,8 +63,16 @@ d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
             sd(dept_data$before), sd(dept_data$after),
             length(dept_data$before), .05)
 
+#The mean measure of belief on the pretest (dept_data$before)
+was 5.571, with a standard deviation of 1.988. The posttest
+(dept_data$after) scores appeared lower but did not reach significance,
+likely due to the small sample size (M = 4.429, SD = 2.878, p = .20).
+The effect size was moderate (d = .47)suggesting the movie may
+have influenced belief in the supernatural.
 }
+\keyword{cohen's}
+\keyword{d}
 \keyword{dependent}
 \keyword{effect}
 \keyword{size,}
-\keyword{t-test}
+\keyword{t-test,}

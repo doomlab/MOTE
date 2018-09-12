@@ -19,24 +19,30 @@
 #'   \item df: the degrees of freedom (sample size - 1)
 #'   }
 #'
-#' In a study to test the effects of science fiction movies on people's
-#' belief in the supernatural, seven people completed a measure of belief
-#' in the supernatural before and after watching a popular science fiction
-#' movie. Higher scores indicated higher levels of belief. The mean measure
-#' of belief on the pretest (dept_data$before) was M = 5.571, SD = 4.429,
-#' while the posttest (dept_data$after) scores were lower, M = 4.429, SD = 2.878.
-#'
-#' You can type in the numbers directly, or use the dataset as seen in the example below.
-#'
 #' @param m1 mean from first level
 #' @param m2 mean from second level
 #' @param sd1 standard deviation from first level
 #' @param sd2 standard deviation from second level
 #' @param n sample size
 #' @param a significance level
-#' @keywords effect size, dependent t-test
+#'
+#' @keywords effect size, dependent t-test, cohen's d
 #' @export
+#' @value d the effect size
 #' @examples
+#'
+#' #The following example is derived from the dept_data dataset included
+#' in the MOTE library.
+#'
+#' #In a study to test the effects of science fiction movies on people's
+#' belief in the supernatural, seven people completed a measure of belief
+#' in the supernatural before and after watching a popular science fiction
+#' movie. Higher scores indicated higher levels of belief.
+#'
+#' t.test(dept_data$before, dept_data$after, paired = TRUE)
+#'
+#' #You can type in the numbers directly, or refer to the dataset,
+#' as shown below.
 #'
 #' d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
 #'            sd2 = 2.878, n = 14, a = .05)
@@ -47,6 +53,12 @@
 #'             sd(dept_data$before), sd(dept_data$after),
 #'             length(dept_data$before), .05)
 #'
+#' #The mean measure of belief on the pretest (dept_data$before)
+#' was 5.571, with a standard deviation of 1.988. The posttest
+#' (dept_data$after) scores appeared lower but did not reach significance,
+#' likely due to the small sample size (M = 4.429, SD = 2.878, p = .20).
+#' The effect size was moderate (d = .47)suggesting the movie may
+#' have influenced belief in the supernatural.
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
