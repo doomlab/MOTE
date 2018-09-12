@@ -40,7 +40,7 @@ Provided information is:
   }
 }
 \examples{
-"In a study to test the effects of science fiction movies on people's
+#In a study to test the effects of science fiction movies on people's
 belief in the supernatural, seven people completed a measure of belief
 in the supernatural before and after watching a popular science fiction
 movie. Higher scores indicated higher levels of belief. The mean measure
@@ -58,7 +58,7 @@ Or you can calculate from the data; try this with dataset "dept_data" included i
 
 d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
             sd(dept_data$before), sd(dept_data$after),
-            length(dept_data$before), .05)"
+            length(dept_data$before), .05)
 
 }
 \keyword{dependent}

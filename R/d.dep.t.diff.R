@@ -27,14 +27,14 @@
 #' @param a significance level
 #' @keywords effect size, dependent t-test
 #' @export
-#' @examples "In a study to test the effects of science fiction movies on people's
+#' @examples #In a study to test the effects of science fiction movies on people's
 #' belief in the supernatural, seven people completed a measure of belief
 #' in the supernatural before and after watching a popular science fiction movie.
 #' Higher scores indicated high levels of belief. The mean difference score was 1.143,
 #' while the standard deviation of the difference scores was 2.116 (the standard error difference was .800).
 #' You can type in the numbers directly:
 #' d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 14, a = .05)
-#' or you can calculate from the data."
+#' or you can calculate from the data.
 #'
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
