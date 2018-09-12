@@ -41,7 +41,7 @@ Provided values are:
 }
 \examples{
 
-#The following example is derived from the dept_data dataset included
+#The following example is derived from the "dept_data" dataset included
 in the MOTE library.
 
 #In a study to test the effects of science fiction movies on people's
@@ -49,17 +49,17 @@ belief in the supernatural, seven people completed a measure of belief
 in the supernatural before and after watching a popular science fiction
 movie. Higher scores indicated higher levels of belief.
 
-t.test(dept_data$before, dept_data$after, paired = TRUE)
+    t.test(dept_data$before, dept_data$after, paired = TRUE)
 
 #You can type in the numbers directly, or refer to the dataset,
 as shown below.
 
-d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
+    d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
            sd2 = 2.878, n = 14, a = .05)
 
-d.dep.t.avg(5.571, 4.429, 1.988, 2.878, 14, .05)
+    d.dep.t.avg(5.571, 4.429, 1.988, 2.878, 14, .05)
 
-d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
+    d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
             sd(dept_data$before), sd(dept_data$after),
             length(dept_data$before), .05)
 
