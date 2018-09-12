@@ -39,6 +39,28 @@ Provided information is:
   \item df: the degrees of freedom (sample size - 1)
   }
 }
+\examples{
+"In a study to test the effects of science fiction movies on people's
+belief in the supernatural, seven people completed a measure of belief
+in the supernatural before and after watching a popular science fiction
+movie. Higher scores indicated higher levels of belief. The mean measure
+of belief on the pretest (dept_data$before) was M = 5.571, SD = 4.429,
+while the posttest (dept_data$after) scores were lower, M = 4.429, SD = 2.878.
+
+You can type in the numbers directly:
+
+d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
+           sd2 = 2.878, n = 14, a = .05)
+
+d.dep.t.avg(5.571, 4.429, 1.988, 2.878, 14, .05)
+
+Or you can calculate from the data; try this with dataset "dept_data" included in MOTE library:
+
+d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
+            sd(dept_data$before), sd(dept_data$after),
+            length(dept_data$before), .05)"
+
+}
 \keyword{dependent}
 \keyword{effect}
 \keyword{size,}
