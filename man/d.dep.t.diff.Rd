@@ -36,7 +36,7 @@ Provided information is:
   \item df: the degrees of freedom (sample size - 1)
   \item t: t-statistic
   \item p: p-value
-}
+  }
 }
 \keyword{dependent}
 \keyword{effect}

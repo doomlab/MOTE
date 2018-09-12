@@ -16,7 +16,7 @@
 #'   \item se1/se2: the standard error of mean one and two
 #'   \item n: the sample size
 #'   \item df: the degrees of freedom (sample size - 1)
-#' }
+#'   }
 #'
 #' @param m1 mean from first level
 #' @param m2 mean from second level
@@ -26,9 +26,7 @@
 #' @param a significance level
 #' @keywords effect size, dependent t-test
 #' @export
-#' @examples
-#'
-#' In a study to test the effects of science fiction movies on people's
+#' @examples In a study to test the effects of science fiction movies on people's
 #' belief in the supernatural, seven people completed a measure of belief
 #' in the supernatural before and after watching a popular science fiction
 #' movie. Higher scores indicated higher levels of belief. The mean measure
