@@ -26,7 +26,7 @@ average standard deviation of each level as the denominator.
 }
 \details{
 To calculate d, mean two is subtracted from mean one, which is
-divided by the average standard deviation.
+divided by the average standard deviation. \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
 
 Provided values are:
 \itemize{
@@ -69,8 +69,8 @@ as shown below.
 #The mean measure of belief on the pretest (dept_data$before)
 was 5.571, with a standard deviation of 1.988. The posttest
 (dept_data$after) scores appeared lower but did not reach significance,
-likely due to the small sample size (M = 4.429, SD = 2.878, p = .20).
-The effect size was moderate (d = .47)suggesting the movie may
+likely due to the small sample size (M = 4.429, SD = 2.878, p = .202).
+The effect size was moderate (d = 0.47) suggesting the movie may
 have influenced belief in the supernatural.
 }
 \keyword{cohen's}

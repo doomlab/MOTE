@@ -12,6 +12,9 @@
 #' differences with associated confidence intervals, standard
 #' deviation of the differences, standard error, sample size, degrees of
 #' freedom, the t-statistic, and the p-value.
+#'   \item {d}{the effect size}
+#'   \item {dlow}{the lower level confidence interval d value}
+#'
 #' @keywords effect size, dependent t-test
 #' @export
 #' @examples #In a study to test the effects of science fiction movies on people's

@@ -20,6 +20,8 @@ The effect size and associated confidence intervals, mean
 differences with associated confidence intervals, standard
 deviation of the differences, standard error, sample size, degrees of
 freedom, the t-statistic, and the p-value.
+  \item {d}{the effect size}
+  \item {dlow}{the lower level confidence interval d value}
 }
 \description{
 This function displays d for repeated measures data
