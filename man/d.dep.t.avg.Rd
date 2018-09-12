@@ -25,6 +25,8 @@ and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
 \details{
+The formula for d is: $$d = \frac{M_1 - M_2}{\frac{SD_1 + SD_2}{2}}$$
+
 Provided values are:
 \itemize{
   \item d: the effect size
