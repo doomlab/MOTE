@@ -55,13 +55,13 @@ movie. Higher scores indicated higher levels of belief.
 as shown below.
 
     d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
-           sd2 = 2.878, n = 14, a = .05)
+                sd2 = 2.878, n = 14, a = .05)
 
     d.dep.t.avg(5.571, 4.429, 1.988, 2.878, 14, .05)
 
     d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
-            sd(dept_data$before), sd(dept_data$after),
-            length(dept_data$before), .05)
+                sd(dept_data$before), sd(dept_data$after),
+                length(dept_data$before), .05)
 
 #The mean measure of belief on the pretest (dept_data$before)
 was 5.571, with a standard deviation of 1.988. The posttest
