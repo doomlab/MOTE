@@ -6,8 +6,6 @@
 #'
 #' @details
 #'
-#' The formula for d is: d = {M1 - M2}\{2(SD1 + SD2)}
-#'
 #' Provided values are:
 #' \itemize{
 #'   \item d: the effect size

@@ -9,18 +9,21 @@
 #' @param n sample size
 #' @param a significance level
 #' @return
-#'   d: the effect size
-#'   dlow: the lower level confidence interval d value
-#'   dhigh: the upper level confidence interval d value
-#'   mdiff: mean of the differences
-#'   Mlow: the lower level confidence interval of mean
-#'   Mhigh: the upper level confidence interval of mean
-#'   sddiff: standard deviation of the differences
-#'   se: the standard error
-#'   n: the sample size
-#'   df: the degrees of freedom (sample size - 1)
-#'   t: t-statistic
-#'   p: p-value
+#'
+#' \itemize{
+#'   item\ d: the effect size
+#'   item\ dlow: the lower level confidence interval d value
+#'   item\ dhigh: the upper level confidence interval d value
+#'   item\ mdiff: mean of the differences
+#'   item\ Mlow: the lower level confidence interval of mean
+#'   item\ Mhigh: the upper level confidence interval of mean
+#'   item\ sddiff: standard deviation of the differences
+#'   item\ se: the standard error
+#'   item\ n: the sample size
+#'   item\ df: the degrees of freedom (sample size - 1)
+#'   item\ t: t-statistic
+#'   item\ p: p-value
+#'   }
 #'
 #' @keywords effect size, dependent t-test
 #' @export
