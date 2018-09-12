@@ -24,23 +24,6 @@ This function displays d for repeated measures data
 and the non-central confidence interval using the
 average standard deviation of each level as the denominator.
 }
-\details{
-The formula for d is: $$d = \frac{M_1 - M_2}{\frac{SD_1 + SD_2}{2}}$$
-
-Provided values are:
-\itemize{
-  \item d: the effect size
-  \item dlow: the lower level confidence interval d value
-  \item dhigh: the upper level confidence interval d value
-  \item M1/M2: mean one and two
-  \item M1low/M2low: the lower level confidence interval of mean one or two
-  \item M1high/M2high: the upper level confidence interval of mean one or two
-  \item sd1/sd2: the standard deviation of mean one and two
-  \item se1/se2: the standard error of mean one and two
-  \item n: the sample size
-  \item df: the degrees of freedom (sample size - 1)
-  }
-}
 \examples{
 
 #The following example is derived from the "dept_data" dataset included
