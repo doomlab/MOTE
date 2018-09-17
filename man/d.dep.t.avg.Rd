@@ -19,6 +19,22 @@ d.dep.t.avg(m1, m2, sd1, sd2, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+The effect size (Cohen's d) with associated confidence intervals,
+the confidence intervals associated with the means of each group,
+standard deviations of the means for each group.
+
+\item {d}{effect size}
+\item {dlow}{the lower level confidence interval d value}
+\item {dhigh}{the upper level confidence interval d value}
+\item {M1/M2}{mean one and two}
+\item {M1low/M2low}{the lower level confidence interval of mean one or two}
+\item {M1high/M2high}{the upper level confidence interval of mean one or two}
+\item {sd1/sd2}{the standard deviation of mean one and two}
+\item {se1/se2}{the standard error of mean one and two}
+\item {n}{the sample size}
+\item {df}{the degrees of freedom (sample size - 1)}
+}
 \description{
 This function displays d for repeated measures data
 and the non-central confidence interval using the
@@ -26,21 +42,8 @@ average standard deviation of each level as the denominator.
 }
 \details{
 To calculate d, mean two is subtracted from mean one, which is
-divided by the average standard deviation. \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
-
-Provided values are:
-\itemize{
-  \item d: the effect size
-  \item dlow: the lower level confidence interval d value
-  \item dhigh: the upper level confidence interval d value
-  \item M1/M2: mean one and two
-  \item M1low/M2low: the lower level confidence interval of mean one or two
-  \item M1high/M2high: the upper level confidence interval of mean one or two
-  \item sd1/sd2: the standard deviation of mean one and two
-  \item se1/se2: the standard error of mean one and two
-  \item n: the sample size
-  \item df: the degrees of freedom (sample size - 1)
-  }
+divided by the average standard deviation.
+\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
 }
 \examples{
 
@@ -73,9 +76,14 @@ likely due to the small sample size (M = 4.429, SD = 2.878, p = .202).
 The effect size was moderate (d = 0.47) suggesting the movie may
 have influenced belief in the supernatural.
 }
+\keyword{average,}
 \keyword{cohen's}
 \keyword{d}
+\keyword{d,}
 \keyword{dependent}
 \keyword{effect}
+\keyword{measures}
+\keyword{paired-sample,}
+\keyword{repeated}
 \keyword{size,}
 \keyword{t-test,}

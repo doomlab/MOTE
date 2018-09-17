@@ -4,24 +4,9 @@
 #' and the non-central confidence interval using the
 #' average standard deviation of each level as the denominator.
 #'
-#' @details
-#'
 #' To calculate d, mean two is subtracted from mean one, which is
-#' divided by the average standard deviation. \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
-#'
-#' Provided values are:
-#' \itemize{
-#'   \item d: the effect size
-#'   \item dlow: the lower level confidence interval d value
-#'   \item dhigh: the upper level confidence interval d value
-#'   \item M1/M2: mean one and two
-#'   \item M1low/M2low: the lower level confidence interval of mean one or two
-#'   \item M1high/M2high: the upper level confidence interval of mean one or two
-#'   \item sd1/sd2: the standard deviation of mean one and two
-#'   \item se1/se2: the standard error of mean one and two
-#'   \item n: the sample size
-#'   \item df: the degrees of freedom (sample size - 1)
-#'   }
+#' divided by the average standard deviation.
+#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
 #'
 #' @param m1 mean from first level
 #' @param m2 mean from second level
@@ -29,8 +14,23 @@
 #' @param sd2 standard deviation from second level
 #' @param n sample size
 #' @param a significance level
+#' @return The effect size (Cohen's d) with associated confidence intervals,
+#' the confidence intervals associated with the means of each group,
+#' standard deviations of the means for each group.
 #'
-#' @keywords effect size, dependent t-test, cohen's d
+#' \item {d}{effect size}
+#' \item {dlow}{the lower level confidence interval d value}
+#' \item {dhigh}{the upper level confidence interval d value}
+#' \item {M1/M2}{mean one and two}
+#' \item {M1low/M2low}{the lower level confidence interval of mean one or two}
+#' \item {M1high/M2high}{the upper level confidence interval of mean one or two}
+#' \item {sd1/sd2}{the standard deviation of mean one and two}
+#' \item {se1/se2}{the standard error of mean one and two}
+#' \item {n}{the sample size}
+#' \item {df}{the degrees of freedom (sample size - 1)}
+#'
+#' @keywords effect size, dependent t-test, cohen's d, d average, paired-sample,
+#' repeated measures
 #' @export
 #' @examples
 #'

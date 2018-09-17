@@ -4,16 +4,30 @@
 #' and the non-central confidence interval using the
 #' standard deviation of the differences as the denominator.
 #'
+#' To calculate d, mean two is subtracted from mean one, which is
+#' divided by the standard deviation of the difference scores.
+#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}
+#'
 #' @param mdiff mean difference score
 #' @param sddiff standard deviation of the difference scores
 #' @param n sample size
 #' @param a significance level
-#' @return The effect size and associated confidence intervals, mean
+#' @return The effect size (Cohen's d) with associated confidence intervals, mean
 #' differences with associated confidence intervals, standard
 #' deviation of the differences, standard error, sample size, degrees of
 #' freedom, the t-statistic, and the p-value.
-#' \item{d}{the effect size}
-#' \item{dlow}{the lower level confidence interval d value}
+#'
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval d value}
+#' \item{dhigh}{upper level confidence interval d value}
+#' \item{mdiff}{mean difference score}
+#' \item{Mlow}{lower level of confidence interval of the mean}
+#' \item{Mhigh}{upper level of confidence interval of the mean}
+#' \item{sddiff}{standard deviation of the difference scores}
+#' \item{n}{sample size}
+#' \item{df}{degrees of freedom (sample size - 1)}
+#' \item{t}{t-statistic}
+#' \item{p}{p-value}
 #'
 #' @keywords effect size, dependent t-test
 #' @export
