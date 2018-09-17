@@ -34,9 +34,9 @@ freedom, the t-statistic, and the p-value.
 \item{p}{p-value}
 }
 \description{
-This function displays d for repeated measures data
-and the non-central confidence interval using the
-standard deviation of the differences as the denominator.
+This function displays d and the non-central confidence interval
+for repeated measures data, using the standard deviation
+of the difference score as the denominator.
 }
 \details{
 To calculate d, mean two is subtracted from mean one, which is
@@ -44,14 +44,21 @@ divided by the standard deviation of the difference scores.
 \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}
 }
 \examples{
+
+#The following example is derived from the "dept_data" dataset included
+in the MOTE library.
+
 #In a study to test the effects of science fiction movies on people's
 belief in the supernatural, seven people completed a measure of belief
 in the supernatural before and after watching a popular science fiction movie.
-Higher scores indicated high levels of belief. The mean difference score was 1.143,
-while the standard deviation of the difference scores was 2.116 (the standard error difference was .800).
-You can type in the numbers directly:
-d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 14, a = .05)
-or you can calculate from the data.
+Higher scores indicated higher levels of belief. The mean difference score was 1.14,
+while the standard deviation of the difference scores was 2.12.
+
+#You can type in the numbers directly as shown below.
+
+    d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 7, a = .05)
+
+    d.dep.t.diff(1.143, 2.116, 7, .05)
 
 }
 \keyword{dependent}

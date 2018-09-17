@@ -13,6 +13,14 @@ d.dep.t.diff.t(t, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+\item{d}{effect size}
+\item{dlow}{the lower level confidence interval d value}
+\item{dhigh}{the upper level confidence interval d value}
+\item{n}{the sample size}
+\item{df}{the degrees of freedom (sample size - 1)}
+\item{p}{p-value}
+}
 \description{
 This function displays d for repeated measures data
 and the non-central confidence interval using the
@@ -20,9 +28,39 @@ standard deviation of the differences as the denominator
 estimating from the t-statistic.
 }
 \examples{
-d.dep.t.diff.t(t = 5, n = 100, a = .05)
+
+#The following example is derived from the "dept_data" dataset included
+in the MOTE library.
+
+#In a study to test the effects of science fiction movies on people’s belief
+in the supernatural, seven people completed a measure of belief in
+the supernatural before and after watching a popular science
+fiction movie. Higher scores indicated higher levels of belief.
+
+    scifi = t.test(dept_data$before, dept_data$after, paired = TRUE)
+
+#The t-test value was 1.4292. You can type in the numbers directly,
+or refer to the dataset, as shown below.
+
+    d.dep.t.diff.t(1.429179, n = 7, a = .05)
+
+    d.dep.t.diff.t(1.429179, 7, .05)
+
+    d.dep.t.diff.t(scifi$statistic, length(dept_data$before), .05)
+
+#The mean measure of belief on the pretest (dept_data$before)
+was 5.57, with a standard deviation of 1.99. The posttest
+(dept_data$after) scores appeared lower (M = 4.43, SD = 2.88) but did not reach
+significance, (t(7) = 1.429, p = .20, d = .54), likely due to the small sample size.
+The effect size was moderate (d = 0.54) suggesting the movie may
+have influenced belief in the supernatural.
 }
 \keyword{dependent}
 \keyword{effect}
+\keyword{measures,}
+\keyword{paired}
+\keyword{repeated}
+\keyword{sample,}
 \keyword{size,}
 \keyword{t-test}
+\keyword{t-test,}
