@@ -17,15 +17,63 @@ d.prop(p1, p2, n1, n2, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+\item{d}{effect size}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{p1}{proportion of group one}
+\item{se1}{standard error of the proportion of group one}
+\item{z1}{z-statistic group one}
+\item{z1low}{lower level confidence interval of z}
+\item{z1high}{upper level confidence interval of z}
+\item{p2}{proportion of group two}
+\item{se2}{standard error of the proportion of group two}
+\item{z2}{z-statistic of group two}
+\item{z2low}{lower level confidence interval of z}
+\item{z2high}{upper level confidence interval of z}
+\item{n1}{sample size group one (n - 1)}
+\item{n2}{sample size group two (n - 1)}
+\item{z}{z-statistic}
+\item{ppooled}{pooled proportion}
+\item{se}{standard error}
+\item{p}{p-value}
+}
 \description{
 This function displays d and central confidence interval
 calculated from differences in independent proportions.
 }
+\details{
+To calculate d, the proportion of group two is divided by the standard error
+of group two which is then subtracted from the proportion of group one divided by
+the standard error of group one.
+
+To calculate z, the proportion of group two is substracted from group one,
+which is then divided by the standard error.
+\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/independentproportions.html}
+}
 \examples{
-d.prop(p1 = .4, p2 = .6, n1 = 100, n2 = 100, a = .05)
+
+Several researchers were examining the data on the number
+of students who retake a course after they receive a D, F,
+or withdraw from the course. They randomly sampled form
+a large university two groups of students: traditional
+(less than 25 years old) and non-traditional (25 and older).
+Each group included 100 participants. About 25\% of students
+of the traditional group reported they would retake a course,
+while the non-traditional group showed about 35\% would
+retake the course.
+
+You can type in the numbers directly as shown below,
+or refer to your dataset within the function.
+
+    d.prop(p1 = .25, p2 = .35, n1 = 100, n2 = 100, a = .05)
+
+    d.prop(.25, .35, 100, 100, .05)
 }
 \keyword{effect}
+\keyword{independent}
 \keyword{prop}
 \keyword{proportions}
+\keyword{proportions,}
 \keyword{size,}
 \keyword{test,}

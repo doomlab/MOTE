@@ -42,7 +42,8 @@
 #' Higher scores indicated higher levels of belief. The mean difference score was 1.14,
 #' while the standard deviation of the difference scores was 2.12.
 #'
-#' #You can type in the numbers directly as shown below.
+#' #You can type in the numbers directly as shown below,
+#' or refer to your dataset within the function.
 #'
 #'     d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 7, a = .05)
 #'

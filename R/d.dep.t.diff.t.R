@@ -5,6 +5,9 @@
 #' standard deviation of the differences as the denominator
 #' estimating from the t-statistic.
 #'
+#'  To calculate d, the t-statistic is divided by the square root of the sample size.
+#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}
+#'
 #' @param t t-test value
 #' @param n sample size
 #' @param a significance level

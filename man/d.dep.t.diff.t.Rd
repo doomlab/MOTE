@@ -27,6 +27,10 @@ and the non-central confidence interval using the
 standard deviation of the differences as the denominator
 estimating from the t-statistic.
 }
+\details{
+To calculate d, the t-statistic is divided by the square root of the sample size.
+\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}
+}
 \examples{
 
 #The following example is derived from the "dept_data" dataset included

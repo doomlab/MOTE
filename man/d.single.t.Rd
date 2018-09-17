@@ -17,13 +17,53 @@ d.single.t(m, u, sd, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+\item{d}{effect size}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{m}{sample mean}
+\item{sd}{standard deviation of the sample}
+\item{se}{standard error of the sample}
+\item{Mlow}{lower level confidence interval of the sample mean}
+\item{Mhigh}{upper level confidence interval of the sample mean}
+\item{u}{population mean}
+\item{n}{sample size}
+\item{df}{degrees of freedom (n - 1)}
+\item{t}{t-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays d and non-central confidence interval for single t from means.
 }
+\details{
+To calculate d, the population is subtracted from the sample mean,
+which is then divided by the standard deviation.
+\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/singlett.html}
+}
 \examples{
-d.single.t(m = 20, u = 17, sd = 4, n = 100, a = .05)
+
+#A school has a gifted/honors program that they claim is
+significantly better than others in the country. The gifted/honors
+students in this school scored an average of 1370 on the SAT,
+with a standard deviation of 112.7, while the national average
+for gifted programs is a SAT score of 1080.
+
+You can type in the numbers directly as shown below,
+or refer to your dataset within the function.
+
+    d.single.t(m = 1370, u = 1080, sd = 112.7, n = 100, a = .05)
+
+    d.single.t(1370, 1080, 112.7, 100, .05)
+
 }
 \keyword{effect}
+\keyword{mean}
+\keyword{mean,}
+\keyword{mu,}
+\keyword{population}
+\keyword{sample}
 \keyword{single}
+\keyword{single-sample,}
 \keyword{size,}
-\keyword{t}
+\keyword{t,}
+\keyword{u,}
