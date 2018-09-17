@@ -25,12 +25,12 @@
 #' \item{dlow}{lower level confidence interval d value}
 #' \item{dhigh}{upper level confidence interval d value}
 #' \item{M1}{mean one}
-#' \item{sd1=}{standard deviation of mean one}
+#' \item{sd1}{standard deviation of mean one}
 #' \item{se1}{standard error of mean one}
 #' \item{M1low}{lower level confidence interval of mean one}
 #' \item{M1high}{upper level confidence interval of mean one}
 #' \item{M2}{mean two}
-#' \item{sd2=}{standard deviation of mean two}
+#' \item{sd2}{standard deviation of mean two}
 #' \item{se2}{standard error of mean two}
 #' \item{M2low}{lower level confidence interval of mean two}
 #' \item{M2high}{upper level confidence interval of mean two}
