@@ -15,10 +15,10 @@ d.dep.t.diff.t(t, n, a = 0.05)
 }
 \value{
 \item{d}{effect size}
-\item{dlow}{the lower level confidence interval d value}
-\item{dhigh}{the upper level confidence interval d value}
-\item{n}{the sample size}
-\item{df}{the degrees of freedom (sample size - 1)}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{n}{sample size}
+\item{df}{degrees of freedom (sample size - 1)}
 \item{p}{p-value}
 }
 \description{

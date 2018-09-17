@@ -1,8 +1,13 @@
 #' d for Repeated Measures with Average SD Denominator
 #'
-#' This function displays d for repeated measures data controlling for r
-#' and the non-central confidence interval using the
-#' average standard deviation of each level as the denominator.
+#' This function displays d and the non-central confidence interval
+#' for repeated measures data, using the average standard deviation of
+#' each level as the denominator, but controlling for r.
+#'
+#' To calculate d, mean two is subtracted from mean one, which is
+#' divided by the average standard deviation, while mathematically controlling for r.
+#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptrm.html}
+#'
 #'
 #' @param m1 mean from first level
 #' @param m2 mean from second level
@@ -11,11 +16,64 @@
 #' @param r correlation between first and second level
 #' @param n sample size
 #' @param a significance level
-#' @keywords effect size, dependent t-test
+#' @return Controls for correlation and provides the effect size (Cohen's d)
+#' with associated confidence intervals,m the confidence intervals associated
+#' with the means of each group,mstandard deviations and standard errors of
+#' the means for each group.
+#'
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval d value}
+#' \item{dhigh}{upper level confidence interval d value}
+#' \item{M1}{mean one}
+#' \item{sd1=}{standard deviation of mean one}
+#' \item{se1}{standard error of mean one}
+#' \item{M1low}{lower level confidence interval of mean one}
+#' \item{M1high}{upper level confidence interval of mean one}
+#' \item{M2}{mean two}
+#' \item{sd2=}{standard deviation of mean two}
+#' \item{se2}{standard error of mean two}
+#' \item{M2low}{lower level confidence interval of mean two}
+#' \item{M2high}{upper level confidence interval of mean two}
+#' \item{r}{correlation}
+#' \item{n}{sample size}
+#' \item{df}{degrees of freedom (sample size - 1)}
+#'
+#' @keywords effect size, dependent t-test, cohen's d, paired-sample,
+#' repeated measures, correlation
 #' @export
 #' @examples
-#' d.dep.t.rm(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, r = .30, n = 100, a = .05)
-
+#'
+#' #The following example is derived from the "dept_data" dataset included
+#' in the MOTE library.
+#'
+#' #In a study to test the effects of science fiction movies on people's
+#' belief in the supernatural, seven people completed a measure of belief
+#' in the supernatural before and after watching a popular science fiction
+#' movie. Higher scores indicated higher levels of belief.
+#'
+#'     t.test(dept_data$before, dept_data$after, paired = TRUE)
+#'
+#'     scifi_cor = cor(dept_data$before, dept_data$after, method = "pearson")
+#'
+#' #You can type in the numbers directly, or refer to the dataset,
+#' as shown below.
+#'
+#'     d.dep.t.rm(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
+#'                 sd2 = 2.878, r = 0.6781784, n = 14, a = .05)
+#'
+#'     d.dep.t.rm(5.571, 4.429, 1.988, 2.878, 0.6781784, 14, .05)
+#'
+#'     d.dep.t.rm(mean(dept_data$before), mean(dept_data$after),
+#'                 sd(dept_data$before), sd(dept_data$after),
+#'                 scifi_cor, length(dept_data$before), .05)
+#'
+#' #The mean measure of belief on the pretest (dept_data$before)
+#' was 5.57, with a standard deviation of 1.99. The posttest
+#' (dept_data$after) scores appeared lower (M = 4.43, SD = 2.88) but did not reach
+#' significance, (t(7) = 1.1429, p = .20, d = .54), likely due to the small sample size
+#' The effect size was moderate (d = 0.43), suggesting the movie may
+#' have influenced belief in the supernatural.
+#'
 
 d.dep.t.rm <- function (m1, m2, sd1, sd2, r, n, a = .05) {
   # Displays d and non-central confidence interval for repeated measures
