@@ -9,7 +9,7 @@
 #'
 #' To calculate d, the t-statistic is divided by the square root of the degrees of freedom
 #' and multiplied by two.
-#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/indtm.html}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtm.html}{Learn more on our example page.}
 #'
 #'
 #' @param m1 mean group one
