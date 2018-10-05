@@ -17,6 +17,15 @@ odds(n11, n12, n21, n22, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides odds ratios with associated confidence intervals
+and relevant statistics.
+
+\item{odds}{odds statistic}
+\item{olow}{lower level confidence interval of odds statistic}
+\item{ohigh}{upper level confidence interval of odds statistic}
+\item{se}{standard error}
+}
 \description{
 This function displays odds ratios and their normal confidence intervals.
 This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),

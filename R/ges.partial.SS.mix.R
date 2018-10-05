@@ -11,6 +11,17 @@
 #' @param sse sum of squares for the error/residual/within
 #' @param Fvalue F statistic
 #' @param a significance level
+#'
+#' @return Partial generalized eta-squared (GES) with associated confidence intervals
+#' and relevant statistics.
+#' \item{ges}{effect size}
+#' \item{geslow}{lower level confidence interval for ges}
+#' \item{geshigh}{upper level confidence interval for ges}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, ges, ANOVA
 #' @export
 #' @examples

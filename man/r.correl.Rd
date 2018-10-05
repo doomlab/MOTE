@@ -13,6 +13,25 @@ r.correl(r, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides correlation coefficient and coefficient of
+determination with associated confidence intervals
+and relevant statistics.
+
+\item{r}{correlation coefficient}
+\item{rlow}{lower level confidence interval r}
+\item{rhigh}{upper level confidence interval r}
+\item{R2}{coefficient of determination}
+\item{R2low}{lower level confidence interval of R2}
+\item{R2high}{upper level confidence interval of R2}
+\item{se}{standard error}
+\item{n}{sample size}
+\item{dfm}{degrees of freedom of mean}
+\item{dfe}{degrees of freedom of error}
+\item{t}{t-statistic}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays transformation from r to r2 to calculate
 the non-central confidence interval for r2 using the F distribution.

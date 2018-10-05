@@ -21,6 +21,33 @@ g.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+D-g corrected with associated confidence intervals,
+the confidence intervals associated with the means of each group,
+standard deviations of the means for each group, relevant statistics.
+
+\item{d}{effect size}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{M1}{mean group one}
+\item{sd1}{standard deviation of group one}
+\item{se1}{standard error of group one}
+\item{M1low}{lower level confidence interval of mean one}
+\item{M1high}{upper level confidence interval of mean one}
+\item{M2}{mean two}
+\item{sd2}{standard deviation of mean two}
+\item{se1}{standard error of mean two}
+\item{M2low}{lower level confidence interval of mean two}
+\item{M2high}{upper level confidence interval of mean two}
+\item{spooled}{pooled standard deviation}
+\item{sepooled}{pooled standard error}
+\item{correction}{g corrected}
+\item{n1}{size of sample one}
+\item{n2}{size of sample two}
+\item{df}{degrees of freedom}
+\item{t}{t-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays d-g corrected
 and the non-central confidence interval for independent t.

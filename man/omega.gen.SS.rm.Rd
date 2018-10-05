@@ -25,6 +25,18 @@ omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides omega squared with associated confidence intervals
+and relevant statistics.
+
+\item{omega}{omega squared}
+\item{omegalow}{lower level confidence interval of omega}
+\item{omegahigh}{upper level confidence interval of omega}
+\item{dfm}{degrees of freedom for the model/IV/between}
+\item{dfe}{degrees of freedom for the error/resisual/within}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays generalized omega squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.

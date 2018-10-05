@@ -13,6 +13,17 @@
 #' @param j number of levels in the OTHER IV
 #' @param Fvalue F statistic from the output for your IV
 #' @param a significance level
+#' @return Provides omega squared with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{omega}{omega squared}
+#' \item{omegalow}{lower level confidence interval of omega}
+#' \item{omegahigh}{upper level confidence interval of omega}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/resisual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, omega, ANOVA
 #' @export
 #' @examples

@@ -6,13 +6,29 @@
 #' for between subjects and repeated measures designs.
 #' Remember if you have two or more IVs, these values are partial eta squared.
 #'
+#' Eta is calculated by multiplying the degrees of freedom of
+#' the model by the F-statistic. This is divided by the product
+#' of degrees of freedom of the model, the F-statistic, and
+#' the degrees of freedom for the error or residual.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param Fvalue F statistic
 #' @param a significance level
+#' @return Provides eta with associated confidence intervals and relevant statistics.
+#'
+#' \item{eta}{effect size}
+#' \item{etalow}{lower level confidence interval of eta}
+#' \item{etahigh}{upper level confidence interval of eta}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/resisual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, eta, ANOVA
 #' @export
 #' @examples
+#'
 #' eta.F(dfm = 2, dfe = 20, Fvalue = 5.7, a = .05)
 
 

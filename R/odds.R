@@ -10,6 +10,14 @@
 #' @param n21 sample size for level 2.1
 #' @param n22 sample size for level 2.2
 #' @param a significance level
+#' @return Provides odds ratios with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{odds}{odds statistic}
+#' \item{olow}{lower level confidence interval of odds statistic}
+#' \item{ohigh}{upper level confidence interval of odds statistic}
+#' \item{se}{standard error}
+#'
 #' @keywords effect size, odds ratios
 #' @export
 #' @examples

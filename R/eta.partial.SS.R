@@ -10,6 +10,18 @@
 #' @param sse sum of squares for the error/residual/within
 #' @param Fvalue F statistic
 #' @param a significance level
+#'
+#' @return Provides partial eta squared with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{eta}{effect size}
+#' \item{etalow}{lower level confidence interval of eta}
+#' \item{etahigh}{upper level confidence interval of eta}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/resisual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, eta, ANOVA
 #' @export
 #' @examples
