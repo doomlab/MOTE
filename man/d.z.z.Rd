@@ -15,13 +15,41 @@ d.z.z(z, sig = NA, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+The effect size (Cohen's d) with associated confidence intervals and
+relevant statistics.
+
+\item{d}{effect size}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{sigma}{sample size}
+\item{z}{sig stats}
+\item{p}{p-value}
+\item{n}{sample size}
+}
 \description{
-This function displays d for z-scores when all you have is the z-statistics.
-The normoal confidence interval is also provided if you have sigma.
+This function displays d for z-scores when all you have is the z-statistic.
+The normal confidence interval is also provided if you have sigma.
 If sigma is left blank, then you will not see a confidence interval.
 }
+\details{
+To calculate d, z is divided by the square root of N.
+\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/ztestz.html}
+}
 \examples{
-d.z.z(z = 1.25, sig = 3, n = 10, a = .05)
+
+A recent study suggested that students (N = 100) learning
+statistics improved their test scores with the use of
+visual aids (Z = 2.5). The population standard deviation is 4.
+
+You can type in the numbers directly as shown below,
+or refer to your dataset within the function.
+
+    d.z.z(z = 2.5, sig = 4, n = 100, a = .05)
+
+    d.z.z(z = 2.5, n = 100, a = .05)
+
+    d.z.z(2.5, 4, 100, .05)
 }
 \keyword{effect}
 \keyword{size,}
