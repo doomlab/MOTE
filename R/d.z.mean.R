@@ -1,6 +1,6 @@
-#' d for z-Scores from Population Mean and SD
+#' d for Z-test from Population Mean and SD
 #'
-#' This function displays d for z-scores with the
+#' This function displays d for Z-test with the
 #' population mean and standard deviation.
 #' The normal confidence interval is also provided.
 #'
@@ -10,15 +10,35 @@
 #' @param sd1 standard deviation from the study
 #' @param n sample size
 #' @param a significance level
+#' @return The effect size (Cohen's d) with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval d value}
+#' \item{dhigh}{upper level confidence interval d value}
+#' \item{M1}{mean of sample}
+#' \item{sd1}{standard deviation of sample}
+#' \item{se1}{standard error of sample}
+#' \item{M1low}{lower level confidence interval of the mean}
+#' \item{M1high}{upper level confidence interval of the mean}
+#' \item{Mu}{population mean}
+#' \item{Sigma}{standard deviation of population}
+#' \item{se2}{standard error of population}
+#' \item{z}{z-statistic}
+#' \item{p}{p-value}
+#' \item{n}{sample size}
+#'
 #' @keywords effect size, z-test
 #' @export
 #' @examples
+#'
 #' d.z.mean(mu = 20, m1 = 17, sig = 4, sd1 = 5, n = 100, a = .05)
 
 
 d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
   # Displays d for z-test where you have one sample and the population
-  # mean and standard deviation. The normal confidence intervals are also provided.
+  # mean and standard deviation. The normal confidence intervals are
+  # also provided.
   #
   # Args:
   #   mu  : population mean

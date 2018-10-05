@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.z.mean.R
 \name{d.z.mean}
 \alias{d.z.mean}
-\title{d for z-Scores from Population Mean and SD}
+\title{d for Z-test from Population Mean and SD}
 \usage{
 d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 }
@@ -19,12 +19,32 @@ d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+The effect size (Cohen's d) with associated confidence intervals
+and relevant statistics.
+
+\item{d}{effect size}
+\item{dlow}{lower level confidence interval d value}
+\item{dhigh}{upper level confidence interval d value}
+\item{M1}{mean of sample}
+\item{sd1}{standard deviation of sample}
+\item{se1}{standard error of sample}
+\item{M1low}{lower level confidence interval of the mean}
+\item{M1high}{upper level confidence interval of the mean}
+\item{Mu}{population mean}
+\item{Sigma}{standard deviation of population}
+\item{se2}{standard error of population}
+\item{z}{z-statistic}
+\item{p}{p-value}
+\item{n}{sample size}
+}
 \description{
-This function displays d for z-scores with the
+This function displays d for Z-test with the
 population mean and standard deviation.
 The normal confidence interval is also provided.
 }
 \examples{
+
 d.z.mean(mu = 20, m1 = 17, sig = 4, sd1 = 5, n = 100, a = .05)
 }
 \keyword{effect}

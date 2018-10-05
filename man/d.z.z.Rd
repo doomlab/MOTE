@@ -2,7 +2,7 @@
 % Please edit documentation in R/d.z.z.R
 \name{d.z.z}
 \alias{d.z.z}
-\title{d for z-scores from z}
+\title{d from z-statistic for Z-test}
 \usage{
 d.z.z(z, sig = NA, n, a = 0.05)
 }
@@ -28,7 +28,7 @@ relevant statistics.
 \item{n}{sample size}
 }
 \description{
-This function displays d for z-scores when all you have is the z-statistic.
+This function displays d for Z-tests when all you have is the z-statistic.
 The normal confidence interval is also provided if you have sigma.
 If sigma is left blank, then you will not see a confidence interval.
 }

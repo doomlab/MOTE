@@ -19,6 +19,19 @@ epsilon.full.SS(dfm, dfe, msm, mse, sst, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides the effect size (Cohen's d) with associated confidence intervals,
+the t-statistic, the confidence intervals associated with the means of each group, as well as the
+standard deviations and standard errors of the means for each group.
+
+\item{epsilon}{effect size}
+\item{epsilonlow}{lower level confidence interval of epsilon}
+\item{epsilonhigh}{upper level confidence interval of epsilon}
+\item{dfm}{degrees of freedom for the model/IV/between}
+\item{dfe}{degrees of freedom for the error/resisual/within}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays epsilon squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
