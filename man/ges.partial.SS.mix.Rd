@@ -21,6 +21,17 @@ ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Partial generalized eta-squared (GES) with associated confidence intervals
+and relevant statistics.
+\item{ges}{effect size}
+\item{geslow}{lower level confidence interval for ges}
+\item{geshigh}{upper level confidence interval for ges}
+\item{dfm}{degrees of freedom for the model/IV/between}
+\item{dfe}{degrees of freedom for the error/residual/within}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays partial generalized eta-squared (GES) from ANOVA analyses
 and its non-central confidence interval based on the F distribution.

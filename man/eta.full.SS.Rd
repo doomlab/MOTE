@@ -19,6 +19,17 @@ eta.full.SS(dfm, dfe, ssm, sst, Fvalue, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides eta with associated confidence intervals and relevant statistics.
+
+\item{eta}{effect size}
+\item{etalow}{lower level confidence interval of eta}
+\item{etahigh}{upper level confidence interval of eta}
+\item{dfm}{degrees of freedom for the model/IV/between}
+\item{dfe}{degrees of freedom for the error/resisual/within}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays eta squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.

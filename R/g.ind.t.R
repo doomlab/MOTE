@@ -10,6 +10,32 @@
 #' @param n1 sample size group one
 #' @param n2 sample size group two
 #' @param a significance level
+#' @return D-g corrected with associated confidence intervals,
+#' the confidence intervals associated with the means of each group,
+#' standard deviations of the means for each group, relevant statistics.
+#'
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval d value}
+#' \item{dhigh}{upper level confidence interval d value}
+#' \item{M1}{mean group one}
+#' \item{sd1}{standard deviation of group one}
+#' \item{se1}{standard error of group one}
+#' \item{M1low}{lower level confidence interval of mean one}
+#' \item{M1high}{upper level confidence interval of mean one}
+#' \item{M2}{mean two}
+#' \item{sd2}{standard deviation of mean two}
+#' \item{se1}{standard error of mean two}
+#' \item{M2low}{lower level confidence interval of mean two}
+#' \item{M2high}{upper level confidence interval of mean two}
+#' \item{spooled}{pooled standard deviation}
+#' \item{sepooled}{pooled standard error}
+#' \item{correction}{g corrected}
+#' \item{n1}{size of sample one}
+#' \item{n2}{size of sample two}
+#' \item{df}{degrees of freedom}
+#' \item{t}{t-statistic}
+#' \item{p}{p-value}
+
 #' @keywords effect size, independent t, correction
 #' @export
 #' @examples
