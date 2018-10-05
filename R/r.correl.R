@@ -6,6 +6,24 @@
 #' @param r correlation coefficient
 #' @param n sample size
 #' @param a significance level
+#' @return Provides correlation coefficient and coefficient of
+#' determination with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{r}{correlation coefficient}
+#' \item{rlow}{lower level confidence interval r}
+#' \item{rhigh}{upper level confidence interval r}
+#' \item{R2}{coefficient of determination}
+#' \item{R2low}{lower level confidence interval of R2}
+#' \item{R2high}{upper level confidence interval of R2}
+#' \item{se}{standard error}
+#' \item{n}{sample size}
+#' \item{dfm}{degrees of freedom of mean}
+#' \item{dfe}{degrees of freedom of error}
+#' \item{t}{t-statistic}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, correlation
 #' @export
 #' @examples

@@ -8,6 +8,17 @@
 #' @param r number of rows in the contingency table
 #' @param c number of columns in the contingency table
 #' @param a significance level
+#' @return Provides V with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{v}{v-statistic}
+#' \item{vlow}{lower level confidence interval of omega}
+#' \item{vhigh}{upper level confidence interval of omega}
+#' \item{n}{sample size}
+#' \item{df}{degrees of freedom}
+#' \item{x2}{significance statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, chi-square
 #' @export
 #' @examples

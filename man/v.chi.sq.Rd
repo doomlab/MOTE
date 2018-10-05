@@ -17,6 +17,18 @@ v.chi.sq(x2, n, r, c, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides V with associated confidence intervals
+and relevant statistics.
+
+\item{v}{v-statistic}
+\item{vlow}{lower level confidence interval of omega}
+\item{vhigh}{upper level confidence interval of omega}
+\item{n}{sample size}
+\item{df}{degrees of freedom}
+\item{x2}{significance statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays V and non-central confidence interval
 for the specified chi-square statistic.

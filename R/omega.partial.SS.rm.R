@@ -13,6 +13,17 @@
 #' @param sse sum of squares for the error/residual/within
 #' @param sss sum of squares for the subject variance
 #' @param a significance level
+#' @return Provides omega squared with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{omega}{omega squared}
+#' \item{omegalow}{lower level confidence interval of omega}
+#' \item{omegahigh}{upper level confidence interval of omega}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/resisual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+#'
 #' @keywords effect size, omega, ANOVA
 #' @export
 #' @examples
