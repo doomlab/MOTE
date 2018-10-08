@@ -6,7 +6,7 @@
 #' estimating from the t-statistic.
 #'
 #'  To calculate d, the t-statistic is divided by the square root of the sample size.
-#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 #'
 #' @param t t-test value
 #' @param n sample size

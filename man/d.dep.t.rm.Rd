@@ -52,7 +52,7 @@ each level as the denominator, but controlling for r.
 \details{
 To calculate d, mean two is subtracted from mean one, which is
 divided by the average standard deviation, while mathematically controlling for r.
-\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptrm.html}
+\href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}{Learn more on our example page.}
 }
 \examples{
 

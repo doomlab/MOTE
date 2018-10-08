@@ -41,7 +41,7 @@ of the difference score as the denominator.
 \details{
 To calculate d, mean two is subtracted from mean one, which is
 divided by the standard deviation of the difference scores.
-\href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
+\href{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}{Learn more on our example page.}
 }
 \examples{
 

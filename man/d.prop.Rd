@@ -49,7 +49,7 @@ the standard error of group one.
 
 To calculate z, the proportion of group two is substracted from group one,
 which is then divided by the standard error.
-\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/independentproportions.html}
+\href{https://www.aggieerin.com/shiny-server/tests/independentproportions.html}{Learn more on our example page.}
 }
 \examples{
 
