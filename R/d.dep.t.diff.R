@@ -6,7 +6,7 @@
 #'
 #' To calculate d, mean two is subtracted from mean one, which is
 #' divided by the standard deviation of the difference scores.
-#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 #'
 #' @param mdiff mean difference score
 #' @param sddiff standard deviation of the difference scores

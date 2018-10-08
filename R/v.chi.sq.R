@@ -3,6 +3,10 @@
 #' This function displays V and non-central confidence interval
 #' for the specified chi-square statistic.
 #'
+#' V is the square root of chi-squared divided by the product
+#' of the sample size and the degrees of freedom with the lowest value.
+#' \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
+#'
 #' @param x2 chi-square statistic
 #' @param n sample size
 #' @param r number of rows in the contingency table

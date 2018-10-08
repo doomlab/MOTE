@@ -38,7 +38,7 @@ This function displays d and non-central confidence interval for single t from m
 \details{
 To calculate d, the population is subtracted from the sample mean,
 which is then divided by the standard deviation.
-\href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/singlett.html}
+\href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
 }
 \examples{
 

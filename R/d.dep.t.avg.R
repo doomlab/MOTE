@@ -6,7 +6,7 @@
 #'
 #' To calculate d, mean two is subtracted from mean one, which is
 #' divided by the average standard deviation.
-#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}{Learn more on our example page.}
 #'
 #' @param m1 mean from first level
 #' @param m2 mean from second level

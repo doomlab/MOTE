@@ -4,7 +4,7 @@
 #'
 #' To calculate d, the population is subtracted from the sample mean,
 #' which is then divided by the standard deviation.
-#' \href{Learn more on our example page.}{https://www.aggieerin.com/shiny-server/tests/singlett.html}
+#' \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
 #'
 #' @param m sample mean
 #' @param u population mean

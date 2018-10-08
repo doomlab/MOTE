@@ -33,6 +33,11 @@ and relevant statistics.
 This function displays V and non-central confidence interval
 for the specified chi-square statistic.
 }
+\details{
+V is the square root of chi-squared divided by the product
+of the sample size and the degrees of freedom with the lowest value.
+\href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
+}
 \examples{
 v.chi.sq(x2 = 4, n = 25, r = 2, c = 2, a = .05)
 }

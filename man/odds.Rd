@@ -28,9 +28,12 @@ and relevant statistics.
 }
 \description{
 This function displays odds ratios and their normal confidence intervals.
-This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
-which can be considered the odds of level 1.1 given level1 overall versus level2.1
-given level2 overall.
+}
+\details{
+This statistic is the ratio between level 1.1 divided by level 1.2, and
+level 2.1 divided by 2.2. In other words, these are the odds of level 1.1
+given level 1 overall versus level 2.1 given level 2 overall.
+\href{https://www.aggieerin.com/shiny-server/tests/chio.html}{Learn more on our example page.}
 }
 \examples{
 odds(n11 = 10, n12 = 15, n21 = 20, n22 = 5, a = .05)
