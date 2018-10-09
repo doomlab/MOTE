@@ -5,6 +5,8 @@
 #' This formula works for one way and multi way designs with careful
 #' focus on the sum of squares total.
 #'
+#' Eta squared is calculated by dividing the sum of squares for the model by the sum of squares total.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between

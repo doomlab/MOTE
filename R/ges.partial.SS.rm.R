@@ -4,6 +4,11 @@
 #' and its non-central confidence interval based on the F distribution.
 #' This formula works for multi-way repeated measures designs.
 #'
+#' First, the sum of squares of the model, sum of squares of the subject
+#' variance, sum of squares for the first and second independent variables,
+#' and the sum of squares for the interaction are added together.
+#' The sum of squares of the model is divided by this value.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between

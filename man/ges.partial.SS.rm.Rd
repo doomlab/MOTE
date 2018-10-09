@@ -41,6 +41,12 @@ This function displays partial ges squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula works for multi-way repeated measures designs.
 }
+\details{
+First, the sum of squares of the model, sum of squares of the subject
+variance, sum of squares for the first and second independent variables,
+and the sum of squares for the interaction are added together.
+The sum of squares of the model is divided by this value.
+}
 \examples{
 ges.partial.SS.rm(dfm = 2, dfe = 100, ssm = 435, sss = 659, sse1 = 435, sse2 = 446, sse3 = 546, Fvalue = 5.46, a = .05)
 }

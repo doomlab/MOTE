@@ -36,6 +36,11 @@ This function displays partial eta squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula works for one way and multi way designs.
 }
+\details{
+Partial eta squared is calculated by dividing the sum of squares
+of the model by the sum of the sum of squares of the model and
+sum of squares of the error.
+}
 \examples{
 eta.partial.SS(dfm = 2, dfe = 100, ssm = 435, sse = 659, Fvalue = 5.46, a = .05)
 }

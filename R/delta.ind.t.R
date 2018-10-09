@@ -4,6 +4,10 @@
 #' and the non-central confidence interval using the
 #' control group standard deviation as the denominator.
 #'
+#' To calculate d-delta, the mean of the experimental group
+#' is subtracted from the mean of the control group, which
+#' is divided by the standard deviation of the control group.
+#'
 #' @param m1 mean from control group
 #' @param m2 mean from experimental group
 #' @param sd1 standard deviation from control group

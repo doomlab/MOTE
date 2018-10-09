@@ -5,6 +5,11 @@
 #' This formula works for one way and multi way designs with careful
 #' focus on the sum of squares total calculation.
 #'
+#' To calculate epsilon, first, the mean square for the error is
+#' substracted from the mean square for the model. The difference
+#' is multiplied by the degrees of freedom for the model. The
+#' product is divided by the sum of squares total.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param msm mean square for the model/IV/between

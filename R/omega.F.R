@@ -6,11 +6,29 @@
 #' for between subjects and repeated measures designs.
 #' Remember if you have two or more IVs, these values are partial omega squared.
 #'
+#' Omega squared or partial omega squared is calculated by subtracting one
+#' from the F-statistic and multiplying it by degrees of freedom of the model. This is
+#' divided by the same value after adding the number of valid responses. This
+#' value will be omega squared for one-way ANOVA designs, and will be
+#' partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param Fvalue F statistic
 #' @param n full sample size
 #' @param a significance level
+#' @return The effect size (Cohen's d) with associated confidence intervals
+#' and relevant statistics.
+#'
+#' \item{omega}{omega statistic}
+#' \item{omegalow}{lower level confidence interval d value}
+#' \item{omegahigh}{upper level confidence interval d value}
+#' \item{dfm}{degrees of freedom for the model/IV/between}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
+#' \item{F}{F-statistic}
+#' \item{p}{p-value}
+
+#'
 #' @keywords effect size, omega, ANOVA
 #' @export
 #' @examples

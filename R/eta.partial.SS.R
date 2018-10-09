@@ -4,6 +4,10 @@
 #' and its non-central confidence interval based on the F distribution.
 #' This formula works for one way and multi way designs.
 #'
+#' Partial eta squared is calculated by dividing the sum of squares
+#' of the model by the sum of the sum of squares of the model and
+#' sum of squares of the error.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between

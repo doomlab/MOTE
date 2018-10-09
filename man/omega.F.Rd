@@ -17,12 +17,31 @@ omega.F(dfm, dfe, Fvalue, n, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+The effect size (Cohen's d) with associated confidence intervals
+and relevant statistics.
+
+\item{omega}{omega statistic}
+\item{omegalow}{lower level confidence interval d value}
+\item{omegahigh}{upper level confidence interval d value}
+\item{dfm}{degrees of freedom for the model/IV/between}
+\item{dfe}{degrees of freedom for the error/residual/within}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 This function displays omega squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 These values are calculated directly from F statistics and can be used
 for between subjects and repeated measures designs.
 Remember if you have two or more IVs, these values are partial omega squared.
+}
+\details{
+Omega squared or partial omega squared is calculated by subtracting one
+from the F-statistic and multiplying it by degrees of freedom of the model. This is
+divided by the same value after adding the number of valid responses. This
+value will be omega squared for one-way ANOVA designs, and will be
+partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
 }
 \examples{
 omega.F(dfm = 2, dfe = 97, Fvalue = 5.7, n = 100, a = .05)

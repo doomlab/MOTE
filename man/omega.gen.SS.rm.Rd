@@ -42,6 +42,15 @@ This function displays generalized omega squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula is appropriate for multi-way repeated measures designs and mix level designs.
 }
+\details{
+Omega squared is calculated by subtracting the product of the
+degrees of freedom of the model and the mean square of the
+subject variance from the sum of squares for the model.
+This value is divided by the value obtained after combining
+the sum of squares total, sum of squares for the other
+independent variable, and the product of the number of levels
+ and the mean square of the subject variance.
+}
 \examples{
 omega.gen.SS.rm(dfm = 2, dfe = 100,
                      ssm = 5339, ssm2 = 432, sst = 10947,

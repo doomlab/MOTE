@@ -52,6 +52,11 @@ This function displays d-delta for between subjects data
 and the non-central confidence interval using the
 control group standard deviation as the denominator.
 }
+\details{
+To calculate d-delta, the mean of the experimental group
+is subtracted from the mean of the control group, which
+is divided by the standard deviation of the control group.
+}
 \examples{
 
 #The following example is derived from the "indt_data" dataset, included

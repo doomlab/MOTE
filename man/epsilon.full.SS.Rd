@@ -38,6 +38,12 @@ and its non-central confidence interval based on the F distribution.
 This formula works for one way and multi way designs with careful
 focus on the sum of squares total calculation.
 }
+\details{
+To calculate epsilon, first, the mean square for the error is
+substracted from the mean square for the model. The difference
+is multiplied by the degrees of freedom for the model. The
+product is divided by the sum of squares total.
+}
 \examples{
 epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
 }

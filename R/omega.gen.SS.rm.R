@@ -4,6 +4,14 @@
 #' and its non-central confidence interval based on the F distribution.
 #' This formula is appropriate for multi-way repeated measures designs and mix level designs.
 #'
+#' Omega squared is calculated by subtracting the product of the
+#' degrees of freedom of the model and the mean square of the
+#' subject variance from the sum of squares for the model.
+#' This value is divided by the value obtained after combining
+#' the sum of squares total, sum of squares for the other
+#' independent variable, and the product of the number of levels
+#'  and the mean square of the subject variance.
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the MAIN model/IV/between
