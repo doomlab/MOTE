@@ -32,7 +32,8 @@
 #'
 #' @keywords effect size, dependent t-test, cohen's d, d average, paired-sample,
 #' repeated measures
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' #The following example is derived from the "dept_data" dataset included
@@ -66,8 +67,6 @@
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
-  library(MBESS)
-
   if (missing(m1)){
     stop("Be sure to include m1 for the first mean.")
   }
@@ -86,6 +85,10 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
   if (missing(n)){
     stop("Be sure to include the sample size n.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
   }
 
   d <- (m1 - m2) / ((sd1 + sd2) / 2)
