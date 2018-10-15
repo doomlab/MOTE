@@ -21,6 +21,14 @@
 
 apa <- function(value, decimals = 3, leading = T) {
 
+  if (missing(value)) {
+    stop("Be sure to include the numeric values you wish to format.")
+  }
+
+  if (!is.numeric(value)){
+    stop("The values you provided are not numeric.")
+  }
+
   if (leading == T) {
     formnumber <- format(round(as.numeric(value), decimals), digits = decimals, nsmall = decimals)
     }

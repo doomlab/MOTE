@@ -67,9 +67,25 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
   library(MBESS)
 
-  if (missing(m1) || missing(m2) || missing(sd1) || missing(sd2) || missing(n)) {
-    stop("Be sure you enter mean 1, mean 2, sd 1, sd 2, and n values.")
-    }
+  if (missing(m1)){
+    stop("Be sure to include m1 for the first mean.")
+  }
+
+  if (missing(m2)){
+    stop("Be sure to include m2 for the second mean.")
+  }
+
+  if (missing(sd1)){
+    stop("Be sure to include sd1 for the first mean.")
+  }
+
+  if (missing(sd2)){
+    stop("Be sure to include sd2 for the second mean.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n.")
+  }
 
   d <- (m1 - m2) / ((sd1 + sd2) / 2)
   se1 <- sd1 / sqrt(n)
@@ -97,7 +113,10 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
                 "M2low" = M2low,
                 "M2high" = M2high,
                 "n" = n, #sample stats
-                "df" = (n - 1)) #no t/p as not appropriate for sig testing
+                "df" = (n - 1),
+                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = "")
+                                   ) #no t/p as not appropriate for sig testing
 
   return(output)
 }
