@@ -15,6 +15,25 @@ d.to.r(d, n1, n2, a = 0.05)
 
 \item{a}{significance level}
 }
+\value{
+Provides the effect size (Cohen's d) with associated confidence intervals,
+the t-statistic, the confidence intervals associated with the means of each group, as well as the
+standard deviations and standard errors of the means for each group.
+
+\item{r}{effect size}
+\item{rlow}{lower level confidence interval r}
+\item{rhigh}{upper level confidence interval r}
+\item{R2}{coefficient of determination}
+\item{R2low}{lower level confidence interval of R2}
+\item{R2high}{upper level confidence interval of R2}
+\item{se}{standard error}
+\item{n}{sample size}
+\item{dfm}{degrees of freedom of mean}
+\item{dfe}{degrees of freedom error}
+\item{t}{t-statistic}
+\item{F}{F-statistic}
+\item{p}{p-value}
+}
 \description{
 Calculates r from d and then translates r to r2 to calculate
 the non-central confidence interval for r2 using the F distribution.
