@@ -5,6 +5,14 @@
 #' This formula works for one way and multi way designs with careful
 #' focus on which error term you are using for the calculation.
 #'
+#' Omega squared is calculated by deducting the mean square of the error
+#' from the mean square of the model and multiplying by the degrees of freedom for the model.
+#' This is divided by the sum of the sum of squares total and the mean square of the error.
+#'
+#'      omega = (dfm * (msm - mse)) / (sst + mse)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/omegass.html}{Learn more on our example page.}
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param msm mean square for the model/IV/between

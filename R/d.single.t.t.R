@@ -3,6 +3,13 @@
 #' This function displays d and non-central confidence interval for single t
 #' estimated from the t-statistic.
 #'
+#' To calculate d, the t-statistic is divided by the square root of the sample size.
+#'
+#'      d = t / sqrt(n)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
+#'
+#'
 #' @param t t-test value
 #' @param n sample size
 #' @param a significance level

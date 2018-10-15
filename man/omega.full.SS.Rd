@@ -37,6 +37,15 @@ and its non-central confidence interval based on the F distribution.
 This formula works for one way and multi way designs with careful
 focus on which error term you are using for the calculation.
 }
+\details{
+Omega squared is calculated by deducting the mean square of the error
+from the mean square of the model and multiplying by the degrees of freedom for the model.
+This is divided by the sum of the sum of squares total and the mean square of the error.
+
+omega = (dfm * (msm - mse)) / (sst + mse)
+
+\href{https://www.aggieerin.com/shiny-server/tests/omegass.html}{Learn more on our example page.}
+}
 \examples{
 omega.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
 }

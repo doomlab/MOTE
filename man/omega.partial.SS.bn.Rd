@@ -38,6 +38,17 @@ This function displays omega squared from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula is appropriate for multi-way between subjects designs.
 }
+\details{
+Partial omega squared is calculated by subtracting the mean square for the error
+from the mean square of the model, which is multiplied by degrees of freedom of
+the model. This is divided by the product of the degrees of freedom
+for the model are deducted from the sample size, multiplied by the
+mean square of the error, plus the sum of squares for the model.
+
+omega <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
+
+\href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}{Learn more on our example page.}
+}
 \examples{
 omega.partial.SS.bn(dfm = 2, dfe = 100, msm = 214, mse = 100, ssm = 5339, n = 150, a = .05)
 }

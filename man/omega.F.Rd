@@ -42,6 +42,10 @@ from the F-statistic and multiplying it by degrees of freedom of the model. This
 divided by the same value after adding the number of valid responses. This
 value will be omega squared for one-way ANOVA designs, and will be
 partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
+
+omega = (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
+
+\href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}{Learn more on our example page.}
 }
 \examples{
 omega.F(dfm = 2, dfe = 97, Fvalue = 5.7, n = 100, a = .05)

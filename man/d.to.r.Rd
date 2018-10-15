@@ -20,7 +20,7 @@ Provides the effect size (Cohen's d) with associated confidence intervals,
 the t-statistic, the confidence intervals associated with the means of each group, as well as the
 standard deviations and standard errors of the means for each group.
 
-\item{r}{effect size}
+\item{r}{correlation coefficient}
 \item{rlow}{lower level confidence interval r}
 \item{rhigh}{upper level confidence interval r}
 \item{R2}{coefficient of determination}
@@ -37,6 +37,14 @@ standard deviations and standard errors of the means for each group.
 \description{
 Calculates r from d and then translates r to r2 to calculate
 the non-central confidence interval for r2 using the F distribution.
+}
+\details{
+r is calculated by dividing Cohen's d by the square root of the total sample size
+squared divided by the product of sample size group one and group two.
+
+r = d / sqrt(d^2 + (n1 + n2)^2 / (n1*n2))
+
+\href{https://www.aggieerin.com/shiny-server/tests/dtor.html}{Learn more on our example page.}
 }
 \examples{
 d.to.r(d = .5, n1 = 50, n2 = 50, a = .05)

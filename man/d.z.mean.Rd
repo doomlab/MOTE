@@ -43,6 +43,14 @@ This function displays d for Z-test with the
 population mean and standard deviation.
 The normal confidence interval is also provided.
 }
+\details{
+d is calculated by deducting the population mean from the sample study mean
+and dividing by the alpha level.
+
+d <- (m1 - mu) / sig
+
+\href{https://www.aggieerin.com/shiny-server/tests/zm.html}{Learn more on our example page.}
+}
 \examples{
 
 d.z.mean(mu = 20, m1 = 17, sig = 4, sd1 = 5, n = 100, a = .05)

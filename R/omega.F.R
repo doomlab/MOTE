@@ -12,6 +12,11 @@
 #' value will be omega squared for one-way ANOVA designs, and will be
 #' partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
 #'
+#'      omega = (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}{Learn more on our example page.}
+#'
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param Fvalue F statistic

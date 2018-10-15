@@ -4,6 +4,21 @@
 #' and its non-central confidence interval based on the F distribution.
 #' This formula is appropriate for multi-way repeated measures designs and mix level designs.
 #'
+#' Partial omega squared is calculated by subtracting the mean square for the error
+#' from the mean square of the model, which is multiplied by degrees of freedom of
+#' the model. This is divided by the sum of the sum of squares for the model,
+#' sum of squares for the error, sum of squares for the subject, and the
+#' mean square of the subject.
+#'
+#'      (dfm * (msm - mse)) / (ssm + sse + sss + mss)
+#'
+#' F is calculated by dividing the mean square of the model by the mean square of the
+#' error.
+#'
+#'      msm / mse
+#'
+#'\href{https://www.aggieerin.com/shiny-server/tests/omegaprmss.html}{Learn more on our example page.}
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param msm mean square for the model/IV/between
