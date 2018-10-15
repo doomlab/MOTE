@@ -28,6 +28,8 @@
 #' \item{df}{degrees of freedom (sample size - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA for the t-test}
 #'
 #' @keywords effect size, dependent t-test
 #' @export
@@ -54,6 +56,18 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
 
   library(MBESS)
 
+  if (missing(mdiff)) {
+    stop("Be sure to include the mean difference score mdiff.")
+  }
+
+  if (missing(sddiff)){
+    stop("Be sure to include the standard deviation of the difference scores sddiff.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n.")
+  }
+
   d <- mdiff / sddiff
   se <- sddiff / sqrt(n)
   t <- mdiff / se
@@ -64,6 +78,7 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
   Mhigh <- mdiff + se * qt(a / 2, n - 1, lower.tail = FALSE)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,
@@ -75,7 +90,10 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
                 "n" = n, #sample stats
                 "df" = (n - 1),
                 "t" = t, #sig stats
-                "p" = p
+                "p" = p,
+                "estimate" = paste("$d_z$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,T), ", $p$ ", reportp, sep = "")
                 )
 
   return(output)

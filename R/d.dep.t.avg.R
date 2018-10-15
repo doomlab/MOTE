@@ -28,6 +28,7 @@
 #' \item{se1/se2}{standard error of mean one and two}
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom (sample size - 1)}
+#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
 #'
 #' @keywords effect size, dependent t-test, cohen's d, d average, paired-sample,
 #' repeated measures
@@ -114,7 +115,7 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
                 "M2high" = M2high,
                 "n" = n, #sample stats
                 "df" = (n - 1),
-                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                "estimate" = paste("$d_{av}$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
                                    apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = "")
                                    ) #no t/p as not appropriate for sig testing
 

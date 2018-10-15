@@ -11,7 +11,8 @@ Author: Erin M. Buchanan [aut, cre],
   John E. Scofield [aut],
   K. D. Valentine [aut],
   Amber M. Gillenwaters [aut]
-Depends: R (>= 3.1.0), MBESS
+Depends: R (>= 3.1.0)
+Imports: MBESS, stats
 Description: This package calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
 License: LGPL-3
 Encoding: UTF-8

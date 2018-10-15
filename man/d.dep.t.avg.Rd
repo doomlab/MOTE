@@ -34,6 +34,7 @@ standard deviations of the means for each group.
 \item{se1/se2}{standard error of mean one and two}
 \item{n}{sample size}
 \item{df}{degrees of freedom (sample size - 1)}
+\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
 }
 \description{
 This function displays d and the non-central confidence interval

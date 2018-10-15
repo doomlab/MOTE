@@ -32,6 +32,8 @@ freedom, the t-statistic, and the p-value.
 \item{df}{degrees of freedom (sample size - 1)}
 \item{t}{t-statistic}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+\item{statistic}{the t-statistic in APA for the t-test}
 }
 \description{
 This function displays d and the non-central confidence interval
