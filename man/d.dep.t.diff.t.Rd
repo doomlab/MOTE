@@ -20,6 +20,8 @@ d.dep.t.diff.t(t, n, a = 0.05)
 \item{n}{sample size}
 \item{df}{degrees of freedom (sample size - 1)}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+\item{statistic}{the t-statistic in APA for the t-test}
 }
 \description{
 This function displays d for repeated measures data
@@ -43,21 +45,20 @@ fiction movie. Higher scores indicated higher levels of belief.
 
     scifi = t.test(dept_data$before, dept_data$after, paired = TRUE)
 
-#The t-test value was 1.4292. You can type in the numbers directly,
+#The t-test value was 1.43. You can type in the numbers directly,
 or refer to the dataset, as shown below.
 
-    d.dep.t.diff.t(1.429179, n = 7, a = .05)
+    d.dep.t.diff.t(t = 1.43, n = 7, a = .05)
 
-    d.dep.t.diff.t(1.429179, 7, .05)
+    d.dep.t.diff.t(1.43, 7, .05)
 
     d.dep.t.diff.t(scifi$statistic, length(dept_data$before), .05)
 
-#The mean measure of belief on the pretest (dept_data$before)
-was 5.57, with a standard deviation of 1.99. The posttest
-(dept_data$after) scores appeared lower (M = 4.43, SD = 2.88) but did not reach
-significance, (t(7) = 1.429, p = .20, d = .54), likely due to the small sample size.
-The effect size was moderate (d = 0.54) suggesting the movie may
-have influenced belief in the supernatural.
+#The mean measure of belief on the pretest was 5.57, with a standard
+deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
+but the dependent t-test was not significant using alpha = .05,
+t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+that the movie may have influenced belief in the supernatural.
 }
 \keyword{dependent}
 \keyword{effect}

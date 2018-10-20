@@ -32,7 +32,8 @@
 #' \item{statistic}{the t-statistic in APA for the t-test}
 #'
 #' @keywords effect size, dependent t-test
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' #The following example is derived from the "dept_data" dataset included
@@ -47,9 +48,20 @@
 #' #You can type in the numbers directly as shown below,
 #' or refer to your dataset within the function.
 #'
-#'     d.dep.t.diff(mdiff = 1.143, sddiff = 2.116, n = 7, a = .05)
+#'     d.dep.t.diff(mdiff = 1.14, sddiff = 2.12, n = 7, a = .05)
 #'
-#'     d.dep.t.diff(1.143, 2.116, 7, .05)
+#'     d.dep.t.diff(1.14, 2.12, 7, .05)
+#'
+#'     d.dep.t.diff(mdiff = mean(dept_data$before - dept_data$after),
+#'                  sddiff = sd(dept_data$before - dept_data$after),
+#'                  n = length(dept_data$before),
+#'                  a = .05)
+#'
+#' #The mean measure of belief on the pretest was 5.57, with a standard
+#' deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
+#' but the dependent t-test was not significant using alpha = .05,
+#' t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+#' that the movie may have influenced belief in the supernatural.
 #'
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
@@ -66,6 +78,10 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
 
   if (missing(n)){
     stop("Be sure to include the sample size n.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
   }
 
   d <- mdiff / sddiff

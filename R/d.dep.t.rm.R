@@ -36,10 +36,12 @@
 #' \item{r}{correlation}
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom (sample size - 1)}
+#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
 #'
 #' @keywords effect size, dependent t-test, cohen's d, paired-sample,
 #' repeated measures, correlation
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' #The following example is derived from the "dept_data" dataset included
@@ -52,46 +54,57 @@
 #'
 #'     t.test(dept_data$before, dept_data$after, paired = TRUE)
 #'
-#'     scifi_cor = cor(dept_data$before, dept_data$after, method = "pearson")
+#'     scifi_cor = cor(dept_data$before, dept_data$after, method = "pearson",
+#'                 use = "pairwise.complete.obs")
 #'
 #' #You can type in the numbers directly, or refer to the dataset,
 #' as shown below.
 #'
-#'     d.dep.t.rm(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
-#'                 sd2 = 2.878, r = 0.6781784, n = 14, a = .05)
+#'     d.dep.t.rm(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
+#'                 sd2 = 2.88, r = 0.68, n = 7, a = .05)
 #'
-#'     d.dep.t.rm(5.571, 4.429, 1.988, 2.878, 0.6781784, 14, .05)
+#'     d.dep.t.rm(5.57, 4.43, 1.99, 2.88, 0.68, 7, .05)
 #'
 #'     d.dep.t.rm(mean(dept_data$before), mean(dept_data$after),
 #'                 sd(dept_data$before), sd(dept_data$after),
 #'                 scifi_cor, length(dept_data$before), .05)
 #'
-#' #The mean measure of belief on the pretest (dept_data$before)
-#' was 5.57, with a standard deviation of 1.99. The posttest
-#' (dept_data$after) scores appeared lower (M = 4.43, SD = 2.88) but did not reach
-#' significance, (t(7) = 1.1429, p = .20, d = .54), likely due to the small sample size
-#' The effect size was moderate (d = 0.43), suggesting the movie may
-#' have influenced belief in the supernatural.
+#' #The mean measure of belief on the pretest was 5.57, with a standard
+#' deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
+#' but the dependent t-test was not significant using alpha = .05,
+#' t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+#' that the movie may have influenced belief in the supernatural.
 #'
 
 d.dep.t.rm <- function (m1, m2, sd1, sd2, r, n, a = .05) {
-  # Displays d and non-central confidence interval for repeated measures
-  # using the average standard deviation as a denominator with a correction
-  # for correlated levels.
-  #
-  # Args:
-  #   m1 : mean from first group
-  #   m2 : mean from second group
-  #   sd1: standard deviation from first group
-  #   sd2: standard deviation from second group
-  #   r  : correlation between levels
-  #   n  : sample size
-  #   a  : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
 
-  library(MBESS)
+  if (missing(m1)){
+    stop("Be sure to include m1 for the first mean.")
+  }
+
+  if (missing(m2)){
+    stop("Be sure to include m2 for the second mean.")
+  }
+
+  if (missing(sd1)){
+    stop("Be sure to include sd1 for the first mean.")
+  }
+
+  if (missing(sd2)){
+    stop("Be sure to include sd2 for the second mean.")
+  }
+
+  if (missing(r)){
+    stop("Be sure to include the correlation r between the two levels.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   d <- ((m1 - m2) / sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2))) * sqrt(2*(1-r))
   se1 <- sd1 / sqrt(n)
@@ -120,7 +133,13 @@ d.dep.t.rm <- function (m1, m2, sd1, sd2, r, n, a = .05) {
                 "M2high" = M2high,
                 "r" = r,
                 "n" = n, #sample stats
-                "df" = (n - 1)) #no t/p as not appropriate for sig testing
+                "df" = (n - 1),
+                "estimate" = paste("$d_{rm}$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = "")
+                ) #no t/p as not appropriate for sig testing
 
   return(output)
   }
+
+#' @rdname d.dep.t.rm
+#' @export

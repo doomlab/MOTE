@@ -49,7 +49,8 @@
 #'
 #' @keywords effect size, independent t, between-subjects, pooled standard deviation,
 #' pooled sd
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' #The following example is derived from the "indt_data" dataset, included

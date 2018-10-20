@@ -27,6 +27,8 @@ degrees of freedom, t-statistic, and p-value.
 \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 \item{t}{t-statistic}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+\item{statistic}{the t-statistic in APA for the t-test}
 }
 \description{
 This function displays d for between subjects data
@@ -65,8 +67,8 @@ as shown below.
     d.ind.t.t(-2.6599, 4, 4, .05)
 
     d.ind.t.t(hyp$statistic,
-              length(indt_data[1:4, ('correctq')]),
-              length(indt_data[5:8, ('correctq')]),
+              length(indt_data$group[indt_data$group == 1]),
+              length(indt_data$group[indt_data$group == 2])),
               .05)
 
 #Contrary to the hypothesized result, the group that underwent hypnosis were

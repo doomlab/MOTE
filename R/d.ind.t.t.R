@@ -25,9 +25,12 @@
 #' \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA for the t-test}
 #'
 #' @keywords effect size, independent t
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' #The following example is derived from the "indt_data" dataset, included
@@ -53,8 +56,8 @@
 #'     d.ind.t.t(-2.6599, 4, 4, .05)
 #'
 #'     d.ind.t.t(hyp$statistic,
-#'               length(indt_data[1:4, ('correctq')]),
-#'               length(indt_data[5:8, ('correctq')]),
+#'               length(indt_data$group[indt_data$group == 1]),
+#'               length(indt_data$group[indt_data$group == 2])),
 #'               .05)
 #'
 #' #Contrary to the hypothesized result, the group that underwent hypnosis were
@@ -64,25 +67,31 @@
 #' d.ind.t.t(t = 4.12, n1 = 100, n2 = 100, a = .05)
 
 d.ind.t.t <- function (t, n1, n2, a = .05) {
-  # Displays d and non-cental confidence interval
-  # estimating from the t-statistic.
-  #
-  # Args:
-  #   t : t-test value
-  #   n1: sample size group one
-  #   n2: sample size group two
-  #   a  : significance level
-  #
-  # Returns:
-  #   List of d and sample size statistics
 
-  library(MBESS)
+  if (missing(t)){
+    stop("Be sure to include the t-value found from your t-test.")
+  }
+
+  if (missing(n1)){
+    stop("Be sure to include the sample size n1 for group 1.")
+  }
+
+  if (missing(n2)){
+    stop("Be sure to include the sample size n2 for group 2.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
+
 
   d <- 2 * t / sqrt(n1 + n2 - 2)
   ncpboth <- conf.limits.nct(t, (n1 - 1 + n2 - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(((n1 * n2) / (n1 + n2)))
   dhigh <- ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2)))
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -91,7 +100,12 @@ d.ind.t.t <- function (t, n1, n2, a = .05) {
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$d_s$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$ = (", (n1-1+n2-1), ") = ",
+                                    apa(t,2,T), "$p$ ", reportp, sep = "")
+                )
 
   return(output)
 }

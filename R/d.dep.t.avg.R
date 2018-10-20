@@ -49,21 +49,20 @@
 #' #You can type in the numbers directly, or refer to the dataset,
 #' as shown below.
 #'
-#'     d.dep.t.avg(m1 = 5.571, m2 = 4.429, sd1 = 1.988,
-#'                 sd2 = 2.878, n = 14, a = .05)
+#'     d.dep.t.avg(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
+#'                 sd2 = 2.88, n = 7, a = .05)
 #'
-#'     d.dep.t.avg(5.571, 4.429, 1.988, 2.878, 14, .05)
+#'     d.dep.t.avg(5.57, 4.43, 1.99, 2.88, 7, .05)
 #'
 #'     d.dep.t.avg(mean(dept_data$before), mean(dept_data$after),
 #'                 sd(dept_data$before), sd(dept_data$after),
 #'                 length(dept_data$before), .05)
 #'
-#' #The mean measure of belief on the pretest (dept_data$before)
-#' was 5.57, with a standard deviation of 1.99. The posttest
-#' (dept_data$after) scores appeared lower (M = 4.43, SD = 2.88) but did not reach
-#' significance, (t(7) = 1.1429, p = .20, d = .54), likely due to the small sample size
-#' The effect size was moderate (d = 0.47), suggesting the movie may
-#' have influenced belief in the supernatural.
+#' #The mean measure of belief on the pretest was 5.57, with a standard
+#' deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
+#' but the dependent t-test was not significant using alpha = .05,
+#' t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+#' that the movie may have influenced belief in the supernatural.
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
