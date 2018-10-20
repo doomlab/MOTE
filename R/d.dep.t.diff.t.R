@@ -48,7 +48,7 @@
 #' #The mean measure of belief on the pretest was 5.57, with a standard
 #' deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
 #' but the dependent t-test was not significant using alpha = .05,
-#' t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+#' t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium effect suggesting
 #' that the movie may have influenced belief in the supernatural.
 
 d.dep.t.diff.t <- function (t, n, a = .05) {
@@ -65,13 +65,13 @@ d.dep.t.diff.t <- function (t, n, a = .05) {
     stop("Alpha should be between 0 and 1.")
   }
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
   d <- t / sqrt(n)
   ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,

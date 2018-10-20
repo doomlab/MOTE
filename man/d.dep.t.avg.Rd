@@ -73,7 +73,7 @@ as shown below.
 #The mean measure of belief on the pretest was 5.57, with a standard
 deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
 but the dependent t-test was not significant using alpha = .05,
-t(7) = 1.43, p = .203, d = 0.54. The effect size was a medium effect suggesting
+t(7) = 1.43, p = .203, d_av = 0.47. The effect size was a medium effect suggesting
 that the movie may have influenced belief in the supernatural.
 }
 \keyword{average,}
