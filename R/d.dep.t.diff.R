@@ -34,6 +34,7 @@
 #' @keywords effect size, dependent t-test
 #' @import MBESS
 #' @import stats
+#' @export
 #' @examples
 #'
 #' #The following example is derived from the "dept_data" dataset included
