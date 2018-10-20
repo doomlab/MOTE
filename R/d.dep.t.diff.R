@@ -66,8 +66,6 @@
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
 
-  library(MBESS)
-
   if (missing(mdiff)) {
     stop("Be sure to include the mean difference score mdiff.")
   }
