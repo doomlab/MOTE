@@ -31,6 +31,7 @@
 #' @keywords effect size, independent t
 #' @import MBESS
 #' @import stats
+#' @export
 #' @examples
 #'
 #' #The following example is derived from the "indt_data" dataset, included
