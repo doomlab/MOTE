@@ -13,7 +13,7 @@ Author: Erin M. Buchanan [aut, cre],
   Amber M. Gillenwaters [aut]
 Depends: R (>= 3.1.0)
 Imports: MBESS, stats
-Description: This package calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
+Description: Calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
