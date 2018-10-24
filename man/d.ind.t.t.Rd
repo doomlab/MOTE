@@ -68,7 +68,7 @@ d = 2 * t / sqrt(n1 + n2 - 2)
 
     d.ind.t.t(hyp$statistic,
               length(indt_data$group[indt_data$group == 1]),
-              length(indt_data$group[indt_data$group == 2])),
+              length(indt_data$group[indt_data$group == 2]),
               .05)
 
 #Contrary to the hypothesized result, the group that underwent hypnosis were

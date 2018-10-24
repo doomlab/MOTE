@@ -27,7 +27,7 @@ This function creates "pretty" character vectors from numeric variables
   truly alphabetical.
 }
 \examples{
-apa(value = 0.54674, decimals = 3, leading = T)
+apa(value = 0.54674, decimals = 3, leading = TRUE)
 }
 \keyword{APA,}
 \keyword{decimals,}

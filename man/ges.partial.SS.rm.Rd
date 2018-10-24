@@ -53,7 +53,10 @@ ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
 \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 }
 \examples{
-ges.partial.SS.rm(dfm = 2, dfe = 100, ssm = 435, sss = 659, sse1 = 435, sse2 = 446, sse3 = 546, Fvalue = 5.46, a = .05)
+ges.partial.SS.rm(dfm = 2, dfe = 100,
+                  ssm = 435, sss = 659,
+                  sse1 = 435, sse2 = 446, sse3 = 546,
+                  Fvalue = 5.46, a = .05)
 }
 \keyword{ANOVA}
 \keyword{effect}
