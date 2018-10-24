@@ -7,10 +7,16 @@
 #' Omega squared is calculated by subtracting the product of the
 #' degrees of freedom of the model and the mean square of the
 #' subject variance from the sum of squares for the model.
-#' This value is divided by the value obtained after combining
+#'
+#' This is divided by the value obtained after combining
 #' the sum of squares total, sum of squares for the other
-#' independent variable, and the product of the number of levels
-#'  and the mean square of the subject variance.
+#' independent variable, and the mean square of the
+#' subject variance multiplied by the number of levels
+#' in the other model/IV/between.
+#'
+#'      omega = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 #'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within

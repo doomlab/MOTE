@@ -1,10 +1,18 @@
-#' Odds Ratios
+#' Chi-Square Odds Ratios
 #'
 #' This function displays odds ratios and their normal confidence intervals.
 #'
 #' This statistic is the ratio between level 1.1 divided by level 1.2, and
 #' level 2.1 divided by 2.2. In other words, these are the odds of level 1.1
 #' given level 1 overall versus level 2.1 given level 2 overall.
+#'
+#' To calculate odds ratios, First, the sample size for level 1.1
+#' is divided by the sample size for level 1.2. This value is divided
+#' by the sample size for level 2.1, after dividing by the sample
+#' size of level 2.2.
+#'
+#'      odds <- (n11 / n12) / (n21 / n22)
+#'
 #' \href{https://www.aggieerin.com/shiny-server/tests/chio.html}{Learn more on our example page.}
 #'
 #' @param n11 sample size for level 1.1

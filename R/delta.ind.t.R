@@ -8,6 +8,10 @@
 #' is subtracted from the mean of the control group, which
 #' is divided by the standard deviation of the control group.
 #'
+#'      d-delta = (m1 - m2) / sd1
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
+#'
 #' @param m1 mean from control group
 #' @param m2 mean from experimental group
 #' @param sd1 standard deviation from control group
@@ -19,9 +23,9 @@
 #' the t-statistic, the confidence intervals associated with the means of each group, as well as the
 #' standard deviations and standard errors of the means for each group.
 #'
-#' \item{d}{effect size}
-#' \item{dlow}{lower level confidence interval of d value}
-#' \item{dhigh}{upper level confidence interval of d value}
+#' \item{d}{d-delta effect size}
+#' \item{dlow}{lower level confidence interval of d-delta value}
+#' \item{dhigh}{upper level confidence interval of d-delta value}
 #' \item{M1}{mean of group one}
 #' \item{sd1}{standard deviation of group one mean}
 #' \item{se1}{standard error of group one mean}

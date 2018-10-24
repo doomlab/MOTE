@@ -3,13 +3,20 @@
 #' This function displays d and central confidence interval
 #' calculated from differences in independent proportions.
 #'
+#' To calculate z, the proportion of group two is substracted from group one,
+#' which is then divided by the standard error.
+#'
+#'      z = (p1 - p2)/ se
+#'
 #' To calculate d, the proportion of group two is divided by the standard error
 #' of group two which is then subtracted from the proportion of group one divided by
 #' the standard error of group one.
 #'
-#' To calculate z, the proportion of group two is substracted from group one,
-#' which is then divided by the standard error.
-#' \href{https://www.aggieerin.com/shiny-server/tests/independentproportions.html}{Learn more on our example page.}
+#'     z1 = p1 / se1
+#'     z2 = p2 / se2
+#'      d = z1 - z2
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtprop.html}{Learn more on our example page.}
 #'
 #' @param p1 proportion of people group one
 #' @param p2 proportion of people group two

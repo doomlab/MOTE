@@ -10,6 +10,9 @@
 #' the model by the F-statistic. This is divided by the product
 #' of degrees of freedom of the model, the F-statistic, and
 #' the degrees of freedom for the error or residual.
+#'
+#'      eta = (dfm * Fvalue) / (dfm * Fvalue + dfe)
+#'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etaf.html}{Learn more on our example page.}
 #'
 #' @param dfm degrees of freedom for the model/IV/between

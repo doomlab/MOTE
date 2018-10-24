@@ -43,6 +43,10 @@ To calculate epsilon, first, the mean square for the error is
 substracted from the mean square for the model. The difference
 is multiplied by the degrees of freedom for the model. The
 product is divided by the sum of squares total.
+
+epsilon = (dfm * (msm - mse)) / (sst)
+
+\href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 }
 \examples{
 epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)

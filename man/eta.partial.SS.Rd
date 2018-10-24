@@ -23,9 +23,9 @@ eta.partial.SS(dfm, dfe, ssm, sse, Fvalue, a = 0.05)
 Provides partial eta squared with associated confidence intervals
 and relevant statistics.
 
-\item{eta}{effect size}
-\item{etalow}{lower level confidence interval of eta}
-\item{etahigh}{upper level confidence interval of eta}
+\item{eta}{partial eta squared effect size}
+\item{etalow}{lower level confidence interval of partial eta squared}
+\item{etahigh}{upper level confidence interval of partial eta squared}
 \item{dfm}{degrees of freedom for the model/IV/between}
 \item{dfe}{degrees of freedom for the error/resisual/within}
 \item{F}{F-statistic}
@@ -40,6 +40,10 @@ This formula works for one way and multi way designs.
 Partial eta squared is calculated by dividing the sum of squares
 of the model by the sum of the sum of squares of the model and
 sum of squares of the error.
+
+partial eta squared = ssm / (ssm + sse)
+
+\href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 }
 \examples{
 eta.partial.SS(dfm = 2, dfe = 100, ssm = 435, sse = 659, Fvalue = 5.46, a = .05)

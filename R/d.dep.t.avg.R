@@ -4,8 +4,11 @@
 #' for repeated measures data, using the average standard deviation of
 #' each level as the denominator.
 #'
-#' To calculate d, mean two is subtracted from mean one, which is
+#' To calculate d, mean two is subtracted from mean one, which is then
 #' divided by the average standard deviation.
+#'
+#'      d = (m1 - m2) / ((sd1 + sd2) / 2)
+#'
 #' \href{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}{Learn more on our example page.}
 #'
 #' @param m1 mean from first level

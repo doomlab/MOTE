@@ -3,6 +3,20 @@
 #' This function displays d-g corrected
 #' and the non-central confidence interval for independent t.
 #'
+#' The correction is calculated by dividing three by the sum of both
+#' sample sizes after multiplying by four and subtracting nine.
+#' This amount is deducted from one.
+#'
+#'      correction = 1 - (3 / (4 * (n1 + n2) - 9))
+#'
+#' D-g corrected is calculated by substracting mean two from mean one,
+#' dividing by the pooled standard deviation which is multiplied
+#' by the correction above.
+#'
+#'      d-g corrected = ((m1 - m2) / spooled) * correction
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
+#'
 #' @param m1 mean group one
 #' @param m2 mean group two
 #' @param sd1 standard deviation group one
@@ -14,9 +28,9 @@
 #' the confidence intervals associated with the means of each group,
 #' standard deviations of the means for each group, relevant statistics.
 #'
-#' \item{d}{effect size}
-#' \item{dlow}{lower level confidence interval d value}
-#' \item{dhigh}{upper level confidence interval d value}
+#' \item{d}{d-g corrected effect size}
+#' \item{dlow}{lower level confidence interval d-g corrected}
+#' \item{dhigh}{upper level confidence interval d-g corrected}
 #' \item{M1}{mean group one}
 #' \item{sd1}{standard deviation of group one}
 #' \item{se1}{standard error of group one}

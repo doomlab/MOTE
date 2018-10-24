@@ -13,8 +13,4 @@ data(indt_data)
 Dataset for use in \code{\link{d.ind.t}}, \code{\link{d.ind.t.t}}, \code{\link{delta.ind.t}} exploring
 the effects of hypnotism on the effects of recall after witnessing a crime.
 }
-\examples{
-
-
-}
 \keyword{datasets}

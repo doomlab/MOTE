@@ -4,8 +4,11 @@
 #' for repeated measures data, using the standard deviation
 #' of the difference score as the denominator.
 #'
-#' To calculate d, mean two is subtracted from mean one, which is
+#' To calculate d, the mean difference score is divided by
 #' divided by the standard deviation of the difference scores.
+#'
+#'      d = mdiff / sddiff
+#'
 #' \href{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}{Learn more on our example page.}
 #'
 #' @param mdiff mean difference score

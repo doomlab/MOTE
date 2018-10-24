@@ -10,6 +10,10 @@
 #' is multiplied by the degrees of freedom for the model. The
 #' product is divided by the sum of squares total.
 #'
+#'      epsilon = (dfm * (msm - mse)) / (sst)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param msm mean square for the model/IV/between

@@ -39,8 +39,9 @@ Calculates r from d and then translates r to r2 to calculate
 the non-central confidence interval for r2 using the F distribution.
 }
 \details{
-r is calculated by dividing Cohen's d by the square root of the total sample size
-squared divided by the product of sample size group one and group two.
+The correlation coefficient (r) is calculated by dividing Cohen's d
+by the square root of the total sample size squared - divided
+by the product of the sample sizes of group one and group two.
 
 r = d / sqrt(d^2 + (n1 + n2)^2 / (n1*n2))
 

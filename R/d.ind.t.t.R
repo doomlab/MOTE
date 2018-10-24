@@ -3,11 +3,11 @@
 #' This function displays d for between subjects data
 #' and the non-central confidence interval estimating from the t-statistic.
 #'
-#' To calculate the t-statistic, mean two is subtracted from mean one and divided
-#' by the standard error.
+#' To calculate d, the t-statistic is multiplied by two then divided by
+#' the square root of the degrees of freedom.
 #'
-#' To calculate d, the t-statistic is divided by the square root of the degrees of freedom
-#' and multiplied by two.
+#'      d = 2 * t / sqrt(n1 + n2 - 2)
+#'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 #'
 #' @param t t-test value

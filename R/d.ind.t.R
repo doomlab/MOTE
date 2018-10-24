@@ -4,11 +4,8 @@
 #' and the non-central confidence interval using the
 #' pooled standard deviation as the denominator.
 #'
-#' To calculate the t-statistic, mean two is subtracted from mean one and divided
-#' by the standard error.
-#'
-#' To calculate d, the t-statistic is divided by the square root of the degrees of freedom
-#' and multiplied by two.
+#' To calculate d, mean two is subtracted from mean one and divided
+#' by the pooled standard deviation.
 #'
 #'      d = (m1 - m2) / spooled
 #'

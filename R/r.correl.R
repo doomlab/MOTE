@@ -3,6 +3,18 @@
 #' This function displays transformation from r to r2 to calculate
 #' the non-central confidence interval for r2 using the F distribution.
 #'
+#' The t-statistic is calculated by first dividing one minus the
+#' square root of r squared by degrees of freedom of the error.
+#' r is divided by this value.
+#'
+#'      t = r / sqrt((1 - rsq) / (n - 2))
+#'
+#' The F-statistic is the t-statistic squared.
+#'
+#'      Fvalue = t ^ 2
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/rcorrel.html}{Learn more on our example page.}
+#'
 #' @param r correlation coefficient
 #' @param n sample size
 #' @param a significance level

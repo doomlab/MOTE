@@ -37,6 +37,17 @@ This function displays partial generalized eta-squared (GES) from ANOVA analyses
 and its non-central confidence interval based on the F distribution.
 This formula works for mixed designs.
 }
+\details{
+To calculate partial generalized eta squared, first, the sum of
+squares of the model, sum of squares of the subject
+variance, sum of squares for the subject variance,
+and the sum of squares for the error/residual/within are added together.
+The sum of squares of the model is divided by this value.
+
+partial ges = ssm / (ssm + sss + sse)
+
+\href{https://www.aggieerin.com/shiny-server/tests/gesmixss.html}{Learn more on our example page.}
+}
 \examples{
 ges.partial.SS.mix(dfm = 2, dfe = 100, ssm = 435, sss = 235, sse = 659, Fvalue = 5.46, a = .05)
 }

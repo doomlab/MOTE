@@ -12,7 +12,4 @@
 #'
 #' @keywords datasets
 #'
-#' @examples
-#'
-#'
 "indt_data"

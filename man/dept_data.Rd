@@ -4,7 +4,7 @@
 \name{dept_data}
 \alias{dept_data}
 \title{Dependent t Example Data}
-\format{A data frame of before and after scores for rating 
+\format{A data frame of before and after scores for rating
 supernatural beliefs.
 
 before: scores rated before watching a scifi movie
@@ -14,15 +14,13 @@ data(dept_data)
 }
 \description{
 Dataset for use in \code{\link{d.dep.t.diff}}, \code{\link{d.dep.t.diff.t}},
-\code{\link{d.dep.t.avg}}, and \code{\link{d.dep.t.rm}} exploring the before 
+\code{\link{d.dep.t.avg}}, and \code{\link{d.dep.t.rm}} exploring the before
 and after effects of scifi movies on supernatural beliefs.
-}
-\examples{
-
-STUFF FROM DEP T PAGES
 }
 \references{
 Nolan and Heizen Statistics for the Behavioral Sciences
 (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
+
+STUFF FROM DEP T PAGES
 }
 \keyword{datasets}

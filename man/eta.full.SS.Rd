@@ -37,7 +37,12 @@ This formula works for one way and multi way designs with careful
 focus on the sum of squares total.
 }
 \details{
-Eta squared is calculated by dividing the sum of squares for the model by the sum of squares total.
+Eta squared is calculated by dividing the sum of squares for the model
+by the sum of squares total.
+
+eta = ssm / sst
+
+\href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 }
 \examples{
 eta.full.SS(dfm = 2, dfe = 100, ssm = 435, sst = 659, Fvalue = 5.46, a = .05)

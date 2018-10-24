@@ -8,6 +8,10 @@
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
+#'      partial eta squared = ssm / (ssm + sse)
+#'
+#' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
+#'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between
@@ -18,9 +22,9 @@
 #' @return Provides partial eta squared with associated confidence intervals
 #' and relevant statistics.
 #'
-#' \item{eta}{effect size}
-#' \item{etalow}{lower level confidence interval of eta}
-#' \item{etahigh}{upper level confidence interval of eta}
+#' \item{eta}{partial eta squared effect size}
+#' \item{etalow}{lower level confidence interval of partial eta squared}
+#' \item{etahigh}{upper level confidence interval of partial eta squared}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
 #' \item{dfe}{degrees of freedom for the error/resisual/within}
 #' \item{F}{F-statistic}
