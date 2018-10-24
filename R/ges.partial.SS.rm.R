@@ -39,7 +39,8 @@
 #' ges.partial.SS.rm(dfm = 2, dfe = 100, ssm = 435, sss = 659, sse1 = 435, sse2 = 446, sse3 = 546, Fvalue = 5.46, a = .05)
 
 
-ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a = .05) {
+ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3,
+                               Fvalue, a = .05) {
   # This function displays ges squared from ANOVA analyses
   # and its non-central confidence interval based on the F distribution.
   #

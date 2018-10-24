@@ -4,7 +4,7 @@
 \alias{apa}
 \title{APA Format}
 \usage{
-apa(value, decimals = 3, leading = T)
+apa(value, decimals = 3, leading = TRUE)
 }
 \arguments{
 \item{value}{A set of numeric values, either a single number, vector, or set of columns.}

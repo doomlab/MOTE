@@ -19,7 +19,7 @@
 #' apa(value = 0.54674, decimals = 3, leading = T)
 #' @export
 
-apa <- function(value, decimals = 3, leading = T) {
+apa <- function(value, decimals = 3, leading = TRUE) {
 
   if (missing(value)) {
     stop("Be sure to include the numeric values you wish to format.")
