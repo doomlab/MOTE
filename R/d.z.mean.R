@@ -36,29 +36,14 @@
 #' \item{n}{sample size}
 #'
 #' @keywords effect size, z-test
-#' @export
+#' @import MBESS
+#' @import stats
 #' @examples
 #'
 #' d.z.mean(mu = 20, m1 = 17, sig = 4, sd1 = 5, n = 100, a = .05)
 
 
 d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
-  # Displays d for z-test where you have one sample and the population
-  # mean and standard deviation. The normal confidence intervals are
-  # also provided.
-  #
-  # Args:
-  #   mu  : population mean
-  #   m1  : sample study mean
-  #   sig : population standard deviation
-  #   sd1 : standard deviation from the study
-  #   n   : sample size
-  #   a   : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
-
-  library(MBESS)
 
   d <- (m1 - mu) / sig
   se1 <- sig / sqrt(n)
