@@ -8,7 +8,7 @@
 #' divided by the average standard deviation, while mathematically
 #' controlling for the correlation coefficient (r).
 #'
-#'      d = ((m1 - m2) / sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2))) * sqrt(2*(1-r))
+#'      d_rm = ((m1 - m2) / sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2))) * sqrt(2*(1-r))
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}{Learn more on our example page.}
 #'

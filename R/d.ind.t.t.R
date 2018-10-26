@@ -6,7 +6,7 @@
 #' To calculate d, the t-statistic is multiplied by two then divided by
 #' the square root of the degrees of freedom.
 #'
-#'      d = 2 * t / sqrt(n1 + n2 - 2)
+#'      d_s = 2 * t / sqrt(n1 + n2 - 2)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 #'
@@ -63,7 +63,7 @@
 #'
 #' #Contrary to the hypothesized result, the group that underwent hypnosis were
 #' #significantly less accurate while reporting facts than the control group
-#' #with a large effect size, t(7) = -2.66, p = .043, d = 2.17.
+#' #with a large effect size, t(6) = -2.66, p = .038, d_s = 2.17.
 #'
 
 d.ind.t.t <- function (t, n1, n2, a = .05) {
@@ -104,8 +104,12 @@ d.ind.t.t <- function (t, n1, n2, a = .05) {
                 "estimate" = paste("$d_s$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
                                    apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
                 "statistic" = paste("$t$ = (", (n1-1+n2-1), ") = ",
-                                    apa(t,2,T), "$p$ ", reportp, sep = "")
+                                    apa(t,2,T), ", $p$ ", reportp, sep = "")
                 )
 
   return(output)
 }
+
+#' @rdname d.ind.t.t
+#' @export
+

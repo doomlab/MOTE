@@ -8,7 +8,7 @@
 #' is subtracted from the mean of the control group, which
 #' is divided by the standard deviation of the control group.
 #'
-#'      d-delta = (m1 - m2) / sd1
+#'      d_delta = (m1 - m2) / sd1
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 #'
@@ -45,6 +45,8 @@
 #' \item{p}{p-value}
 #'
 #' @keywords effect size, delta, independent t
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -72,37 +74,23 @@
 #'
 #'     delta.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 #'
-#'     delta.ind.t(hyp$estimate[1], hyp$estimate[2],
-#'             sd(indt_data[1:4, ('correctq')]),
-#'             sd(indt_data[5:8, ('correctq')]),
-#'             length(indt_data[1:4, ('correctq')]),
-#'             length(indt_data[5:8, ('correctq')]),
+#'     delta.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+#'             mean(indt_data$correctq[indt_data$group == 2]),
+#'             sd(indt_data$correctq[indt_data$group == 1]),
+#'             sd(indt_data$correctq[indt_data$group == 2]),
+#'             length(indt_data$correctq[indt_data$group == 1]),
+#'             length(indt_data$correctq[indt_data$group == 2]),
 #'             .05)
 #'
 #' #Contrary to the hypothesized result, the group that underwent hypnosis were
 #' #significantly less accurate while reporting facts than the control group
-#' #with a large effect size, t(7) = -2.66, p = .043, d = 1.88.
+#' #with a large effect size, t(6) = -2.66, p = .038, d_delta = 1.59.
 #'
 
 
 delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
-  # This function displays d-delta for between subjects data
-  # and the non-central confidence interval using the
-  # control group standard deviation as the denominator.
-  #
-  # Args:
-  #   m1 : mean from control group
-  #   m2 : mean from experimental group
-  #   sd1: standard deviation from control group
-  #   sd2: standard deviation from experimental group
-  #   n1 : sample size from control group
-  #   n2 : sample size from experimental group
-  #   a  : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
 
-  library(MBESS)
+
 
   spooled <- sqrt(((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
   d <- (m1 - m2) / sd1
@@ -118,6 +106,8 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -138,7 +128,15 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$d_{delta}$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ", reportp, sep = "")
+  )
 
   return(output)
 }
+
+#' @rdname delta.ind.t
+#' @export
+

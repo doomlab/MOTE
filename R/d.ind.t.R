@@ -7,7 +7,7 @@
 #' To calculate d, mean two is subtracted from mean one and divided
 #' by the pooled standard deviation.
 #'
-#'      d = (m1 - m2) / spooled
+#'      d_s = (m1 - m2) / spooled
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtm.html}{Learn more on our example page.}
 #'
@@ -42,7 +42,8 @@
 #' \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
-#'
+#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA for the t-test}
 #'
 #' @keywords effect size, independent t, between-subjects, pooled standard deviation,
 #' pooled sd
@@ -69,40 +70,53 @@
 #' #You can type in the numbers directly, or refer to the dataset,
 #' #as shown below.
 #'
-#'     d.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30, sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
+#'     d.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
+#'            sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
 #'
 #'     d.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 #'
-#'     d.ind.t(mean(indt_data[1:4, ('correctq')]),
-#'             mean(indt_data[5:8, ('correctq')]),
-#'             sd(indt_data[1:4, ('correctq')]),
-#'             sd(indt_data[5:8, ('correctq')]),
-#'             length(indt_data[1:4, ('correctq')]),
-#'             length(indt_data[5:8, ('correctq')]),
+#'     d.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+#'             mean(indt_data$correctq[indt_data$group == 2]),
+#'             sd(indt_data$correctq[indt_data$group == 1]),
+#'             sd(indt_data$correctq[indt_data$group == 2]),
+#'             length(indt_data$correctq[indt_data$group == 1]),
+#'             length(indt_data$correctq[indt_data$group == 2]),
 #'             .05)
 #'
 #' #Contrary to the hypothesized result, the group that underwent hypnosis were
 #' #significantly less accurate while reporting facts than the control group
-#' #with a large effect size, t(7) = -2.66, p = .043, d = 1.88.
+#' #with a large effect size, t(6) = -2.66, p = .038, d_s = 1.88.
 #'
 
 d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
-  # Displays d and confidence interval
-  # using the pooled standard deviation as the denominator.
-  #
-  # Args:
-  #   m1 : mean group one
-  #   m2 : mean group two
-  #   sd1: standard deviation group one
-  #   sd2: standard deviation group two
-  #   n1 : sample size group one
-  #   n2 : sample size group two
-  #   a  : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
 
-  library(MBESS)
+  if (missing(m1)){
+    stop("Be sure to include m1 for the first mean.")
+  }
+
+  if (missing(m2)){
+    stop("Be sure to include m2 for the second mean.")
+  }
+
+  if (missing(sd1)){
+    stop("Be sure to include sd1 for the first mean.")
+  }
+
+  if (missing(sd2)){
+    stop("Be sure to include sd2 for the second mean.")
+  }
+
+  if (missing(n1)){
+    stop("Be sure to include the sample size n1 for the first group.")
+  }
+
+  if (missing(n2)){
+    stop("Be sure to include the sample size n2 for the second group.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   spooled <- sqrt( ((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
   d <- (m1 - m2) / spooled
@@ -118,6 +132,8 @@ d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -138,7 +154,15 @@ d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$d_s$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = "")
+  )
 
   return(output)
 }
+
+#' @rdname d.ind.t
+#' @export

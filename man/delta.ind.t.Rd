@@ -57,7 +57,7 @@ To calculate d-delta, the mean of the experimental group
 is subtracted from the mean of the control group, which
 is divided by the standard deviation of the control group.
 
-d-delta = (m1 - m2) / sd1
+d_delta = (m1 - m2) / sd1
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 }
@@ -87,16 +87,17 @@ d-delta = (m1 - m2) / sd1
 
     delta.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 
-    delta.ind.t(hyp$estimate[1], hyp$estimate[2],
-            sd(indt_data[1:4, ('correctq')]),
-            sd(indt_data[5:8, ('correctq')]),
-            length(indt_data[1:4, ('correctq')]),
-            length(indt_data[5:8, ('correctq')]),
+    delta.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+            mean(indt_data$correctq[indt_data$group == 2]),
+            sd(indt_data$correctq[indt_data$group == 1]),
+            sd(indt_data$correctq[indt_data$group == 2]),
+            length(indt_data$correctq[indt_data$group == 1]),
+            length(indt_data$correctq[indt_data$group == 2]),
             .05)
 
 #Contrary to the hypothesized result, the group that underwent hypnosis were
 #significantly less accurate while reporting facts than the control group
-#with a large effect size, t(7) = -2.66, p = .043, d = 1.88.
+#with a large effect size, t(6) = -2.66, p = .038, d_delta = 1.59.
 
 }
 \keyword{delta,}

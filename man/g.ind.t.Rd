@@ -47,6 +47,8 @@ standard deviations of the means for each group, relevant statistics.
 \item{df}{degrees of freedom}
 \item{t}{t-statistic}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+\item{statistic}{the t-statistic in APA for the t-test}
 }
 \description{
 This function displays d-g corrected
@@ -63,12 +65,47 @@ D-g corrected is calculated by substracting mean two from mean one,
 dividing by the pooled standard deviation which is multiplied
 by the correction above.
 
-d-g corrected = ((m1 - m2) / spooled) * correction
+d_g corrected = ((m1 - m2) / spooled) * correction
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
 }
 \examples{
-g.ind.t(m1 = 20, m2 = 17, sd1 = 4, sd2 = 5, n1 = 100, n2 = 100, a = .05)
+
+#The following example is derived from the "indt_data" dataset, included
+#in the MOTE library.
+
+#A forensic psychologist conducted a study to examine whether
+#being hypnotized during recall affects how well a witness
+#can remember facts about an event. Eight participants
+#watched a short film of a mock robbery, after which
+#each participant was questioned about what he or she had
+#seen. The four participants in the experimental group
+#were questioned while they were hypnotized. The four
+#participants in the control group recieved the same
+#questioning without hypnosis.
+
+    t.test(correctq ~ group, data = indt_data)
+
+#You can type in the numbers directly, or refer to the dataset,
+#as shown below.
+
+    g.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
+           sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
+
+    g.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
+
+    g.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+            mean(indt_data$correctq[indt_data$group == 2]),
+            sd(indt_data$correctq[indt_data$group == 1]),
+            sd(indt_data$correctq[indt_data$group == 2]),
+            length(indt_data$correctq[indt_data$group == 1]),
+            length(indt_data$correctq[indt_data$group == 2]),
+            .05)
+
+#Contrary to the hypothesized result, the group that underwent hypnosis were
+#significantly less accurate while reporting facts than the control group
+#with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
+
 }
 \keyword{correction}
 \keyword{effect}

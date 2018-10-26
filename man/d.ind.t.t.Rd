@@ -38,7 +38,7 @@ and the non-central confidence interval estimating from the t-statistic.
 To calculate d, the t-statistic is multiplied by two then divided by
 the square root of the degrees of freedom.
 
-d = 2 * t / sqrt(n1 + n2 - 2)
+d_s = 2 * t / sqrt(n1 + n2 - 2)
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 }
@@ -73,7 +73,7 @@ d = 2 * t / sqrt(n1 + n2 - 2)
 
 #Contrary to the hypothesized result, the group that underwent hypnosis were
 #significantly less accurate while reporting facts than the control group
-#with a large effect size, t(7) = -2.66, p = .043, d = 2.17.
+#with a large effect size, t(6) = -2.66, p = .038, d_s = 2.17.
 
 }
 \keyword{effect}

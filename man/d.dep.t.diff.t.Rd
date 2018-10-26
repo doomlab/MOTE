@@ -32,7 +32,7 @@ estimating from the t-statistic.
 \details{
 To calculate d, the t-statistic is divided by the square root of the sample size.
 
-d = t / sqrt(n)
+d_z = t / sqrt(n)
 
 \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 }
