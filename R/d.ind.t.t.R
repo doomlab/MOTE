@@ -91,7 +91,7 @@ d.ind.t.t <- function (t, n1, n2, a = .05) {
   dhigh <- ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2)))
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,

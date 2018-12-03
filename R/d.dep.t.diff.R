@@ -31,8 +31,9 @@
 #' \item{df}{degrees of freedom (sample size - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA for the t-test}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, dependent t-test
 #' @import MBESS
@@ -64,8 +65,9 @@
 #' #The mean measure of belief on the pretest was 5.57, with a standard
 #' #deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
 #' #but the dependent t-test was not significant using alpha = .05,
-#' #t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium effect suggesting
-#' #that the movie may have influenced belief in the supernatural.
+#' #t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium
+#' #effect suggesting that the movie may have influenced belief
+#' #in the supernatural.
 #'
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
@@ -96,7 +98,8 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
   Mhigh <- mdiff + se * qt(a / 2, n - 1, lower.tail = FALSE)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,

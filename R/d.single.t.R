@@ -29,8 +29,13 @@
 #' \item{df}{degrees of freedom (n - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, single t, single-sample, mu, u, population mean, sample mean
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -57,19 +62,26 @@
 #'         length(singt_data$SATscore), .05)
 
 d.single.t = function (m, u, sd, n, a = .05) {
-  # This function displays d and non-central confidence interval for single t from means.
-  #
-  # Args:
-  #   m : sample mean
-  #   u : population mean
-  #   sd: sample standard deviation
-  #   n : sample size
-  #   a : significance level
-  #
-  # Returns:
-  #   List of d, mean, and sample size statistics
 
-  library(MBESS)
+  if (missing(m)){
+    stop("Be sure to include m for the sample mean.")
+  }
+
+  if (missing(u)){
+    stop("Be sure to include me for the population.")
+  }
+
+  if (missing(sd)){
+    stop("Be sure to include sd for the sample mean.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n for the sample.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   se <- sd / sqrt(n)
   d <- (m - u) / sd
@@ -80,6 +92,8 @@ d.single.t = function (m, u, sd, n, a = .05) {
   Mlow = m - se*qt(a / 2, n - 1, lower.tail = FALSE)
   Mhigh = m + se*qt(a / 2, n - 1, lower.tail = FALSE)
   p = pt(abs(t), n - 1, lower.tail = F)*2
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -93,7 +107,15 @@ d.single.t = function (m, u, sd, n, a = .05) {
                 "n" = n, #sample stats
                 "df" = (n - 1),
                 "t" = t, #sig stats,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = "")
+  )
 
   return(output)
 }
+
+#' @rdname d.single.t
+#' @export

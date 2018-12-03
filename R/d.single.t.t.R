@@ -23,8 +23,13 @@
 #' \item{df}{degrees of freedom (sample size - 1)}
 #' \item{t}{sig stats}
 #' \item{p}{p-value}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, single t
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -51,18 +56,18 @@
 
 
 d.single.t.t <- function (t, n, a = .05) {
-  # This function displays d and non-central confidence interval for single t
-  # estimated from the t-statistic.
-  #
-  # Args:
-  #   t : t-test value
-  #   n : sample size
-  #   a : significance level
-  #
-  # Returns:
-  #   List of d and sample size statistics
 
-  library(MBESS)
+  if (missing(t)){
+    stop("Be sure to include t from the t-test statistic.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n for the sample.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   d <- t / sqrt(n)
   ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
@@ -70,15 +75,24 @@ d.single.t.t <- function (t, n, a = .05) {
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,
                 "n" = n, #sample stats
                 "df" = (n - 1),
                 "t" = t, #sig stats
-                "p" = p
-  )
+                "p" = p,
+                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$t$(", (n - 1), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = "")
+                )
 
   return(output)
 
 }
+
+#' @rdname d.single.t.t
+#' @export

@@ -21,10 +21,12 @@
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom (sample size - 1)}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA for the t-test}
+#' \item{estimate}{the d statistic and confidence interval in APA
+#' style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
-#' @keywords effect size, dependent t-test, paired sample, repeated measures, t-test
+#' @keywords effect size, dependent t-test, paired sample,
+#' repeated measures, t-test
 #' @import MBESS
 #' @import stats
 #' @export
@@ -76,6 +78,7 @@ d.dep.t.diff.t <- function (t, n, a = .05) {
   p <- pt(abs(t), n - 1, lower.tail = F) * 2
 
   if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,

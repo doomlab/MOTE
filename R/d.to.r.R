@@ -15,9 +15,9 @@
 #' @param n1 sample size group one
 #' @param n2 sample size group two
 #' @param a significance level
-#' @return Provides the effect size (Cohen's d) with associated confidence intervals,
-#' the t-statistic, the confidence intervals associated with the means of each group, as well as the
-#' standard deviations and standard errors of the means for each group.
+#' @return Provides the effect size (Cohen's d) with associated
+#' confidence intervals, the t-statistic, F-statistic, and other estimates
+#' appropriate for d to r translation.
 #'
 #' \item{r}{correlation coefficient}
 #' \item{rlow}{lower level confidence interval r}
@@ -32,27 +32,35 @@
 #' \item{t}{t-statistic}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, correlation
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' d.to.r(d = .5, n1 = 50, n2 = 50, a = .05)
 
 
 d.to.r <- function (d, n1, n2, a = .05) {
-  # This function Displays transformation from r to r2 to calculate
-  # the non-central confidence interval for r2.
-  #
-  # Args:
-  #   d   : effect size statistic
-  #   n1  : sample size group one
-  #   n2  : sample size group two
-  #   a   : significance level
-  #
-  # Returns:
-  #   List of r, r2, and sample size statistics
 
-  library(MBESS)
+  if (missing(d)){
+    stop("Be sure to include d effect size.")
+  }
+
+  if (missing(n1)){
+    stop("Be sure to include the sample size n1 for the first group.")
+  }
+
+  if (missing(n2)){
+    stop("Be sure to include the sample size n2 for the second group.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   correct = (n1 + n2)^2 / (n1*n2)
   n = n1 + n2
@@ -63,10 +71,6 @@ d.to.r <- function (d, n1, n2, a = .05) {
   Fvalue <- t ^ 2
   dfm <- 1
   dfe <- n - 2
-
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #rsqlow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
 
   limits <- ci.R2(R2 = rsq, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
   ciforr <- ci.R(R = abs(r), df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
@@ -81,6 +85,8 @@ d.to.r <- function (d, n1, n2, a = .05) {
     rhigh = ciforr$Upper.Conf.Limit.R
     }
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("r" = r, #r stats
                 "rlow" = rlow,
                 "rhigh" = rhigh,
@@ -93,7 +99,15 @@ d.to.r <- function (d, n1, n2, a = .05) {
                 "dfe" = (n - 2),
                 "t" = t,
                 "F" = Fvalue,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$r$ = ", apa(r,2,F), ", ", (1-a)*100, "\\% CI [",
+                                   apa(rlow,2,F), ", ", apa(rhigh,2,F), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-2), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = "")
+  )
 
   return(output)
 }
+
+#' @rdname d.to.r
+#' @export
