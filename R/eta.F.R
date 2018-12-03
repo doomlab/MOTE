@@ -33,6 +33,8 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, eta, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -40,17 +42,6 @@
 
 
 eta.F <- function (dfm, dfe, Fvalue, a = .05) {
-  # This function displays eta, r squared, ICCs from ANOVA analyses
-  # and their non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom model/IV/between
-  #   dfe     : degrees of freedom error/residual/within
-  #   Fvalue  : F statistic
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of eta, F, and sample size statistics
 
   eta <- (dfm * Fvalue) / (dfm * Fvalue + dfe)
 

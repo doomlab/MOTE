@@ -36,25 +36,14 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, epsilon, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
 
 
 epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
-  # This function displays epsilon squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom for the model/IV/between
-  #   dfe     : degrees of freedom error/residual/within
-  #   msm     : mean square for the model/IV/between
-  #   mse     : mean square for the error/residual/within
-  #   sst     : sum of squares total
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of epsilon, F, and sample size statistics
 
   epsilon <- (dfm * (msm - mse)) / (sst)
   Fvalue <- msm / mse

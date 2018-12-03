@@ -32,25 +32,14 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, eta, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' eta.full.SS(dfm = 2, dfe = 100, ssm = 435, sst = 659, Fvalue = 5.46, a = .05)
 
 
 eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
-  # This function displays eta squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     :  degrees of freedom for the model/IV/between
-  #   dfe     :  degrees of freedom for the error/residual/within
-  #   ssm     :  sum of squares for the model/IV/between
-  #   sst     :  sum of squares total
-  #   Fvalue  :  F statistic
-  #   a       :  significance level
-  #
-  # Returns:
-  #   List of eta, F, and sample size statistics
 
   eta <- ssm / sst
 
