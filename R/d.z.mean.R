@@ -34,6 +34,9 @@
 #' \item{z}{z-statistic}
 #' \item{p}{p-value}
 #' \item{n}{sample size}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the Z-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, z-test
 #' @import MBESS
@@ -45,6 +48,30 @@
 
 d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
 
+  if (missing(m1)){
+    stop("Be sure to include m1 for the sample mean.")
+  }
+
+  if (missing(mu)){
+    stop("Be sure to include mu for the population mean.")
+  }
+
+  if (missing(sig)){
+    stop("Be sure to include sig for the population standard deviation.")
+  }
+
+  if (missing(sd1)){
+    stop("Be sure to include sd1 for the sample standard deviation")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n for the sample.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
+
   d <- (m1 - mu) / sig
   se1 <- sig / sqrt(n)
   se2 <- sd1 / sqrt(n)
@@ -54,6 +81,8 @@ d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
   p <- pnorm(abs(z), lower.tail = FALSE)*2
   M1low <- m1 - se2 * qnorm(a/2, lower.tail = FALSE)
   M1high <- m1 + se2 * qnorm(a/2, lower.tail = FALSE)
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -68,8 +97,15 @@ d.z.mean <- function (mu, m1, sig, sd1, n, a = .05) {
                 "se2" = se1,
                 "z" = z,
                 "p" = p,
-                "n" = n #sample stats
-                )
+                "n" = n, #sample stats
+                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$Z$", " = ", apa(z,2,T), ", $p$ ",
+                                    reportp, sep = "")
+  )
 
   return(output)
-  }
+}
+
+#' @rdname d.z.mean
+#' @export

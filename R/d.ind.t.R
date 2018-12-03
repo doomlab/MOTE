@@ -19,8 +19,9 @@
 #' @param n2 sample size group two
 #' @param a significance level
 #' @return Provides the effect size (Cohen's d) with associated confidence intervals,
-#' the t-statistic, the confidence intervals associated with the means of each group, as well as the
-#' standard deviations and standard errors of the means for each group.
+#' the t-statistic, the confidence intervals associated with the means of
+#' each group, as well as the standard deviations and standard errors
+#' of the means for each group.
 #'
 #' \item{d}{effect size}
 #' \item{dlow}{lower level confidence interval of d value}
@@ -42,11 +43,12 @@
 #' \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA for the t-test}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
-#' @keywords effect size, independent t, between-subjects, pooled standard deviation,
-#' pooled sd
+#' @keywords effect size, independent t, between-subjects, pooled
+#' standard deviation, pooled sd
 #' @import MBESS
 #' @import stats
 #' @export
@@ -133,7 +135,7 @@ d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
