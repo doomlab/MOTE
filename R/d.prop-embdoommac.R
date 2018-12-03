@@ -2,24 +2,29 @@
 #'
 #' This function displays d and central confidence interval
 #' calculated from differences in independent proportions.
+#' Independent proportions are two percentages that are from
+#' different groups of participants.
 #'
-#' To calculate z, the proportion of group two is substracted from group one,
-#' which is then divided by the standard error.
+#' To calculate z, the proportion of group two is substracted
+#' from group one, which is then divided by the standard error.
 #'
-#'      z = (p1 - p2)/ se
+#'      z = (p1 - p2) / se
 #'
-#' To calculate d, the proportion of group two is divided by the standard error
-#' of group two which is then subtracted from the proportion of group one divided by
-#' the standard error of group one.
+#' To calculate d, the proportion of group two is divided by
+#' the standard error of group two which is then subtracted
+#' from the proportion of group one divided by the standard
+#' error of group one.
 #'
 #'     z1 = p1 / se1
+#'
 #'     z2 = p2 / se2
+#'
 #'      d = z1 - z2
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtprop.html}{Learn more on our example page.}
 #'
-#' @param p1 proportion of people group one
-#' @param p2 proportion of people group two
+#' @param p1 proportion for group one
+#' @param p2 proportion for group two
 #' @param n1 sample size group one
 #' @param n2 sample size group two
 #' @param a significance level
@@ -38,14 +43,19 @@
 #' \item{z2}{z-statistic of group two}
 #' \item{z2low}{lower level confidence interval of z}
 #' \item{z2high}{upper level confidence interval of z}
-#' \item{n1}{sample size group one (n - 1)}
-#' \item{n2}{sample size group two (n - 1)}
-#' \item{z}{z-statistic}
-#' \item{ppooled}{pooled proportion}
+#' \item{n1}{sample size group one}
+#' \item{n2}{sample size group two}
+#' \item{z}{z-statistic for the differences}
+#' \item{ppooled}{pooled proportion to calculate standard error}
 #' \item{se}{standard error}
-#' \item{p}{p-value}
+#' \item{p}{p-value for the differences}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, prop test, proportions, independent proportions
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -68,18 +78,32 @@
 
 
 d.prop <- function (p1, p2, n1, n2, a = .05) {
-  # This function displays d and central confidence interval
-  # calculated from differences in independent proportions.
-  #
-  # Args:
-  #   p1: proportion of people group one
-  #   p2: proportion of people group two
-  #   n1: sample size group one
-  #   n2: sample size group two
-  #   a : significance level
-  #
-  # Returns:
-  #   List of d, proportions, and sample size statistics
+
+  if (missing(p1)){
+    stop("Be sure to include p1 for the first proportion.")
+  }
+
+  if (p1 > 1 | p2 > 1 | p1 < 0 | p2 < 0){
+    stop("Be sure to enter your values as proportions,
+         rather than percentages, values should be less than 1.
+         Also make sure all proportion values are positive.")
+  }
+
+  if (missing(p2)){
+    stop("Be sure to include p2 for the second proportion.")
+  }
+
+  if (missing(n1)){
+    stop("Be sure to include the sample size n1 for the first group.")
+  }
+
+  if (missing(n2)){
+    stop("Be sure to include the sample size n2 for the second group.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   ppooled <- (p1 * n1 + p2 * n2) / (n1 + n2)
   se <- sqrt(ppooled * (1 - ppooled) * ((1 / n1) + (1 / n2)))
@@ -96,6 +120,8 @@ d.prop <- function (p1, p2, n1, n2, a = .05) {
   d <- z1 - z2
   dlow <- d - qnorm(a / 2, lower.tail = F) * se
   dhigh <- d + qnorm(a / 2, lower.tail = F) * se
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -115,7 +141,15 @@ d.prop <- function (p1, p2, n1, n2, a = .05) {
                 "z" = z, #sig stats,
                 "ppooled" = ppooled,
                 "se" = se,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$d_prop$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$Z$", " = ", apa(z,2,T), ", $p$ ",
+                                    reportp, sep = "")
+  )
 
   return(output)
 }
+
+#' @rdname d.prop
+#' @export

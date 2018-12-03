@@ -40,7 +40,8 @@
 #' \item{r}{correlation}
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom (sample size - 1)}
-#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
 #'
 #' @keywords effect size, dependent t-test, cohen's d, paired-sample,
 #' repeated measures, correlation
@@ -66,9 +67,9 @@
 #' #as shown below.
 #'
 #'     d.dep.t.rm(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
-#'                 sd2 = 2.88, r = 0.68, n = 7, a = .05)
+#'                 sd2 = 2.88, r = .68, n = 7, a = .05)
 #'
-#'     d.dep.t.rm(5.57, 4.43, 1.99, 2.88, 0.68, 7, .05)
+#'     d.dep.t.rm(5.57, 4.43, 1.99, 2.88, .68, 7, .05)
 #'
 #'     d.dep.t.rm(mean(dept_data$before), mean(dept_data$after),
 #'                 sd(dept_data$before), sd(dept_data$after),

@@ -29,27 +29,43 @@
 #' \item{dfe}{degrees of freedom for the error/resisual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the eta squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, eta, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' eta.partial.SS(dfm = 2, dfe = 100, ssm = 435, sse = 659, Fvalue = 5.46, a = .05)
 
 
 eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
-  # This function displays eta squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     :  degrees of freedom for the model/IV/between
-  #   dfe     :  degrees of freedom for the error/residual/within
-  #   ssm     :  sum of squares for the model/IV/between
-  #   sse     :  sum of squares for the error/residual/within
-  #   Fvalue  :  F statistic
-  #   a       :  significance level
-  #
-  # Returns:
-  #   List of eta, F, and sample size statistics
+
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(ssm)){
+    stop("Be sure to include the sum of squares for your model (IV).")
+  }
+
+  if (missing(sse)){
+    stop("Be sure to include the sum of squares for the error.")
+  }
+
+  if (missing(Fvalue)){
+    stop("Be sure to include the F-statistic from your ANOVA.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   eta <- ssm / (ssm + sse)
 
@@ -61,13 +77,20 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output <- list("eta" = eta, #eta stats
                  "etalow" = limits$Lower.Conf.Limit.R2,
                  "etahigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$eta^2$ = ", apa(eta,2,F), ", ", (1-a)*100, "\\% CI [",
+                                    apa(etalow,2,F), ", ", apa(etahigh,2,F), "]", sep = ""),
+                 "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
+                                     reportp, sep = "")
+  )
 
   return(output)
 

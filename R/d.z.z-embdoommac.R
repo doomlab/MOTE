@@ -6,7 +6,7 @@
 #'
 #' To calculate d, z is divided by the square root of N.
 #'
-#'      d = z / sqrt(n)
+#'      d = z / sqrt(N)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/ztestz.html}{Learn more on our example page.}
 #'
@@ -24,8 +24,13 @@
 #' \item{z}{sig stats}
 #' \item{p}{p-value}
 #' \item{n}{sample size}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the Z-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, z-test
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #'
@@ -44,19 +49,18 @@
 
 
 d.z.z <- function (z, sig = NA, n, a = .05) {
-  # Displays d for z-test where you have one sample and the population
-  # mean and standard deviation. The normal confidence intervals are also provided.
-  #
-  # Args:
-  #   z   : z-test statistic
-  #   sig : population standard deviation can be NA
-  #   n   : sample size
-  #   a   : significance level
-  #
-  # Returns:
-  #   List of d, z statistics
 
-  library(MBESS)
+  if (missing(z)){
+    stop("Be sure to include z from the z-statistic.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size n for the sample.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   d <- z / sqrt(n)
   if (is.na(sig)){
@@ -68,14 +72,23 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
   }
   p <- pnorm(z, lower.tail = FALSE)*2
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("d" = d, #d stats
                 "dlow" = dlow,
                 "dhigh" = dhigh,
                 "sigma" = sig, #population stats
                 "z" = z, #sig stats
                 "p" = p,
-                "n" = n #sample stats
+                "n" = n, #sample stats
+                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                "statistic" = paste("$Z$", " = ", apa(z,2,T), ", $p$ ",
+                                    reportp, sep = "")
                 )
 
   return(output)
   }
+
+#' @rdname d.z.z
+#' @export

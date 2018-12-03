@@ -1,21 +1,15 @@
-#' d-g Corrected for Independent t
+#' d for Between Subjects with Pooled SD Denominator
 #'
-#' This function displays d-g corrected
-#' and the non-central confidence interval for independent t.
+#' This function displays d for between subjects data
+#' and the non-central confidence interval using the
+#' pooled standard deviation as the denominator.
 #'
-#' The correction is calculated by dividing three by the sum of both
-#' sample sizes after multiplying by four and subtracting nine.
-#' This amount is deducted from one.
+#' To calculate d, mean two is subtracted from mean one and divided
+#' by the pooled standard deviation.
 #'
-#'      correction = 1 - (3 / (4 * (n1 + n2) - 9))
+#'      d_s = (m1 - m2) / spooled
 #'
-#' D-g corrected is calculated by substracting mean two from mean one,
-#' dividing by the pooled standard deviation which is multiplied
-#' by the correction above.
-#'
-#'      d_g corrected = ((m1 - m2) / spooled) * correction
-#'
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtm.html}{Learn more on our example page.}
 #'
 #' @param m1 mean group one
 #' @param m2 mean group two
@@ -24,35 +18,37 @@
 #' @param n1 sample size group one
 #' @param n2 sample size group two
 #' @param a significance level
-#' @return D-g corrected with associated confidence intervals,
-#' the confidence intervals associated with the means of each group,
-#' standard deviations of the means for each group, relevant statistics.
+#' @return Provides the effect size (Cohen's d) with associated confidence intervals,
+#' the t-statistic, the confidence intervals associated with the means of
+#' each group, as well as the standard deviations and standard errors
+#' of the means for each group.
 #'
-#' \item{d}{d-g corrected effect size}
-#' \item{dlow}{lower level confidence interval d-g corrected}
-#' \item{dhigh}{upper level confidence interval d-g corrected}
-#' \item{M1}{mean group one}
-#' \item{sd1}{standard deviation of group one}
-#' \item{se1}{standard error of group one}
-#' \item{M1low}{lower level confidence interval of mean one}
-#' \item{M1high}{upper level confidence interval of mean one}
-#' \item{M2}{mean two}
-#' \item{sd2}{standard deviation of mean two}
-#' \item{se1}{standard error of mean two}
-#' \item{M2low}{lower level confidence interval of mean two}
-#' \item{M2high}{upper level confidence interval of mean two}
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval of d value}
+#' \item{dhigh}{upper level confidence interval of d value}
+#' \item{M1}{mean of group one}
+#' \item{sd1}{standard deviation of group one mean}
+#' \item{se1}{standard error of group one mean}
+#' \item{M1low}{lower level confidence interval of group one mean}
+#' \item{M1high}{upper level confidence interval of group one mean}
+#' \item{M2}{mean of group two}
+#' \item{sd2}{standard deviation of group two mean}
+#' \item{se2}{standard error of group two mean}
+#' \item{M2low}{lower level confidence interval of group two mean}
+#' \item{M2high}{upper level confidence interval of group two mean}
 #' \item{spooled}{pooled standard deviation}
 #' \item{sepooled}{pooled standard error}
-#' \item{correction}{g corrected}
-#' \item{n1}{size of sample one}
-#' \item{n2}{size of sample two}
-#' \item{df}{degrees of freedom}
+#' \item{n1}{sample size of group one}
+#' \item{n2}{sample size of group two}
+#' \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 #' \item{t}{t-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA for the t-test}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
-#' @keywords effect size, independent t, correction
+#' @keywords effect size, independent t, between-subjects, pooled
+#' standard deviation, pooled sd
 #' @import MBESS
 #' @import stats
 #' @export
@@ -76,12 +72,12 @@
 #' #You can type in the numbers directly, or refer to the dataset,
 #' #as shown below.
 #'
-#'     g.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
+#'     d.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
 #'            sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
 #'
-#'     g.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
+#'     d.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 #'
-#'     g.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+#'     d.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
 #'             mean(indt_data$correctq[indt_data$group == 2]),
 #'             sd(indt_data$correctq[indt_data$group == 1]),
 #'             sd(indt_data$correctq[indt_data$group == 2]),
@@ -91,10 +87,10 @@
 #'
 #' #Contrary to the hypothesized result, the group that underwent hypnosis were
 #' #significantly less accurate while reporting facts than the control group
-#' #with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
+#' #with a large effect size, t(6) = -2.66, p = .038, d_s = 1.88.
 #'
 
-g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
+d.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
 
   if (missing(m1)){
     stop("Be sure to include m1 for the first mean.")
@@ -124,23 +120,22 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
     stop("Alpha should be between 0 and 1.")
   }
 
-  correction <- 1 - (3 / (4 * (n1 + n2) - 9))
   spooled <- sqrt( ((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
-  d <- ((m1 - m2) / spooled) * correction
+  d <- (m1 - m2) / spooled
   se1 <- sd1 / sqrt(n1)
   se2 <- sd2 / sqrt(n2)
   sepooled <- sqrt((spooled ^ 2 / n1 + spooled ^ 2 / n2))
   t <- (m1 - m2) / sepooled
   ncpboth <- conf.limits.nct(t, (n1 - 1 + n2 - 1), conf.level = (1 - a), sup.int.warns = TRUE)
-  dlow <- correction * (ncpboth$Lower.Limit / sqrt(((n1 * n2) / (n1 + n2))))
-  dhigh <- correction * (ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2))))
+  dlow <- ncpboth$Lower.Limit / sqrt(((n1 * n2) / (n1 + n2)))
+  dhigh <- ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2)))
   M1low <- m1 - se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
   M1high <- m1 + se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", p, sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -157,20 +152,19 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "M2high" = M2high,
                 "spooled" = spooled,
                 "sepooled" = sepooled,
-                "correction" = correction,
                 "n1" = n1, #sample stats
                 "n2" = n2,
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
                 "p" = p,
-                "estimate" = paste("$d_{g}$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
+                "estimate" = paste("$d_s$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
                                    apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
-                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ", reportp, sep = "")
+                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = "")
   )
 
   return(output)
 }
 
-#' @rdname g.ind.t
+#' @rdname d.ind.t
 #' @export
-
