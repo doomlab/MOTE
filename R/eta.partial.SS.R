@@ -29,9 +29,9 @@
 #' \item{dfe}{degrees of freedom for the error/resisual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in
+#' \item{estimate}{the eta squared statistic and confidence interval in
 #' APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, eta, ANOVA
 #' @import MBESS
@@ -77,13 +77,20 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output <- list("eta" = eta, #eta stats
                  "etalow" = limits$Lower.Conf.Limit.R2,
                  "etahigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$eta^2$ = ", apa(eta,2,F), ", ", (1-a)*100, "\\% CI [",
+                                    apa(etalow,2,F), ", ", apa(etahigh,2,F), "]", sep = ""),
+                 "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
+                                     reportp, sep = "")
+  )
 
   return(output)
 

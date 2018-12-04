@@ -20,20 +20,19 @@
 #' @param mse mean square for the error/residual/within
 #' @param sst sum of squares total
 #' @param a significance level
-#' @return Provides the effect size (Cohen's d) with associated confidence intervals,
-#' the t-statistic, the confidence intervals associated with the means of each group, as well as the
-#' standard deviations and standard errors of the means for each group.
+#' @return Provides the effect size (epsilong) with associated
+#' confidence intervals from the F-statistic.
 #'
 #' \item{epsilon}{effect size}
 #' \item{epsilonlow}{lower level confidence interval of epsilon}
 #' \item{epsilonhigh}{upper level confidence interval of epsilon}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in
+#' \item{estimate}{the epsilon statistic and confidence interval in
 #' APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, epsilon, ANOVA
 #' @import MBESS
@@ -45,6 +44,30 @@
 
 epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
 
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(msm)){
+    stop("Be sure to include the mean square value for your model (IV).")
+  }
+
+  if (missing(mse)){
+    stop("Be sure to include the mean square value for the error.")
+  }
+
+  if (missing(sst)){
+    stop("Be sure to include the sum of squares total for your ANOVA.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
+
   epsilon <- (dfm * (msm - mse)) / (sst)
   Fvalue <- msm / mse
 
@@ -55,6 +78,8 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
   limits <- ci.R2(R2 = epsilon, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output <- list("epsilon" = epsilon, #epsilon stats
                  "epsilonlow" = limits$Lower.Conf.Limit.R2,
