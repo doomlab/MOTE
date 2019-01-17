@@ -7,7 +7,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(BN1_data)
+#' @usage data(bn1_data)
 #'
 #' @format A data frame of ratings of close interpersonal attachments
 #'
@@ -20,5 +20,4 @@
 #' @references Nolan and Heizen Statistics for the Behavioral Sciences
 #' (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
 #'
-#' STUFF FROM DEP T PAGES
-"BN1_data"
+"bn1_data"
