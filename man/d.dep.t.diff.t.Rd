@@ -20,8 +20,9 @@ d.dep.t.diff.t(t, n, a = 0.05)
 \item{n}{sample size}
 \item{df}{degrees of freedom (sample size - 1)}
 \item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-\item{statistic}{the t-statistic in APA for the t-test}
+\item{estimate}{the d statistic and confidence interval in APA
+style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d for repeated measures data

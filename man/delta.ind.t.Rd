@@ -46,6 +46,9 @@ standard deviations and standard errors of the means for each group.
 \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 \item{t}{t-statistic}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d-delta for between subjects data

@@ -47,8 +47,9 @@ standard deviations of the means for each group, relevant statistics.
 \item{df}{degrees of freedom}
 \item{t}{t-statistic}
 \item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-\item{statistic}{the t-statistic in APA for the t-test}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d-g corrected

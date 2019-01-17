@@ -30,6 +30,9 @@ and relevant statistics.
 \item{dfe}{degrees of freedom for the error/resisual/within}
 \item{F}{F-statistic}
 \item{p}{p-value}
+\item{estimate}{the eta squared statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the F-statistic in APA style for markdown printing}
 }
 \description{
 This function displays partial eta squared from ANOVA analyses

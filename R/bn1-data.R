@@ -1,0 +1,24 @@
+#' Between Subjects Oneway ANOVA Example Data
+#'
+#' Dataset for use in \code{\link{eta.F}}, \code{\link{etafull.SS}},
+#' and \code{\link{epsilon.full.SS}}, including ratings of
+#' inter-personal attachments of 45-year-olds categorized as
+#' being in excellent, fair, or poor health.
+#'
+#' @docType data
+#'
+#' @usage data(BN1_data)
+#'
+#' @format A data frame of ratings of close interpersonal attachments
+#'
+#' poor: individuals in poor health
+#' fair: individuals in fair health
+#' excellent: individuals in excellent health
+#'
+#' @keywords datasets
+#'
+#' @references Nolan and Heizen Statistics for the Behavioral Sciences
+#' (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
+#'
+#' STUFF FROM DEP T PAGES
+"BN1_data"

@@ -26,6 +26,9 @@ relevant statistics.
 \item{z}{sig stats}
 \item{p}{p-value}
 \item{n}{sample size}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the Z-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d for Z-tests when all you have is the z-statistic.
@@ -35,7 +38,7 @@ If sigma is left blank, then you will not see a confidence interval.
 \details{
 To calculate d, z is divided by the square root of N.
 
-d = z / sqrt(n)
+d = z / sqrt(N)
 
 \href{https://www.aggieerin.com/shiny-server/tests/ztestz.html}{Learn more on our example page.}
 }

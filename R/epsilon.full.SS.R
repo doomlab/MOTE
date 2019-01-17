@@ -20,7 +20,7 @@
 #' @param mse mean square for the error/residual/within
 #' @param sst sum of squares total
 #' @param a significance level
-#' @return Provides the effect size (epsilong) with associated
+#' @return Provides the effect size (epsilon) with associated
 #' confidence intervals from the F-statistic.
 #'
 #' \item{epsilon}{effect size}
@@ -39,6 +39,17 @@
 #' @import stats
 #' @export
 #' @examples
+#'
+#' #The following example is derived from the "indt_data" dataset, included
+#' #in the MOTE library.
+#'
+#' A health psychologist recorded the number of close inter-personal
+#' attachments of 45-year-olds who were in excellent, fair, or poor
+#' health. People in the Excellent Health group had 4, 3, 2, and 3
+#' close attachments; people in the Fair Health group had 3, 5,
+#' and 8 close attachments; and people in the Poor Health group
+#' had 3, 1, 0, and 2 close attachments.
+#'
 #' epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
 
 

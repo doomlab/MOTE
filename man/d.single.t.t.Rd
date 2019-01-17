@@ -24,6 +24,9 @@ and relevant statistics.
 \item{df}{degrees of freedom (sample size - 1)}
 \item{t}{sig stats}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d and non-central confidence interval for single t

@@ -43,7 +43,8 @@ the means for each group.
 \item{r}{correlation}
 \item{n}{sample size}
 \item{df}{degrees of freedom (sample size - 1)}
-\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
 }
 \description{
 This function displays d and the non-central confidence interval
@@ -78,9 +79,9 @@ d_rm = ((m1 - m2) / sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2))) * sqrt(2*(1-r))
 #as shown below.
 
     d.dep.t.rm(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
-                sd2 = 2.88, r = 0.68, n = 7, a = .05)
+                sd2 = 2.88, r = .68, n = 7, a = .05)
 
-    d.dep.t.rm(5.57, 4.43, 1.99, 2.88, 0.68, 7, .05)
+    d.dep.t.rm(5.57, 4.43, 1.99, 2.88, .68, 7, .05)
 
     d.dep.t.rm(mean(dept_data$before), mean(dept_data$after),
                 sd(dept_data$before), sd(dept_data$after),

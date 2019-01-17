@@ -37,6 +37,9 @@ and relevant statistics.
 \item{z}{z-statistic}
 \item{p}{p-value}
 \item{n}{sample size}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the Z-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d for Z-test with the

@@ -20,17 +20,19 @@ epsilon.full.SS(dfm, dfe, msm, mse, sst, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides the effect size (Cohen's d) with associated confidence intervals,
-the t-statistic, the confidence intervals associated with the means of each group, as well as the
-standard deviations and standard errors of the means for each group.
+Provides the effect size (epsilon) with associated
+confidence intervals from the F-statistic.
 
 \item{epsilon}{effect size}
 \item{epsilonlow}{lower level confidence interval of epsilon}
 \item{epsilonhigh}{upper level confidence interval of epsilon}
 \item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
+\item{dfe}{degrees of freedom for the error/residual/within}
 \item{F}{F-statistic}
 \item{p}{p-value}
+\item{estimate}{the epsilon statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the F-statistic in APA style for markdown printing}
 }
 \description{
 This function displays epsilon squared from ANOVA analyses
@@ -49,6 +51,17 @@ epsilon = (dfm * (msm - mse)) / (sst)
 \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 }
 \examples{
+
+#The following example is derived from the "indt_data" dataset, included
+#in the MOTE library.
+
+A health psychologist recorded the number of close inter-personal
+attachments of 45-year-olds who were in excellent, fair, or poor
+health. People in the Excellent Health group had 4, 3, 2, and 3
+close attachments; people in the Fair Health group had 3, 5,
+and 8 close attachments; and people in the Poor Health group
+had 3, 1, 0, and 2 close attachments.
+
 epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
 }
 \keyword{ANOVA}

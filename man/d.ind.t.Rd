@@ -23,8 +23,9 @@ d.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
 \value{
 Provides the effect size (Cohen's d) with associated confidence intervals,
-the t-statistic, the confidence intervals associated with the means of each group, as well as the
-standard deviations and standard errors of the means for each group.
+the t-statistic, the confidence intervals associated with the means of
+each group, as well as the standard deviations and standard errors
+of the means for each group.
 
 \item{d}{effect size}
 \item{dlow}{lower level confidence interval of d value}
@@ -46,8 +47,9 @@ standard deviations and standard errors of the means for each group.
 \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
 \item{t}{t-statistic}
 \item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-\item{statistic}{the t-statistic in APA for the t-test}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d for between subjects data

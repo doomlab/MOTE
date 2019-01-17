@@ -31,6 +31,9 @@ d.single.t(m, u, sd, n, a = 0.05)
 \item{df}{degrees of freedom (n - 1)}
 \item{t}{t-statistic}
 \item{p}{p-value}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d and non-central confidence interval for single t from means.

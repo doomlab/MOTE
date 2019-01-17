@@ -7,9 +7,9 @@
 d.prop(p1, p2, n1, n2, a = 0.05)
 }
 \arguments{
-\item{p1}{proportion of people group one}
+\item{p1}{proportion for group one}
 
-\item{p2}{proportion of people group two}
+\item{p2}{proportion for group two}
 
 \item{n1}{sample size group one}
 
@@ -31,30 +31,38 @@ d.prop(p1, p2, n1, n2, a = 0.05)
 \item{z2}{z-statistic of group two}
 \item{z2low}{lower level confidence interval of z}
 \item{z2high}{upper level confidence interval of z}
-\item{n1}{sample size group one (n - 1)}
-\item{n2}{sample size group two (n - 1)}
-\item{z}{z-statistic}
-\item{ppooled}{pooled proportion}
+\item{n1}{sample size group one}
+\item{n2}{sample size group two}
+\item{z}{z-statistic for the differences}
+\item{ppooled}{pooled proportion to calculate standard error}
 \item{se}{standard error}
-\item{p}{p-value}
+\item{p}{p-value for the differences}
+\item{estimate}{the d statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays d and central confidence interval
 calculated from differences in independent proportions.
+Independent proportions are two percentages that are from
+different groups of participants.
 }
 \details{
-To calculate z, the proportion of group two is substracted from group one,
-which is then divided by the standard error.
+To calculate z, the proportion of group two is substracted
+from group one, which is then divided by the standard error.
 
-z = (p1 - p2)/ se
+z = (p1 - p2) / se
 
-To calculate d, the proportion of group two is divided by the standard error
-of group two which is then subtracted from the proportion of group one divided by
-the standard error of group one.
+To calculate d, the proportion of group two is divided by
+the standard error of group two which is then subtracted
+from the proportion of group one divided by the standard
+error of group one.
 
 z1 = p1 / se1
-    z2 = p2 / se2
-     d = z1 - z2
+
+z2 = p2 / se2
+
+d = z1 - z2
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtprop.html}{Learn more on our example page.}
 }
