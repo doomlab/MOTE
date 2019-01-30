@@ -12,7 +12,7 @@ Author: Erin M. Buchanan [aut, cre],
   John E. Scofield [aut],
   K. D. Valentine [aut]
 Depends: R (>= 3.1.0)
-Imports: MBESS, stats
+Imports: MBESS, stats, ez, reshape
 Description: Calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
 License: LGPL-3
 Encoding: UTF-8
