@@ -1,16 +1,14 @@
 Package: MOTE
-Version: 0.0.0.9100
+Version: 0.1.0.0000
 Date: 2017-10-18
 Title: Effect Size and Confidence Interval Calculator
 Authors@R: c(person("Erin", "Buchanan", role = c("aut", "cre"),
-                     email = "erinbuchanan@missouristate.edu"),
-              person("John", "Scofield", role = "aut"),
-              person("K.D.", "Valentine", role = "aut"),
-              person("Amber", "Gillenwaters", role = "aut"))
-Author: Erin M. Buchanan [aut, cre],
-  John E. Scofield [aut],
-  K. D. Valentine [aut],
-  Amber M. Gillenwaters [aut]
+                     email = "buchananlab@gmail.com"),
+                     person("Amber", "Gillenwaters", role = "aut"),
+                     person("John", "Scofield", role = "aut"),
+                     person("K.D.", "Valentine", role = "aut"))
+              
+Author: Erin M. Buchanan [aut, cre], Amber M. Gillenwaters [aut], John E. Scofield [aut], K. D. Valentine [aut]
 Depends: R (>= 3.1.0)
 Imports: MBESS, stats
 Description: Calculates various effect sizes (d, r, odds ratio, v) and their non-centralized confidence intervals. 
