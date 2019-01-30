@@ -1,4 +1,4 @@
-#' Between Subjects Oneway ANOVA Example Data
+#' Between Subjects One-way ANOVA Example Data
 #'
 #' Dataset for use in \code{\link{eta.F}}, \code{\link{etafull.SS}},
 #' and \code{\link{epsilon.full.SS}}, including ratings of

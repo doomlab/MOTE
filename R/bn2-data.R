@@ -1,4 +1,4 @@
-#' Between Subjects Twoway ANOVA Example Data
+#' Between Subjects Two-way ANOVA Example Data
 #'
 #' Dataset for use in \code{\link{omega.partial.SS.bn}} and other
 #' between-subject's ANOVA designs. This data includes (fake) atheletic
@@ -17,6 +17,5 @@
 #' money: athletic spending (in thousands of dollars)
 #'
 #' @keywords datasets
-#'
 #'
 "bn2_data"

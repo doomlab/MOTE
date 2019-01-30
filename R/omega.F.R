@@ -45,24 +45,28 @@
 
 
 omega.F <- function (dfm, dfe, Fvalue, n, a = .05) {
-  # This function displays omega squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom model/IV/between
-  #   dfe     : degrees of freedom error/residual/within
-  #   Fvalue  : F statistic
-  #   n       : full sample size
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of omega, F, and sample size statistics
+
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(Fvalue)){
+    stop("Be sure to include the Fvalue from your ANOVA.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include total sample size.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   omega <- (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
-
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
 
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 

@@ -8,7 +8,7 @@
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
-#'      partial eta^2  = ssm / (ssm + sse)
+#'      partial eta^2 = ssm / (ssm + sse)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
@@ -40,7 +40,7 @@
 #' @export
 #' @examples
 #'
-#' #' #The following example is derived from the "bn2_data" dataset, included
+#' #The following example is derived from the "bn2_data" dataset, included
 #' #in the MOTE library.
 #'
 #' #Is there a difference in atheletic spending budget for different sports?

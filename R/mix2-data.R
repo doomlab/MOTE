@@ -1,4 +1,4 @@
-#' Mixed Twoway ANOVA Example Data
+#' Mixed Two-way ANOVA Example Data
 #'
 #' Dataset for use in \code{\link{ges.partial.SS.mix.R}}.
 #' Given previous research, we know that backward strength
@@ -18,13 +18,11 @@
 #'
 #' @format A data frame including group type and backward strength rating.
 #'
-#' group: jam or debias
-#' bsglo: estimate of response to target word
-#' bsghi: estimate of response to target word
+#' group: Regular JAM Task or Debiasing JAM task
+#' bsglo: estimate of response to target word in a Low BSG condition
+#' bsghi: estimate of response to target word in a High BSG condition
 #'
 #' @keywords datasets
 #'
-#' @references Nolan and Heizen Statistics for the Behavioral Sciences
-#' (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
 #'
 "mix2_data"

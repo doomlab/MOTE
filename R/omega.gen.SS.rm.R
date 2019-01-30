@@ -21,7 +21,7 @@
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the MAIN model/IV/between
-#' @param ssm2 sum sum of squares for the OTHER model/IV/between
+#' @param ssm2 sum of squares for the OTHER model/IV/between
 #' @param sst sum of squares total across the whole ANOVA
 #' @param mss mean square for the subject variance
 #' @param j number of levels in the OTHER IV
@@ -51,6 +51,42 @@
 #'                      mss = 543, j = 3, Fvalue = 12, a = .05)
 
 omega.gen.SS.rm <- function (dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = .05) {
+
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(ssm)){
+    stop("Be sure to include the sum of squares for your model (IV).")
+  }
+
+  if (missing(ssm2)){
+    stop("Be sure to include the sum of squares for the OTHER model (IV).")
+  }
+
+  if (missing(sst)){
+    stop("Be sure to include the sum of squares total for your model.")
+  }
+
+  if (missing(mss)){
+    stop("Be sure to include the mean square for your subjects from your model.")
+  }
+
+  if (missing(j)){
+    stop("Be sure to include the number of levels in the OTHER IV.")
+  }
+
+  if (missing(Fvalue)){
+    stop("Be sure to include the Fvalue from your ANOVA.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   omega <- (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
 

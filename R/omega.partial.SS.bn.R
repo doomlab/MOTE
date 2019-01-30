@@ -44,27 +44,38 @@
 #' omega.partial.SS.bn(dfm = 2, dfe = 100, msm = 214, mse = 100, ssm = 5339, n = 150, a = .05)
 
 omega.partial.SS.bn <- function (dfm, dfe, msm, mse, ssm, n, a = .05) {
-  # This function displays omega squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom for the model/IV/between
-  #   dfe     : degrees of freedom error/residual/within
-  #   msm     : mean square for the model/IV/between
-  #   mse     : mean square for the error/residual/within
-  #   ssm     : sum of squares for the model/IV/between
-  #   n       : total sample size
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of omega, F, and sample size statistics
+
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(msm)){
+    stop("Be sure to include the mean squared model for your model (IV).")
+  }
+
+  if (missing(mse)){
+    stop("Be sure to include the mean squared error for your model.")
+  }
+
+  if (missing(ssm)){
+    stop("Be sure to include the sum of squares for your model (IV).")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include total sample size.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   omega <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
-  Fvalue <- msm / mse
 
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
+  Fvalue <- msm / mse
 
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
