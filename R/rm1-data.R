@@ -1,18 +1,23 @@
-#' Repeated Measures One-way ANOVA Example Data
+#' Repeated Measures Oneway ANOVA Example Data
 #'
-#' Dataset for use in repeated measures one-way designs that measures
-#' the simulated heart rates of participants given a picture stimulus
-#' shown to them.
+#' Dataset for use in \code{\link{omega.F.R}}.
+#' Participants were tested over several days to measure
+#' variations in their pulse given different types of stimuli.
+#' One stimulus was a neutral picture (like a toaster),
+#' while other stimuli were cute/happy pictures (puppies, babies),
+#' and negative stimuli (mutilated faces, pictures of war).
+#' Were there differences in pulse for each participant
+#' across the stimuli?
 #'
 #' @docType data
 #'
 #' @usage data(rm1_data)
 #'
-#' @format A data frame of heart rates given stimuli seen on a screen
+#' @format A data frame including ratings toward pictures.
 #'
-#' positive: A positive picture shown on screen, measured heart rate
-#' negative: A negative picture shown on screen, measured heart rate
-#' neutral: A neutral picture shown on screen, measured heart rate
+#' neutral: pulse during exposure to neutral stimuli
+#' positive: pulse during exposure to positive stimuli
+#' negative: pulse during exposure to negative stimuli
 #'
 #' @keywords datasets
 #'
