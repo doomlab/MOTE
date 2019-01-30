@@ -28,6 +28,9 @@ and relevant statistics.
 \item{dfe}{degrees of freedom for the error/residual/within}
 \item{F}{F-statistic}
 \item{p}{p-value}
+\item{estimate}{the omega squared statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the F-statistic in APA style for markdown printing}
 }
 \description{
 This function displays omega squared from ANOVA analyses

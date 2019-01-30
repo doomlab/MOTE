@@ -30,7 +30,7 @@ APA style for markdown printing}
 \item{statistic}{the F-statistic in APA style for markdown printing}
 }
 \description{
-This function displays eta, r squared, ICCs from ANOVA analyses
+This function displays eta squared from ANOVA analyses
 and their non-central confidence interval based on the F distribution.
 These values are calculated directly from F statistics and can be used
 for between subjects and repeated measures designs.
@@ -42,13 +42,27 @@ the model by the F-statistic. This is divided by the product
 of degrees of freedom of the model, the F-statistic, and
 the degrees of freedom for the error or residual.
 
-eta = (dfm * Fvalue) / (dfm * Fvalue + dfe)
+eta^2 = (dfm * Fvalue) / (dfm * Fvalue + dfe)
 
 \href{https://www.aggieerin.com/shiny-server/tests/etaf.html}{Learn more on our example page.}
 }
 \examples{
 
-eta.F(dfm = 2, dfe = 20, Fvalue = 5.7, a = .05)
+#The following example is derived from the "bn1_data" dataset, included
+#in the MOTE library.
+
+#A health psychologist recorded the number of close inter-personal
+#attachments of 45-year-olds who were in excellent, fair, or poor
+#health. People in the Excellent Health group had 4, 3, 2, and 3
+#close attachments; people in the Fair Health group had 3, 5,
+#and 8 close attachments; and people in the Poor Health group
+#had 3, 1, 0, and 2 close attachments.
+
+anova_model = lm(formula = friends ~ group, data = bn1_data)
+summary.aov(anova_model)
+
+eta.F(dfm = 2, dfe = 8,
+      Fvalue = 5.134, a = .05)
 }
 \keyword{ANOVA}
 \keyword{effect}

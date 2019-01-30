@@ -20,7 +20,5 @@ and after effects of scifi movies on supernatural beliefs.
 \references{
 Nolan and Heizen Statistics for the Behavioral Sciences
 (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
-
-STUFF FROM DEP T PAGES
 }
 \keyword{datasets}

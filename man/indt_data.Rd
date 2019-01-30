@@ -4,13 +4,15 @@
 \name{indt_data}
 \alias{indt_data}
 \title{Independent t Example Data}
-\format{A data frame including two groups, one recieving a hypnotism intervention, and one control
-group, to determine how hypnotism effects recall after witnessing a crime.}
+\format{A data frame including two groups, one recieving a
+hypnotism intervention, and one control group, to determine how
+hypnotism effects recall after witnessing a crime.}
 \usage{
 data(indt_data)
 }
 \description{
-Dataset for use in \code{\link{d.ind.t}}, \code{\link{d.ind.t.t}}, \code{\link{delta.ind.t}} exploring
-the effects of hypnotism on the effects of recall after witnessing a crime.
+Dataset for use in \code{\link{d.ind.t}}, \code{\link{d.ind.t.t}},
+\code{\link{delta.ind.t}} exploring the effects of hypnotism on
+the effects of recall after witnessing a crime.
 }
 \keyword{datasets}

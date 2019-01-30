@@ -43,12 +43,27 @@ focus on the sum of squares total.
 Eta squared is calculated by dividing the sum of squares for the model
 by the sum of squares total.
 
-eta = ssm / sst
+eta^2 = ssm / sst
 
 \href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 }
 \examples{
-eta.full.SS(dfm = 2, dfe = 100, ssm = 435, sst = 659, Fvalue = 5.46, a = .05)
+
+#The following example is derived from the "bn1_data" dataset, included
+#in the MOTE library.
+
+#A health psychologist recorded the number of close inter-personal
+#attachments of 45-year-olds who were in excellent, fair, or poor
+#health. People in the Excellent Health group had 4, 3, 2, and 3
+#close attachments; people in the Fair Health group had 3, 5,
+#and 8 close attachments; and people in the Poor Health group
+#had 3, 1, 0, and 2 close attachments.
+
+anova_model = lm(formula = friends ~ group, data = bn1_data)
+summary.aov(anova_model)
+
+eta.full.SS(dfm = 2, dfe = 8, ssm = 25.24,
+            sst = (25.24+19.67), Fvalue = 5.134, a = .05)
 }
 \keyword{ANOVA}
 \keyword{effect}

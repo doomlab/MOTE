@@ -13,7 +13,7 @@ omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 
 \item{ssm}{sum of squares for the MAIN model/IV/between}
 
-\item{ssm2}{sum sum of squares for the OTHER model/IV/between}
+\item{ssm2}{sum of squares for the OTHER model/IV/between}
 
 \item{sst}{sum of squares total across the whole ANOVA}
 
@@ -36,6 +36,9 @@ and relevant statistics.
 \item{dfe}{degrees of freedom for the error/resisual/within}
 \item{F}{F-statistic}
 \item{p}{p-value}
+\item{estimate}{the omega squared statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the F-statistic in APA style for markdown printing}
 }
 \description{
 This function displays generalized omega squared from ANOVA analyses
@@ -53,7 +56,7 @@ independent variable, and the mean square of the
 subject variance multiplied by the number of levels
 in the other model/IV/between.
 
-omega = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
 
 \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 }

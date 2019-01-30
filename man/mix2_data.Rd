@@ -3,12 +3,12 @@
 \docType{data}
 \name{mix2_data}
 \alias{mix2_data}
-\title{Mixed Twoway ANOVA Example Data}
+\title{Mixed Two-way ANOVA Example Data}
 \format{A data frame including group type and backward strength rating.
 
-group: jam or debias
-bsglo: estimate of response to target word
-bsghi: estimate of response to target word}
+group: Regular JAM Task or Debiasing JAM task
+bsglo: estimate of response to target word in a Low BSG condition
+bsghi: estimate of response to target word in a High BSG condition}
 \usage{
 data(mix2_data)
 }
@@ -24,9 +24,5 @@ know something, which is bad for studying. So, we
 gave people instructions on how to ignore the BSG.
 Did it help? Is there an interaction between BSG
 and instructions given?
-}
-\references{
-Nolan and Heizen Statistics for the Behavioral Sciences
-(\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
 }
 \keyword{datasets}

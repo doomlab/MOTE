@@ -18,7 +18,9 @@ d.to.r(d, n1, n2, a = 0.05)
 \value{
 Provides the effect size (correlation coefficient) with associated
 confidence intervals, the t-statistic, F-statistic, and other estimates
-appropriate for d to r translation.
+appropriate for d to r translation. Note this CI is not based on the
+traditional r-to-z transformation but rather non-central F using the
+ci.R function from MBESS.
 
 \item{r}{correlation coefficient}
 \item{rlow}{lower level confidence interval r}
@@ -33,7 +35,9 @@ appropriate for d to r translation.
 \item{t}{t-statistic}
 \item{F}{F-statistic}
 \item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in
+\item{estimate}{the r statistic and confidence interval in
+APA style for markdown printing}
+#' \item{estimateR2}{the R^2 statistic and confidence interval in
 APA style for markdown printing}
 \item{statistic}{the t-statistic in APA style for markdown printing}
 }
@@ -88,7 +92,7 @@ hypnosis were significantly less accurate while reporting
 facts than the control group with a large effect size, t(6) = -2.66,
 #p = .038, d_s = 1.88.
 
-     d.to.r(d = 1.88, 4, 4, a = .05)
+     d.to.r(d = -1.88, n1 = 4, n2 = 4, a = .05)
 }
 \keyword{correlation}
 \keyword{effect}

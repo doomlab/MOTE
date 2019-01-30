@@ -3,7 +3,7 @@
 \docType{data}
 \name{bn1_data}
 \alias{bn1_data}
-\title{Between Subjects Oneway ANOVA Example Data}
+\title{Between Subjects One-way ANOVA Example Data}
 \format{A data frame of ratings of close interpersonal attachments
 
 poor: individuals in poor health
