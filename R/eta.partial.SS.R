@@ -8,7 +8,7 @@
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
-#'      partial eta squared = ssm / (ssm + sse)
+#'      partial eta^2  = ssm / (ssm + sse)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
@@ -36,9 +36,41 @@
 #' @keywords effect size, eta, ANOVA
 #' @import MBESS
 #' @import stats
+#' @import ez
 #' @export
 #' @examples
-#' eta.partial.SS(dfm = 2, dfe = 100, ssm = 435, sse = 659, Fvalue = 5.46, a = .05)
+#'
+#' #' #The following example is derived from the "bn2_data" dataset, included
+#' #in the MOTE library.
+#'
+#' #Is there a difference in atheletic spending budget for different sports?
+#' #Does that spending interact with the change in coaching staff? This data includes
+#' #(fake) atheletic budgets for baseball, basketball, football, soccer, and volleyball teams
+#' #with new and old coaches to determine if there are differences in
+#' #spending across coaches and sports.
+#'
+#' library(ez)
+#' bn2_data$partno = 1:nrow(bn2_data)
+#' anova_model = ezANOVA(data = bn2_data,
+#'                       dv = money,
+#'                       wid = partno,
+#'                       between = .(coach, type),
+#'                       detailed = T,
+#'                       type = 3)
+#'
+#' #You would calculate one eta for each F-statistic.
+#' #Here's an example for the interaction with typing in numbers.
+#' eta.partial.SS(dfm = 4, dfe = 990,
+#'                ssm = 338057.9, sse = 32833499,
+#'                Fvalue = 2.548, a = .05)
+#'
+#' #Here's an example for the interaction with code.
+#' eta.partial.SS(dfm = anova_model$ANOVA$DFn[4],
+#'                dfe = anova_model$ANOVA$DFd[4],
+#'                ssm = anova_model$ANOVA$SSn[4],
+#'                sse = anova_model$ANOVA$SSd[4],
+#'                Fvalue =  anova_model$ANOVA$F[4],
+#'                a = .05)
 
 
 eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
@@ -69,10 +101,6 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
   eta <- ssm / (ssm + sse)
 
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-
   limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
@@ -86,7 +114,7 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$eta^2$ = ", apa(eta,2,F), ", ", (1-a)*100, "\\% CI [",
+                 "estimate" = paste("$eta^2_{p}$ = ", apa(eta,2,F), ", ", (1-a)*100, "\\% CI [",
                                     apa(etalow,2,F), ", ", apa(etahigh,2,F), "]", sep = ""),
                  "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
                                      reportp, sep = "")
@@ -95,3 +123,6 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
   return(output)
 
 }
+
+#' @rdname eta.partial.SS
+#' @export

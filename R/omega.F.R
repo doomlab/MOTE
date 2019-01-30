@@ -32,9 +32,13 @@
 #' \item{dfe}{degrees of freedom for the error/residual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
-
+#' \item{estimate}{the omega squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, omega, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' omega.F(dfm = 2, dfe = 97, Fvalue = 5.7, n = 100, a = .05)
@@ -64,14 +68,26 @@ omega.F <- function (dfm, dfe, Fvalue, n, a = .05) {
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output <- list("omega" = omega, #omega stats
                 "omegalow" = limits$Lower.Conf.Limit.R2,
                 "omegahigh" = limits$Upper.Conf.Limit.R2,
                 "dfm" = dfm, #sig stats
                 "dfe" = dfe,
                 "F" = Fvalue,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$\\omega^2$ = ", apa(omega,2,T), ", ", (1-a)*100, "\\% CI [",
+                                   apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                   apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                    apa(Fvalue,2,T), ", $p$ ",
+                                    reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname omega.F
+#' @export
+

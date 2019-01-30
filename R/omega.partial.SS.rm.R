@@ -39,8 +39,13 @@
 #' \item{dfe}{degrees of freedom for the error/resisual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the omega squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, omega, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' omega.partial.SS.rm(dfm = 2, dfe = 100,
@@ -48,33 +53,51 @@
 #'                     ssm = 5339, sse = 435, sss = 53, a = .05)
 
 omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05) {
-  # This function displays omega squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom for the model/IV/between
-  #   dfe     : degrees of freedom for the error/residual/within
-  #   msm     : mean square for the model/IV/between
-  #   mse     : mean square for the error/residual/within
-  #   mss     : mean square for the subject variance
-  #   ssm     : sum of squares for the model/IV/between
-  #   sse     : sum of squares for the error/residual/within
-  #   sss     : sum of squares for the subject variance
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of omega, F, and sample size statistics
+
+  if (missing(dfm)){
+    stop("Be sure to include the degrees of freedom for the model (IV).")
+  }
+
+  if (missing(dfe)){
+    stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (missing(msm)){
+    stop("Be sure to include the mean squared model for your model (IV).")
+  }
+
+  if (missing(mse)){
+    stop("Be sure to include the mean squared error for your model.")
+  }
+
+  if (missing(mss)){
+    stop("Be sure to include the mean square for the subject variance your ANOVA.")
+  }
+
+  if (missing(ssm)){
+    stop("Be sure to include the sum of squares for your model (IV).")
+  }
+
+  if (missing(sse)){
+    stop("Be sure to include the sum of squares for your error.")
+  }
+
+  if (missing(sss)){
+    stop("Be sure to include the sum of squares for the subject variance.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   omega <- (dfm * (msm - mse)) / (ssm + sse + sss + mss)
   Fvalue <- msm / mse
 
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output <- list("omega" = omega, #omega stats
                  "omegalow" = limits$Lower.Conf.Limit.R2,
@@ -82,8 +105,17 @@ omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\omega^2_{p}$ = ", apa(omega,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname omega.partial.SS.rm
+#' @export

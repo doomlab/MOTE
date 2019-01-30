@@ -10,7 +10,7 @@
 #' is multiplied by the degrees of freedom for the model. The
 #' product is divided by the sum of squares total.
 #'
-#'      epsilon = (dfm * (msm - mse)) / (sst)
+#'      epsilon^2 = (dfm * (msm - mse)) / (sst)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 #'
@@ -40,17 +40,21 @@
 #' @export
 #' @examples
 #'
-#' #The following example is derived from the "indt_data" dataset, included
+#' #The following example is derived from the "bn1_data" dataset, included
 #' #in the MOTE library.
 #'
-#' A health psychologist recorded the number of close inter-personal
-#' attachments of 45-year-olds who were in excellent, fair, or poor
-#' health. People in the Excellent Health group had 4, 3, 2, and 3
-#' close attachments; people in the Fair Health group had 3, 5,
-#' and 8 close attachments; and people in the Poor Health group
-#' had 3, 1, 0, and 2 close attachments.
+#' #A health psychologist recorded the number of close inter-personal
+#' #attachments of 45-year-olds who were in excellent, fair, or poor
+#' #health. People in the Excellent Health group had 4, 3, 2, and 3
+#' #close attachments; people in the Fair Health group had 3, 5,
+#' #and 8 close attachments; and people in the Poor Health group
+#' #had 3, 1, 0, and 2 close attachments.
 #'
-#' epsilon.full.SS(dfm = 2, dfe = 100, msm = 214, mse = 100, sst = 5339, a = .05)
+#' anova_model = lm(formula = friends ~ group, data = bn1_data)
+#' summary.aov(anova_model)
+#'
+#' epsilon.full.SS(dfm = 2, dfe = 8, msm = 12.621,
+#'                 mse = 2.458, sst = (25.24+19.67), a = .05)
 
 
 epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
@@ -82,10 +86,6 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
   epsilon <- (dfm * (msm - mse)) / (sst)
   Fvalue <- msm / mse
 
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-
   limits <- ci.R2(R2 = epsilon, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
@@ -98,8 +98,17 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\epsilon^2$ = ", apa(epsilon,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname epsilon.full.SS
+#' @export

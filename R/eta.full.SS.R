@@ -8,7 +8,7 @@
 #' Eta squared is calculated by dividing the sum of squares for the model
 #' by the sum of squares total.
 #'
-#'      eta = ssm / sst
+#'      eta^2 = ssm / sst
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 #'
@@ -36,7 +36,22 @@
 #' @import stats
 #' @export
 #' @examples
-#' eta.full.SS(dfm = 2, dfe = 100, ssm = 435, sst = 659, Fvalue = 5.46, a = .05)
+#'
+#' #The following example is derived from the "bn1_data" dataset, included
+#' #in the MOTE library.
+#'
+#' #A health psychologist recorded the number of close inter-personal
+#' #attachments of 45-year-olds who were in excellent, fair, or poor
+#' #health. People in the Excellent Health group had 4, 3, 2, and 3
+#' #close attachments; people in the Fair Health group had 3, 5,
+#' #and 8 close attachments; and people in the Poor Health group
+#' #had 3, 1, 0, and 2 close attachments.
+#'
+#' anova_model = lm(formula = friends ~ group, data = bn1_data)
+#' summary.aov(anova_model)
+#'
+#' eta.full.SS(dfm = 2, dfe = 8, ssm = 25.24,
+#'             sst = (25.24+19.67), Fvalue = 5.134, a = .05)
 
 
 eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
@@ -67,10 +82,6 @@ eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
 
   eta <- ssm / sst
 
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #elow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ehigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
-
   limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
@@ -83,8 +94,17 @@ eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\eta^2$ = ", apa(eta,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname eta.full.SS
+#' @export

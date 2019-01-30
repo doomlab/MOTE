@@ -31,8 +31,13 @@
 #' \item{dfe}{degrees of freedom for the error/residual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the generalized eta squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, ges, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' ges.partial.SS.mix(dfm = 2, dfe = 100, ssm = 435, sss = 235, sse = 659, Fvalue = 5.46, a = .05)
@@ -64,6 +69,7 @@ ges.partial.SS.mix <- function (dfm, dfe, ssm, sss, sse, Fvalue, a = .05) {
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
@@ -71,8 +77,17 @@ ges.partial.SS.mix <- function (dfm, dfe, ssm, sss, sse, Fvalue, a = .05) {
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\eta^2_{G}$ = ", apa(ges,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname ges.partial.SS.mix
+#' @export

@@ -14,7 +14,7 @@
 #' subject variance multiplied by the number of levels
 #' in the other model/IV/between.
 #'
-#'      omega = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+#'      generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 #'
@@ -37,8 +37,13 @@
 #' \item{dfe}{degrees of freedom for the error/resisual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the omega squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, omega, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' omega.gen.SS.rm(dfm = 2, dfe = 100,
@@ -46,32 +51,14 @@
 #'                      mss = 543, j = 3, Fvalue = 12, a = .05)
 
 omega.gen.SS.rm <- function (dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = .05) {
-  # This function displays omega squared from ANOVA analyses
-  # and its non-central confidence interval based on the F distribution.
-  #
-  # Args:
-  #   dfm     : degrees of freedom for the model/IV/between
-  #   dfe     : degrees of freedom for the error/residual/within
-  #   ssm     : sum of squares for the MAIN model/IV/between
-  #   ssm2    : sum sum of squares for the OTHER model/IV/between
-  #   sst     : sum of squares total across the whole ANOVA
-  #   mss     : mean square for the subject variance
-  #   j       : number of levels in the OTHER IV
-  #   Fvalue  : F statistic from the output for your IV
-  #   a       : significance level
-  #
-  # Returns:
-  #   List of omega, F, and sample size statistics
 
   omega <- (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
-
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #olow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #ohigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
 
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
   output <- list("omega" = omega, #omega stats
                  "omegalow" = limits$Lower.Conf.Limit.R2,
@@ -79,8 +66,18 @@ omega.gen.SS.rm <- function (dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = .05) 
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\omega^2_{G}$ = ", apa(omega,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname omega.gen.SS.rm
+#' @export
+

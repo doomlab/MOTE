@@ -32,8 +32,13 @@
 #' \item{dfe}{degrees of freedom for the error/residual/within}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the generalized eta squared statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the F-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, ges, ANOVA
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
 #' ges.partial.SS.rm(dfm = 2, dfe = 100,
@@ -70,14 +75,25 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = F)
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
                  "geshigh" = limits$Upper.Conf.Limit.R2,
                  "dfm" = dfm, #sig stats
                  "dfe" = dfe,
                  "F" = Fvalue,
-                 "p" = p)
+                 "p" = p,
+                 "estimate" = paste("$\\eta^2_{G}$ = ", apa(ges,2,T), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
+                                     apa(Fvalue,2,T), ", $p$ ",
+                                     reportp, sep = ""))
 
   return(output)
 
 }
+
+#' @rdname ges.partial.SS.rm
+#' @export
