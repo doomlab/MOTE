@@ -41,6 +41,7 @@
 #' @keywords effect size, z-test
 #' @import MBESS
 #' @import stats
+#' @export
 #' @examples
 #'
 #' #The average quiz test taking time for a 10 item test is 22.5
