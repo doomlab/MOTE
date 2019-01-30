@@ -95,8 +95,6 @@ ges.partial.SS.mix(dfm = anova_model$ANOVA$DFn[4],
                sse = anova_model$ANOVA$SSd[4],
                Fvalue =  anova_model$ANOVA$F[4],
                a = .05)
-
-ges.partial.SS.mix(dfm = 2, dfe = 100, ssm = 435, sss = 235, sse = 659, Fvalue = 5.46, a = .05)
 }
 \keyword{ANOVA}
 \keyword{effect}

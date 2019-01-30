@@ -31,6 +31,11 @@ and relevant statistics.
 \item{t}{t-statistic}
 \item{F}{F-statistic}
 \item{p}{p-value}
+\item{estimate}{the r statistic and confidence interval in
+APA style for markdown printing}
+\item{estimateR2}{the R^2 statistic and confidence interval in
+APA style for markdown printing}
+\item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
 This function displays transformation from r to r2 to calculate
@@ -50,7 +55,14 @@ Fvalue = t ^ 2
 \href{https://www.aggieerin.com/shiny-server/tests/rcorrel.html}{Learn more on our example page.}
 }
 \examples{
-r.correl(r = .5, n = 100, a = .05)
+
+#This example is derived from the mtcars dataset provided in R.
+
+#What is the correlation between miles per gallon and car weight?
+
+cor.test(mtcars$mpg, mtcars$wt)
+
+r.correl(r = -0.8676594, n = 32, a = .05)
 }
 \keyword{correlation}
 \keyword{effect}

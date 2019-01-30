@@ -25,6 +25,8 @@ and relevant statistics.
 \item{olow}{lower level confidence interval of odds statistic}
 \item{ohigh}{upper level confidence interval of odds statistic}
 \item{se}{standard error}
+\item{estimate}{the oods statistic and confidence interval in
+APA style for markdown printing}
 }
 \description{
 This function displays odds ratios and their normal confidence intervals.
@@ -44,7 +46,19 @@ odds <- (n11 / n12) / (n21 / n22)
 \href{https://www.aggieerin.com/shiny-server/tests/chio.html}{Learn more on our example page.}
 }
 \examples{
-odds(n11 = 10, n12 = 15, n21 = 20, n22 = 5, a = .05)
+
+#A health psychologist was interested in the rates of anxiety in
+#first generation and regular college students. They polled campus
+#and found the following data:
+
+  |              | First Generation | Regular |
+  |--------------|------------------|---------|
+  | Low Anxiety  | 10               | 50      |
+  | High Anxiety | 20               | 15      |
+
+#What are the odds for the first generation students to have anxiety?
+
+odds(n11 = 10, n12 = 50, n21 = 20, n22 = 15, a = .05)
 }
 \keyword{effect}
 \keyword{odds}

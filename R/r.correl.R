@@ -35,26 +35,39 @@
 #' \item{t}{t-statistic}
 #' \item{F}{F-statistic}
 #' \item{p}{p-value}
+#' \item{estimate}{the r statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{estimateR2}{the R^2 statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, correlation
+#' @import MBESS
+#' @import stats
 #' @export
 #' @examples
-#' r.correl(r = .5, n = 100, a = .05)
-
+#'
+#' #This example is derived from the mtcars dataset provided in R.
+#'
+#' #What is the correlation between miles per gallon and car weight?
+#'
+#' cor.test(mtcars$mpg, mtcars$wt)
+#'
+#' r.correl(r = -0.8676594, n = 32, a = .05)
 
 r.correl <- function (r, n, a = .05) {
-  # This function Displays transformation from r to r2 to calculate
-  # the non-central confidence interval for r2.
-  #
-  # Args:
-  #   r : correlation coefficient
-  #   n : sample size
-  #   a : significance level
-  #
-  # Returns:
-  #   List of r, r2, and sample size statistics
 
-  library(MBESS)
+  if (missing(r)){
+    stop("Be sure to include the correlation r.")
+  }
+
+  if (missing(n)){
+    stop("Be sure to include the sample size.")
+  }
+
+  if (a < 0 || a > 1) {
+    stop("Alpha should be between 0 and 1.")
+  }
 
   rsq <- (r) ^ 2
   se <- sqrt(4 * rsq * ((1 - rsq) ^ 2) * ((n - 3) ^ 2) / ((n ^ 2 - 1) * (3 + n)))
@@ -62,10 +75,6 @@ r.correl <- function (r, n, a = .05) {
   Fvalue <- t ^ 2
   dfm <- 1
   dfe <- n - 2
-
-  #ncpboth <- conf.limits.ncf(Fvalue, df.1 = dfm, df.2 = dfe, conf.level = (1 - a))
-  #rsqlow <- ncpboth$Lower.Limit / (ncpboth$Lower.Limit + dfm + dfe + 1)
-  #rsqhigh <- ncpboth$Upper.Limit / (ncpboth$Upper.Limit + dfm + dfe + 1)
 
   limits <- ci.R2(R2 = rsq, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
@@ -81,6 +90,8 @@ r.correl <- function (r, n, a = .05) {
     rhigh = ciforr$Upper.Conf.Limit.R
   }
 
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+
   output = list("r" = r, #r stats
                 "rlow" = rlow,
                 "rhigh" = rhigh,
@@ -93,7 +104,17 @@ r.correl <- function (r, n, a = .05) {
                 "dfe" = (n - 2),
                 "t" = t,
                 "F" = Fvalue,
-                "p" = p)
+                "p" = p,
+                "estimate" = paste("$r$ = ", apa(r,2,F), ", ", (1-a)*100, "\\% CI [",
+                                   apa(rlow,2,F), ", ", apa(rhigh,2,F), "]", sep = ""),
+                "estimateR2" = paste("$R^2$ = ", apa(rsq,2,F), ", ", (1-a)*100, "\\% CI [",
+                                     apa(limits$Lower.Conf.Limit.R2,2,F), ", ",
+                                     apa(limits$Upper.Conf.Limit.R2,2,F), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-2), ") = ", apa(t,2,T), ", $p$ ",
+                                    reportp, sep = ""))
 
   return(output)
 }
+
+#' @rdname r.correl
+#' @export

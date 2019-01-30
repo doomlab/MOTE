@@ -36,7 +36,7 @@
 #' \item{p}{p-value}
 #' \item{estimate}{the r statistic and confidence interval in
 #' APA style for markdown printing}
-#' #' \item{estimateR2}{the R^2 statistic and confidence interval in
+#' \item{estimateR2}{the R^2 statistic and confidence interval in
 #' APA style for markdown printing}
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
@@ -77,9 +77,9 @@
 #'             length(indt_data$correctq[indt_data$group == 2]),
 #'             .05)
 #'
-#' Contrary to the hypothesized result, the group that underwent
-#' hypnosis were significantly less accurate while reporting
-#' facts than the control group with a large effect size, t(6) = -2.66,
+#' #Contrary to the hypothesized result, the group that underwent
+#' #hypnosis were significantly less accurate while reporting
+#' #facts than the control group with a large effect size, t(6) = -2.66,
 #' #p = .038, d_s = 1.88.
 #'
 #'      d.to.r(d = -1.88, n1 = 4, n2 = 4, a = .05)
