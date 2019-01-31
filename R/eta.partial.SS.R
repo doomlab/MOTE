@@ -115,7 +115,7 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
                  "F" = Fvalue,
                  "p" = p,
                  "estimate" = paste("$\\eta^2_{p}$ = ", apa(eta,2,FALSE), ", ", (1-a)*100, "\\% CI [",
-                                    apa(etalow,2,FALSE), ", ", apa(etahigh,2,FALSE), "]", sep = ""),
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ", apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,TRUE), ", $p$ ",
                                      reportp, sep = "")
   )
