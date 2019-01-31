@@ -65,7 +65,7 @@ anova_model = ezANOVA(data = bn2_data,
                       dv = money,
                       wid = partno,
                       between = .(coach, type),
-                      detailed = T,
+                      detailed = TRUE,
                       type = 3)
 
 #You would calculate one eta for each F-statistic.

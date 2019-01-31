@@ -13,9 +13,10 @@ money: athletic spending (in thousands of dollars)}
 data(bn2_data)
 }
 \description{
-Dataset for use in \code{\link{omega.partial.SS.bn}} and other
-between-subject's ANOVA designs. This data includes (fake) atheletic
-budgets for baseball, basketball, football, soccer, and volleyball teams
+Dataset for use in \code{\link{omega.partial.SS.bn}},
+\code{\link{eta.partial.SS.bn}}, and other between-subject's ANOVA
+designs. This data includes (fake) atheletic budgets for baseball,
+basketball, football, soccer, and volleyball teams
 with new and old coaches to determine if there are differences in
 spending across coaches and sports.
 }
