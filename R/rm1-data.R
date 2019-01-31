@@ -1,6 +1,6 @@
 #' Repeated Measures Oneway ANOVA Example Data
 #'
-#' Dataset for use in \code{\link{omega.F.R}}.
+#' Dataset for use in \code{\link{omega.F}}.
 #' Participants were tested over several days to measure
 #' variations in their pulse given different types of stimuli.
 #' One stimulus was a neutral picture (like a toaster),

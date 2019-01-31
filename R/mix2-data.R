@@ -1,6 +1,6 @@
 #' Mixed Two-way ANOVA Example Data
 #'
-#' Dataset for use in \code{\link{ges.partial.SS.mix.R}}.
+#' Dataset for use in \code{\link{ges.partial.SS.mix}}.
 #' Given previous research, we know that backward strength
 #' in free association tends to increase the ratings
 #' participants give when you ask them how many people

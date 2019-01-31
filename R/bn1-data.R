@@ -1,6 +1,6 @@
 #' Between Subjects One-way ANOVA Example Data
 #'
-#' Dataset for use in \code{\link{eta.F}}, \code{\link{etafull.SS}},
+#' Dataset for use in \code{\link{eta.F}}, \code{\link{eta.full.SS}},
 #' and \code{\link{epsilon.full.SS}}, including ratings of
 #' inter-personal attachments of 45-year-olds categorized as
 #' being in excellent, fair, or poor health.

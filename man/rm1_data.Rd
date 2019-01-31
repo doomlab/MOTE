@@ -13,7 +13,7 @@ negative: pulse during exposure to negative stimuli}
 data(rm1_data)
 }
 \description{
-Dataset for use in \code{\link{omega.F.R}}.
+Dataset for use in \code{\link{omega.F}}.
 Participants were tested over several days to measure
 variations in their pulse given different types of stimuli.
 One stimulus was a neutral picture (like a toaster),
