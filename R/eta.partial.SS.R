@@ -103,7 +103,7 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
   limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
   if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
 
