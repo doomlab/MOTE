@@ -76,7 +76,7 @@ anova_model = ezANOVA(data = long_mix,
                       wid = partno,
                       between = group,
                       within = variable,
-                      detailed = T,
+                      detailed = TRUE,
                       type = 3)
 
 #You would calculate one partial GES value for each F-statistic.

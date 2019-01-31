@@ -70,7 +70,7 @@
 #'                       dv = value,
 #'                       wid = subject,
 #'                       within = .(FSG, BSG),
-#'                       detailed = T,
+#'                       detailed = TRUE,
 #'                       type = 3)
 #'
 #' #You would calculate one partial GES value for each F-statistic.
