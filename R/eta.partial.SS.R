@@ -105,7 +105,7 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
   p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("eta" = eta, #eta stats
                  "etalow" = limits$Lower.Conf.Limit.R2,
@@ -114,9 +114,9 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$eta^2_{p}$ = ", apa(eta,2,F), ", ", (1-a)*100, "\\% CI [",
-                                    apa(etalow,2,F), ", ", apa(etahigh,2,F), "]", sep = ""),
-                 "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ",
+                 "estimate" = paste("$eta^2_{p}$ = ", apa(eta,2,FALSE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(etalow,2,FALSE), ", ", apa(etahigh,2,FALSE), "]", sep = ""),
+                 "statistic" = paste("$F$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,TRUE), ", $p$ ",
                                      reportp, sep = "")
   )
 
