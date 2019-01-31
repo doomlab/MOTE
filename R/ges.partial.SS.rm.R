@@ -59,12 +59,12 @@
 #' library(ez)
 #' library(reshape)
 #' long_mix = melt(rm2_data, id = c("subject", "group"))
-#' long_mix$FSG = c(rep("Low-FSG", nrow(rm2_data)),
-#'                  rep("High-FSG", nrow(rm2_data)),
+#' long_mix$FSG = c(rep("Low-FSG", (nrow(rm2_data)*2)),
+#'                  rep("High-FSG", (nrow(rm2_data)*2)),
 #'                  rep("Low-FSG", nrow(rm2_data)),
 #'                  rep("High-FSG", nrow(rm2_data)))
-#' long_mix$BSG = c(rep("Low-BSG", nrow(rm2_data)*2),
-#'                  rep("High-BSG", nrow(rm2_data)*2))
+#' long_mix$BSG = c(rep("Low-BSG", (nrow(rm2_data)*3)),
+#'                  rep("High-BSG", (nrow(rm2_data)*3)))
 #'
 #' anova_model = ezANOVA(data = long_mix,
 #'                       dv = value,
