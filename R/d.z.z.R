@@ -82,7 +82,7 @@ d.z.z <- function (z, sig = NA, n, a = .05) {
                 "p" = p,
                 "n" = n, #sample stats
                 "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
+                                   apa((d-qnorm(a/2, lower.tail = F)*sig),2,T), ", ", apa((d+qnorm(a/2, lower.tail = F))*sig,2,T), "]", sep = ""),
                 "statistic" = paste("$Z$", " = ", apa(z,2,T), ", $p$ ",
                                     reportp, sep = "")
                 )
