@@ -71,7 +71,7 @@
 #'                       wid = partno,
 #'                       between = group,
 #'                       within = variable,
-#'                       detailed = T,
+#'                       detailed = TRUE,
 #'                       type = 3)
 #'
 #' #You would calculate one partial GOS value for each F-statistic.

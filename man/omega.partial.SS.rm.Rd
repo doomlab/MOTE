@@ -90,7 +90,7 @@ anova_model = ezANOVA(data = long_mix,
                       dv = value,
                       wid = subject,
                       within = .(FSG, BSG),
-                      detailed = T,
+                      detailed = TRUE,
                       type = 3)
 
 #You would calculate one partial GOS value for each F-statistic.

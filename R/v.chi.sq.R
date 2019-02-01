@@ -49,7 +49,7 @@
 #' v.chi.sq(x2 = 2.0496, n = 60, r = 3, c = 3, a = .05)
 #'
 #' #Please note, if you see a warning, that implies the lower effect should
-#' be zero, as noted.
+#' #be zero, as noted.
 
 v.chi.sq <- function (x2, n, r, c, a = .05) {
 

@@ -40,10 +40,10 @@
 #' #first generation and regular college students. They polled campus
 #' #and found the following data:
 #'
-#'   |              | First Generation | Regular |
-#'   |--------------|------------------|---------|
-#'   | Low Anxiety  | 10               | 50      |
-#'   | High Anxiety | 20               | 15      |
+#'   #|              | First Generation | Regular |
+#'   #|--------------|------------------|---------|
+#'   #| Low Anxiety  | 10               | 50      |
+#'   #| High Anxiety | 20               | 15      |
 #'
 #' #What are the odds for the first generation students to have anxiety?
 #'
