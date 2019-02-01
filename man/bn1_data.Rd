@@ -14,6 +14,7 @@ data(bn1_data)
 }
 \description{
 Dataset for use in \code{\link{eta.F}}, \code{\link{eta.full.SS}},
+\code{\link{omega.F.R}}, \code{\link{omega.full.SS.R}},
 and \code{\link{epsilon.full.SS}}, including ratings of
 inter-personal attachments of 45-year-olds categorized as
 being in excellent, fair, or poor health.
