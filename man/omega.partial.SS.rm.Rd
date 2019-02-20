@@ -53,9 +53,9 @@ by the sum of the sum of squares for the model, sum of squares
 for the error, sum of squares for the subject, and the
 mean square of the subject.
 
-(dfm * (msm - mse)) / (ssm + sse + sss + mss)
+omega_p^2 = (dfm x (msm - mse)) / (ssm + sse + sss + mss)
 
-The f-statistic is calculated by dividing the mean square
+The F-statistic is calculated by dividing the mean square
 of the model by the mean square of the error.
 
 F = msm / mse
