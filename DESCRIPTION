@@ -1,32 +1,29 @@
-Package: MOTE: Measure of the Effect
-Version: 0.1.0.0000
-Date: 2018-01-30
+Package: MOTE
+Version: 1.0.0
+Date: 2019-02-20
 Title: Effect Size and Confidence Interval Calculator
 Authors@R: c(person("Erin M.", "Buchanan", role = c("aut", "cre"),
                      email = "buchananlab@gmail.com",
                      comment = c(ORCID = "0000-0002-9689-4189")),
-              person("Amber", "Gillenwaters", role = "aut", 
+              person("Amber M", "Gillenwaters", role = "aut", 
                     comment = c(ORCID = "0000-0002-7580-3591")),       
               person("John E.", "Scofield", role = "aut",
                     comment = c(ORCID = "0000-0001-6345-1181")),
-              person("K.D.", "Valentine", role = "aut",
+              person("K. D.", "Valentine", role = "aut",
                     comment = c(ORCID = "0000-0001-6349-5395")))
-Author: Erin M. Buchanan [aut, cre],
-  Amber M. Gillenwaters [aut]
-  John E. Scofield [aut],
-  K. D. Valentine [aut]
 Depends: R (>= 3.1.0)
 Imports: MBESS, stats, ez, reshape
-Description: MOTE is an effect size calculator. In research, an overreliance on p-values 
-conceals the fact that a study is underpowered. A test may be statistically significant, 
-yet practically inconsequential. Although the APA Task Force on Statistical Inference has 
-long advocated for the inclusion of effect sizes, the vast majority of peer-reviewed, 
-published academic studies stop short of reporting effect sizes and confidence intervals.
-To simplify the use and interpretation of effect sizes and confidence intervals, we designed 
-MOTE to calculate a wide variety of effect sizes in the mean differences family (all versions 
-of d) and the variance overlap family (eta, omege, epsilon, r). The package also provides 
-non-central confidence intervals for each effect size, as well as the relevant test statistics 
-when possible. Last, output for reporting in APA style with 'LaTeX' is included. 
+Description: Measure of the Effect (MOTE) is an effect size calculator. In research, 
+    an overreliance on p-values conceals the fact that a study is underpowered. A test 
+    may be statistically significant, yet practically inconsequential. Although the APA 
+    Task Force on Statistical Inference has long advocated for the inclusion of effect 
+    sizes, the vast majority of peer-reviewed, published academic studies stop short of 
+    reporting effect sizes and confidence intervals. To simplify the use and interpretation 
+    of effect sizes and confidence intervals, we designed MOTE to calculate a wide variety 
+    of effect sizes in the mean differences family (all versions of d) and the variance 
+    overlap family (eta, omege, epsilon, r). The package also provides non-central 
+    confidence intervals for each effect size, as well as the relevant test statistics 
+    when possible. Last, output for reporting in APA style with 'LaTeX' is included. 
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true

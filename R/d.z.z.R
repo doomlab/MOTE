@@ -8,7 +8,7 @@
 #'
 #'      d = z / sqrt(N)
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/ztestz.html}{Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/zz.html}{Learn more on our example page.}
 #'
 #' @param z z statistic
 #' @param sig population standard deviation
