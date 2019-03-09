@@ -2,6 +2,8 @@
 
 [![Travis build status](https://travis-ci.org/doomlab/MOTE.svg?branch=master)](https://travis-ci.org/doomlab/MOTE)
 
+[![](https://cranlogs.r-pkg.org/badges/mote)](https://cran.r-project.org/package=mote)
+
 This package is in active development - currently we are debugging/adding information to each function and working on the user's guide. You can check out videos / updates on my [YouTube channel](https://www.youtube.com/channel/UCMdihazndR0f9XBoSXWqnYg), as well as watching or starring the github repo.
 
 You can look at our how-to guide by going to: https://www.aggieerin.com/shiny-server/. A good bit of the details are over there, but still working on ironing out the wrinkles. These details will be transferred to the package and the readme here when we are done.  
