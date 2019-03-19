@@ -6,6 +6,9 @@ sudo: true
 dist: trusty
 cache: packages
 
+before_install:
+  - sudo apt-get install libgsl-dev
+
 repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
