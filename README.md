@@ -26,4 +26,4 @@ To install the development version of the package take the following steps:
 
 4) Enjoy MOTE. 
 
-You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)!
+You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)! 
