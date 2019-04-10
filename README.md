@@ -2,10 +2,10 @@
 
 [![Travis build status](https://travis-ci.org/doomlab/MOTE.svg?branch=master)](https://travis-ci.org/doomlab/MOTE)
 
-[![](https://cranlogs.r-pkg.org/badges/mote)](https://cran.r-project.org/package=mote)
-![](http://cranlogs.r-pkg.org/badges/last-week/mote)
-![](http://cranlogs.r-pkg.org/badges/last-day/mote)
-![](http://cranlogs.r-pkg.org/badges/grand-total/mote)
+[![](https://cranlogs.r-pkg.org/badges/MOTE)](https://cran.r-project.org/package=MOTE)
+![](http://cranlogs.r-pkg.org/badges/last-week/MOTE)
+![](http://cranlogs.r-pkg.org/badges/last-day/MOTE)
+![](http://cranlogs.r-pkg.org/badges/grand-total/MOTE)
 
 
 We gladly take comments and updates! You can check out videos on my [YouTube channel](https://www.youtube.com/channel/UCMdihazndR0f9XBoSXWqnYg), as well as watching or starring the github repo.
