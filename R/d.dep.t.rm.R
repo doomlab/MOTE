@@ -115,7 +115,7 @@ d.dep.t.rm <- function (m1, m2, sd1, sd2, r, n, a = .05) {
   d <- ((m1 - m2) / sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2))) * sqrt(2*(1-r))
   se1 <- sd1 / sqrt(n)
   se2 <- sd2 / sqrt(n)
-  t <- ((m1 - m2) / (sqrt((sd1^2+sd2^2) - (2*r*sd1*sd2)))/sqrt(n)) * sqrt(2*(1-r))
+  t <- ((m1 - m2) / (sqrt((sd1^2 + sd2^2)-(2*r*sd1*sd2))/sqrt(n))) * sqrt(2*(1-r))
   ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
