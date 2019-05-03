@@ -14,4 +14,5 @@ repos:
   ropensci: http://packages.ropensci.org
 
 r_binary_packages:
+  - gsl
   - MBESS
