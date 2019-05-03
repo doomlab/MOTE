@@ -28,7 +28,7 @@
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom (n - 1)}
 #' \item{t}{t-statistic}
-#' \item{p}{p-value}
+#' \item{p}{p-value (two-tailed)}
 #' \item{estimate}{the d statistic and confidence interval in
 #' APA style for markdown printing}
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
