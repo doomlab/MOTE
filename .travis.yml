@@ -1,18 +1,21 @@
 # documentation at https://docs.travis-ci.com/user/languages/r
 
-language: r
+language: R
+r:
+  - oldrel
+  - release
+  - devel
 
-sudo: true
-dist: bionic
 cache: packages
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install libgsl-dev
+# Be strict when checking our package
+warnings_are_errors: true
 
-repos:
-  CRAN: https://cloud.r-project.org
-  ropensci: http://packages.ropensci.org
-
-r_binary_packages:
+# Needed R packages
+r_packages:
   - MBESS
+
+addons:
+  apt:
+    packages:
+    - libgsl-dev # GNU scientific library for MBESS
