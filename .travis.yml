@@ -1,15 +1,11 @@
 # documentation at https://docs.travis-ci.com/user/languages/r
 
+# just the current release
 language: R
 r:
-  - oldrel
   - release
-  - devel
 
 cache: packages
-
-# Be strict when checking our package
-warnings_are_errors: true
 
 # Needed R packages
 r_packages:
