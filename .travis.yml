@@ -3,7 +3,7 @@
 language: r
 
 sudo: true
-dist: trusty
+dist: bionic
 cache: packages
 
 before_install:
