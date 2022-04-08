@@ -31,6 +31,8 @@ You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)!
 
 # Build information
 
+1.0.3 - Fixed a few typos
+
 1.0.2 - Updated mathematical error in `d.dep.t.rm` confidence interval calculation. 
 
 1.0.1 - Initial CRAN release

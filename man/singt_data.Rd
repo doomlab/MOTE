@@ -4,8 +4,10 @@
 \name{singt_data}
 \alias{singt_data}
 \title{Single Sample t Example Data}
-\format{A data frame including a single sample consisting of SAT scores of students from
-a gifted/honors program at a specific school.}
+\format{
+A data frame including a single sample consisting of SAT scores of students from
+a gifted/honors program at a specific school.
+}
 \usage{
 data(singt_data)
 }

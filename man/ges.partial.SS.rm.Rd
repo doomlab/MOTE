@@ -51,7 +51,7 @@ variance, sum of squares for the first and second independent variables,
 and the sum of squares for the interaction are added together.
 The sum of squares of the model is divided by this value.
 
-partial ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
+     partial ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
 
 \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 }

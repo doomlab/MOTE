@@ -4,11 +4,13 @@
 \name{mix2_data}
 \alias{mix2_data}
 \title{Mixed Two-way ANOVA Example Data}
-\format{A data frame including group type and backward strength rating.
+\format{
+A data frame including group type and backward strength rating.
 
 group: Regular JAM Task or Debiasing JAM task
 bsglo: estimate of response to target word in a Low BSG condition
-bsghi: estimate of response to target word in a High BSG condition}
+bsghi: estimate of response to target word in a High BSG condition
+}
 \usage{
 data(mix2_data)
 }

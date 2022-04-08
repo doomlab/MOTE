@@ -46,7 +46,7 @@ divided by the same value after adding the number of valid responses. This
 value will be omega squared for one-way ANOVA designs, and will be
 partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
 
-omega^2 = (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
+     omega^2 = (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
 
 \href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}{Learn more on our example page.}
 }

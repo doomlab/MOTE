@@ -60,7 +60,7 @@ To calculate d-delta, the mean of the experimental group
 is subtracted from the mean of the control group, which
 is divided by the standard deviation of the control group.
 
-d_delta = (m1 - m2) / sd1
+     d_delta = (m1 - m2) / sd1
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 }

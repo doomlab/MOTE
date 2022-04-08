@@ -38,7 +38,7 @@ If sigma is left blank, then you will not see a confidence interval.
 \details{
 To calculate d, z is divided by the square root of N.
 
-d = z / sqrt(N)
+     d = z / sqrt(N)
 
 \href{https://www.aggieerin.com/shiny-server/tests/zz.html}{Learn more on our example page.}
 }

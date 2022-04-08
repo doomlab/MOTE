@@ -60,13 +60,13 @@ The correction is calculated by dividing three by the sum of both
 sample sizes after multiplying by four and subtracting nine.
 This amount is deducted from one.
 
-correction = 1 - (3 / (4 * (n1 + n2) - 9))
+     correction = 1 - (3 / (4 * (n1 + n2) - 9))
 
 D-g corrected is calculated by substracting mean two from mean one,
 dividing by the pooled standard deviation which is multiplied
 by the correction above.
 
-d_g corrected = ((m1 - m2) / spooled) * correction
+     d_g corrected = ((m1 - m2) / spooled) * correction
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
 }

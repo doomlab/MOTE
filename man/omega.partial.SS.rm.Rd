@@ -53,12 +53,12 @@ by the sum of the sum of squares for the model, sum of squares
 for the error, sum of squares for the subject, and the
 mean square of the subject.
 
-omega_p^2 = (dfm x (msm - mse)) / (ssm + sse + sss + mss)
+     omega_p^2 = (dfm x (msm - mse)) / (ssm + sse + sss + mss)
 
 The F-statistic is calculated by dividing the mean square
 of the model by the mean square of the error.
 
-F = msm / mse
+     F = msm / mse
 
 \href{https://www.aggieerin.com/shiny-server/tests/omegaprmss.html}{Learn more on our example page.}
 }

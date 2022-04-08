@@ -45,7 +45,7 @@ of the difference score as the denominator.
 To calculate d, the mean difference score is divided by
 divided by the standard deviation of the difference scores.
 
-d_z = mdiff / sddiff
+     d_z = mdiff / sddiff
 
 \href{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}{Learn more on our example page.}
 }

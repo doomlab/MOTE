@@ -22,8 +22,8 @@ Provides V with associated confidence intervals
 and relevant statistics.
 
 \item{v}{v-statistic}
-\item{vlow}{lower level confidence interval of omega}
-\item{vhigh}{upper level confidence interval of omega}
+\item{vlow}{lower level confidence interval of V}
+\item{vhigh}{upper level confidence interval of V}
 \item{n}{sample size}
 \item{df}{degrees of freedom}
 \item{x2}{significance statistic}
@@ -40,7 +40,7 @@ for the specified chi-square statistic.
 V is calculated by finding the square root of chi-squared divided by the product
 of the sample size and the degrees of freedom with the lowest value.
 
-v = sqrt(x2 / (n * dfsmall))
+     v = sqrt(x2 / (n * dfsmall))
 
 \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
 }

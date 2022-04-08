@@ -56,7 +56,7 @@ To calculate d, mean two is subtracted from mean one, which is
 divided by the average standard deviation, while mathematically
 controlling for the correlation coefficient (r).
 
-d_rm = ((m1 - m2) / sqrt(( sd1^2 + sd2^2 ) - (2 x r x sd1 x sd2))) x sqrt(2 x (1-r))
+     d_rm = ((m1 - m2) / sqrt(( sd1^2 + sd2^2 ) - (2 x r x sd1 x sd2))) x sqrt(2 x (1-r))
 
 \href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}{Learn more on our example page.}
 }

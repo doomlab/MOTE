@@ -57,7 +57,7 @@ independent variable, and the mean square of the
 subject variance multiplied by the number of levels
 in the other model/IV/between.
 
-generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+     generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
 
 \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 }

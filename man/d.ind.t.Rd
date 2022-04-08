@@ -60,7 +60,7 @@ pooled standard deviation as the denominator.
 To calculate d, mean two is subtracted from mean one and divided
 by the pooled standard deviation.
 
-d_s = (m1 - m2) / spooled
+     d_s = (m1 - m2) / spooled
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtm.html}{Learn more on our example page.}
 }

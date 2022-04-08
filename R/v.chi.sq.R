@@ -19,8 +19,8 @@
 #' and relevant statistics.
 #'
 #' \item{v}{v-statistic}
-#' \item{vlow}{lower level confidence interval of omega}
-#' \item{vhigh}{upper level confidence interval of omega}
+#' \item{vlow}{lower level confidence interval of V}
+#' \item{vhigh}{upper level confidence interval of V}
 #' \item{n}{sample size}
 #' \item{df}{degrees of freedom}
 #' \item{x2}{significance statistic}

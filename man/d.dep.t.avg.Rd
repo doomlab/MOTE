@@ -45,7 +45,7 @@ each level as the denominator.
 To calculate d, mean two is subtracted from mean one, which is then
 divided by the average standard deviation.
 
-d_av = (m1 - m2) / ((sd1 + sd2) / 2)
+     d_av = (m1 - m2) / ((sd1 + sd2) / 2)
 
 \href{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}{Learn more on our example page.}
 }

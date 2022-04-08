@@ -38,7 +38,7 @@ and the non-central confidence interval estimating from the t-statistic.
 To calculate d, the t-statistic is multiplied by two then divided by
 the square root of the degrees of freedom.
 
-d_s = 2 * t / sqrt(n1 + n2 - 2)
+     d_s = 2 * t / sqrt(n1 + n2 - 2)
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 }

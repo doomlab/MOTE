@@ -50,7 +50,7 @@ The correlation coefficient (r) is calculated by dividing Cohen's d
 by the square root of the total sample size squared - divided
 by the product of the sample sizes of group one and group two.
 
-r = d / sqrt(d^2 + (n1 + n2)^2 / (n1*n2))
+     r = d / sqrt(d^2 + (n1 + n2)^2 / (n1*n2))
 
 \href{https://www.aggieerin.com/shiny-server/tests/dtor.html}{Learn more on our example page.}
 }

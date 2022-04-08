@@ -4,14 +4,16 @@
 \name{rm2_data}
 \alias{rm2_data}
 \title{Repeated Measures Two-way ANOVA Example Data}
-\format{A data frame of ratings of word pair relation
+\format{
+A data frame of ratings of word pair relation
 
 group: A between-subjects variable indicating the type of instructions
 subject: A subject number
 fsglobsglo: A repeated measures condition of low FSG-BSG
 fsghihbsglo: A repeated measures condition of high FSG, low BSG
 fsglobsghi: A repeated measures condition of low FSG, high BSG
-fsghibsghi: A repeated measures condition of high FSG-BSG}
+fsghibsghi: A repeated measures condition of high FSG-BSG
+}
 \usage{
 data(rm2_data)
 }

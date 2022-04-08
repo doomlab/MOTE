@@ -50,7 +50,7 @@ The normal confidence interval is also provided.
 d is calculated by deducting the population mean from the sample study mean
 and dividing by the alpha level.
 
-d = (m1 - mu) / sig
+     d = (m1 - mu) / sig
 
 \href{https://www.aggieerin.com/shiny-server/tests/zm.html}{Learn more on our example page.}
 }

@@ -41,7 +41,7 @@ is divided by the sample size for level 1.2. This value is divided
 by the sample size for level 2.1, after dividing by the sample
 size of level 2.2.
 
-odds <- (n11 / n12) / (n21 / n22)
+     odds <- (n11 / n12) / (n21 / n22)
 
 \href{https://www.aggieerin.com/shiny-server/tests/chio.html}{Learn more on our example page.}
 }

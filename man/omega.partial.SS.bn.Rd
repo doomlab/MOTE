@@ -48,7 +48,7 @@ the model. This is divided by the product of the degrees of freedom
 for the model are deducted from the sample size, multiplied by the
 mean square of the error, plus the sum of squares for the model.
 
-omega^2 <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
+     omega^2 <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
 
 \href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}{Learn more on our example page.}
 }

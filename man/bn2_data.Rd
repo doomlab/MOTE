@@ -4,11 +4,13 @@
 \name{bn2_data}
 \alias{bn2_data}
 \title{Between Subjects Two-way ANOVA Example Data}
-\format{A data frame of ratings of close interpersonal attachments
+\format{
+A data frame of ratings of close interpersonal attachments
 
 coach: an old or new coach
 type: varying sports - baseball, basketball, football, soccer, volleyball
-money: athletic spending (in thousands of dollars)}
+money: athletic spending (in thousands of dollars)
+}
 \usage{
 data(bn2_data)
 }

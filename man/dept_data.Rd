@@ -4,11 +4,13 @@
 \name{dept_data}
 \alias{dept_data}
 \title{Dependent t Example Data}
-\format{A data frame of before and after scores for rating
+\format{
+A data frame of before and after scores for rating
 supernatural beliefs.
 
 before: scores rated before watching a scifi movie
-after: scores rated after watching a scifi movie}
+after: scores rated after watching a scifi movie
+}
 \usage{
 data(dept_data)
 }

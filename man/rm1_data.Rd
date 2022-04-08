@@ -4,11 +4,13 @@
 \name{rm1_data}
 \alias{rm1_data}
 \title{Repeated Measures Oneway ANOVA Example Data}
-\format{A data frame including ratings toward pictures.
+\format{
+A data frame including ratings toward pictures.
 
 neutral: pulse during exposure to neutral stimuli
 positive: pulse during exposure to positive stimuli
-negative: pulse during exposure to negative stimuli}
+negative: pulse during exposure to negative stimuli
+}
 \usage{
 data(rm1_data)
 }

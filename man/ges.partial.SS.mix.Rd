@@ -47,7 +47,7 @@ variance, sum of squares for the subject variance,
 and the sum of squares for the error/residual/within are added together.
 The sum of squares of the model is divided by this value.
 
-partial ges = ssm / (ssm + sss + sse)
+     partial ges = ssm / (ssm + sss + sse)
 
 \href{https://www.aggieerin.com/shiny-server/tests/gesmixss.html}{Learn more on our example page.}
 }

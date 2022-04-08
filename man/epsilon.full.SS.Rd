@@ -46,7 +46,7 @@ substracted from the mean square for the model. The difference
 is multiplied by the degrees of freedom for the model. The
 product is divided by the sum of squares total.
 
-epsilon^2 = (dfm * (msm - mse)) / (sst)
+     epsilon^2 = (dfm * (msm - mse)) / (sst)
 
 \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 }

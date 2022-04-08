@@ -4,10 +4,12 @@
 \name{chisq_data}
 \alias{chisq_data}
 \title{Chi-Square Example Data}
-\format{A data frame of number of friends and number of children
+\format{
+A data frame of number of friends and number of children
 
 friends: number of reported friends
-kids: number of children}
+kids: number of children
+}
 \usage{
 data(chisq_data)
 }

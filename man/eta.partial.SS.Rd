@@ -44,7 +44,7 @@ Partial eta squared is calculated by dividing the sum of squares
 of the model by the sum of the sum of squares of the model and
 sum of squares of the error.
 
-partial eta^2 = ssm / (ssm + sse)
+     partial eta^2 = ssm / (ssm + sse)
 
 \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 }

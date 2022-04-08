@@ -4,11 +4,13 @@
 \name{bn1_data}
 \alias{bn1_data}
 \title{Between Subjects One-way ANOVA Example Data}
-\format{A data frame of ratings of close interpersonal attachments
+\format{
+A data frame of ratings of close interpersonal attachments
 
 poor: individuals in poor health
 fair: individuals in fair health
-excellent: individuals in excellent health}
+excellent: individuals in excellent health
+}
 \usage{
 data(bn1_data)
 }
