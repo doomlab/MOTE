@@ -15,3 +15,4 @@ addons:
   apt:
     packages:
     - libgsl-dev # GNU scientific library for MBESS
+    - libnlopt-dev # nloptr library issues 
