@@ -30,7 +30,8 @@ apa <- function(value, decimals = 3, leading = TRUE) {
   }
 
   if (leading == T) {
-    formnumber <- format(round(as.numeric(value), decimals), digits = decimals, nsmall = decimals)
+    sigDigits <- decimals + 1
+    formnumber <- format(round(as.numeric(value), decimals), digits = sigDigits, nsmall = decimals)
     }
   if (leading == F) {
     formnumber <- sub("^(-?)0.", "\\1.", sprintf(paste("%.", decimals, "f", sep = ""), as.numeric(value)))
