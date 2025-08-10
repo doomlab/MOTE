@@ -3,17 +3,20 @@
 \docType{data}
 \name{singt_data}
 \alias{singt_data}
-\title{Single Sample t Example Data}
+\title{One-Sample t-Test Example Data}
 \format{
-A data frame including a single sample consisting of SAT scores of students from
-a gifted/honors program at a specific school.
+A data frame with 1 variable:
+\describe{
+  \item{SAT}{Numeric. SAT scores of gifted/honors program students at one school.}
+}
 }
 \usage{
 data(singt_data)
 }
 \description{
-A simulated dataset for use in \code{\link{d.single.t}} and \code{\link{d.single.t.t}}, including
-gifted/honors student SAT scores from a specific school to use for comparison with the
-national average SAT score (1080) of gifted/honors students nationwide.
+Simulated dataset of SAT scores from gifted/honors students at a specific school,
+intended for comparison to the national average SAT score (1080) for gifted/honors
+students nationwide. Designed for use with functions such as \code{\link{d.single.t}}
+and \code{\link{d.single.t.t}}.
 }
 \keyword{datasets}

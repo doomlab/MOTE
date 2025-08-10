@@ -1,43 +1,45 @@
-#' d from t for Repeated Measures with SD Difference Scores Denominator
+#' Cohen's d from t for Paired Samples Using the SD of Difference Scores
 #'
-#' This function displays d for repeated measures data
-#' and the non-central confidence interval using the
-#' standard deviation of the differences as the denominator
-#' estimating from the t-statistic.
+#' Compute Cohen's \eqn{d_z} from a paired-samples t-statistic and provide a
+#' noncentral-t confidence interval, using the **standard deviation of the
+#' difference scores** as the denominator.
 #'
-#' To calculate d, the t-statistic is divided by the square root of the sample size.
+#' @details
+#' For paired designs, \eqn{d_z} can be obtained directly from the t-statistic:
+#' \deqn{d_z = \frac{t}{\sqrt{n}},}
+#' where \eqn{n} is the number of paired observations (df = \eqn{n-1}). The
+#' \eqn{(1-\alpha)} confidence interval for \eqn{d_z} is derived from the
+#' noncentral t distribution for the observed \eqn{t} and df.
 #'
-#'      d_z = t / sqrt(n)
-#'
+#' See the online example for additional context:
 #' \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 #'
-#' @param t t-test value
-#' @param n sample size
-#' @param a significance level
-#' @return
-#' \item{d}{effect size}
-#' \item{dlow}{lower level confidence interval d value}
-#' \item{dhigh}{upper level confidence interval d value}
-#' \item{n}{sample size}
-#' \item{df}{degrees of freedom (sample size - 1)}
-#' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in APA
-#' style for markdown printing}
-#' \item{statistic}{the t-statistic in APA style for markdown printing}
+#' @param t t-statistic from a paired-samples t-test.
+#' @param n Sample size (number of paired observations).
+#' @param a Significance level (alpha) for the confidence interval. Must be in (0, 1).
 #'
-#' @keywords effect size, dependent t-test, paired sample,
-#' repeated measures, t-test
+#' @return A list with the following elements:
+#' \describe{
+#'   \item{d}{Cohen's \eqn{d_z}.}
+#'   \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_z}.}
+#'   \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_z}.}
+#'   \item{n}{Sample size.}
+#'   \item{df}{Degrees of freedom (\eqn{n - 1}).}
+#'   \item{t}{t-statistic.}
+#'   \item{p}{p-value.}
+#'   \item{estimate}{APA-style formatted string for reporting \eqn{d_z} and its CI.}
+#'   \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+#' }
+#'
+#' @keywords effect size, dependent t-test, paired sample, repeated measures, t-test
 #' @import stats
 #' @export
+#'
 #' @examples
+#' # Example derived from the "dept_data" dataset included in MOTE
 #'
-#' # The following example is derived from the "dept_data" dataset included
-#' # in the MOTE library.
-#'
-#' # In a study to test the effects of science fiction movies on people’s belief
-#' # in the supernatural, seven people completed a measure of belief in
-#' # the supernatural before and after watching a popular science
-#' # fiction movie. Higher scores indicated higher levels of belief.
+#' # Suppose seven people completed a measure before and after an intervention.
+#' # Higher scores indicate stronger endorsement.
 #'
 #'     scifi <- t.test(dept_data$before, dept_data$after, paired = TRUE)
 #'
@@ -49,12 +51,6 @@
 #'     d.dep.t.diff.t(1.43, 7, .05)
 #'
 #'     d.dep.t.diff.t(scifi$statistic, length(dept_data$before), .05)
-#'
-#' # The mean measure of belief on the pretest was 5.57, with a standard
-#' # deviation of 1.99. The post-test scores appeared lower (M = 4.43, SD = 2.88)
-#' # but the dependent t-test was not significant using alpha = .05,
-#' # t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium effect suggesting
-#' # that the movie may have influenced belief in the supernatural.
 
 d.dep.t.diff.t <- function (t, n, a = .05) {
 
@@ -74,9 +70,9 @@ d.dep.t.diff.t <- function (t, n, a = .05) {
   ncpboth <- noncentral_t(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
-  p <- pt(abs(t), n - 1, lower.tail = F) * 2
+  p <- pt(abs(t), n - 1, lower.tail = FALSE) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -85,13 +81,11 @@ d.dep.t.diff.t <- function (t, n, a = .05) {
                 "df" = (n - 1),
                 "t" = t, #sig stats
                 "p" = p,
-                "estimate" = paste("$d_z$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
-                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,T), ", $p$ ", reportp, sep = "")
+                "estimate" = paste("$d_z$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,TRUE), ", $p$ ", reportp, sep = "")
                 )
 
   return(output)
 }
 
-#' @rdname d.dep.t.diff.t
-#' @export

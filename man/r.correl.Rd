@@ -56,9 +56,9 @@ The F-statistic is the t-statistic squared.
 }
 \examples{
 
-#This example is derived from the mtcars dataset provided in R.
+# This example is derived from the mtcars dataset provided in R.
 
-#What is the correlation between miles per gallon and car weight?
+# What is the correlation between miles per gallon and car weight?
 
 cor.test(mtcars$mpg, mtcars$wt)
 

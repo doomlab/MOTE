@@ -3,23 +3,25 @@
 \docType{data}
 \name{bn2_data}
 \alias{bn2_data}
-\title{Between Subjects Two-way ANOVA Example Data}
+\title{Between-Subjects Two-Way ANOVA Example Data}
 \format{
-A data frame of ratings of close interpersonal attachments
-
-coach: an old or new coach
-type: varying sports - baseball, basketball, football, soccer, volleyball
-money: athletic spending (in thousands of dollars)
+A data frame with 3 variables:
+\describe{
+  \item{coach}{Factor with levels \code{"old"} and \code{"new"} indicating coach experience.}
+  \item{type}{Factor indicating sport type: \code{"baseball"}, \code{"basketball"}, \code{"football"}, \code{"soccer"}, or \code{"volleyball"}.}
+  \item{money}{Numeric. Athletic spending in thousands of dollars.}
+}
 }
 \usage{
 data(bn2_data)
 }
 \description{
-Dataset for use in \code{\link{omega.partial.SS.bn}},
-\code{\link{eta.partial.SS}}, and other between-subject's ANOVA
-designs. This data includes (fake) atheletic budgets for baseball,
-basketball, football, soccer, and volleyball teams
-with new and old coaches to determine if there are differences in
-spending across coaches and sports.
+Example data for a between-subjects two-way ANOVA examining whether
+athletic spending differs by sport type and coach experience.
+This dataset contains simulated athletic budgets (in thousands of dollars)
+for baseball, basketball, football, soccer, and volleyball teams,
+with either a new or old coach. Designed for use with
+\code{\link{omega.partial.SS.bn}}, \code{\link{eta.partial.SS}}, and
+other between-subjects ANOVA designs.
 }
 \keyword{datasets}

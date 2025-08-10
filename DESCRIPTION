@@ -33,4 +33,4 @@ Description: Measure of the Effect ('MOTE') is an effect size calculator, includ
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2

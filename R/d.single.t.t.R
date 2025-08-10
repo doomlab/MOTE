@@ -1,56 +1,56 @@
-#' d for Single t from t
+#' Cohen's d from t for One-Sample t-Test
 #'
-#' This function displays d and non-central confidence interval for single t
-#' estimated from the t-statistic.
+#' Compute Cohen's \eqn{d} and a noncentral-t confidence interval for a
+#' one-sample (single) t-test using the observed t-statistic.
 #'
-#' To calculate d, the t-statistic is divided by the square root of the sample size.
+#' @details
+#' The effect size is calculated as:
+#' \deqn{d = \frac{t}{\sqrt{n}},}
+#' where \eqn{t} is the one-sample t-statistic and \eqn{n} is the sample size.
 #'
-#'      d = t / sqrt(n)
+#' The corresponding \eqn{(1 - \alpha)} confidence interval for \eqn{d} is
+#' derived from the noncentral t distribution.
 #'
+#' See the online example for additional context:
 #' \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
 #'
+#' @param t t-test value.
+#' @param n Sample size.
+#' @param a Significance level (alpha) for the confidence interval. Must be in (0, 1).
 #'
-#' @param t t-test value
-#' @param n sample size
-#' @param a significance level
-#' @return The effect size (Cohen's d) with associated confidence intervals
-#' and relevant statistics.
+#' @return A list with the following elements:
+#' \describe{
+#'   \item{d}{Cohen's \eqn{d}.}
+#'   \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+#'   \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+#'   \item{n}{Sample size.}
+#'   \item{df}{Degrees of freedom (\eqn{n - 1}).}
+#'   \item{t}{t-statistic.}
+#'   \item{p}{p-value.}
+#'   \item{estimate}{APA-style formatted string for reporting \eqn{d} and its CI.}
+#'   \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+#' }
 #'
-#' \item{d}{effect size}
-#' \item{dlow}{lower level confidence interval d value}
-#' \item{dhigh}{upper level confidence interval d value}
-#' \item{n}{sample size}
-#' \item{df}{degrees of freedom (sample size - 1)}
-#' \item{t}{sig stats}
-#' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA style for markdown printing}
-#'
-#' @keywords effect size, single t
+#' @keywords effect size, single t, one-sample
 #' @import stats
 #' @export
-#' @examples
 #'
+#' @examples
 #' # A school has a gifted/honors program that they claim is
 #' # significantly better than others in the country. The gifted/honors
 #' # students in this school scored an average of 1370 on the SAT,
 #' # with a standard deviation of 112.7, while the national average
 #' # for gifted programs is a SAT score of 1080.
 #'
-#'     gift <- t.test(singt_data, mu = 1080, alternative = "two.sided")
+#'     gift <- t.test(singt_data$SATscore, mu = 1080, alternative = "two.sided")
 #'
-#' # According to a single-sample t-test, the scores of the students
-#' # from the program were significantly higher than the national
-#' # average, t(14) = 9.97, p < .001.
-#'
-#' # You can type in the numbers directly as shown below, or refer
-#' # to your dataset within the function.
-#'
+#' # Direct entry of t-statistic and sample size:
 #'     d.single.t.t(t = 9.968, n = 15, a = .05)
 #'
+#' # Equivalent shorthand:
 #'     d.single.t.t(9.968, 15, .05)
 #'
+#' # Using values from a t-test object and dataset:
 #'     d.single.t.t(gift$statistic, length(singt_data$SATscore), .05)
 
 
@@ -72,9 +72,9 @@ d.single.t.t <- function (t, n, a = .05) {
   ncpboth <- noncentral_t(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
-  p <- pt(abs(t), n - 1, lower.tail = F) * 2
+  p <- pt(abs(t), n - 1, lower.tail = FALSE) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -83,15 +83,12 @@ d.single.t.t <- function (t, n, a = .05) {
                 "df" = (n - 1),
                 "t" = t, #sig stats
                 "p" = p,
-                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
-                "statistic" = paste("$t$(", (n - 1), ") = ", apa(t,2,T), ", $p$ ",
+                "estimate" = paste("$d$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
+                "statistic" = paste("$t$(", (n - 1), ") = ", apa(t,2,TRUE), ", $p$ ",
                                     reportp, sep = "")
                 )
 
   return(output)
 
 }
-
-#' @rdname d.single.t.t
-#' @export

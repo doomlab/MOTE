@@ -1,64 +1,65 @@
-#' d for Single t from Means
+#' Cohen's d for One-Sample t from Summary Stats
 #'
-#' This function displays d and non-central confidence interval for single t from means.
+#' Compute Cohen's \eqn{d} and a noncentral-t confidence interval for a
+#' one-sample (single) t-test using summary statistics.
 #'
-#' To calculate d, the population is subtracted from the sample mean,
-#' which is then divided by the standard deviation.
+#' @details
+#' The effect size is defined as the standardized mean difference between the
+#' sample mean and the population/reference mean:
+#' \deqn{d = \frac{m - \mu}{s}.}
 #'
-#'      d = (m - u) / sd
+#' The corresponding t-statistic is:
+#' \deqn{t = \frac{m - \mu}{s/\sqrt{n}}.}
 #'
+#' See the online example for additional context:
 #' \href{https://www.aggieerin.com/shiny-server/tests/singletm.html}{Learn more on our example page.}
 #'
-#' @param m sample mean
-#' @param u population mean
-#' @param sd sample standard deviation
-#' @param n sample size
-#' @param a significance level
-#' @return
+#' @param m Sample mean.
+#' @param u Population (reference) mean \eqn{\mu}.
+#' @param sd Sample standard deviation \eqn{s}.
+#' @param n Sample size \eqn{n}.
+#' @param a Significance level (alpha) for the confidence interval. Must be in (0, 1).
 #'
-#' \item{d}{effect size}
-#' \item{dlow}{lower level confidence interval d value}
-#' \item{dhigh}{upper level confidence interval d value}
-#' \item{m}{sample mean}
-#' \item{sd}{standard deviation of the sample}
-#' \item{se}{standard error of the sample}
-#' \item{Mlow}{lower level confidence interval of the sample mean}
-#' \item{Mhigh}{upper level confidence interval of the sample mean}
-#' \item{u}{population mean}
-#' \item{n}{sample size}
-#' \item{df}{degrees of freedom (n - 1)}
-#' \item{t}{t-statistic}
-#' \item{p}{p-value}
-#' \item{estimate}{the d statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the t-statistic in APA style for markdown printing}
+#' @return A list with the following elements:
+#' \describe{
+#'   \item{d}{Cohen's \eqn{d}.}
+#'   \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+#'   \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+#'   \item{m}{Sample mean.}
+#'   \item{sd}{Sample standard deviation.}
+#'   \item{se}{Standard error of the mean.}
+#'   \item{Mlow, Mhigh}{Confidence interval bounds for the mean.}
+#'   \item{u}{Population (reference) mean.}
+#'   \item{n}{Sample size.}
+#'   \item{df}{Degrees of freedom (\eqn{n - 1}).}
+#'   \item{t}{t-statistic.}
+#'   \item{p}{p-value.}
+#'   \item{estimate}{APA-style formatted string for reporting \eqn{d} and its CI.}
+#'   \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+#' }
 #'
-#' @keywords effect size, single t, single-sample, mu, u, population mean, sample mean
+#' @keywords effect size, single t, one-sample, population mean, sample mean
 #' @import stats
 #' @export
+#'
 #' @examples
+#' # Example derived from the "singt_data" dataset included in MOTE.
 #'
-#' # The following example is derived from the "singt_data"
-#' # dataset included in the MOTE library.
+#' # A school claims their gifted/honors program outperforms the national
+#' # average (1080). Their students' SAT scores (sample) have mean 1370 and
+#' # SD 112.7.
 #'
-#' # A school has a gifted/honors program that they claim is
-#' # significantly better than others in the country. The gifted/honors
-#' # students in this school scored an average of 1370 on the SAT,
-#' # with a standard deviation of 112.7, while the national average
-#' # for gifted programs is a SAT score of 1080.
+#'     gift <- t.test(singt_data$SATscore, mu = 1080, alternative = "two.sided")
 #'
-#'     gift <- t.test(singt_data, mu = 1080, alternative = "two.sided")
-#'
-#' # You can type in the numbers directly as shown below,
-#' # or refer to your dataset within the function.
-#'
+#' # Direct entry of summary statistics:
 #'     d.single.t(m = 1370, u = 1080, sd = 112.7, n = 14, a = .05)
 #'
-#'     d.single.t(1370, 1080, 112.7, 100, .05)
+#' # Equivalent shorthand:
+#'     d.single.t(1370, 1080, 112.7, 14, .05)
 #'
+#' # Using values from the t-test object and dataset:
 #'     d.single.t(gift$estimate, gift$null.value,
-#'                sd(singt_data$SATscore),
-#'                length(singt_data$SATscore), .05)
+#'                sd(singt_data$SATscore), length(singt_data$SATscore), .05)
 
 d.single.t = function (m, u, sd, n, a = .05) {
 
@@ -67,7 +68,7 @@ d.single.t = function (m, u, sd, n, a = .05) {
   }
 
   if (missing(u)){
-    stop("Be sure to include me for the population.")
+    stop("Be sure to include u for the population mean.")
   }
 
   if (missing(sd)){
@@ -90,9 +91,9 @@ d.single.t = function (m, u, sd, n, a = .05) {
   dhigh = ncpboth$Upper.Limit / sqrt(n)
   Mlow = m - se*qt(a / 2, n - 1, lower.tail = FALSE)
   Mhigh = m + se*qt(a / 2, n - 1, lower.tail = FALSE)
-  p = pt(abs(t), n - 1, lower.tail = F)*2
+  p = pt(abs(t), n - 1, lower.tail = FALSE)*2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -107,14 +108,11 @@ d.single.t = function (m, u, sd, n, a = .05) {
                 "df" = (n - 1),
                 "t" = t, #sig stats,
                 "p" = p,
-                "estimate" = paste("$d$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
-                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,T), ", $p$ ",
+                "estimate" = paste("$d$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
+                "statistic" = paste("$t$(", (n-1), ") = ", apa(t,2,TRUE), ", $p$ ",
                                     reportp, sep = "")
   )
 
   return(output)
 }
-
-#' @rdname d.single.t
-#' @export
