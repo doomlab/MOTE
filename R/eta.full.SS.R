@@ -1,14 +1,14 @@
-#' Eta for ANOVA from F and Sum of Squares
+#' $\eta^2$ for ANOVA from $F$ and Sum of Squares
 #'
-#' This function displays eta squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
+#' This function displays $\eta^2$ from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
 #' This formula works for one way and multi way designs with careful
 #' focus on the sum of squares total.
 #'
 #' Eta squared is calculated by dividing the sum of squares for the model
 #' by the sum of squares total.
 #'
-#'      eta^2 = ssm / sst
+#'     $$\eta^2 = \frac{SS_M}{SS_T}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 #'
@@ -18,18 +18,19 @@
 #' @param sst sum of squares total
 #' @param Fvalue F statistic
 #' @param a significance level
-#' @return Provides eta with associated confidence intervals and relevant statistics.
+#' @return Provides the effect size ($\eta^2$) with associated confidence intervals and relevant statistics.
 #'
-#' \item{eta}{effect size}
-#' \item{etalow}{lower level confidence interval of eta}
-#' \item{etahigh}{upper level confidence interval of eta}
+#' \describe{
+#' \item{eta}{$\eta^2$ effect size}
+#' \item{etalow}{lower level confidence interval of $\eta^2$}
+#' \item{etahigh}{upper level confidence interval of $\eta^2$}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
-#' \item{F}{F-statistic}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
+#' \item{F}{$F$-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the eta squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' \item{estimate}{the $\eta^2$ statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, eta, ANOVA
 #' @import stats
@@ -83,9 +84,9 @@ eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
 
   limits <- ci.R2(R2 = eta, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("eta" = eta, #eta stats
                  "etalow" = limits$Lower.Conf.Limit.R2,
@@ -94,16 +95,13 @@ eta.full.SS <- function (dfm, dfe, ssm, sst, Fvalue, a = .05) {
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$\\eta^2$ = ", apa(eta,2,T), ", ", (1-a)*100, "\\% CI [",
-                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
-                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "estimate" = paste("$\\eta^2$ = ", apa(eta,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = ""))
 
   return(output)
-
 }
 
-#' @rdname eta.full.SS
-#' @export

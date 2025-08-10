@@ -1,7 +1,7 @@
-#' Partial Generalized Eta-Squared for ANOVA from F
+#' $\eta^2_{G}$ (Partial Generalized Eta-Squared) for Repeated-Measures ANOVA from $F$
 #'
-#' This function displays partial ges squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
+#' This function displays partial generalized eta-squared ($\eta^2_{G}$) from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
 #' This formula works for multi-way repeated measures designs.
 #'
 #' To calculate partial generalized eta squared, first, the sum of
@@ -10,7 +10,7 @@
 #' and the sum of squares for the interaction are added together.
 #' The sum of squares of the model is divided by this value.
 #'
-#'      partial ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
+#'     $$\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_{E1} + SS_{E2} + SS_{E3}}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 #'
@@ -23,22 +23,20 @@
 #' @param sse3 sum of squares for the error/residual/within for the interaction
 #' @param Fvalue F statistic
 #' @param a significance level
-#' @return Partial generalized eta-squared (GES) with associated confidence intervals
-#' and relevant statistics.
-#' \item{ges}{effect size}
-#' \item{geslow}{lower level confidence interval for ges}
-#' \item{geshigh}{upper level confidence interval for ges}
-#' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/residual/within}
-#' \item{F}{F-statistic}
-#' \item{p}{p-value}
-#' \item{estimate}{the generalized eta squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' @return \describe{
+#'   \item{ges}{$\eta^2_{G}$ effect size}
+#'   \item{geslow}{lower level confidence interval for $\eta^2_{G}$}
+#'   \item{geshigh}{upper level confidence interval for $\eta^2_{G}$}
+#'   \item{dfm}{degrees of freedom for the model/IV/between}
+#'   \item{dfe}{degrees of freedom for the error/residual/within}
+#'   \item{F}{$F$-statistic}
+#'   \item{p}{p-value}
+#'   \item{estimate}{the $\eta^2_{G}$ statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, ges, ANOVA
 #' @import stats
-#' @export
 #' @examples
 #'
 #' # The following example is derived from the "rm2_data" dataset, included
@@ -133,9 +131,9 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
 
   limits <- ci.R2(R2 = ges, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("ges" = ges, #ges stats
                  "geslow" = limits$Lower.Conf.Limit.R2,
@@ -144,16 +142,12 @@ ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a =
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$\\eta^2_{G}$ = ", apa(ges,2,T), ", ", (1-a)*100, "\\% CI [",
-                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
-                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "estimate" = paste("$\\eta^2_{G}$ = ", apa(ges,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = ""))
 
   return(output)
-
 }
-
-#' @rdname ges.partial.SS.rm
-#' @export

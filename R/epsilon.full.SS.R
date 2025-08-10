@@ -1,16 +1,16 @@
-#' Epsilon for ANOVA from F and Sum of Squares
+#' $\epsilon^2$ for ANOVA from $F$ and Sum of Squares
 #'
-#' This function displays epsilon squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
+#' This function displays $\\epsilon^2$ from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
 #' This formula works for one way and multi way designs with careful
 #' focus on the sum of squares total calculation.
 #'
-#' To calculate epsilon, first, the mean square for the error is
+#' To calculate $\\epsilon^2$, first, the mean square for the error is
 #' substracted from the mean square for the model. The difference
 #' is multiplied by the degrees of freedom for the model. The
 #' product is divided by the sum of squares total.
 #'
-#'      epsilon^2 = (dfm * (msm - mse)) / (sst)
+#'     $$\\epsilon^2 = \\frac{df_m (ms_m - ms_e)}{SS_T}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 #'
@@ -20,9 +20,9 @@
 #' @param mse mean square for the error/residual/within
 #' @param sst sum of squares total
 #' @param a significance level
-#' @return Provides the effect size (epsilon) with associated
-#' confidence intervals from the F-statistic.
-#'
+#' @return Provides the effect size ($\\epsilon^2$) with associated
+#' confidence intervals from the $F$-statistic.
+#' \describe{
 #' \item{epsilon}{effect size}
 #' \item{epsilonlow}{lower level confidence interval of epsilon}
 #' \item{epsilonhigh}{upper level confidence interval of epsilon}
@@ -33,6 +33,7 @@
 #' \item{estimate}{the epsilon statistic and confidence interval in
 #' APA style for markdown printing}
 #' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, epsilon, ANOVA
 #' @import stats
@@ -87,9 +88,9 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
 
   limits <- ci.R2(R2 = epsilon, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("epsilon" = epsilon, #epsilon stats
                  "epsilonlow" = limits$Lower.Conf.Limit.R2,
@@ -98,16 +99,13 @@ epsilon.full.SS <- function (dfm, dfe, msm, mse, sst, a = .05) {
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$\\epsilon^2$ = ", apa(epsilon,2,T), ", ", (1-a)*100, "\\% CI [",
-                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
-                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "estimate" = paste("$\\epsilon^2$ = ", apa(epsilon,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = ""))
 
   return(output)
 
 }
-
-#' @rdname epsilon.full.SS
-#' @export

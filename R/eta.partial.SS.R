@@ -1,14 +1,14 @@
-#' Partial Eta Squared for ANOVA from F and Sum of Squares
+#' $\eta^2_p$ for ANOVA from $F$ and Sum of Squares
 #'
-#' This function displays partial eta squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
+#' This function displays $\eta^2_p$ from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
 #' This formula works for one way and multi way designs.
 #'
-#' Partial eta squared is calculated by dividing the sum of squares
+#' $\eta^2_p$ is calculated by dividing the sum of squares
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
-#'      partial eta^2 = ssm / (ssm + sse)
+#'     $$\eta^2_p = \frac{SS_M}{SS_M + SS_E}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
@@ -19,23 +19,23 @@
 #' @param Fvalue F statistic
 #' @param a significance level
 #'
-#' @return Provides partial eta squared with associated confidence intervals
+#' @return Provides the effect size ($\eta^2_p$) with associated confidence intervals
 #' and relevant statistics.
 #'
-#' \item{eta}{partial eta squared effect size}
-#' \item{etalow}{lower level confidence interval of partial eta squared}
-#' \item{etahigh}{upper level confidence interval of partial eta squared}
+#' \describe{
+#' \item{eta}{$\eta^2_p$ effect size}
+#' \item{etalow}{lower level confidence interval of $\eta^2_p$}
+#' \item{etahigh}{upper level confidence interval of $\eta^2_p$}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
-#' \item{F}{F-statistic}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
+#' \item{F}{$F$-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the eta squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' \item{estimate}{the $\eta^2_p$ statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, eta, ANOVA
 #' @import stats
-#' @export
 #' @examples
 #'
 #' # The following example is derived from the "bn2_data"
@@ -117,7 +117,7 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
                  "estimate" = paste("$\\eta^2_{p}$ = ", apa(eta,2,FALSE), ", ", (1-a)*100, "\\% CI [",
                                     apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ", apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = "")
   )
 
@@ -125,5 +125,3 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
 }
 
-#' @rdname eta.partial.SS
-#' @export

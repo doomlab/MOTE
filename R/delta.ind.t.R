@@ -1,14 +1,14 @@
-#' d-delta for Between Subjects with Control Group SD Denominator
+#' $d_{\delta}$ for Between Subjects with Control Group SD Denominator
 #'
-#' This function displays d-delta for between subjects data
+#' This function displays $d_{\delta}$ for between subjects data
 #' and the non-central confidence interval using the
 #' control group standard deviation as the denominator.
 #'
-#' To calculate d-delta, the mean of the experimental group
+#' To calculate $d_{\delta}$, the mean of the experimental group
 #' is subtracted from the mean of the control group, which
 #' is divided by the standard deviation of the control group.
 #'
-#'      d_delta = (m1 - m2) / sd1
+#'     $$d_{\delta} = \frac{m_1 - m_2}{sd_1}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 #'
@@ -107,9 +107,9 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   M1high <- m1 + se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
   M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
   M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
-  p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = F) * 2
+  p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = FALSE) * 2
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output = list("d" = d, #d stats
                 "dlow" = dlow,
@@ -131,14 +131,11 @@ delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
                 "df" = (n1 - 1 + n2 - 1),
                 "t" = t, #sig stats,
                 "p" = p,
-                "estimate" = paste("$d_{delta}$ = ", apa(d,2,T), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,T), ", ", apa(dhigh,2,T), "]", sep = ""),
-                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,T), ", $p$ ", reportp, sep = "")
+                "estimate" = paste("$d_{delta}$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
+                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,TRUE), ", $p$ ", reportp, sep = "")
   )
 
   return(output)
 }
-
-#' @rdname delta.ind.t
-#' @export
 

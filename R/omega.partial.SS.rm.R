@@ -1,8 +1,8 @@
-#' Partial Omega Squared for Repeated Measures ANOVA from F
+#' $\omega^2_p$ (Partial Omega Squared) for Repeated Measures ANOVA from $F$
 #'
-#' This function displays omega squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
-#' This formula is appropriate for multi-way repeated measures designs and mix level designs.
+#' This function displays $\omega^2_p$ from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
+#' This formula is appropriate for multi-way repeated measures designs and mixed-level designs.
 #'
 #' Partial omega squared is calculated by subtracting the mean
 #' square for the error from the mean square of the model, which is
@@ -11,7 +11,7 @@
 #' for the error, sum of squares for the subject, and the
 #' mean square of the subject.
 #'
-#'      omega_p^2 = (dfm x (msm - mse)) / (ssm + sse + sss + mss)
+#'     $$\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + SS_E + SS_S + MS_S}$$
 #'
 #' The F-statistic is calculated by dividing the mean square
 #' of the model by the mean square of the error.
@@ -29,23 +29,20 @@
 #' @param sse sum of squares for the error/residual/within
 #' @param sss sum of squares for the subject variance
 #' @param a significance level
-#' @return Provides omega squared with associated confidence intervals
-#' and relevant statistics.
-#'
-#' \item{omega}{omega squared}
-#' \item{omegalow}{lower level confidence interval of omega}
-#' \item{omegahigh}{upper level confidence interval of omega}
-#' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
-#' \item{F}{F-statistic}
-#' \item{p}{p-value}
-#' \item{estimate}{the omega squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' @return \describe{
+#'   \item{omega}{$\omega^2_p$ effect size}
+#'   \item{omegalow}{lower level confidence interval of $\omega^2_p$}
+#'   \item{omegahigh}{upper level confidence interval of $\omega^2_p$}
+#'   \item{dfm}{degrees of freedom for the model/IV/between}
+#'   \item{dfe}{degrees of freedom for the error/residual/within}
+#'   \item{F}{$F$-statistic}
+#'   \item{p}{p-value}
+#'   \item{estimate}{the $\omega^2_p$ statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, omega, ANOVA
 #' @import stats
-#' @export
 #' @examples
 #'
 #' # The following example is derived from the "rm2_data" dataset,
@@ -143,9 +140,9 @@ omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05
 
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("omega" = omega, #omega stats
                  "omegalow" = limits$Lower.Conf.Limit.R2,
@@ -154,16 +151,12 @@ omega.partial.SS.rm <- function (dfm, dfe, msm, mse, mss, ssm, sse, sss, a = .05
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$\\omega^2_{p}$ = ", apa(omega,2,T), ", ", (1-a)*100, "\\% CI [",
-                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
-                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "estimate" = paste("$\\omega^2_{p}$ = ", apa(omega,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = ""))
 
   return(output)
-
 }
-
-#' @rdname omega.partial.SS.rm
-#' @export

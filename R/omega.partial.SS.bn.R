@@ -1,8 +1,8 @@
-#' Partial Omega Squared for Between Subjects ANOVA from F
+#' $\omega^2_p$ (Partial Omega Squared) for Between-Subjects ANOVA from $F$
 #'
-#' This function displays omega squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
-#' This formula is appropriate for multi-way between subjects designs.
+#' This function displays $\omega^2_p$ from ANOVA analyses
+#' and its non-central confidence interval based on the $F$ distribution.
+#' This formula is appropriate for multi-way between-subjects designs.
 #'
 #' Partial omega squared is calculated by subtracting the mean square for the error
 #' from the mean square of the model, which is multiplied by degrees of freedom of
@@ -10,7 +10,7 @@
 #' for the model are deducted from the sample size, multiplied by the
 #' mean square of the error, plus the sum of squares for the model.
 #'
-#'      omega^2 <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
+#'     $$\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + (n - df_m) \times MS_E}$$
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}{Learn more on our example page.}
 #'
@@ -22,19 +22,17 @@
 #' @param n total sample size
 #' @param a significance level
 #'
-#' @return Provides omega squared with associated confidence intervals
-#' and relevant statistics.
-#'
-#' \item{omega}{omega squared}
-#' \item{omegalow}{lower level confidence interval of omega}
-#' \item{omegahigh}{upper level confidence interval of omega}
-#' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
-#' \item{F}{F-statistic}
-#' \item{p}{p-value}
-#' \item{estimate}{the omega squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' @return \describe{
+#'   \item{omega}{$\omega^2_p$ effect size}
+#'   \item{omegalow}{lower level confidence interval of $\omega^2_p$}
+#'   \item{omegahigh}{upper level confidence interval of $\omega^2_p$}
+#'   \item{dfm}{degrees of freedom for the model/IV/between}
+#'   \item{dfe}{degrees of freedom for the error/residual/within}
+#'   \item{F}{$F$-statistic}
+#'   \item{p}{p-value}
+#'   \item{estimate}{the $\omega^2_p$ statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, omega, ANOVA
 #' @import stats
@@ -114,9 +112,9 @@ omega.partial.SS.bn <- function (dfm, dfe, msm, mse, ssm, n, a = .05) {
 
   limits <- ci.R2(R2 = omega, df.1 = dfm, df.2 = dfe, conf.level = (1-a))
 
-  p <- pf(Fvalue, dfm, dfe, lower.tail = F)
+  p <- pf(Fvalue, dfm, dfe, lower.tail = FALSE)
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,F), sep = "")}
+  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
 
   output <- list("omega" = omega, #omega stats
                  "omegalow" = limits$Lower.Conf.Limit.R2,
@@ -125,17 +123,13 @@ omega.partial.SS.bn <- function (dfm, dfe, msm, mse, ssm, n, a = .05) {
                  "dfe" = dfe,
                  "F" = Fvalue,
                  "p" = p,
-                 "estimate" = paste("$\\omega^2_{p}$ = ", apa(omega,2,T), ", ", (1-a)*100, "\\% CI [",
-                                    apa(limits$Lower.Conf.Limit.R2,2,T), ", ",
-                                    apa(limits$Upper.Conf.Limit.R2,2,T), "]", sep = ""),
+                 "estimate" = paste("$\\omega^2_{p}$ = ", apa(omega,2,TRUE), ", ", (1-a)*100, "\\% CI [",
+                                    apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ",
+                                    apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = ""))
 
   return(output)
 
 }
-
-#' @rdname omega.partial.SS.bn
-#' @export
-
