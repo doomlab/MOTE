@@ -35,23 +35,22 @@
 #'
 #' @keywords effect size, dependent t-test, cohen's d, d average, paired-sample,
 #' repeated measures
-#' @import MBESS
 #' @import stats
 #' @export
 #' @examples
 #'
-#' #The following example is derived from the "dept_data" dataset included
-#' #in the MOTE library.
+#' # The following example is derived from the "dept_data" dataset included
+#' # in the MOTE library.
 #'
-#' #In a study to test the effects of science fiction movies on people's
-#' #belief in the supernatural, seven people completed a measure of belief
-#' #in the supernatural before and after watching a popular science fiction
-#' #movie. Higher scores indicated higher levels of belief.
+#' # In a study to test the effects of science fiction movies on people's
+#' # belief in the supernatural, seven people completed a measure of belief
+#' # in the supernatural before and after watching a popular science fiction
+#' # movie. Higher scores indicated higher levels of belief.
 #'
 #'     t.test(dept_data$before, dept_data$after, paired = TRUE)
 #'
-#' #You can type in the numbers directly, or refer to the dataset,
-#' #as shown below.
+#' # You can type in the numbers directly, or refer to the dataset,
+#' # as shown below.
 #'
 #'     d.dep.t.avg(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
 #'                 sd2 = 2.88, n = 7, a = .05)
@@ -62,11 +61,11 @@
 #'                 sd(dept_data$before), sd(dept_data$after),
 #'                 length(dept_data$before), .05)
 #'
-#' #The mean measure of belief on the pretest was 5.57, with a standard
-#' #deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
-#' #but the dependent t-test was not significant using alpha = .05,
-#' #t(7) = 1.43, p = .203, d_av = 0.47. The effect size was a medium effect suggesting
-#' #that the movie may have influenced belief in the supernatural.
+#' # The mean measure of belief on the pretest was 5.57, with a standard
+#' # deviation of 1.99. The post-test scores appeared lower (M = 4.43, SD = 2.88)
+#' # but the dependent t-test was not significant using alpha = .05,
+#' # t(7) = 1.43, p = .203, d_av = 0.47. The effect size was a medium effect suggesting
+#' # that the movie may have influenced belief in the supernatural.
 
 d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
 
@@ -98,7 +97,7 @@ d.dep.t.avg <- function (m1, m2, sd1, sd2, n, a = .05) {
   se1 <- sd1 / sqrt(n)
   se2 <- sd2 / sqrt(n)
   t <- (m1 - m2) / ((se1 + se2) / 2)
-  ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
+  ncpboth <- noncentral_t(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   M1low <- m1 - se1 * qt(a / 2, n - 1, lower.tail = FALSE)

@@ -76,7 +76,7 @@ by the pooled standard deviation.
 #each participant was questioned about what he or she had
 #seen. The four participants in the experimental group
 #were questioned while they were hypnotized. The four
-#participants in the control group recieved the same
+#participants in the control group received the same
 #questioning without hypnosis.
 
     t.test(correctq ~ group, data = indt_data)

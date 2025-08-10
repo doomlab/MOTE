@@ -42,14 +42,13 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, correlation
-#' @import MBESS
 #' @import stats
 #' @export
 #' @examples
 #'
-#' #This example is derived from the mtcars dataset provided in R.
+#' # This example is derived from the mtcars dataset provided in R.
 #'
-#' #What is the correlation between miles per gallon and car weight?
+#' # What is the correlation between miles per gallon and car weight?
 #'
 #' cor.test(mtcars$mpg, mtcars$wt)
 #'

@@ -1,7 +1,8 @@
 #' Single Sample t Example Data
 #'
-#' A simulated dataset for use in \code{\link{d.single.t}} and \code{\link{d.single.t.t}}, including
-#' gifted/honors student SAT scores from a specific school to use for comparison with the
+#' A simulated dataset for use in \code{\link{d.single.t}} and
+#' \code{\link{d.single.t.t}}, including gifted/honors student SAT scores
+#' from a specific school to use for comparison with the
 #' national average SAT score (1080) of gifted/honors students nationwide.
 #'
 #' @docType data

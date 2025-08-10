@@ -28,25 +28,24 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, single t
-#' @import MBESS
 #' @import stats
 #' @export
 #' @examples
 #'
-#' #A school has a gifted/honors program that they claim is
-#' #significantly better than others in the country. The gifted/honors
-#' #students in this school scored an average of 1370 on the SAT,
-#' #with a standard deviation of 112.7, while the national average
-#' #for gifted programs is a SAT score of 1080.
+#' # A school has a gifted/honors program that they claim is
+#' # significantly better than others in the country. The gifted/honors
+#' # students in this school scored an average of 1370 on the SAT,
+#' # with a standard deviation of 112.7, while the national average
+#' # for gifted programs is a SAT score of 1080.
 #'
-#'     gift = t.test(singt_data, mu = 1080, alternative = "two.sided")
+#'     gift <- t.test(singt_data, mu = 1080, alternative = "two.sided")
 #'
-#' #According to a single-sample t-test, the scores of the students
-#' #from the program were significantly higher than the national
-#' #average, t(14) = 9.97, p < .001.
+#' # According to a single-sample t-test, the scores of the students
+#' # from the program were significantly higher than the national
+#' # average, t(14) = 9.97, p < .001.
 #'
-#' #You can type in the numbers directly as shown below, or refer
-#' #to your dataset within the function.
+#' # You can type in the numbers directly as shown below, or refer
+#' # to your dataset within the function.
 #'
 #'     d.single.t.t(t = 9.968, n = 15, a = .05)
 #'
@@ -70,7 +69,7 @@ d.single.t.t <- function (t, n, a = .05) {
   }
 
   d <- t / sqrt(n)
-  ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
+  ncpboth <- noncentral_t(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   p <- pt(abs(t), n - 1, lower.tail = F) * 2

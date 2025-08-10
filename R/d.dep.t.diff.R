@@ -36,22 +36,21 @@
 #' \item{statistic}{the t-statistic in APA style for markdown printing}
 #'
 #' @keywords effect size, dependent t-test
-#' @import MBESS
 #' @import stats
 #' @export
 #' @examples
 #'
-#' #The following example is derived from the "dept_data" dataset included
-#' #in the MOTE library.
+#' # The following example is derived from the "dept_data" dataset included
+#' # in the MOTE library.
 #'
-#' #In a study to test the effects of science fiction movies on people's
-#' #belief in the supernatural, seven people completed a measure of belief
-#' #in the supernatural before and after watching a popular science fiction movie.
-#' #Higher scores indicated higher levels of belief. The mean difference score was 1.14,
-#' #while the standard deviation of the difference scores was 2.12.
+#' # In a study to test the effects of science fiction movies on people's
+#' # belief in the supernatural, seven people completed a measure of belief
+#' # in the supernatural before and after watching a popular science fiction movie.
+#' # Higher scores indicated higher levels of belief. The mean difference score was 1.14,
+#' # while the standard deviation of the difference scores was 2.12.
 #'
-#' #You can type in the numbers directly as shown below,
-#' #or refer to your dataset within the function.
+#' # You can type in the numbers directly as shown below,
+#' # or refer to your dataset within the function.
 #'
 #'     d.dep.t.diff(mdiff = 1.14, sddiff = 2.12, n = 7, a = .05)
 #'
@@ -62,12 +61,12 @@
 #'                  n = length(dept_data$before),
 #'                  a = .05)
 #'
-#' #The mean measure of belief on the pretest was 5.57, with a standard
-#' #deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
-#' #but the dependent t-test was not significant using alpha = .05,
-#' #t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium
-#' #effect suggesting that the movie may have influenced belief
-#' #in the supernatural.
+#' # The mean measure of belief on the pretest was 5.57, with a standard
+#' # deviation of 1.99. The post-test scores appeared lower (M = 4.43, SD = 2.88)
+#' # but the dependent t-test was not significant using alpha = .05,
+#' # t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium
+#' # effect suggesting that the movie may have influenced belief
+#' # in the supernatural.
 #'
 
 d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
@@ -91,7 +90,7 @@ d.dep.t.diff <- function (mdiff, sddiff, n, a = .05) {
   d <- mdiff / sddiff
   se <- sddiff / sqrt(n)
   t <- mdiff / se
-  ncpboth <- conf.limits.nct(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
+  ncpboth <- noncentral_t(t, (n - 1), conf.level = (1 - a), sup.int.warns = TRUE)
   dlow <- ncpboth$Lower.Limit / sqrt(n)
   dhigh <- ncpboth$Upper.Limit / sqrt(n)
   Mlow <- mdiff - se * qt(a / 2, n - 1, lower.tail = FALSE)
