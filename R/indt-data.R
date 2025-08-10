@@ -1,17 +1,20 @@
-#' Independent t Example Data
+#' Independent-Samples t-Test Example Data
 #'
-#' Dataset for use in \code{\link{d.ind.t}}, \code{\link{d.ind.t.t}},
-#' \code{\link{delta.ind.t}} exploring the effects of hypnotism on
-#' the effects of recall after witnessing a crime.
+#' @description
+#' Example data for an independent-samples t-test examining whether a
+#' hypnotism intervention affects recall accuracy after witnessing a crime.
+#' Designed for use with functions such as \code{\link{d.ind.t}},
+#' \code{\link{d.ind.t.t}}, and \code{\link{delta.ind.t}}.
 #'
 #' @docType data
 #'
 #' @usage data(indt_data)
 #'
-#' @format A data frame including two groups, one recieving a
-#' hypnotism intervention, and one control group, to determine how
-#' hypnotism effects recall after witnessing a crime.
+#' @format A data frame with 2 variables:
+#' \describe{
+#'   \item{group}{Factor indicating condition with levels \code{"control"} and \code{"hypnotism"}.}
+#'   \item{recall}{Numeric recall score/accuracy.}
+#' }
 #'
 #' @keywords datasets
-#'
 "indt_data"
