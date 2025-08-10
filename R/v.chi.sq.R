@@ -29,6 +29,7 @@
 #'
 #' @keywords effect size, chi-square
 #' @import stats
+#' @export
 #' @examples
 #'
 #' # The following example is derived from the "chisq_data"
