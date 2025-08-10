@@ -1,7 +1,7 @@
-#' $\omega^2_p$ (Partial Omega Squared) for Repeated Measures ANOVA from $F$
+#' omega^2_p (Partial Omega Squared) for Repeated Measures ANOVA from F
 #'
-#' This function displays $\omega^2_p$ from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\omega^2_p} from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula is appropriate for multi-way repeated measures designs and mixed-level designs.
 #'
 #' Partial omega squared is calculated by subtracting the mean
@@ -11,7 +11,7 @@
 #' for the error, sum of squares for the subject, and the
 #' mean square of the subject.
 #'
-#'     $$\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + SS_E + SS_S + MS_S}$$
+#' \deqn{\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + SS_E + SS_S + MS_S}}
 #'
 #' The F-statistic is calculated by dividing the mean square
 #' of the model by the mean square of the error.
@@ -30,15 +30,15 @@
 #' @param sss sum of squares for the subject variance
 #' @param a significance level
 #' @return \describe{
-#'   \item{omega}{$\omega^2_p$ effect size}
-#'   \item{omegalow}{lower level confidence interval of $\omega^2_p$}
-#'   \item{omegahigh}{upper level confidence interval of $\omega^2_p$}
+#'   \item{omega}{\eqn{\omega^2_p} effect size}
+#'   \item{omegalow}{lower level confidence interval of \eqn{\omega^2_p}}
+#'   \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_p}}
 #'   \item{dfm}{degrees of freedom for the model/IV/between}
 #'   \item{dfe}{degrees of freedom for the error/residual/within}
-#'   \item{F}{$F$-statistic}
+#'   \item{F}{\eqn{F}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $\omega^2_p$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{\omega^2_p} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, omega, ANOVA

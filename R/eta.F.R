@@ -1,7 +1,7 @@
-#' $\eta^2$ and Coefficient of Determination ($R^2$) for ANOVA from $F$
+#' \eqn{\eta^2} and Coefficient of Determination (R\eqn{^2}) for ANOVA from \eqn{F}
 #'
-#' This function displays $\eta^2$ from ANOVA analyses
-#' and their non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\eta^2} from ANOVA analyses
+#' and their non-central confidence interval based on the \eqn{F} distribution.
 #' These values are calculated directly from F statistics and can be used
 #' for between subjects and repeated measures designs.
 #' Remember if you have two or more IVs, these values are partial eta squared.
@@ -11,7 +11,7 @@
 #' of degrees of freedom of the model, the F-statistic, and
 #' the degrees of freedom for the error or residual.
 #'
-#'     $$\eta^2 = \frac{df_m \cdot F}{df_m \cdot F + df_e}$$
+#' \deqn{\eta^2 = \frac{df_m \cdot F}{df_m \cdot F + df_e}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etaf.html}{Learn more on our example page.}
 #'
@@ -19,18 +19,18 @@
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param Fvalue F statistic
 #' @param a significance level
-#' @return Provides the effect size ($\eta^2$) with associated confidence intervals and relevant statistics.
+#' @return Provides the effect size (\eqn{\eta^2}) with associated confidence intervals and relevant statistics.
 #'
 #' \describe{
-#' \item{eta}{$\eta^2$ effect size}
-#' \item{etalow}{lower level confidence interval of $\eta^2$}
-#' \item{etahigh}{upper level confidence interval of $\eta^2$}
+#' \item{eta}{\eqn{\eta^2} effect size}
+#' \item{etalow}{lower level confidence interval of \eqn{\eta^2}}
+#' \item{etahigh}{upper level confidence interval of \eqn{\eta^2}}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
 #' \item{dfe}{degrees of freedom for the error/residual/within}
-#' \item{F}{$F$-statistic}
+#' \item{F}{\eqn{F}-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the $\eta^2$ statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' \item{estimate}{the \eqn{\eta^2} statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, eta, ANOVA

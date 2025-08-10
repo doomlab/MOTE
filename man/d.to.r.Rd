@@ -7,13 +7,13 @@
 d.to.r(d, n1, n2, a = 0.05)
 }
 \arguments{
-\item{d}{effect size statistic}
+\item{d}{Effect size statistic.}
 
-\item{n1}{sample size group one}
+\item{n1}{Sample size for group one.}
 
-\item{n2}{sample size group two}
+\item{n2}{Sample size for group two.}
 
-\item{a}{significance level}
+\item{a}{Significance level.}
 }
 \value{
 Provides the effect size (correlation coefficient) with associated
@@ -22,35 +22,35 @@ appropriate for d to r translation. Note this CI is not based on the
 traditional r-to-z transformation but rather non-central F using the
 ci.R function from MBESS.
 
-\item{r}{correlation coefficient}
-\item{rlow}{lower level confidence interval r}
-\item{rhigh}{upper level confidence interval r}
-\item{R2}{coefficient of determination}
-\item{R2low}{lower level confidence interval of R2}
-\item{R2high}{upper level confidence interval of R2}
-\item{se}{standard error}
-\item{n}{sample size}
-\item{dfm}{degrees of freedom of mean}
-\item{dfe}{degrees of freedom error}
-\item{t}{t-statistic}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the r statistic and confidence interval in
-APA style for markdown printing}
-\item{estimateR2}{the R^2 statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+\describe{
+  \item{r}{Correlation coefficient.}
+  \item{rlow}{Lower level confidence interval for r.}
+  \item{rhigh}{Upper level confidence interval for r.}
+  \item{R2}{Coefficient of determination.}
+  \item{R2low}{Lower level confidence interval of R2.}
+  \item{R2high}{Upper level confidence interval of R2.}
+  \item{se}{Standard error.}
+  \item{n}{Sample size.}
+  \item{dfm}{Degrees of freedom of mean.}
+  \item{dfe}{Degrees of freedom error.}
+  \item{t}{t-statistic.}
+  \item{F}{F-statistic.}
+  \item{p}{p-value.}
+  \item{estimate}{The r statistic and confidence interval in APA style for markdown printing.}
+  \item{estimateR2}{The R\eqn{^2} statistic and confidence interval in APA style for markdown printing.}
+  \item{statistic}{The t-statistic in APA style for markdown printing.}
+}
 }
 \description{
 Calculates r from d and then translates r to r2 to calculate
 the non-central confidence interval for r2 using the F distribution.
 }
 \details{
-The correlation coefficient (r) is calculated by dividing Cohen's d
-by the square root of the total sample size squared - divided
+The correlation coefficient (\eqn{r}) is calculated by dividing Cohen's d
+by the square root of the total sample size squared, divided
 by the product of the sample sizes of group one and group two.
 
-     r = d / sqrt(d^2 + (n1 + n2)^2 / (n1*n2))
+\deqn{r = \frac{d}{\sqrt{d^2 + \frac{(n_1 + n_2)^2}{n_1 n_2}}}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/dtor.html}{Learn more on our example page.}
 }

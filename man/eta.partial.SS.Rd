@@ -2,7 +2,7 @@
 % Please edit documentation in R/eta.partial.SS.R
 \name{eta.partial.SS}
 \alias{eta.partial.SS}
-\title{Partial Eta Squared for ANOVA from F and Sum of Squares}
+\title{\eqn{\eta^2_p} for ANOVA from \eqn{F} and Sum of Squares}
 \usage{
 eta.partial.SS(dfm, dfe, ssm, sse, Fvalue, a = 0.05)
 }
@@ -20,31 +20,32 @@ eta.partial.SS(dfm, dfe, ssm, sse, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides partial eta squared with associated confidence intervals
+Provides the effect size (\eqn{\eta^2_p}) with associated confidence intervals
 and relevant statistics.
 
-\item{eta}{partial eta squared effect size}
-\item{etalow}{lower level confidence interval of partial eta squared}
-\item{etahigh}{upper level confidence interval of partial eta squared}
+\describe{
+\item{eta}{\eqn{\eta^2_p} effect size}
+\item{etalow}{lower level confidence interval of \eqn{\eta^2_p}}
+\item{etahigh}{upper level confidence interval of \eqn{\eta^2_p}}
 \item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
+\item{dfe}{degrees of freedom for the error/residual/within}
+\item{F}{\eqn{F}-statistic}
 \item{p}{p-value}
-\item{estimate}{the eta squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\item{estimate}{the \eqn{\eta^2_p} statistic and confidence interval in APA style for markdown printing}
+\item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays partial eta squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
+This function displays \eqn{\eta^2_p} from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
 This formula works for one way and multi way designs.
 }
 \details{
-Partial eta squared is calculated by dividing the sum of squares
+\eqn{\eta^2_p} is calculated by dividing the sum of squares
 of the model by the sum of the sum of squares of the model and
 sum of squares of the error.
 
-     partial eta^2 = ssm / (ssm + sse)
+\deqn{\eta^2_p = \frac{SS_M}{SS_M + SS_E}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 }

@@ -1,12 +1,12 @@
-#' $V$ for Chi-Square
+#' V for Chi-Square
 #'
-#' This function displays $V$ and its non-central confidence interval
-#' for the specified $\chi^2$ statistic.
+#' This function displays \eqn{V} and its non-central confidence interval
+#' for the specified \eqn{\chi^2} statistic.
 #'
-#' $V$ is calculated by finding the square root of $\chi^2$ divided by the product
+#' \eqn{V} is calculated by finding the square root of \eqn{\chi^2} divided by the product
 #' of the sample size and the smaller of the two degrees of freedom.
 #'
-#'     $$V = \sqrt{\frac{\chi^2}{n \times df_{\text{small}}}}$$
+#' \deqn{V = \sqrt{\frac{\chi^2}{n \times df_{\mathrm{small}}}}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
 #'
@@ -16,15 +16,15 @@
 #' @param c number of columns in the contingency table
 #' @param a significance level
 #' @return \describe{
-#'   \item{v}{$V$ statistic}
-#'   \item{vlow}{lower level confidence interval of $V$}
-#'   \item{vhigh}{upper level confidence interval of $V$}
+#'   \item{v}{\eqn{V} statistic}
+#'   \item{vlow}{lower level confidence interval of \eqn{V}}
+#'   \item{vhigh}{upper level confidence interval of \eqn{V}}
 #'   \item{n}{sample size}
 #'   \item{df}{degrees of freedom}
-#'   \item{x2}{$\chi^2$ statistic}
+#'   \item{x2}{\eqn{\chi^2} statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $V$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the $\chi^2$ statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{V} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{\chi^2} statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, chi-square

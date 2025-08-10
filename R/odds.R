@@ -4,7 +4,7 @@
 #'
 #' This statistic is the odds ratio:
 #'
-#'     $$OR = \frac{n_{11} / n_{12}}{n_{21} / n_{22}}$$
+#' \deqn{OR = \frac{n_{11} / n_{12}}{n_{21} / n_{22}}}
 #'
 #' To calculate odds ratios, First, the sample size for level 1.1
 #' is divided by the sample size for level 1.2. This value is divided

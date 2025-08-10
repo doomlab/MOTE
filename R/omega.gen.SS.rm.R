@@ -1,7 +1,7 @@
-#' $\omega^2_G$ (Generalized Omega Squared) for Multi-Way and Mixed ANOVA from $F$
+#' omega^2_G (Generalized Omega Squared) for Multi-Way and Mixed ANOVA from F
 #'
-#' This function displays $\omega^2_G$ (generalized omega squared) from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\omega^2_G} (generalized omega squared) from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula is appropriate for multi-way repeated-measures
 #' designs and mixed-level designs.
 #'
@@ -15,7 +15,7 @@
 #' subject variance multiplied by the number of levels
 #' in the other model/IV/between.
 #'
-#'     $$\omega^2_G = \frac{SS_M - (df_m \times MS_S)}{SS_T + SS_{M2} + j \times MS_S}$$
+#' \deqn{\omega^2_G = \frac{SS_M - (df_m \times MS_S)}{SS_T + SS_{M2} + j \times MS_S}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 #'
@@ -29,15 +29,15 @@
 #' @param Fvalue F statistic from the output for your IV
 #' @param a significance level
 #' @return \describe{
-#'   \item{omega}{$\omega^2_G$ effect size}
-#'   \item{omegalow}{lower level confidence interval of $\omega^2_G$}
-#'   \item{omegahigh}{upper level confidence interval of $\omega^2_G$}
+#'   \item{omega}{\eqn{\omega^2_G} effect size}
+#'   \item{omegalow}{lower level confidence interval of \eqn{\omega^2_G}}
+#'   \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_G}}
 #'   \item{dfm}{degrees of freedom for the model/IV/between}
 #'   \item{dfe}{degrees of freedom for the error/residual/within}
-#'   \item{F}{$F$-statistic}
+#'   \item{F}{\eqn{F}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $\omega^2_G$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{\omega^2_G} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, omega, ANOVA

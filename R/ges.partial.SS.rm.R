@@ -1,7 +1,7 @@
-#' $\eta^2_{G}$ (Partial Generalized Eta-Squared) for Repeated-Measures ANOVA from $F$
+#' \eqn{\eta^2_{G}} (Partial Generalized Eta-Squared) for Repeated-Measures ANOVA from \eqn{F}
 #'
-#' This function displays partial generalized eta-squared ($\eta^2_{G}$) from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays partial generalized eta-squared (\eqn{\eta^2_{G}}) from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula works for multi-way repeated measures designs.
 #'
 #' To calculate partial generalized eta squared, first, the sum of
@@ -10,7 +10,7 @@
 #' and the sum of squares for the interaction are added together.
 #' The sum of squares of the model is divided by this value.
 #'
-#'     $$\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_{E1} + SS_{E2} + SS_{E3}}$$
+#' \deqn{\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_{E1} + SS_{E2} + SS_{E3}}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 #'
@@ -24,15 +24,15 @@
 #' @param Fvalue F statistic
 #' @param a significance level
 #' @return \describe{
-#'   \item{ges}{$\eta^2_{G}$ effect size}
-#'   \item{geslow}{lower level confidence interval for $\eta^2_{G}$}
-#'   \item{geshigh}{upper level confidence interval for $\eta^2_{G}$}
+#'   \item{ges}{\eqn{\eta^2_{G}} effect size}
+#'   \item{geslow}{lower level confidence interval for \eqn{\eta^2_{G}}}
+#'   \item{geshigh}{upper level confidence interval for \eqn{\eta^2_{G}}}
 #'   \item{dfm}{degrees of freedom for the model/IV/between}
 #'   \item{dfe}{degrees of freedom for the error/residual/within}
-#'   \item{F}{$F$-statistic}
+#'   \item{F}{\eqn{F}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $\eta^2_{G}$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{\eta^2_{G}} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, ges, ANOVA

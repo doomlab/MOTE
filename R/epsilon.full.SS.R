@@ -1,16 +1,16 @@
-#' $\epsilon^2$ for ANOVA from $F$ and Sum of Squares
+#' \eqn{\epsilon^2} for ANOVA from \eqn{F} and Sum of Squares
 #'
-#' This function displays $\\epsilon^2$ from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\epsilon^2} from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula works for one way and multi way designs with careful
 #' focus on the sum of squares total calculation.
 #'
-#' To calculate $\\epsilon^2$, first, the mean square for the error is
+#' To calculate \eqn{\epsilon^2}, first, the mean square for the error is
 #' substracted from the mean square for the model. The difference
 #' is multiplied by the degrees of freedom for the model. The
 #' product is divided by the sum of squares total.
 #'
-#'     $$\\epsilon^2 = \\frac{df_m (ms_m - ms_e)}{SS_T}$$
+#' \deqn{\epsilon^2 = \frac{df_m (ms_m - ms_e)}{SS_T}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 #'
@@ -20,19 +20,19 @@
 #' @param mse mean square for the error/residual/within
 #' @param sst sum of squares total
 #' @param a significance level
-#' @return Provides the effect size ($\\epsilon^2$) with associated
-#' confidence intervals from the $F$-statistic.
+#' @return Provides the effect size (\eqn{\epsilon^2}) with associated
+#' confidence intervals from the \eqn{F}-statistic.
 #' \describe{
 #' \item{epsilon}{effect size}
 #' \item{epsilonlow}{lower level confidence interval of epsilon}
 #' \item{epsilonhigh}{upper level confidence interval of epsilon}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
 #' \item{dfe}{degrees of freedom for the error/residual/within}
-#' \item{F}{F-statistic}
+#' \item{F}{\eqn{F}-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the epsilon statistic and confidence interval in
+#' \item{estimate}{the \eqn{\epsilon^2} statistic and confidence interval in
 #' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, epsilon, ANOVA

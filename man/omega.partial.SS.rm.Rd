@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.partial.SS.rm.R
 \name{omega.partial.SS.rm}
 \alias{omega.partial.SS.rm}
-\title{Partial Omega Squared for Repeated Measures ANOVA from F}
+\title{omega^2_p (Partial Omega Squared) for Repeated Measures ANOVA from F}
 \usage{
 omega.partial.SS.rm(dfm, dfe, msm, mse, mss, ssm, sse, sss, a = 0.05)
 }
@@ -26,24 +26,22 @@ omega.partial.SS.rm(dfm, dfe, msm, mse, mss, ssm, sse, sss, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides omega squared with associated confidence intervals
-and relevant statistics.
-
-\item{omega}{omega squared}
-\item{omegalow}{lower level confidence interval of omega}
-\item{omegahigh}{upper level confidence interval of omega}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the omega squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{omega}{\eqn{\omega^2_p} effect size}
+  \item{omegalow}{lower level confidence interval of \eqn{\omega^2_p}}
+  \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_p}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\omega^2_p} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays omega squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
-This formula is appropriate for multi-way repeated measures designs and mix level designs.
+This function displays \eqn{\omega^2_p} from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
+This formula is appropriate for multi-way repeated measures designs and mixed-level designs.
 }
 \details{
 Partial omega squared is calculated by subtracting the mean
@@ -53,7 +51,7 @@ by the sum of the sum of squares for the model, sum of squares
 for the error, sum of squares for the subject, and the
 mean square of the subject.
 
-     omega_p^2 = (dfm x (msm - mse)) / (ssm + sse + sss + mss)
+\deqn{\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + SS_E + SS_S + MS_S}}
 
 The F-statistic is calculated by dividing the mean square
 of the model by the mean square of the error.

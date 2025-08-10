@@ -1,7 +1,7 @@
-#' $\omega^2$ for One-Way and Multi-Way ANOVA from $F$
+#' omega^2 for One-Way and Multi-Way ANOVA from F
 #'
-#' This function displays $\omega^2$ from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\omega^2} from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula works for one way and multi way designs with careful
 #' focus on which error term you are using for the calculation.
 #'
@@ -9,7 +9,7 @@
 #' from the mean square of the model and multiplying by the degrees of freedom for the model.
 #' This is divided by the sum of the sum of squares total and the mean square of the error.
 #'
-#'     $$\omega^2 = \frac{df_m (ms_m - ms_e)}{SS_T + ms_e}$$
+#' \deqn{\omega^2 = \frac{df_m (ms_m - ms_e)}{SS_T + ms_e}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/omegass.html}{Learn more on our example page.}
 #'
@@ -20,15 +20,15 @@
 #' @param sst sum of squares total
 #' @param a significance level
 #' @return \describe{
-#'   \item{omega}{$\omega^2$ effect size}
-#'   \item{omegalow}{lower level confidence interval of $\omega^2$}
-#'   \item{omegahigh}{upper level confidence interval of $\omega^2$}
+#'   \item{omega}{\eqn{\omega^2} effect size}
+#'   \item{omegalow}{lower level confidence interval of \eqn{\omega^2}}
+#'   \item{omegahigh}{upper level confidence interval of \eqn{\omega^2}}
 #'   \item{dfm}{degrees of freedom for the model/IV/between}
 #'   \item{dfe}{degrees of freedom for the error/residual/within}
-#'   \item{F}{$F$-statistic}
+#'   \item{F}{\eqn{F}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $\omega^2$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{\omega^2} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, omega, ANOVA

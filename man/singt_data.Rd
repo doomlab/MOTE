@@ -7,7 +7,7 @@
 \format{
 A data frame with 1 variable:
 \describe{
-  \item{SAT}{Numeric. SAT scores of gifted/honors program students at one school.}
+  \item{SATscore}{Numeric. SAT scores of gifted/honors program students at one school.}
 }
 }
 \usage{

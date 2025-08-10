@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.F.R
 \name{omega.F}
 \alias{omega.F}
-\title{Omega Squared for ANOVA from F}
+\title{\eqn{\omega^2} for ANOVA from \eqn{F}}
 \usage{
 omega.F(dfm, dfe, Fvalue, n, a = 0.05)
 }
@@ -18,35 +18,33 @@ omega.F(dfm, dfe, Fvalue, n, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-The effect size (Cohen's d) with associated confidence intervals
-and relevant statistics.
-
-\item{omega}{omega statistic}
-\item{omegalow}{lower level confidence interval d value}
-\item{omegahigh}{upper level confidence interval d value}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/residual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the omega squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{omega}{\eqn{\omega^2} effect size}
+  \item{omegalow}{lower level confidence interval of \eqn{\omega^2}}
+  \item{omegahigh}{upper level confidence interval of \eqn{\omega^2}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\omega^2} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays omega squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
+This function displays \eqn{\omega^2} from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
 These values are calculated directly from F statistics and can be used
 for between subjects and repeated measures designs.
 Remember if you have two or more IVs, these values are partial omega squared.
 }
 \details{
 Omega squared or partial omega squared is calculated by subtracting one
-from the F-statistic and multiplying it by degrees of freedom of the model. This is
+from the \eqn{F}-statistic and multiplying it by degrees of freedom of the model. This is
 divided by the same value after adding the number of valid responses. This
 value will be omega squared for one-way ANOVA designs, and will be
 partial omega squared for multi-way ANOVA designs (i.e. with more than one IV).
 
-     omega^2 = (dfm * (Fvalue-1)) / ((dfm * (Fvalue-1)) + n)
+\deqn{\omega^2 = \frac{df_m (F - 1)}{df_m (F - 1) + n}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}{Learn more on our example page.}
 }

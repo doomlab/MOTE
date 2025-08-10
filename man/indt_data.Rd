@@ -7,8 +7,8 @@
 \format{
 A data frame with 2 variables:
 \describe{
+  \item{correctq}{Numeric recall score/accuracy.}
   \item{group}{Factor indicating condition with levels \code{"control"} and \code{"hypnotism"}.}
-  \item{recall}{Numeric recall score/accuracy.}
 }
 }
 \usage{

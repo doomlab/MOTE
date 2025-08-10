@@ -14,8 +14,8 @@
 #'
 #' @format A data frame with *n* rows and 2 variables:
 #' \describe{
-#'   \item{health}{Factor with levels \code{"poor"}, \code{"fair"}, and \code{"excellent"}.}
-#'   \item{rating}{Numeric rating of close interpersonal attachments.}
+#'   \item{group}{Factor with levels \code{"poor"}, \code{"fair"}, and \code{"excellent"}.}
+#'   \item{friends}{Numeric rating of close interpersonal attachments.}
 #' }
 #'
 #' @keywords datasets

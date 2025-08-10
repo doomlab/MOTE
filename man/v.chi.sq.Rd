@@ -18,29 +18,27 @@ v.chi.sq(x2, n, r, c, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides V with associated confidence intervals
-and relevant statistics.
-
-\item{v}{v-statistic}
-\item{vlow}{lower level confidence interval of V}
-\item{vhigh}{upper level confidence interval of V}
-\item{n}{sample size}
-\item{df}{degrees of freedom}
-\item{x2}{significance statistic}
-\item{p}{p-value}
-\item{estimate}{the V statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the X2-statistic in APA style for markdown printing}
+\describe{
+  \item{v}{\eqn{V} statistic}
+  \item{vlow}{lower level confidence interval of \eqn{V}}
+  \item{vhigh}{upper level confidence interval of \eqn{V}}
+  \item{n}{sample size}
+  \item{df}{degrees of freedom}
+  \item{x2}{\eqn{\chi^2} statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{V} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{\chi^2} statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays V and non-central confidence interval
-for the specified chi-square statistic.
+This function displays \eqn{V} and its non-central confidence interval
+for the specified \eqn{\chi^2} statistic.
 }
 \details{
-V is calculated by finding the square root of chi-squared divided by the product
-of the sample size and the degrees of freedom with the lowest value.
+\eqn{V} is calculated by finding the square root of \eqn{\chi^2} divided by the product
+of the sample size and the smaller of the two degrees of freedom.
 
-     v = sqrt(x2 / (n * dfsmall))
+\deqn{V = \sqrt{\frac{\chi^2}{n \times df_{\mathrm{small}}}}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
 }

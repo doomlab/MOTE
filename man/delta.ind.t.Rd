@@ -2,7 +2,7 @@
 % Please edit documentation in R/delta.ind.t.R
 \name{delta.ind.t}
 \alias{delta.ind.t}
-\title{d-delta for Between Subjects with Control Group SD Denominator}
+\title{\eqn{d_{\delta}} for Between Subjects with Control Group SD Denominator}
 \usage{
 delta.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
@@ -51,16 +51,16 @@ APA style for markdown printing}
 \item{statistic}{the t-statistic in APA style for markdown printing}
 }
 \description{
-This function displays d-delta for between subjects data
+This function displays \eqn{d_{\delta}} for between subjects data
 and the non-central confidence interval using the
 control group standard deviation as the denominator.
 }
 \details{
-To calculate d-delta, the mean of the experimental group
+To calculate \eqn{d_{\delta}}, the mean of the experimental group
 is subtracted from the mean of the control group, which
 is divided by the standard deviation of the control group.
 
-     d_delta = (m1 - m2) / sd1
+\deqn{d_{\delta} = \frac{m_1 - m_2}{sd_1}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 }

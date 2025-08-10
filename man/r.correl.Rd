@@ -2,7 +2,7 @@
 % Please edit documentation in R/r.correl.R
 \name{r.correl}
 \alias{r.correl}
-\title{r to Coefficient of Determination (R2) from F}
+\title{r to Coefficient of Determination (R\eqn{^2}) from F}
 \usage{
 r.correl(r, n, a = 0.05)
 }
@@ -14,43 +14,35 @@ r.correl(r, n, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides correlation coefficient and coefficient of
-determination with associated confidence intervals
-and relevant statistics.
-
-\item{r}{correlation coefficient}
-\item{rlow}{lower level confidence interval r}
-\item{rhigh}{upper level confidence interval r}
-\item{R2}{coefficient of determination}
-\item{R2low}{lower level confidence interval of R2}
-\item{R2high}{upper level confidence interval of R2}
-\item{se}{standard error}
-\item{n}{sample size}
-\item{dfm}{degrees of freedom of mean}
-\item{dfe}{degrees of freedom of error}
-\item{t}{t-statistic}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the r statistic and confidence interval in
-APA style for markdown printing}
-\item{estimateR2}{the R^2 statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+\describe{
+  \item{r}{correlation coefficient}
+  \item{rlow}{lower level confidence interval for \eqn{r}}
+  \item{rhigh}{upper level confidence interval for \eqn{r}}
+  \item{R2}{coefficient of determination}
+  \item{R2low}{lower level confidence interval of \eqn{R^2}}
+  \item{R2high}{upper level confidence interval of \eqn{R^2}}
+  \item{se}{standard error}
+  \item{n}{sample size}
+  \item{dfm}{degrees of freedom of mean}
+  \item{dfe}{degrees of freedom of error}
+  \item{t}{\eqn{t}-statistic}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{r} statistic and confidence interval in APA style for markdown printing}
+  \item{estimateR2}{the \eqn{R^2} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{t}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays transformation from r to r2 to calculate
-the non-central confidence interval for r2 using the F distribution.
+This function displays the transformation from \eqn{r} to \eqn{R^2} to calculate
+the non-central confidence interval for \eqn{R^2} using the \eqn{F} distribution.
 }
 \details{
-The t-statistic is calculated by first dividing one minus the
-square root of r squared by degrees of freedom of the error.
-r is divided by this value.
+The \eqn{t}-statistic is calculated by:
+\deqn{t = \frac{r}{\sqrt{\frac{1 - r^2}{n - 2}}}}
 
-     t = r / sqrt((1 - rsq) / (n - 2))
-
-The F-statistic is the t-statistic squared.
-
-     Fvalue = t ^ 2
+The \eqn{F}-statistic is the \eqn{t}-statistic squared:
+\deqn{F = t^2}
 
 \href{https://www.aggieerin.com/shiny-server/tests/rcorrel.html}{Learn more on our example page.}
 }

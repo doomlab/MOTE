@@ -1,16 +1,16 @@
-#' $d_g$ Corrected for Independent t
+#' \eqn{d_g} Corrected for Independent \eqn{t}
 #'
 #'
-#' This function displays $d_g$ (Hedges' g) corrected
-#' and the non-central confidence interval for independent $t$.
+#' This function displays \eqn{d_g} (Hedges' g) corrected
+#' and the non-central confidence interval for independent \eqn{t}.
 #'
 #' The small-sample correction factor is:
 #'
-#'     $$\text{correction} = 1 - \frac{3}{4(n_1 + n_2) - 9}$$
+#' \deqn{\mathrm{correction} = 1 - \frac{3}{4(n_1 + n_2) - 9}}
 #'
-#' $d_g$ is computed as the standardized mean difference multiplied by the correction:
+#' \eqn{d_g} is computed as the standardized mean difference multiplied by the correction:
 #'
-#'     $$d_g = \frac{m_1 - m_2}{s_\text{pooled}} \times \text{correction}$$
+#' \deqn{d_g = \frac{m_1 - m_2}{s_{\mathrm{pooled}}} \times \mathrm{correction}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
 #'
@@ -22,9 +22,9 @@
 #' @param n2 sample size group two
 #' @param a significance level
 #' @return \describe{
-#'   \item{d}{$d_g$ corrected effect size}
-#'   \item{dlow}{lower level confidence interval for $d_g$}
-#'   \item{dhigh}{upper level confidence interval for $d_g$}
+#'   \item{d}{\eqn{d_g} corrected effect size}
+#'   \item{dlow}{lower level confidence interval for \eqn{d_g}}
+#'   \item{dhigh}{upper level confidence interval for \eqn{d_g}}
 #'   \item{M1}{mean of group one}
 #'   \item{sd1}{standard deviation of group one}
 #'   \item{se1}{standard error of group one}
@@ -40,11 +40,11 @@
 #'   \item{correction}{Hedges' small-sample correction factor}
 #'   \item{n1}{sample size of group one}
 #'   \item{n2}{sample size of group two}
-#'   \item{df}{degrees of freedom ($n_1 - 1 + n_2 - 1$)}
-#'   \item{t}{t-statistic}
+#'   \item{df}{degrees of freedom (\eqn{n_1 - 1 + n_2 - 1})}
+#'   \item{t}{\eqn{t}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the $d_g$ statistic and confidence interval in APA style for markdown printing}
-#'   \item{statistic}{the t-statistic in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{d_g} statistic and confidence interval in APA style for markdown printing}
+#'   \item{statistic}{the \eqn{t}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, independent t, correction

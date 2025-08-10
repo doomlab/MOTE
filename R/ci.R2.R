@@ -77,7 +77,7 @@ ci.R2 <- function(R2=NULL, df.1=NULL, df.2=NULL,
 
   if(Random.Predictors==FALSE)
   {
-    Limits <- conf.limits.ncf(F.value=F.value, df.1=df.1, df.2=df.2, conf.level=NULL, tol=tol, alpha.lower=alpha.lower, alpha.upper=alpha.upper)
+    Limits <- noncentral_f(F.value=F.value, df.1=df.1, df.2=df.2, conf.level=NULL, tol=tol, alpha.lower=alpha.lower, alpha.upper=alpha.upper)
 
     if(length(Limits)==4)
     {

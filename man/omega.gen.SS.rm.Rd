@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.gen.SS.rm.R
 \name{omega.gen.SS.rm}
 \alias{omega.gen.SS.rm}
-\title{Generalized Omega Squared for Multi-Way and Mixed ANOVA from F}
+\title{omega^2_G (Generalized Omega Squared) for Multi-Way and Mixed ANOVA from F}
 \usage{
 omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 }
@@ -26,25 +26,23 @@ omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides omega squared with associated confidence intervals
-and relevant statistics.
-
-\item{omega}{omega squared}
-\item{omegalow}{lower level confidence interval of omega}
-\item{omegahigh}{upper level confidence interval of omega}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the omega squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{omega}{\eqn{\omega^2_G} effect size}
+  \item{omegalow}{lower level confidence interval of \eqn{\omega^2_G}}
+  \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_G}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\omega^2_G} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays generalized omega squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
-This formula is appropriate for multi-way repeated measures
-designs and mix level designs.
+This function displays \eqn{\omega^2_G} (generalized omega squared) from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
+This formula is appropriate for multi-way repeated-measures
+designs and mixed-level designs.
 }
 \details{
 Omega squared is calculated by subtracting the product of the
@@ -57,7 +55,7 @@ independent variable, and the mean square of the
 subject variance multiplied by the number of levels
 in the other model/IV/between.
 
-     generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+\deqn{\omega^2_G = \frac{SS_M - (df_m \times MS_S)}{SS_T + SS_{M2} + j \times MS_S}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 }

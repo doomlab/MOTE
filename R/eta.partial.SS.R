@@ -1,14 +1,14 @@
-#' $\eta^2_p$ for ANOVA from $F$ and Sum of Squares
+#' \eqn{\eta^2_p} for ANOVA from \eqn{F} and Sum of Squares
 #'
-#' This function displays $\eta^2_p$ from ANOVA analyses
-#' and its non-central confidence interval based on the $F$ distribution.
+#' This function displays \eqn{\eta^2_p} from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula works for one way and multi way designs.
 #'
-#' $\eta^2_p$ is calculated by dividing the sum of squares
+#' \eqn{\eta^2_p} is calculated by dividing the sum of squares
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
-#'     $$\eta^2_p = \frac{SS_M}{SS_M + SS_E}$$
+#' \deqn{\eta^2_p = \frac{SS_M}{SS_M + SS_E}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
@@ -19,19 +19,19 @@
 #' @param Fvalue F statistic
 #' @param a significance level
 #'
-#' @return Provides the effect size ($\eta^2_p$) with associated confidence intervals
+#' @return Provides the effect size (\eqn{\eta^2_p}) with associated confidence intervals
 #' and relevant statistics.
 #'
 #' \describe{
-#' \item{eta}{$\eta^2_p$ effect size}
-#' \item{etalow}{lower level confidence interval of $\eta^2_p$}
-#' \item{etahigh}{upper level confidence interval of $\eta^2_p$}
+#' \item{eta}{\eqn{\eta^2_p} effect size}
+#' \item{etalow}{lower level confidence interval of \eqn{\eta^2_p}}
+#' \item{etahigh}{upper level confidence interval of \eqn{\eta^2_p}}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
 #' \item{dfe}{degrees of freedom for the error/residual/within}
-#' \item{F}{$F$-statistic}
+#' \item{F}{\eqn{F}-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the $\eta^2_p$ statistic and confidence interval in APA style for markdown printing}
-#' \item{statistic}{the $F$-statistic in APA style for markdown printing}
+#' \item{estimate}{the \eqn{\eta^2_p} statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
 #' }
 #'
 #' @keywords effect size, eta, ANOVA

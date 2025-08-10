@@ -20,6 +20,7 @@
 #'   removed for values with absolute value < 1.
 #' If `value` is a data frame, all columns must be numeric; otherwise an error
 #' is thrown.
+#' @export
 #' @examples
 #' apa(0.54674, decimals = 3, leading = TRUE)   # "0.547"
 #' apa(c(0.2, 1.2345, -0.04), decimals = 2)     # "0.20" "1.23" "-0.04"

@@ -1,14 +1,14 @@
-#' $d_{\delta}$ for Between Subjects with Control Group SD Denominator
+#' \eqn{d_{\delta}} for Between Subjects with Control Group SD Denominator
 #'
-#' This function displays $d_{\delta}$ for between subjects data
+#' This function displays \eqn{d_{\delta}} for between subjects data
 #' and the non-central confidence interval using the
 #' control group standard deviation as the denominator.
 #'
-#' To calculate $d_{\delta}$, the mean of the experimental group
+#' To calculate \eqn{d_{\delta}}, the mean of the experimental group
 #' is subtracted from the mean of the control group, which
 #' is divided by the standard deviation of the control group.
 #'
-#'     $$d_{\delta} = \frac{m_1 - m_2}{sd_1}$$
+#' \deqn{d_{\delta} = \frac{m_1 - m_2}{sd_1}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 #'

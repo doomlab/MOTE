@@ -2,75 +2,73 @@
 % Please edit documentation in R/d.prop.R
 \name{d.prop}
 \alias{d.prop}
-\title{d for Independent Proportions}
+\title{Cohen's d for Independent Proportions}
 \usage{
 d.prop(p1, p2, n1, n2, a = 0.05)
 }
 \arguments{
-\item{p1}{proportion for group one}
+\item{p1}{Proportion for group one.}
 
-\item{p2}{proportion for group two}
+\item{p2}{Proportion for group two.}
 
-\item{n1}{sample size group one}
+\item{n1}{Sample size for group one.}
 
-\item{n2}{sample size group two}
+\item{n2}{Sample size for group two.}
 
-\item{a}{significance level}
+\item{a}{Significance level.}
 }
 \value{
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{p1}{proportion of group one}
-\item{se1}{standard error of the proportion of group one}
-\item{z1}{z-statistic group one}
-\item{z1low}{lower level confidence interval of z}
-\item{z1high}{upper level confidence interval of z}
-\item{p2}{proportion of group two}
-\item{se2}{standard error of the proportion of group two}
-\item{z2}{z-statistic of group two}
-\item{z2low}{lower level confidence interval of z}
-\item{z2high}{upper level confidence interval of z}
-\item{n1}{sample size group one}
-\item{n2}{sample size group two}
-\item{z}{z-statistic for the differences}
-\item{ppooled}{pooled proportion to calculate standard error}
-\item{se}{standard error}
-\item{p}{p-value for the differences}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+A list with the following elements:
+\describe{
+  \item{d}{Effect size.}
+  \item{dlow}{Lower level confidence interval d value.}
+  \item{dhigh}{Upper level confidence interval d value.}
+  \item{p1}{Proportion of group one.}
+  \item{se1}{Standard error of the proportion of group one.}
+  \item{z1}{z-statistic for group one.}
+  \item{z1low}{Lower level confidence interval of z for group one.}
+  \item{z1high}{Upper level confidence interval of z for group one.}
+  \item{p2}{Proportion of group two.}
+  \item{se2}{Standard error of the proportion of group two.}
+  \item{z2}{z-statistic for group two.}
+  \item{z2low}{Lower level confidence interval of z for group two.}
+  \item{z2high}{Upper level confidence interval of z for group two.}
+  \item{n1}{Sample size for group one.}
+  \item{n2}{Sample size for group two.}
+  \item{z}{z-statistic for the difference.}
+  \item{ppooled}{Pooled proportion used to calculate standard error.}
+  \item{se}{Standard error.}
+  \item{p}{p-value for the difference.}
+  \item{estimate}{The d statistic and confidence interval in APA style for markdown printing.}
+  \item{statistic}{The z-statistic in APA style for markdown printing.}
+}
 }
 \description{
-This function displays d and central confidence interval
-calculated from differences in independent proportions.
-Independent proportions are two percentages that are from
-different groups of participants.
+Compute Cohen's \eqn{d_{prop}} for independent proportions and a central confidence interval.
+Independent proportions are two percentages from different groups of participants.
 }
 \details{
-To calculate z, the proportion of group two is substracted
-from group one, which is then divided by the standard error.
+The z-statistic is:
+\deqn{z = \frac{p_1 - p_2}{SE_{pooled}}}
+where the pooled standard error is based on the pooled proportion:
+\deqn{SE_{pooled} = \sqrt{\hat{p} (1 - \hat{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right) }}
+and \eqn{\hat{p} = \frac{p_1 n_1 + p_2 n_2}{n_1 + n_2}}.
 
-     z = (p1 - p2) / se
+For each group, the z-statistic is computed as:
+\deqn{z_1 = \frac{p_1}{SE_1}, \quad SE_1 = \sqrt{ \frac{p_1 (1 - p_1)}{n_1} }}
+\deqn{z_2 = \frac{p_2}{SE_2}, \quad SE_2 = \sqrt{ \frac{p_2 (1 - p_2)}{n_2} }}
 
-To calculate d, the proportion of group two is divided by
-the standard error of group two which is then subtracted
-from the proportion of group one divided by the standard
-error of group one.
+Cohen's \eqn{d_{prop}} is then:
+\deqn{d_{prop} = z_1 - z_2}
 
-    z1 = p1 / se1
-
-    z2 = p2 / se2
-
-     d = z1 - z2
-
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/indtprop.html}{Learn more on our example page.}
 }
 \examples{
 
 # Several researchers were examining the data on the number
 # of students who retake a course after they receive a D, F,
-# or withdraw from the course. They randomly sampled form
+# or withdraw from the course. They randomly sampled from
 # a large university two groups of students: traditional
 # (less than 25 years old) and non-traditional (25 and older).
 # Each group included 100 participants. About 25\% of students

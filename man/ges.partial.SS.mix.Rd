@@ -2,7 +2,7 @@
 % Please edit documentation in R/ges.partial.SS.mix.R
 \name{ges.partial.SS.mix}
 \alias{ges.partial.SS.mix}
-\title{Partial Generalized Eta-Squared for Mixed Design ANOVA from F}
+\title{\eqn{\eta^2_{G}} (Partial Generalized Eta-Squared) for Mixed Design ANOVA from \eqn{F}}
 \usage{
 ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 }
@@ -22,22 +22,21 @@ ges.partial.SS.mix(dfm, dfe, ssm, sss, sse, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Partial generalized eta-squared (GES) with associated confidence intervals
-and relevant statistics.
-\item{ges}{effect size}
-\item{geslow}{lower level confidence interval for ges}
-\item{geshigh}{upper level confidence interval for ges}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/residual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the generalized eta squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{ges}{\eqn{\eta^2_{G}} effect size}
+  \item{geslow}{lower level confidence interval for \eqn{\eta^2_{G}}}
+  \item{geshigh}{upper level confidence interval for \eqn{\eta^2_{G}}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\eta^2_{G}} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays partial generalized eta-squared (GES) from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
+This function displays partial generalized eta-squared (\eqn{\eta^2_{G}}) from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
 This formula works for mixed designs.
 }
 \details{
@@ -45,9 +44,8 @@ To calculate partial generalized eta squared, first, the sum of
 squares of the model, sum of squares of the subject
 variance, sum of squares for the subject variance,
 and the sum of squares for the error/residual/within are added together.
-The sum of squares of the model is divided by this value.
 
-     partial ges = ssm / (ssm + sss + sse)
+\deqn{\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_E}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/gesmixss.html}{Learn more on our example page.}
 }

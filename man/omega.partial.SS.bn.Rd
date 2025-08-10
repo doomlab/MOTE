@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.partial.SS.bn.R
 \name{omega.partial.SS.bn}
 \alias{omega.partial.SS.bn}
-\title{Partial Omega Squared for Between Subjects ANOVA from F}
+\title{omega^2_p (Partial Omega Squared) for Between-Subjects ANOVA from F}
 \usage{
 omega.partial.SS.bn(dfm, dfe, msm, mse, ssm, n, a = 0.05)
 }
@@ -22,24 +22,22 @@ omega.partial.SS.bn(dfm, dfe, msm, mse, ssm, n, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides omega squared with associated confidence intervals
-and relevant statistics.
-
-\item{omega}{omega squared}
-\item{omegalow}{lower level confidence interval of omega}
-\item{omegahigh}{upper level confidence interval of omega}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the omega squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{omega}{\eqn{\omega^2_p} effect size}
+  \item{omegalow}{lower level confidence interval of \eqn{\omega^2_p}}
+  \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_p}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\omega^2_p} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays omega squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
-This formula is appropriate for multi-way between subjects designs.
+This function displays \eqn{\omega^2_p} from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
+This formula is appropriate for multi-way between-subjects designs.
 }
 \details{
 Partial omega squared is calculated by subtracting the mean square for the error
@@ -48,7 +46,7 @@ the model. This is divided by the product of the degrees of freedom
 for the model are deducted from the sample size, multiplied by the
 mean square of the error, plus the sum of squares for the model.
 
-     omega^2 <- (dfm * (msm - mse)) / (ssm + (n-dfm)*mse)
+\deqn{\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + (n - df_m) \times MS_E}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}{Learn more on our example page.}
 }
