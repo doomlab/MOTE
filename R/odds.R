@@ -69,18 +69,29 @@ odds <- function (n11, n12, n21, n22, a = .05) {
     stop("Alpha should be between 0 and 1.")
   }
 
+  # Displays odds ratios, sensitivity / specificity
+  #
+  # Args:
+  #   n11 : sample size for level 1.1
+  #   n12 : sample size for level 1.2
+  #   n21 : sample size for level 2.1
+  #   n22 : sample size for level 2.2
+  #   a   : significance level
+  #
+  # Returns:
+  #   List of odds and sample size statistics
+
   odds <- (n11 / n12) / (n21 / n22)
   se <- sqrt((1 / n11) + (1 / n12) + (1 / n21) + (1 / n22))
-  olow <- exp(log(odds)) - qnorm(a / 2, lower.tail = FALSE) * se
-  ohigh <- exp(log(odds)) + qnorm(a / 2, lower.tail = FALSE) * se
+  olow <- exp(log(odds) - qnorm(a / 2, lower.tail = F) * se)
+  ohigh <- exp(log(odds) + qnorm(a / 2, lower.tail = F) * se)
 
   output = list("odds" = odds, #odds stats
                 "olow" = olow,
                 "ohigh" = ohigh,
-                "se" = se,
-                "estimate" = paste("$Odds$ = ", apa(odds,2,TRUE), ", ", (1-a)*100, "\\% CI [",
-                                   apa(olow,2,TRUE), ", ", apa(ohigh,2,TRUE), "]", sep = ""))
+                "se" = se)
 
   return(output)
 
 }
+
