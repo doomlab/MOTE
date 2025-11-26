@@ -14,13 +14,21 @@
 #'
 #' @format A data frame with 2 variables:
 #' \describe{
-#'   \item{friends}{Factor with levels \code{"low"}, \code{"medium"}, and \code{"high"} indicating self-reported number of friends.}
-#'   \item{kids}{Factor with levels \code{"1"}, \code{"2"}, and \code{"3+"} indicating number of children.}
+#'   \item{friends}{Factor with levels \code{"low"}, \code{"medium"},
+#' and \code{"high"} indicating self-reported number of friends.}
+#'   \item{kids}{Factor with levels \code{"1"}, \code{"2"}, and \code{"3+"}
+#' indicating number of children.}
 #' }
 #'
 #' @keywords datasets
 #'
 #' @references
-#' Nolan, S. A., & Heinzen, T. E. (*4th ed.*). *Statistics for the Behavioral Sciences*.  
-#' Macmillan Learning. \url{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
+#' Nolan, S. A., & Heinzen, T. E. (*4th ed.*).
+#' *Statistics for the Behavioral Sciences*.
+#' Macmillan Learning. \url{https://www.macmillanlearning.com/Catalog/
+#' product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
+#' @source
+#' Simulated data inspired by Nolan & Heinzen (4th ed.),
+#' *Statistics for the Behavioral Sciences*. Generated for instructional
+#' examples in the MOTE package.
 "chisq_data"

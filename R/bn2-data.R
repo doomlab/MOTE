@@ -15,10 +15,16 @@
 #'
 #' @format A data frame with 3 variables:
 #' \describe{
-#'   \item{coach}{Factor with levels \code{"old"} and \code{"new"} indicating coach experience.}
-#'   \item{type}{Factor indicating sport type: \code{"baseball"}, \code{"basketball"}, \code{"football"}, \code{"soccer"}, or \code{"volleyball"}.}
+#'   \item{coach}{Factor with levels \code{"old"} and
+#' \code{"new"} indicating coach experience.}
+#'   \item{type}{Factor indicating sport type: \code{"baseball"},
+#' \code{"basketball"}, \code{"football"}, \code{"soccer"}, or
+#' \code{"volleyball"}.}
 #'   \item{money}{Numeric. Athletic spending in thousands of dollars.}
 #' }
 #'
 #' @keywords datasets
+#'
+#' @source
+#' Simulated data generated for instructional examples in the MOTE package.
 "bn2_data"
