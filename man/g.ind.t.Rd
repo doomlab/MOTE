@@ -2,7 +2,7 @@
 % Please edit documentation in R/g.ind.t.R
 \name{g.ind.t}
 \alias{g.ind.t}
-\title{d-g Corrected for Independent t}
+\title{\eqn{d_g} Corrected for Independent \eqn{t}}
 \usage{
 g.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 }
@@ -22,73 +22,66 @@ g.ind.t(m1, m2, sd1, sd2, n1, n2, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-D-g corrected with associated confidence intervals,
-the confidence intervals associated with the means of each group,
-standard deviations of the means for each group, relevant statistics.
-
-\item{d}{d-g corrected effect size}
-\item{dlow}{lower level confidence interval d-g corrected}
-\item{dhigh}{upper level confidence interval d-g corrected}
-\item{M1}{mean group one}
-\item{sd1}{standard deviation of group one}
-\item{se1}{standard error of group one}
-\item{M1low}{lower level confidence interval of mean one}
-\item{M1high}{upper level confidence interval of mean one}
-\item{M2}{mean two}
-\item{sd2}{standard deviation of mean two}
-\item{se1}{standard error of mean two}
-\item{M2low}{lower level confidence interval of mean two}
-\item{M2high}{upper level confidence interval of mean two}
-\item{spooled}{pooled standard deviation}
-\item{sepooled}{pooled standard error}
-\item{correction}{g corrected}
-\item{n1}{size of sample one}
-\item{n2}{size of sample two}
-\item{df}{degrees of freedom}
-\item{t}{t-statistic}
-\item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+\describe{
+  \item{d}{\eqn{d_g} corrected effect size}
+  \item{dlow}{lower level confidence interval for \eqn{d_g}}
+  \item{dhigh}{upper level confidence interval for \eqn{d_g}}
+  \item{M1}{mean of group one}
+  \item{sd1}{standard deviation of group one}
+  \item{se1}{standard error of group one}
+  \item{M1low}{lower level confidence interval of mean one}
+  \item{M1high}{upper level confidence interval of mean one}
+  \item{M2}{mean of group two}
+  \item{sd2}{standard deviation of group two}
+  \item{se2}{standard error of group two}
+  \item{M2low}{lower level confidence interval of mean two}
+  \item{M2high}{upper level confidence interval of mean two}
+  \item{spooled}{pooled standard deviation}
+  \item{sepooled}{pooled standard error}
+  \item{correction}{Hedges' small-sample correction factor}
+  \item{n1}{sample size of group one}
+  \item{n2}{sample size of group two}
+  \item{df}{degrees of freedom (\eqn{n_1 - 1 + n_2 - 1})}
+  \item{t}{\eqn{t}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{d_g} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{t}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays d-g corrected
-and the non-central confidence interval for independent t.
+This function displays \eqn{d_g} (Hedges' g) corrected
+and the non-central confidence interval for independent \eqn{t}.
 }
 \details{
-The correction is calculated by dividing three by the sum of both
-sample sizes after multiplying by four and subtracting nine.
-This amount is deducted from one.
+The small-sample correction factor is:
 
-correction = 1 - (3 / (4 * (n1 + n2) - 9))
+\deqn{\mathrm{correction} = 1 - \frac{3}{4(n_1 + n_2) - 9}}
 
-D-g corrected is calculated by substracting mean two from mean one,
-dividing by the pooled standard deviation which is multiplied
-by the correction above.
+\eqn{d_g} is computed as the standardized mean difference multiplied by the correction:
 
-d_g corrected = ((m1 - m2) / spooled) * correction
+\deqn{d_g = \frac{m_1 - m_2}{s_{\mathrm{pooled}}} \times \mathrm{correction}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
 }
 \examples{
 
-#The following example is derived from the "indt_data" dataset, included
-#in the MOTE library.
+# The following example is derived from the "indt_data"
+# dataset, included in the MOTE library.
 
-#A forensic psychologist conducted a study to examine whether
-#being hypnotized during recall affects how well a witness
-#can remember facts about an event. Eight participants
-#watched a short film of a mock robbery, after which
-#each participant was questioned about what he or she had
-#seen. The four participants in the experimental group
-#were questioned while they were hypnotized. The four
-#participants in the control group recieved the same
-#questioning without hypnosis.
+# A forensic psychologist conducted a study to examine whether
+# being hypnotized during recall affects how well a witness
+# can remember facts about an event. Eight participants
+# watched a short film of a mock robbery, after which
+# each participant was questioned about what he or she had
+# seen. The four participants in the experimental group
+# were questioned while they were hypnotized. The four
+# participants in the control group received the same
+# questioning without hypnosis.
 
-    t.test(correctq ~ group, data = indt_data)
+   t.test(correctq ~ group, data = indt_data)
 
-#You can type in the numbers directly, or refer to the dataset,
-#as shown below.
+# You can type in the numbers directly, or refer to the dataset,
+# as shown below.
 
     g.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
            sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
@@ -103,9 +96,9 @@ d_g corrected = ((m1 - m2) / spooled) * correction
             length(indt_data$correctq[indt_data$group == 2]),
             .05)
 
-#Contrary to the hypothesized result, the group that underwent hypnosis were
-#significantly less accurate while reporting facts than the control group
-#with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
+# Contrary to the hypothesized result, the group that underwent hypnosis were
+# significantly less accurate while reporting facts than the control group
+# with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
 
 }
 \keyword{correction}

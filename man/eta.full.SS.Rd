@@ -2,7 +2,7 @@
 % Please edit documentation in R/eta.full.SS.R
 \name{eta.full.SS}
 \alias{eta.full.SS}
-\title{Eta for ANOVA from F and Sum of Squares}
+\title{\eqn{\eta^2} for ANOVA from \eqn{F} and Sum of Squares}
 \usage{
 eta.full.SS(dfm, dfe, ssm, sst, Fvalue, a = 0.05)
 }
@@ -20,22 +20,23 @@ eta.full.SS(dfm, dfe, ssm, sst, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides eta with associated confidence intervals and relevant statistics.
+Provides the effect size (\eqn{\eta^2}) with associated confidence intervals and relevant statistics.
 
-\item{eta}{effect size}
-\item{etalow}{lower level confidence interval of eta}
-\item{etahigh}{upper level confidence interval of eta}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the eta squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{eta}{\eqn{\eta^2} effect size}
+  \item{etalow}{lower level confidence interval of \eqn{\eta^2}}
+  \item{etahigh}{upper level confidence interval of \eqn{\eta^2}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\eta^2} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays eta squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
+This function displays \eqn{\eta^2} from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
 This formula works for one way and multi way designs with careful
 focus on the sum of squares total.
 }
@@ -43,23 +44,23 @@ focus on the sum of squares total.
 Eta squared is calculated by dividing the sum of squares for the model
 by the sum of squares total.
 
-eta^2 = ssm / sst
+\deqn{\eta^2 = \frac{SS_M}{SS_T}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 }
 \examples{
 
-#The following example is derived from the "bn1_data" dataset, included
-#in the MOTE library.
+# The following example is derived from the "bn1_data"
+# dataset, included in the MOTE library.
 
-#A health psychologist recorded the number of close inter-personal
-#attachments of 45-year-olds who were in excellent, fair, or poor
-#health. People in the Excellent Health group had 4, 3, 2, and 3
-#close attachments; people in the Fair Health group had 3, 5,
-#and 8 close attachments; and people in the Poor Health group
-#had 3, 1, 0, and 2 close attachments.
+# A health psychologist recorded the number of close inter-personal
+# attachments of 45-year-olds who were in excellent, fair, or poor
+# health. People in the Excellent Health group had 4, 3, 2, and 3
+# close attachments; people in the Fair Health group had 3, 5,
+# and 8 close attachments; and people in the Poor Health group
+# had 3, 1, 0, and 2 close attachments.
 
-anova_model = lm(formula = friends ~ group, data = bn1_data)
+anova_model <- lm(formula = friends ~ group, data = bn1_data)
 summary.aov(anova_model)
 
 eta.full.SS(dfm = 2, dfe = 8, ssm = 25.24,

@@ -3,26 +3,25 @@
 \docType{data}
 \name{mix2_data}
 \alias{mix2_data}
-\title{Mixed Two-way ANOVA Example Data}
-\format{A data frame including group type and backward strength rating.
-
-group: Regular JAM Task or Debiasing JAM task
-bsglo: estimate of response to target word in a Low BSG condition
-bsghi: estimate of response to target word in a High BSG condition}
+\title{Mixed Two-Way ANOVA Example Data}
+\format{
+A data frame with 3 variables:
+\describe{
+  \item{group}{Factor indicating instruction condition with levels
+    \code{"Regular JAM Task"} and \code{"Debiasing JAM task"}.}
+  \item{bsglo}{Numeric. Estimated response percentage in the Low BSG condition.}
+  \item{bsghi}{Numeric. Estimated response percentage in the High BSG condition.}
+}
+}
 \usage{
 data(mix2_data)
 }
 \description{
-Dataset for use in \code{\link{ges.partial.SS.mix}}.
-Given previous research, we know that backward strength
-in free association tends to increase the ratings
-participants give when you ask them how many people
-out of 100 would say a word in response to a target
-word (like Family Feud). This result is tied to
-people's overestimation of how well they think they
-know something, which is bad for studying. So, we
-gave people instructions on how to ignore the BSG.
-Did it help? Is there an interaction between BSG
-and instructions given?
+Example data for a mixed two-way ANOVA examining whether instructions to
+ignore backward strength in free association (BSG) reduce overestimation in
+response probabilities. Participants provided estimates of how many out of
+100 people would say a given response to a target word ("Family Feud"-style),
+under low vs. high BSG conditions, after receiving either regular or
+debiasing instructions.
 }
 \keyword{datasets}

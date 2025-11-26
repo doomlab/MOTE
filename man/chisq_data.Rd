@@ -3,25 +3,27 @@
 \docType{data}
 \name{chisq_data}
 \alias{chisq_data}
-\title{Chi-Square Example Data}
-\format{A data frame of number of friends and number of children
-
-friends: number of reported friends
-kids: number of children}
+\title{Chi-Square Test Example Data}
+\format{
+A data frame with 2 variables:
+\describe{
+  \item{friends}{Factor with levels \code{"low"}, \code{"medium"}, and \code{"high"} indicating self-reported number of friends.}
+  \item{kids}{Factor with levels \code{"1"}, \code{"2"}, and \code{"3+"} indicating number of children.}
+}
+}
 \usage{
 data(chisq_data)
 }
 \description{
-Dataset for use in \code{\link{v.chi.sq}},
-Individuals were polled and asked to report their number of friends
-(low, medium, high) and number of kids (1, 2, 3+)
-to determine if there was a relationship between friend
-groups and number of children. It was hypothesized that
-those with more children may have less time for
-friendship maintaining activities.
+Example data for a chi-square test of independence. Individuals were
+polled and asked to report their number of friends (low, medium, high)
+and their number of children (1, 2, 3 or more). The analysis examines
+whether there is an association between friend group size and number of
+children. It was hypothesized that those with more children may have
+less time for friendship-maintaining activities.
 }
 \references{
-Nolan and Heizen Statistics for the Behavioral Sciences
-(\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
+Nolan, S. A., & Heinzen, T. E. (*4th ed.*). *Statistics for the Behavioral Sciences*.  
+Macmillan Learning. \url{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
 }
 \keyword{datasets}

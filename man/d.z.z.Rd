@@ -2,54 +2,59 @@
 % Please edit documentation in R/d.z.z.R
 \name{d.z.z}
 \alias{d.z.z}
-\title{d from z-statistic for Z-test}
+\title{Cohen's d from z-statistic for Z-test}
 \usage{
 d.z.z(z, sig = NA, n, a = 0.05)
 }
 \arguments{
-\item{z}{z statistic}
+\item{z}{z-statistic from a Z-test.}
 
-\item{sig}{population standard deviation}
+\item{sig}{Population standard deviation (\eqn{\sigma}).}
 
-\item{n}{sample size}
+\item{n}{Sample size.}
 
-\item{a}{significance level}
+\item{a}{Significance level (alpha) for the confidence interval. Must be in (0, 1).}
 }
 \value{
-The effect size (Cohen's d) with associated confidence intervals and
-relevant statistics.
-
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{sigma}{sample size}
-\item{z}{sig stats}
-\item{p}{p-value}
-\item{n}{sample size}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the Z-statistic in APA style for markdown printing}
+A list with the following elements:
+\describe{
+  \item{d}{Effect size.}
+  \item{dlow}{Lower confidence interval bound for \eqn{d}.}
+  \item{dhigh}{Upper confidence interval bound for \eqn{d}.}
+  \item{sigma}{Population standard deviation (\eqn{\sigma}).}
+  \item{z}{z-statistic.}
+  \item{p}{Two-tailed p-value.}
+  \item{n}{Sample size.}
+  \item{estimate}{The \eqn{d} statistic and confidence interval in APA style for markdown printing.}
+  \item{statistic}{The Z-statistic in APA style for markdown printing.}
+}
 }
 \description{
-This function displays d for Z-tests when all you have is the z-statistic.
-The normal confidence interval is also provided if you have sigma.
-If sigma is left blank, then you will not see a confidence interval.
+Compute Cohen's \eqn{d} from a z-statistic for a Z-test. If the population
+standard deviation (\eqn{\sigma}) is provided, a normal-theory confidence interval
+for \eqn{d} is also returned. If \eqn{\sigma} is omitted, confidence intervals are not computed.
 }
 \details{
-To calculate d, z is divided by the square root of N.
+The effect size is computed as:
+\deqn{d = \frac{z}{\sqrt{n}},}
+where \eqn{n} is the sample size.
 
-d = z / sqrt(N)
+The confidence interval bounds are:
+\deqn{d_{\mathrm{low}} = d - z_{\alpha/2} \cdot \sigma}
+\deqn{d_{\mathrm{high}} = d + z_{\alpha/2} \cdot \sigma}
+where \eqn{z_{\alpha/2}} is the critical value from the standard normal distribution.
 
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/zz.html}{Learn more on our example page.}
 }
 \examples{
 
-#A recent study suggested that students (N = 100) learning
-#statistics improved their test scores with the use of
-#visual aids (Z = 2.5). The population standard deviation is 4.
+# A recent study suggested that students (N = 100) learning
+# statistics improved their test scores with the use of
+# visual aids (Z = 2.5). The population standard deviation is 4.
 
-#You can type in the numbers directly as shown below,
-#or refer to your dataset within the function.
+# You can type in the numbers directly as shown below,
+# or refer to your dataset within the function.
 
     d.z.z(z = 2.5, sig = 4, n = 100, a = .05)
 

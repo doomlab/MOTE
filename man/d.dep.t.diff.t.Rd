@@ -2,67 +2,62 @@
 % Please edit documentation in R/d.dep.t.diff.t.R
 \name{d.dep.t.diff.t}
 \alias{d.dep.t.diff.t}
-\title{d from t for Repeated Measures with SD Difference Scores Denominator}
+\title{Cohen's d from t for Paired Samples Using the SD of Difference Scores}
 \usage{
 d.dep.t.diff.t(t, n, a = 0.05)
 }
 \arguments{
-\item{t}{t-test value}
+\item{t}{t-statistic from a paired-samples t-test.}
 
-\item{n}{sample size}
+\item{n}{Sample size (number of paired observations).}
 
-\item{a}{significance level}
+\item{a}{Significance level (alpha) for the confidence interval. Must be in (0, 1).}
 }
 \value{
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{n}{sample size}
-\item{df}{degrees of freedom (sample size - 1)}
-\item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in APA
-style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+A list with the following elements:
+\describe{
+  \item{d}{Cohen's \eqn{d_z}.}
+  \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_z}.}
+  \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_z}.}
+  \item{n}{Sample size.}
+  \item{df}{Degrees of freedom (\eqn{n - 1}).}
+  \item{t}{t-statistic.}
+  \item{p}{p-value.}
+  \item{estimate}{APA-style formatted string for reporting \eqn{d_z} and its CI.}
+  \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+}
 }
 \description{
-This function displays d for repeated measures data
-and the non-central confidence interval using the
-standard deviation of the differences as the denominator
-estimating from the t-statistic.
+Compute Cohen's \eqn{d_z} from a paired-samples t-statistic and provide a
+noncentral-t confidence interval, using the **standard deviation of the
+difference scores** as the denominator.
 }
 \details{
-To calculate d, the t-statistic is divided by the square root of the sample size.
+For paired designs, \eqn{d_z} can be obtained directly from the t-statistic:
+\deqn{d_z = \frac{t}{\sqrt{n}},}
+where \eqn{n} is the number of paired observations (df = \eqn{n-1}). The
+\eqn{(1-\alpha)} confidence interval for \eqn{d_z} is derived from the
+noncentral t distribution for the observed \eqn{t} and df.
 
-d_z = t / sqrt(n)
-
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 }
 \examples{
+# Example derived from the "dept_data" dataset included in MOTE
 
-#The following example is derived from the "dept_data" dataset included
-#in the MOTE library.
+# Suppose seven people completed a measure before and after an intervention.
+# Higher scores indicate stronger endorsement.
 
-#In a study to test the effects of science fiction movies on people’s belief
-#in the supernatural, seven people completed a measure of belief in
-#the supernatural before and after watching a popular science
-#fiction movie. Higher scores indicated higher levels of belief.
+    scifi <- t.test(dept_data$before, dept_data$after, paired = TRUE)
 
-    scifi = t.test(dept_data$before, dept_data$after, paired = TRUE)
-
-#The t-test value was 1.43. You can type in the numbers directly,
-#or refer to the dataset, as shown below.
+# The t-test value was 1.43. You can type in the numbers directly,
+# or refer to the dataset, as shown below.
 
     d.dep.t.diff.t(t = 1.43, n = 7, a = .05)
 
     d.dep.t.diff.t(1.43, 7, .05)
 
     d.dep.t.diff.t(scifi$statistic, length(dept_data$before), .05)
-
-#The mean measure of belief on the pretest was 5.57, with a standard
-#deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
-#but the dependent t-test was not significant using alpha = .05,
-#t(7) = 1.43, p = .203, d_z = 0.54. The effect size was a medium effect suggesting
-#that the movie may have influenced belief in the supernatural.
 }
 \keyword{dependent}
 \keyword{effect}

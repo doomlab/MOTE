@@ -2,7 +2,7 @@
 % Please edit documentation in R/omega.gen.SS.rm.R
 \name{omega.gen.SS.rm}
 \alias{omega.gen.SS.rm}
-\title{Generalized Omega Squared for Multi-Way and Mixed ANOVA from F}
+\title{omega^2_G (Generalized Omega Squared) for Multi-Way and Mixed ANOVA from F}
 \usage{
 omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 }
@@ -26,25 +26,23 @@ omega.gen.SS.rm(dfm, dfe, ssm, ssm2, sst, mss, j, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides omega squared with associated confidence intervals
-and relevant statistics.
-
-\item{omega}{omega squared}
-\item{omegalow}{lower level confidence interval of omega}
-\item{omegahigh}{upper level confidence interval of omega}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/resisual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the omega squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{omega}{\eqn{\omega^2_G} effect size}
+  \item{omegalow}{lower level confidence interval of \eqn{\omega^2_G}}
+  \item{omegahigh}{upper level confidence interval of \eqn{\omega^2_G}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\omega^2_G} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays generalized omega squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
-This formula is appropriate for multi-way repeated measures
-designs and mix level designs.
+This function displays \eqn{\omega^2_G} (generalized omega squared) from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
+This formula is appropriate for multi-way repeated-measures
+designs and mixed-level designs.
 }
 \details{
 Omega squared is calculated by subtracting the product of the
@@ -57,31 +55,32 @@ independent variable, and the mean square of the
 subject variance multiplied by the number of levels
 in the other model/IV/between.
 
-generalized omega^2 = (ssm - (dfm * mss)) / (sst + ssm2 + j*mss)
+\deqn{\omega^2_G = \frac{SS_M - (df_m \times MS_S)}{SS_T + SS_{M2} + j \times MS_S}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 }
 \examples{
 
-#The following example is derived from the "mix2_data" dataset, included
-#in the MOTE library.
+# The following example is derived from the "mix2_data"
+# dataset, included in the MOTE library.
 
-#Given previous research, we know that backward strength in free
-#association tends to increase the ratings participants give when
-#you ask them how many people out of 100 would say a word in
-#response to a target word (like Family Feud). This result is
-#tied to people’s overestimation of how well they think they know
-#something, which is bad for studying. So, we gave people instructions
-#on how to ignore the BSG.  Did it help? Is there an interaction
-#between BSG and instructions given?
+# Given previous research, we know that backward strength in free
+# association tends to increase the ratings participants give when
+# you ask them how many people out of 100 would say a word in
+# response to a target word (like Family Feud). This result is
+# tied to people’s overestimation of how well they think they know
+# something, which is bad for studying. So, we gave people instructions
+# on how to ignore the BSG.  Did it help? Is there an interaction
+# between BSG and instructions given?
 
+\dontrun{
 library(ez)
-mix2_data$partno = 1:nrow(mix2_data)
+mix2_data$partno <- 1:nrow(mix2_data)
 
 library(reshape)
-long_mix = melt(mix2_data, id = c("partno", "group"))
+long_mix <- melt(mix2_data, id = c("partno", "group"))
 
-anova_model = ezANOVA(data = long_mix,
+anova_model <- ezANOVA(data = long_mix,
                       dv = value,
                       wid = partno,
                       between = group,
@@ -89,8 +88,8 @@ anova_model = ezANOVA(data = long_mix,
                       detailed = TRUE,
                       type = 3)
 
-#You would calculate one partial GOS value for each F-statistic.
-#Here's an example for the main effect 1 with typing in numbers.
+# You would calculate one partial GOS value for each F-statistic.
+# Here's an example for the main effect 1 with typing in numbers.
  omega.gen.SS.rm(dfm = 1, dfe = 156,
                  ssm = 6842.46829,
                  ssm2 = 14336.07886,
@@ -99,7 +98,7 @@ anova_model = ezANOVA(data = long_mix,
                  mss = 30936.498 / 156,
                  j = 2, Fvalue = 34.503746, a = .05)
 
-#Here's an example for the main effect 1 with code.
+# Here's an example for the main effect 1 with code.
  omega.gen.SS.rm(dfm = anova_model$ANOVA$DFn[2],
                  dfe = anova_model$ANOVA$DFd[2],
                  ssm = anova_model$ANOVA$SSn[2],
@@ -108,6 +107,7 @@ anova_model = ezANOVA(data = long_mix,
                  mss = anova_model$ANOVA$SSd[1]/anova_model$ANOVA$DFd[1],
                  j = anova_model$ANOVA$DFn[3]+1,
                  Fvalue = anova_model$ANOVA$F[2], a = .05)
+ }
 }
 \keyword{ANOVA}
 \keyword{effect}
