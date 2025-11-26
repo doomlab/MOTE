@@ -2,7 +2,7 @@
 % Please edit documentation in R/ges.partial.SS.rm.R
 \name{ges.partial.SS.rm}
 \alias{ges.partial.SS.rm}
-\title{Partial Generalized Eta-Squared for ANOVA from F}
+\title{\eqn{\eta^2_{G}} (Partial Generalized Eta-Squared) for Repeated-Measures ANOVA from \eqn{F}}
 \usage{
 ges.partial.SS.rm(dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a = 0.05)
 }
@@ -26,22 +26,21 @@ ges.partial.SS.rm(dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Partial generalized eta-squared (GES) with associated confidence intervals
-and relevant statistics.
-\item{ges}{effect size}
-\item{geslow}{lower level confidence interval for ges}
-\item{geshigh}{upper level confidence interval for ges}
-\item{dfm}{degrees of freedom for the model/IV/between}
-\item{dfe}{degrees of freedom for the error/residual/within}
-\item{F}{F-statistic}
-\item{p}{p-value}
-\item{estimate}{the generalized eta squared statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the F-statistic in APA style for markdown printing}
+\describe{
+  \item{ges}{\eqn{\eta^2_{G}} effect size}
+  \item{geslow}{lower level confidence interval for \eqn{\eta^2_{G}}}
+  \item{geshigh}{upper level confidence interval for \eqn{\eta^2_{G}}}
+  \item{dfm}{degrees of freedom for the model/IV/between}
+  \item{dfe}{degrees of freedom for the error/residual/within}
+  \item{F}{\eqn{F}-statistic}
+  \item{p}{p-value}
+  \item{estimate}{the \eqn{\eta^2_{G}} statistic and confidence interval in APA style for markdown printing}
+  \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+}
 }
 \description{
-This function displays partial ges squared from ANOVA analyses
-and its non-central confidence interval based on the F distribution.
+This function displays partial generalized eta-squared (\eqn{\eta^2_{G}}) from ANOVA analyses
+and its non-central confidence interval based on the \eqn{F} distribution.
 This formula works for multi-way repeated measures designs.
 }
 \details{
@@ -51,49 +50,50 @@ variance, sum of squares for the first and second independent variables,
 and the sum of squares for the interaction are added together.
 The sum of squares of the model is divided by this value.
 
-     partial ges <- ssm / (ssm + sss + sse1 + sse2 + sse3)
+\deqn{\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_{E1} + SS_{E2} + SS_{E3}}}
 
 \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 }
 \examples{
 
-#The following example is derived from the "rm2_data" dataset, included
-#in the MOTE library.
+# The following example is derived from the "rm2_data" dataset, included
+# in the MOTE library.
 
-#In this experiment people were given word pairs to rate based on
-#their "relatedness". How many people out of a 100 would put LOST-FOUND
-#together? Participants were given pairs of words and asked to rate them
-#on how often they thought 100 people would give the second word if shown
-#the first word.  The strength of the word pairs was manipulated through
-#the actual rating (forward strength: FSG) and the strength of the reverse
-#rating (backward strength: BSG). Is there an interaction between FSG and
-#BSG when participants are estimating the relation between word pairs?
+# In this experiment people were given word pairs to rate based on
+# their "relatedness". How many people out of a 100 would put LOST-FOUND
+# together? Participants were given pairs of words and asked to rate them
+# on how often they thought 100 people would give the second word if shown
+# the first word.  The strength of the word pairs was manipulated through
+# the actual rating (forward strength: FSG) and the strength of the reverse
+# rating (backward strength: BSG). Is there an interaction between FSG and
+# BSG when participants are estimating the relation between word pairs?
 
+\dontrun{
 library(ez)
 library(reshape)
-long_mix = melt(rm2_data, id = c("subject", "group"))
-long_mix$FSG = c(rep("Low-FSG", nrow(rm2_data)),
+long_mix <- melt(rm2_data, id = c("subject", "group"))
+long_mix$FSG <- c(rep("Low-FSG", nrow(rm2_data)),
                  rep("High-FSG", nrow(rm2_data)),
                  rep("Low-FSG", nrow(rm2_data)),
                  rep("High-FSG", nrow(rm2_data)))
-long_mix$BSG = c(rep("Low-BSG", nrow(rm2_data)*2),
+long_mix$BSG <- c(rep("Low-BSG", nrow(rm2_data)*2),
                  rep("High-BSG", nrow(rm2_data)*2))
 
-anova_model = ezANOVA(data = long_mix,
+anova_model <- ezANOVA(data = long_mix,
                       dv = value,
                       wid = subject,
                       within = .(FSG, BSG),
                       detailed = TRUE,
                       type = 3)
 
-#You would calculate one partial GES value for each F-statistic.
-#Here's an example for the interaction with typing in numbers.
+# You would calculate one partial GES value for each F-statistic.
+# Here's an example for the interaction with typing in numbers.
 ges.partial.SS.rm(dfm = 1, dfe = 157,
                   ssm = 2442.948, sss = 76988.13,
                   sse1 = 5402.567, sse2 = 8318.75, sse3 = 6074.417,
                   Fvalue = 70.9927, a = .05)
 
-#Here's an example for the interaction with code.
+# Here's an example for the interaction with code.
 ges.partial.SS.rm(dfm = anova_model$ANOVA$DFn[4],
                   dfe = anova_model$ANOVA$DFd[4],
                   ssm = anova_model$ANOVA$SSn[4],
@@ -103,6 +103,7 @@ ges.partial.SS.rm(dfm = anova_model$ANOVA$DFn[4],
                   sse3 = anova_model$ANOVA$SSd[3],
                   Fvalue = anova_model$ANOVA$F[4],
                   a = .05)
+ }
 }
 \keyword{ANOVA}
 \keyword{effect}

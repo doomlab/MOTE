@@ -1,23 +1,31 @@
-#' APA Format
+#' Format numbers for APA-style reporting
 #'
-#' A function that formats decimals and leading zeroes
-#' for creating reports in scientific style.
+#' Create "pretty" character representations of numeric values with a fixed
+#' number of decimal places, optionally keeping or omitting the leading zero
+#' for values between -1 and 1.
 #'
-#' @param value A set of numeric values, either a single number, vector, or set of columns.
-#' @param decimals The number of decimal points desired in the output.
-#' @param leading Logical value: \code{TRUE} for leading zeroes on decimals
-#'    and \code{FALSE} for no leading zeroes on decimals. The default is \code{TRUE}.
-#' @keywords APA, decimals, formatting
+#' @param value Numeric input: a single number, vector, matrix, or a data frame
+#'   with all-numeric columns. Non-numeric inputs will error.
+#' @param decimals A single non-negative integer giving the number of decimal
+#'   places to keep in the output.
+#' @param leading Logical: `TRUE` to keep leading zeros on decimals (e.g.,
+#'   `0.25`), `FALSE` to drop them (e.g., `.25`). Default is `TRUE`.
+#' @return A character vector/array (matching the shape of `value`) containing
+#'   the formatted numbers.
 #' @details
-#'   This function creates "pretty" character vectors from numeric variables
-#'   for printing as part of a report. The value can take a single number,
-#'   matrix, vector, or multiple columns from a data frame, as long as they are
-#'   numeric. The values will be coerced into numeric if they are characters or
-#'   logical values, but this process may result in an error if values are
-#'   truly alphabetical.
-#' @examples
-#' apa(value = 0.54674, decimals = 3, leading = TRUE)
+#' This function formats numbers for inclusion in manuscripts and reports.
+#' - When `leading = TRUE`, numbers are rounded and padded to `decimals`
+#'   places, keeping the leading zero for values with absolute value < 1.
+#' - When `leading = FALSE`, the leading zero before the decimal point is
+#'   removed for values with absolute value < 1.
+#' If `value` is a data frame, all columns must be numeric; otherwise an error
+#' is thrown.
 #' @export
+#' @examples
+#' apa(0.54674, decimals = 3, leading = TRUE)   # "0.547"
+#' apa(c(0.2, 1.2345, -0.04), decimals = 2)     # "0.20" "1.23" "-0.04"
+#' apa(matrix(c(0.12, -0.9, 2.3, 10.5), 2), decimals = 1, leading = FALSE)
+#' # returns a character matrix with ".1", "-.9", "2.3", "10.5"
 
 apa <- function(value, decimals = 3, leading = TRUE) {
 
@@ -25,19 +33,38 @@ apa <- function(value, decimals = 3, leading = TRUE) {
     stop("Be sure to include the numeric values you wish to format.")
   }
 
-  if (!is.numeric(value)){
-    stop("The values you provided are not numeric.")
+  # Allow data frames with all-numeric columns; coerce to matrix
+  if (is.data.frame(value)) {
+    if (!all(vapply(value, is.numeric, logical(1)))) {
+      stop("All columns in 'value' must be numeric.")
+    }
   }
 
-  if (leading == T) {
-    sigDigits <- decimals + 1
-    formnumber <- format(round(as.numeric(value), decimals), digits = sigDigits, nsmall = decimals)
-    }
-  if (leading == F) {
-    formnumber <- sub("^(-?)0.", "\\1.", sprintf(paste("%.", decimals, "f", sep = ""), as.numeric(value)))
-    }
+  if (!is.numeric(value) && !is.data.frame(value)) {
+    stop("'value' must be numeric (vector, matrix) or a data frame with all-numeric columns.")
+  }
+
+  # Validate 'decimals'
+  if (!is.numeric(decimals) || length(decimals) != 1 || decimals < 0 || decimals != as.integer(decimals)) {
+    stop("'decimals' must be a single non-negative integer.")
+  }
+  decimals <- as.integer(decimals)
+
+  # Validate 'leading'
+  if (!is.logical(leading) || length(leading) != 1) {
+    stop("'leading' must be TRUE or FALSE.")
+  }
+
+  # Base formatted string with fixed decimal places
+  base_fmt <- format(round(as.matrix(as.data.frame(value)), decimals),
+                     nsmall = decimals, trim = FALSE, scientific = FALSE)
+
+  if (isTRUE(leading)) {
+    formnumber <- base_fmt
+  } else {
+    # Remove leading zero for values with absolute value < 1
+    formnumber <- sub("^(-?)0\\.", "\\1.", base_fmt)
+  }
   return(formnumber)
-  }
+}
 
-#' @rdname apa
-#' @export

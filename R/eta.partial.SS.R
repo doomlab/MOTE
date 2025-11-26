@@ -1,14 +1,14 @@
-#' Partial Eta Squared for ANOVA from F and Sum of Squares
+#' \eqn{\eta^2_p} for ANOVA from \eqn{F} and Sum of Squares
 #'
-#' This function displays partial eta squared from ANOVA analyses
-#' and its non-central confidence interval based on the F distribution.
+#' This function displays \eqn{\eta^2_p} from ANOVA analyses
+#' and its non-central confidence interval based on the \eqn{F} distribution.
 #' This formula works for one way and multi way designs.
 #'
-#' Partial eta squared is calculated by dividing the sum of squares
+#' \eqn{\eta^2_p} is calculated by dividing the sum of squares
 #' of the model by the sum of the sum of squares of the model and
 #' sum of squares of the error.
 #'
-#'      partial eta^2 = ssm / (ssm + sse)
+#' \deqn{\eta^2_p = \frac{SS_M}{SS_M + SS_E}}
 #'
 #' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
@@ -19,59 +19,63 @@
 #' @param Fvalue F statistic
 #' @param a significance level
 #'
-#' @return Provides partial eta squared with associated confidence intervals
+#' @return Provides the effect size (\eqn{\eta^2_p}) with associated confidence intervals
 #' and relevant statistics.
 #'
-#' \item{eta}{partial eta squared effect size}
-#' \item{etalow}{lower level confidence interval of partial eta squared}
-#' \item{etahigh}{upper level confidence interval of partial eta squared}
+#' \describe{
+#' \item{eta}{\eqn{\eta^2_p} effect size}
+#' \item{etalow}{lower level confidence interval of \eqn{\eta^2_p}}
+#' \item{etahigh}{upper level confidence interval of \eqn{\eta^2_p}}
 #' \item{dfm}{degrees of freedom for the model/IV/between}
-#' \item{dfe}{degrees of freedom for the error/resisual/within}
-#' \item{F}{F-statistic}
+#' \item{dfe}{degrees of freedom for the error/residual/within}
+#' \item{F}{\eqn{F}-statistic}
 #' \item{p}{p-value}
-#' \item{estimate}{the eta squared statistic and confidence interval in
-#' APA style for markdown printing}
-#' \item{statistic}{the F-statistic in APA style for markdown printing}
+#' \item{estimate}{the \eqn{\eta^2_p} statistic and confidence interval in APA style for markdown printing}
+#' \item{statistic}{the \eqn{F}-statistic in APA style for markdown printing}
+#' }
 #'
 #' @keywords effect size, eta, ANOVA
-#' @import MBESS
 #' @import stats
-#' @import ez
-#' @export
 #' @examples
 #'
-#' #The following example is derived from the "bn2_data" dataset, included
-#' #in the MOTE library.
+#' # The following example is derived from the "bn2_data"
+#' # dataset, included in the MOTE library.
 #'
-#' #Is there a difference in atheletic spending budget for different sports?
-#' #Does that spending interact with the change in coaching staff? This data includes
-#' #(fake) atheletic budgets for baseball, basketball, football, soccer, and volleyball teams
-#' #with new and old coaches to determine if there are differences in
-#' #spending across coaches and sports.
+#' # Is there a difference in athletic spending budget for different sports?
+#' # Does that spending interact with the change in coaching staff? This data includes
+#' # (fake) athletic budgets for baseball, basketball, football, soccer, and volleyball teams
+#' # with new and old coaches to determine if there are differences in
+#' # spending across coaches and sports.
 #'
-#' library(ez)
-#' bn2_data$partno = 1:nrow(bn2_data)
-#' anova_model = ezANOVA(data = bn2_data,
-#'                       dv = money,
-#'                       wid = partno,
-#'                       between = .(coach, type),
-#'                       detailed = TRUE,
-#'                       type = 3)
-#'
-#' #You would calculate one eta for each F-statistic.
-#' #Here's an example for the interaction with typing in numbers.
+#' # Example using reported ANOVA table values directly
 #' eta.partial.SS(dfm = 4, dfe = 990,
 #'                ssm = 338057.9, sse = 32833499,
 #'                Fvalue = 2.548, a = .05)
 #'
-#' #Here's an example for the interaction with code.
-#' eta.partial.SS(dfm = anova_model$ANOVA$DFn[4],
-#'                dfe = anova_model$ANOVA$DFd[4],
-#'                ssm = anova_model$ANOVA$SSn[4],
-#'                sse = anova_model$ANOVA$SSd[4],
-#'                Fvalue =  anova_model$ANOVA$F[4],
-#'                a = .05)
-
+#' # Example computing Type III SS with code (requires the "car" package)
+#' if (requireNamespace("car", quietly = TRUE)) {
+#'
+#'   # Fit the model using stats::lm
+#'   mod <- stats::lm(money ~ coach * type, data = bn2_data)
+#'
+#'   # Type III table for the effects
+#'   aov_type3 <- car::Anova(mod, type = 3)
+#'
+#'   # Extract degrees of freedom, sum of squares, and F for the interaction (coach:type)
+#'   dfm_int <- aov_type3["coach:type", "Df"]
+#'   ssm_int <- aov_type3["coach:type", "Sum Sq"]
+#'   F_int   <- aov_type3["coach:type", "F value"]
+#'
+#'   # Residual degrees of freedom and sum of squares from the standard ANOVA table
+#'   aov_type1 <- stats::anova(mod)
+#'   dfe <- aov_type1["Residuals", "Df"]
+#'   sse <- aov_type1["Residuals", "Sum Sq"]
+#'
+#'   # Calculate partial eta-squared for the interaction using Type III SS
+#'   eta.partial.SS(dfm = dfm_int, dfe = dfe,
+#'                  ssm = ssm_int, sse = sse,
+#'                  Fvalue = F_int, a = .05)
+#' }
 
 eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
@@ -117,13 +121,10 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
                  "estimate" = paste("$\\eta^2_{p}$ = ", apa(eta,2,FALSE), ", ", (1-a)*100, "\\% CI [",
                                     apa(limits$Lower.Conf.Limit.R2,2,TRUE), ", ", apa(limits$Upper.Conf.Limit.R2,2,TRUE), "]", sep = ""),
                  "statistic" = paste("$F$(", dfm, ", ", dfe, ") = ",
-                                     apa(Fvalue,2,T), ", $p$ ",
+                                     apa(Fvalue,2,TRUE), ", $p$ ",
                                      reportp, sep = "")
   )
 
   return(output)
 
 }
-
-#' @rdname eta.partial.SS
-#' @export

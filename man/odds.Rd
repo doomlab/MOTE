@@ -2,7 +2,7 @@
 % Please edit documentation in R/odds.R
 \name{odds}
 \alias{odds}
-\title{Chi-Square Odds Ratios}
+\title{Odds Ratio from 2x2 Table}
 \usage{
 odds(n11, n12, n21, n22, a = 0.05)
 }
@@ -18,23 +18,21 @@ odds(n11, n12, n21, n22, a = 0.05)
 \item{a}{significance level}
 }
 \value{
-Provides odds ratios with associated confidence intervals
-and relevant statistics.
-
-\item{odds}{odds statistic}
-\item{olow}{lower level confidence interval of odds statistic}
-\item{ohigh}{upper level confidence interval of odds statistic}
-\item{se}{standard error}
-\item{estimate}{the oods statistic and confidence interval in
-APA style for markdown printing}
+\describe{
+  \item{odds}{odds ratio statistic}
+  \item{olow}{lower level confidence interval of odds ratio}
+  \item{ohigh}{upper level confidence interval of odds ratio}
+  \item{se}{standard error}
+  \item{estimate}{the odds ratio statistic and confidence interval in APA style for markdown printing}
+}
 }
 \description{
 This function displays odds ratios and their normal confidence intervals.
 }
 \details{
-This statistic is the ratio between level 1.1 divided by level 1.2, and
-level 2.1 divided by 2.2. In other words, these are the odds of level 1.1
-given level 1 overall versus level 2.1 given level 2 overall.
+This statistic is the odds ratio:
+
+\deqn{OR = \frac{n_{11} / n_{12}}{n_{21} / n_{22}}}
 
 To calculate odds ratios, First, the sample size for level 1.1
 is divided by the sample size for level 1.2. This value is divided
@@ -47,16 +45,16 @@ size of level 2.2.
 }
 \examples{
 
-#A health psychologist was interested in the rates of anxiety in
-#first generation and regular college students. They polled campus
-#and found the following data:
+# A health psychologist was interested in the rates of anxiety in
+# first generation and regular college students. They polled campus
+# and found the following data:
 
-  #|              | First Generation | Regular |
-  #|--------------|------------------|---------|
-  #| Low Anxiety  | 10               | 50      |
-  #| High Anxiety | 20               | 15      |
+  # |              | First Generation | Regular |
+  # |--------------|------------------|---------|
+  # | Low Anxiety  | 10               | 50      |
+  # | High Anxiety | 20               | 15      |
 
-#What are the odds for the first generation students to have anxiety?
+# What are the odds for the first generation students to have anxiety?
 
 odds(n11 = 10, n12 = 50, n21 = 20, n22 = 15, a = .05)
 }

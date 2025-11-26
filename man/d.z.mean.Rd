@@ -2,63 +2,65 @@
 % Please edit documentation in R/d.z.mean.R
 \name{d.z.mean}
 \alias{d.z.mean}
-\title{d for Z-test from Population Mean and SD}
+\title{Cohen's d for Z-test from Population Mean and SD}
 \usage{
 d.z.mean(mu, m1, sig, sd1, n, a = 0.05)
 }
 \arguments{
-\item{mu}{population mean}
+\item{mu}{The population mean.}
 
-\item{m1}{sample study mean}
+\item{m1}{The sample study mean.}
 
-\item{sig}{population standard deviation}
+\item{sig}{The population standard deviation.}
 
-\item{sd1}{standard deviation from the study}
+\item{sd1}{The standard deviation from the study.}
 
-\item{n}{sample size}
+\item{n}{The sample size.}
 
-\item{a}{significance level}
+\item{a}{The significance level.}
 }
 \value{
-The effect size (Cohen's d) with associated confidence intervals
-and relevant statistics.
-
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{M1}{mean of sample}
-\item{sd1}{standard deviation of sample}
-\item{se1}{standard error of sample}
-\item{M1low}{lower level confidence interval of the mean}
-\item{M1high}{upper level confidence interval of the mean}
-\item{Mu}{population mean}
-\item{Sigma}{standard deviation of population}
-\item{se2}{standard error of population}
-\item{z}{z-statistic}
-\item{p}{p-value}
-\item{n}{sample size}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the Z-statistic in APA style for markdown printing}
+A list with the following components:
+\describe{
+  \item{d}{Effect size (Cohen's d).}
+  \item{dlow}{Lower level confidence interval d value.}
+  \item{dhigh}{Upper level confidence interval d value.}
+  \item{M1}{Mean of sample.}
+  \item{sd1}{Standard deviation of sample.}
+  \item{se1}{Standard error of sample.}
+  \item{M1low}{Lower level confidence interval of the mean.}
+  \item{M1high}{Upper level confidence interval of the mean.}
+  \item{Mu}{Population mean.}
+  \item{Sigma}{Standard deviation of population.}
+  \item{se2}{Standard error of population.}
+  \item{z}{Z-statistic.}
+  \item{p}{P-value.}
+  \item{n}{Sample size.}
+  \item{estimate}{The d statistic and confidence interval in APA style for markdown printing.}
+  \item{statistic}{The Z-statistic in APA style for markdown printing.}
+}
 }
 \description{
-This function displays d for Z-test with the
-population mean and standard deviation.
-The normal confidence interval is also provided.
+Computes Cohen's d for a Z-test using the sample mean, population mean, and population standard deviation.
+The function also provides a normal-theory confidence interval for d, and returns relevant statistics including the z-statistic and its p-value.
 }
 \details{
-d is calculated by deducting the population mean from the sample study mean
-and dividing by the alpha level.
+The effect size is computed as:
+\deqn{d = \frac{m_1 - \mu}{\sigma}}
+where \eqn{m_1} is the sample mean, \eqn{\mu} is the population mean,
+and \eqn{\sigma} is the population standard deviation.
 
-     d = (m1 - mu) / sig
+The z-statistic is:
+\deqn{z = \frac{m_1 - \mu}{\sigma / \sqrt{n}}}
+where \eqn{n} is the sample size.
 
 \href{https://www.aggieerin.com/shiny-server/tests/zm.html}{Learn more on our example page.}
 }
 \examples{
 
-#The average quiz test taking time for a 10 item test is 22.5
-#minutes, with a standard deviation of 10 minutes. My class of
-#25 students took 19 minutes on the test with a standard deviation of 5.
+# The average quiz test taking time for a 10 item test is 22.5
+# minutes, with a standard deviation of 10 minutes. My class of
+# 25 students took 19 minutes on the test with a standard deviation of 5.
 
 d.z.mean(mu = 22.5, m1 = 19, sig = 10, sd1 = 5, n = 25, a = .05)
 }

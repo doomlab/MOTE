@@ -2,67 +2,66 @@
 % Please edit documentation in R/d.single.t.t.R
 \name{d.single.t.t}
 \alias{d.single.t.t}
-\title{d for Single t from t}
+\title{Cohen's d from t for One-Sample t-Test}
 \usage{
 d.single.t.t(t, n, a = 0.05)
 }
 \arguments{
-\item{t}{t-test value}
+\item{t}{t-test value.}
 
-\item{n}{sample size}
+\item{n}{Sample size.}
 
-\item{a}{significance level}
+\item{a}{Significance level (alpha) for the confidence interval. Must be in (0, 1).}
 }
 \value{
-The effect size (Cohen's d) with associated confidence intervals
-and relevant statistics.
-
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{n}{sample size}
-\item{df}{degrees of freedom (sample size - 1)}
-\item{t}{sig stats}
-\item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
-\item{statistic}{the t-statistic in APA style for markdown printing}
+A list with the following elements:
+\describe{
+  \item{d}{Cohen's \eqn{d}.}
+  \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+  \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d}.}
+  \item{n}{Sample size.}
+  \item{df}{Degrees of freedom (\eqn{n - 1}).}
+  \item{t}{t-statistic.}
+  \item{p}{p-value.}
+  \item{estimate}{APA-style formatted string for reporting \eqn{d} and its CI.}
+  \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+}
 }
 \description{
-This function displays d and non-central confidence interval for single t
-estimated from the t-statistic.
+Compute Cohen's \eqn{d} and a noncentral-t confidence interval for a
+one-sample (single) t-test using the observed t-statistic.
 }
 \details{
-To calculate d, the t-statistic is divided by the square root of the sample size.
+The effect size is calculated as:
+\deqn{d = \frac{t}{\sqrt{n}},}
+where \eqn{t} is the one-sample t-statistic and \eqn{n} is the sample size.
 
-     d = t / sqrt(n)
+The corresponding \eqn{(1 - \alpha)} confidence interval for \eqn{d} is
+derived from the noncentral t distribution.
 
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
 }
 \examples{
+# A school has a gifted/honors program that they claim is
+# significantly better than others in the country. The gifted/honors
+# students in this school scored an average of 1370 on the SAT,
+# with a standard deviation of 112.7, while the national average
+# for gifted programs is a SAT score of 1080.
 
-#A school has a gifted/honors program that they claim is
-#significantly better than others in the country. The gifted/honors
-#students in this school scored an average of 1370 on the SAT,
-#with a standard deviation of 112.7, while the national average
-#for gifted programs is a SAT score of 1080.
+    gift <- t.test(singt_data$SATscore, mu = 1080, alternative = "two.sided")
 
-    gift = t.test(singt_data, mu = 1080, alternative = "two.sided")
-
-#According to a single-sample t-test, the scores of the students
-#from the program were significantly higher than the national
-#average, t(14) = 9.97, p < .001.
-
-#You can type in the numbers directly as shown below, or refer
-#to your dataset within the function.
-
+# Direct entry of t-statistic and sample size:
     d.single.t.t(t = 9.968, n = 15, a = .05)
 
+# Equivalent shorthand:
     d.single.t.t(9.968, 15, .05)
 
+# Using values from a t-test object and dataset:
     d.single.t.t(gift$statistic, length(singt_data$SATscore), .05)
 }
 \keyword{effect}
+\keyword{one-sample}
 \keyword{single}
 \keyword{size,}
-\keyword{t}
+\keyword{t,}

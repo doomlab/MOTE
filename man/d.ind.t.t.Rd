@@ -2,81 +2,67 @@
 % Please edit documentation in R/d.ind.t.t.R
 \name{d.ind.t.t}
 \alias{d.ind.t.t}
-\title{d from t for Between Subjects}
+\title{Cohen's d from t for Independent Samples (Pooled SD)}
 \usage{
 d.ind.t.t(t, n1, n2, a = 0.05)
 }
 \arguments{
-\item{t}{t-test value}
+\item{t}{t-statistic from an independent-samples t-test.}
 
-\item{n1}{sample size group one}
+\item{n1}{Sample size for group one.}
 
-\item{n2}{sample size group two}
+\item{n2}{Sample size for group two.}
 
-\item{a}{significance level}
+\item{a}{Significance level (alpha) for the confidence interval. Must be in (0, 1).}
 }
 \value{
-Provides the effect size (Cohen's d) with associated confidence intervals,
-degrees of freedom, t-statistic, and p-value.
-
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval of d value}
-\item{dhigh}{upper level confidence interval of d value}
-\item{n1}{sample size}
-\item{n2}{sample size}
-\item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
-\item{t}{t-statistic}
-\item{p}{p-value}
-\item{estimate}{the d statistic and confidence interval in APA style for markdown printing}
-\item{statistic}{the t-statistic in APA for the t-test}
+A list with the following elements:
+\describe{
+  \item{d}{Cohen's \eqn{d_s}.}
+  \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_s}.}
+  \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_s}.}
+  \item{n1, n2}{Group sample sizes.}
+  \item{df}{Degrees of freedom (\eqn{n_1 + n_2 - 2}).}
+  \item{t}{t-statistic.}
+  \item{p}{p-value.}
+  \item{estimate}{APA-style formatted string for reporting \eqn{d_s} and its CI.}
+  \item{statistic}{APA-style formatted string for reporting the t-statistic and p-value.}
+}
 }
 \description{
-This function displays d for between subjects data
-and the non-central confidence interval estimating from the t-statistic.
+Compute Cohen's \eqn{d_s} from an independent-samples t-statistic and provide a
+noncentral-t confidence interval, assuming equal variances (pooled SD).
 }
 \details{
-To calculate d, the t-statistic is multiplied by two then divided by
-the square root of the degrees of freedom.
+For between-subjects designs with pooled SD, \eqn{d_s} can be obtained directly
+from the t-statistic:
+\deqn{d_s = \frac{2t}{\sqrt{n_1 + n_2 - 2}},}
+where \eqn{n_1} and \eqn{n_2} are the group sample sizes (df = \eqn{n_1 + n_2 - 2}).
+The \eqn{(1-\alpha)} confidence interval for \eqn{d_s} is derived from the
+noncentral t distribution for the observed \eqn{t} and df.
 
-     d_s = 2 * t / sqrt(n1 + n2 - 2)
-
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 }
 \examples{
+# The following example is derived from the "indt_data" dataset in MOTE.
 
-#The following example is derived from the "indt_data" dataset, included
-#in the MOTE library.
+    hyp <- t.test(correctq ~ group, data = indt_data)
 
-#A forensic psychologist conducted a study to examine whether
-#being hypnotized during recall affects how well a witness
-#can remember facts about an event. Eight participants
-#watched a short film of a mock robbery, after which
-#each participant was questioned about what he or she had
-#seen. The four participants in the experimental group
-#were questioned while they were hypnotized. The four
-#participants in the control group recieved the same
-#questioning without hypnosis.
-
-    hyp = t.test(correctq ~ group, data = indt_data)
-
-#You can type in the numbers directly, or refer to the dataset,
-#as shown below.
-
+# Direct entry of the t-statistic and sample sizes:
     d.ind.t.t(t = -2.6599, n1 = 4, n2 = 4, a = .05)
 
+# Equivalent shorthand:
     d.ind.t.t(-2.6599, 4, 4, .05)
 
-    d.ind.t.t(hyp$statistic,
-              length(indt_data$group[indt_data$group == 1]),
-              length(indt_data$group[indt_data$group == 2]),
-              .05)
-
-#Contrary to the hypothesized result, the group that underwent hypnosis were
-#significantly less accurate while reporting facts than the control group
-#with a large effect size, t(6) = -2.66, p = .038, d_s = 2.17.
-
+# Using the t-statistic from the model object:
+    d.ind.t.t(hyp$statistic, length(indt_data$group[indt_data$group == 1]),
+              length(indt_data$group[indt_data$group == 2]), .05)
 }
+\keyword{deviation}
 \keyword{effect}
 \keyword{independent}
+\keyword{pooled}
 \keyword{size,}
-\keyword{t}
+\keyword{standard}
+\keyword{t-test,}

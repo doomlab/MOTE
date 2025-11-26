@@ -3,25 +3,24 @@
 \docType{data}
 \name{rm1_data}
 \alias{rm1_data}
-\title{Repeated Measures Oneway ANOVA Example Data}
+\title{Repeated Measures One-Way ANOVA Example Data}
 \format{
-A data frame including ratings toward pictures.
-
-neutral: pulse during exposure to neutral stimuli
-positive: pulse during exposure to positive stimuli
-negative: pulse during exposure to negative stimuli
+A data frame with 3 variables:
+\describe{
+  \item{neutral}{Numeric. Pulse rate during exposure to neutral stimuli.}
+  \item{positive}{Numeric. Pulse rate during exposure to positive stimuli.}
+  \item{negative}{Numeric. Pulse rate during exposure to negative stimuli.}
+}
 }
 \usage{
 data(rm1_data)
 }
 \description{
-Dataset for use in \code{\link{omega.F}}.
-Participants were tested over several days to measure
-variations in their pulse given different types of stimuli.
-One stimulus was a neutral picture (like a toaster),
-while other stimuli were cute/happy pictures (puppies, babies),
-and negative stimuli (mutilated faces, pictures of war).
-Were there differences in pulse for each participant
-across the stimuli?
+Example data for a repeated measures one-way ANOVA examining whether
+pulse rate differs across stimulus types. Participants were exposed to
+three categories of images: neutral (e.g., household objects like a toaster),
+positive (e.g., puppies, babies), and negative (e.g., mutilated faces,
+scenes of war). Pulse rate was measured for each participant under each condition.
+Designed for use with \code{\link{omega.F}}.
 }
 \keyword{datasets}

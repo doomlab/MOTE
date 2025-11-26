@@ -2,97 +2,74 @@
 % Please edit documentation in R/d.dep.t.rm.R
 \name{d.dep.t.rm}
 \alias{d.dep.t.rm}
-\title{d for Repeated Measures with Average SD Denominator}
+\title{Cohen's d for Paired t Controlling for Correlation (Repeated Measures)}
 \usage{
 d.dep.t.rm(m1, m2, sd1, sd2, r, n, a = 0.05)
 }
 \arguments{
-\item{m1}{mean from first level}
+\item{m1}{Mean from the first level/occasion.}
 
-\item{m2}{mean from second level}
+\item{m2}{Mean from the second level/occasion.}
 
-\item{sd1}{standard deviation from first level}
+\item{sd1}{Standard deviation from the first level/occasion.}
 
-\item{sd2}{standard deviation from second level}
+\item{sd2}{Standard deviation from the second level/occasion.}
 
-\item{r}{correlation between first and second level}
+\item{r}{Correlation between the two levels/occasions.}
 
-\item{n}{sample size}
+\item{n}{Sample size (number of paired observations).}
 
-\item{a}{significance level}
+\item{a}{Significance level (alpha) for the confidence interval. Must be in (0, 1).}
 }
 \value{
-Controls for correlation and provides the effect size (Cohen's d)
-with associated confidence intervals,m the confidence intervals associated
-with the means of each group,mstandard deviations and standard errors of
-the means for each group.
-
-\item{d}{effect size}
-\item{dlow}{lower level confidence interval d value}
-\item{dhigh}{upper level confidence interval d value}
-\item{M1}{mean one}
-\item{sd1}{standard deviation of mean one}
-\item{se1}{standard error of mean one}
-\item{M1low}{lower level confidence interval of mean one}
-\item{M1high}{upper level confidence interval of mean one}
-\item{M2}{mean two}
-\item{sd2}{standard deviation of mean two}
-\item{se2}{standard error of mean two}
-\item{M2low}{lower level confidence interval of mean two}
-\item{M2high}{upper level confidence interval of mean two}
-\item{r}{correlation}
-\item{n}{sample size}
-\item{df}{degrees of freedom (sample size - 1)}
-\item{estimate}{the d statistic and confidence interval in
-APA style for markdown printing}
+A list with the following elements:
+\describe{
+  \item{d}{Cohen's \eqn{d_{rm}}.}
+  \item{dlow}{Lower limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_{rm}}.}
+  \item{dhigh}{Upper limit of the \eqn{(1-\alpha)} confidence interval for \eqn{d_{rm}}.}
+  \item{M1, M2}{Group means.}
+  \item{M1low, M1high, M2low, M2high}{Confidence interval bounds for each mean.}
+  \item{sd1, sd2}{Standard deviations.}
+  \item{se1, se2}{Standard errors of the means.}
+  \item{r}{Correlation between occasions.}
+  \item{n}{Sample size.}
+  \item{df}{Degrees of freedom (\eqn{n - 1}).}
+  \item{estimate}{APA-style formatted string for reporting \eqn{d_{rm}} and its CI.}
+}
 }
 \description{
-This function displays d and the non-central confidence interval
-for repeated measures data, using the average standard deviation of
-each level as the denominator, but controlling for r.
+Compute Cohen's \eqn{d_{rm}} and a noncentral-t confidence interval for
+repeated-measures (paired-samples) designs **controlling for the correlation
+between occasions**. The denominator uses the SDs and their correlation.
 }
 \details{
-To calculate d, mean two is subtracted from mean one, which is
-divided by the average standard deviation, while mathematically
-controlling for the correlation coefficient (r).
+The effect size is defined as:
+\deqn{d_{rm} = \frac{m_1 - m_2}{\sqrt{s_1^2 + s_2^2 - 2 r s_1 s_2}} \; \sqrt{2(1-r)}.}
 
-     d_rm = ((m1 - m2) / sqrt(( sd1^2 + sd2^2 ) - (2 x r x sd1 x sd2))) x sqrt(2 x (1-r))
+The test statistic used for the noncentral-t confidence interval is:
+\deqn{t = \frac{m_1 - m_2}{\sqrt{\dfrac{s_1^2 + s_2^2 - 2 r s_1 s_2}{n}}} \; \sqrt{2(1-r)}.}
 
+See the online example for additional context:
 \href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}{Learn more on our example page.}
 }
 \examples{
-
-#The following example is derived from the "dept_data" dataset included
-#in the MOTE library.
-
-#In a study to test the effects of science fiction movies on people's
-#belief in the supernatural, seven people completed a measure of belief
-#in the supernatural before and after watching a popular science fiction
-#movie. Higher scores indicated higher levels of belief.
+# Example derived from the "dept_data" dataset included in MOTE
 
     t.test(dept_data$before, dept_data$after, paired = TRUE)
 
-    scifi_cor = cor(dept_data$before, dept_data$after, method = "pearson",
-                use = "pairwise.complete.obs")
+    scifi_cor <- cor(dept_data$before, dept_data$after, method = "pearson",
+                     use = "pairwise.complete.obs")
 
-#You can type in the numbers directly, or refer to the dataset,
-#as shown below.
+# Direct entry of summary statistics, or refer to the dataset as shown below.
 
     d.dep.t.rm(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
-                sd2 = 2.88, r = .68, n = 7, a = .05)
+               sd2 = 2.88, r = .68, n = 7, a = .05)
 
     d.dep.t.rm(5.57, 4.43, 1.99, 2.88, .68, 7, .05)
 
     d.dep.t.rm(mean(dept_data$before), mean(dept_data$after),
-                sd(dept_data$before), sd(dept_data$after),
-                scifi_cor, length(dept_data$before), .05)
-
-#The mean measure of belief on the pretest was 5.57, with a standard
-#deviation of 1.99. The posttest scores appeared lower (M = 4.43, SD = 2.88)
-#but the dependent t-test was not significant using alpha = .05,
-#t(7) = 1.43, p = .203, d_rm = 0.43. The effect size was a medium effect suggesting
-#that the movie may have influenced belief in the supernatural.
-
+               sd(dept_data$before), sd(dept_data$after),
+               scifi_cor, length(dept_data$before), .05)
 }
 \keyword{cohen's}
 \keyword{correlation}

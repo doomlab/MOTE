@@ -3,18 +3,21 @@
 \docType{data}
 \name{indt_data}
 \alias{indt_data}
-\title{Independent t Example Data}
+\title{Independent-Samples t-Test Example Data}
 \format{
-A data frame including two groups, one recieving a
-hypnotism intervention, and one control group, to determine how
-hypnotism effects recall after witnessing a crime.
+A data frame with 2 variables:
+\describe{
+  \item{correctq}{Numeric recall score/accuracy.}
+  \item{group}{Factor indicating condition with levels \code{"control"} and \code{"hypnotism"}.}
+}
 }
 \usage{
 data(indt_data)
 }
 \description{
-Dataset for use in \code{\link{d.ind.t}}, \code{\link{d.ind.t.t}},
-\code{\link{delta.ind.t}} exploring the effects of hypnotism on
-the effects of recall after witnessing a crime.
+Example data for an independent-samples t-test examining whether a
+hypnotism intervention affects recall accuracy after witnessing a crime.
+Designed for use with functions such as \code{\link{d.ind.t}},
+\code{\link{d.ind.t.t}}, and \code{\link{delta.ind.t}}.
 }
 \keyword{datasets}
