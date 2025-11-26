@@ -41,11 +41,13 @@ apa <- function(value, decimals = 3, leading = TRUE) {
   }
 
   if (!is.numeric(value) && !is.data.frame(value)) {
-    stop("'value' must be numeric (vector, matrix) or a data frame with all-numeric columns.")
+    stop("'value' must be numeric (vector, matrix) 
+      or a data frame with all-numeric columns.")
   }
 
   # Validate 'decimals'
-  if (!is.numeric(decimals) || length(decimals) != 1 || decimals < 0 || decimals != as.integer(decimals)) {
+  if (!is.numeric(decimals) || length(decimals) != 1 ||
+        decimals < 0 || decimals != as.integer(decimals)) {
     stop("'decimals' must be a single non-negative integer.")
   }
   decimals <- as.integer(decimals)
@@ -67,4 +69,3 @@ apa <- function(value, decimals = 3, leading = TRUE) {
   }
   return(formnumber)
 }
-
