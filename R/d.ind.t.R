@@ -13,6 +13,29 @@
 #' The corresponding t-statistic is:
 #' \deqn{t = \frac{m_1 - m_2}{ \sqrt{ s_{pooled}^2/n_1 + s_{pooled}^2/n_2 } }}
 #'
+#' \item{d}{effect size}
+#' \item{dlow}{lower level confidence interval of d value}
+#' \item{dhigh}{upper level confidence interval of d value}
+#' \item{M1}{mean of group one}
+#' \item{sd1}{standard deviation of group one mean}
+#' \item{se1}{standard error of group one mean}
+#' \item{M1low}{lower level confidence interval of group one mean}
+#' \item{M1high}{upper level confidence interval of group one mean}
+#' \item{M2}{mean of group two}
+#' \item{sd2}{standard deviation of group two mean}
+#' \item{se2}{standard error of group two mean}
+#' \item{M2low}{lower level confidence interval of group two mean}
+#' \item{M2high}{upper level confidence interval of group two mean}
+#' \item{spooled}{pooled standard deviation}
+#' \item{sepooled}{pooled standard error}
+#' \item{n1}{sample size of group one}
+#' \item{n2}{sample size of group two}
+#' \item{df}{degrees of freedom (n1 - 1 + n2 - 1)}
+#' \item{t}{t-statistic}
+#' \item{p}{p-value (two-tailed)}
+#' \item{estimate}{the d statistic and confidence interval in
+#' APA style for markdown printing}
+#' \item{statistic}{the t-statistic in APA style for markdown printing}
 #' See the online example for additional context:
 #' \href{https://www.aggieerin.com/shiny-server/tests/indtm.html}{Learn more on our example page.}
 #'
