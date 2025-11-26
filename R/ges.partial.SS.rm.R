@@ -51,42 +51,12 @@
 #' # rating (backward strength: BSG). Is there an interaction between FSG and
 #' # BSG when participants are estimating the relation between word pairs?
 #'
-#' \dontrun{
-#' library(ez)
-#' library(reshape)
-#' long_mix <- melt(rm2_data, id = c("subject", "group"))
-#' long_mix$FSG <- c(rep("Low-FSG", nrow(rm2_data)),
-#'                  rep("High-FSG", nrow(rm2_data)),
-#'                  rep("Low-FSG", nrow(rm2_data)),
-#'                  rep("High-FSG", nrow(rm2_data)))
-#' long_mix$BSG <- c(rep("Low-BSG", nrow(rm2_data)*2),
-#'                  rep("High-BSG", nrow(rm2_data)*2))
-#'
-#' anova_model <- ezANOVA(data = long_mix,
-#'                       dv = value,
-#'                       wid = subject,
-#'                       within = .(FSG, BSG),
-#'                       detailed = TRUE,
-#'                       type = 3)
-#'
 #' # You would calculate one partial GES value for each F-statistic.
 #' # Here's an example for the interaction with typing in numbers.
 #' ges.partial.SS.rm(dfm = 1, dfe = 157,
 #'                   ssm = 2442.948, sss = 76988.13,
 #'                   sse1 = 5402.567, sse2 = 8318.75, sse3 = 6074.417,
 #'                   Fvalue = 70.9927, a = .05)
-#'
-#' # Here's an example for the interaction with code.
-#' ges.partial.SS.rm(dfm = anova_model$ANOVA$DFn[4],
-#'                   dfe = anova_model$ANOVA$DFd[4],
-#'                   ssm = anova_model$ANOVA$SSn[4],
-#'                   sss = anova_model$ANOVA$SSd[1],
-#'                   sse1 = anova_model$ANOVA$SSd[4],
-#'                   sse2 = anova_model$ANOVA$SSd[2],
-#'                   sse3 = anova_model$ANOVA$SSd[3],
-#'                   Fvalue = anova_model$ANOVA$F[4],
-#'                   a = .05)
-#'  }
 
 ges.partial.SS.rm <- function (dfm, dfe, ssm, sss, sse1, sse2, sse3, Fvalue, a = .05) {
 

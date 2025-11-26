@@ -48,33 +48,44 @@
 #' # with new and old coaches to determine if there are differences in
 #' # spending across coaches and sports.
 #'
-#' \dontrun{
-#' library(ez)
-#' bn2_data$partno <- 1:nrow(bn2_data)
-#' anova_model <- ezANOVA(data = bn2_data,
-#'                       dv = money,
-#'                       wid = partno,
-#'                       between = .(coach, type),
-#'                       detailed = TRUE,
-#'                       type = 3)
-#'
-#' # You would calculate one eta for each F-statistic.
-#' # Here's an example for the interaction with typing in numbers.
+#' # You would calculate one omega value for each F-statistic.
+#' # Here's an example for the interaction using reported ANOVA values.
 #' omega.partial.SS.bn(dfm = 4, dfe = 990,
 #'                     msm = 338057.9 / 4,
 #'                     mse = 32833499 / 990,
 #'                     ssm = 338057.9,
 #'                     n = 1000, a = .05)
 #'
-#' # Here's an example for the interaction with code.
-#' omega.partial.SS.bn(dfm = anova_model$ANOVA$DFn[4],
-#'                     dfe = anova_model$ANOVA$DFd[4],
-#'                     msm = anova_model$ANOVA$SSn[4] / anova_model$ANOVA$DFn[4],
-#'                     mse = anova_model$ANOVA$SSd[4] / anova_model$ANOVA$DFd[4],
-#'                     ssm = anova_model$ANOVA$SSn[4],
-#'                     n = nrow(bn2_data),
-#'                     a = .05)
-#'  }
+#' # The same analysis can be fit with stats::lm and car::Anova(type = 3).
+#' # This example shows how to obtain the ANOVA table and plug its values
+#' # into omega.partial.SS.bn without relying on ezANOVA.
+#' if (requireNamespace("car", quietly = TRUE)) {
+#'
+#'   mod <- stats::lm(money ~ coach * type, data = bn2_data)
+#'
+#'   # Type I table (for residual SS and df)
+#'   aov_type1 <- stats::anova(mod)
+#'
+#'   # Type III SS table for the effects
+#'   aov_type3 <- car::Anova(mod, type = 3)
+#'
+#'   # Extract dfs and sums of squares for the interaction coach:type
+#'   dfm_int <- aov_type3["coach:type", "Df"]
+#'   ssm_int <- aov_type3["coach:type", "Sum Sq"]
+#'   msm_int <- ssm_int / dfm_int
+#'
+#'   dfe <- aov_type1["Residuals", "Df"]
+#'   sse <- aov_type1["Residuals", "Sum Sq"]
+#'   mse <- sse / dfe
+#'
+#'   omega.partial.SS.bn(dfm = dfm_int,
+#'                       dfe = dfe,
+#'                       msm = msm_int,
+#'                       mse = mse,
+#'                       ssm = ssm_int,
+#'                       n = nrow(bn2_data),
+#'                       a = .05)
+#' }
 
 omega.partial.SS.bn <- function (dfm, dfe, msm, mse, ssm, n, a = .05) {
 

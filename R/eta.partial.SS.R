@@ -47,31 +47,35 @@
 #' # with new and old coaches to determine if there are differences in
 #' # spending across coaches and sports.
 #'
-#' \dontrun{
-#' library(ez)
-#' bn2_data$partno <- 1:nrow(bn2_data)
-#' anova_model <- ezANOVA(data = bn2_data,
-#'                       dv = money,
-#'                       wid = partno,
-#'                       between = .(coach, type),
-#'                       detailed = TRUE,
-#'                       type = 3)
-#'
-#' # You would calculate one eta for each F-statistic.
-#' # Here's an example for the interaction with typing in numbers.
+#' # Example using reported ANOVA table values directly
 #' eta.partial.SS(dfm = 4, dfe = 990,
 #'                ssm = 338057.9, sse = 32833499,
 #'                Fvalue = 2.548, a = .05)
 #'
-#' # Here's an example for the interaction with code.
-#' eta.partial.SS(dfm = anova_model$ANOVA$DFn[4],
-#'                dfe = anova_model$ANOVA$DFd[4],
-#'                ssm = anova_model$ANOVA$SSn[4],
-#'                sse = anova_model$ANOVA$SSd[4],
-#'                Fvalue =  anova_model$ANOVA$F[4],
-#'                a = .05)
+#' # Example computing Type III SS with code (requires the "car" package)
+#' if (requireNamespace("car", quietly = TRUE)) {
+#'
+#'   # Fit the model using stats::lm
+#'   mod <- stats::lm(money ~ coach * type, data = bn2_data)
+#'
+#'   # Type III table for the effects
+#'   aov_type3 <- car::Anova(mod, type = 3)
+#'
+#'   # Extract degrees of freedom, sum of squares, and F for the interaction (coach:type)
+#'   dfm_int <- aov_type3["coach:type", "Df"]
+#'   ssm_int <- aov_type3["coach:type", "Sum Sq"]
+#'   F_int   <- aov_type3["coach:type", "F value"]
+#'
+#'   # Residual degrees of freedom and sum of squares from the standard ANOVA table
+#'   aov_type1 <- stats::anova(mod)
+#'   dfe <- aov_type1["Residuals", "Df"]
+#'   sse <- aov_type1["Residuals", "Sum Sq"]
+#'
+#'   # Calculate partial eta-squared for the interaction using Type III SS
+#'   eta.partial.SS(dfm = dfm_int, dfe = dfe,
+#'                  ssm = ssm_int, sse = sse,
+#'                  Fvalue = F_int, a = .05)
 #' }
-
 
 eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
 
@@ -124,4 +128,3 @@ eta.partial.SS <- function (dfm, dfe, ssm, sse, Fvalue, a = .05) {
   return(output)
 
 }
-
