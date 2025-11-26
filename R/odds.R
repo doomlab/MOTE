@@ -1,19 +1,9 @@
 #' Odds Ratio from 2x2 Table
 #'
 #' This function displays odds ratios and their normal confidence intervals.
-#'
-#' This statistic is the odds ratio:
-#'
-#' \deqn{OR = \frac{n_{11} / n_{12}}{n_{21} / n_{22}}}
-#'
-#' To calculate odds ratios, First, the sample size for level 1.1
-#' is divided by the sample size for level 1.2. This value is divided
-#' by the sample size for level 2.1, after dividing by the sample
-#' size of level 2.2.
-#'
-#'      odds <- (n11 / n12) / (n21 / n22)
-#'
-#' \href{https://www.aggieerin.com/shiny-server/tests/chio.html}{Learn more on our example page.}
+#' This statistic is calculated as (level 1.1/level 1.2) / (level 2.1/level 2.2),
+#' which can be considered the odds of level 1.1 given level1 overall versus level2.1 
+#' given level2 overall. 
 #'
 #' @param n11 sample size for level 1.1
 #' @param n12 sample size for level 1.2
