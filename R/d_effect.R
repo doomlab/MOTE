@@ -1,7 +1,7 @@
 #' General interface for Cohen's d
 #'
 #' @description
-#' `d()` is a convenience wrapper that will eventually route to the appropriate
+#' `d_effect()` is a convenience wrapper that will route to the appropriate
 #' Cohen's *d* helper function based on the arguments supplied. This allows
 #' users to call a single function for different study designs while
 #' maintaining backward compatibility with the more specific helpers.
@@ -36,6 +36,15 @@
 #'   directly. Supply `t_value`, `n1`, and `n2`. In this case, `d()` will call
 #'   [d_ind_t_t()] with the same arguments.
 #'
+#' - `"single_t"` — one‑sample t‑test effect size using the sample mean,
+#'   population mean, sample SD, and sample size. Supply `m1` (sample mean),
+#'   `u` (population mean), `sd1`, and `n`. In this case, `d()` will call
+#'   [d_single_t()] with the same arguments.
+#'
+#' - `"single_t_t"` — one-sample t-test effect size where the *t* value is
+#'   supplied directly along with the sample size `n`. In this case, `d()`
+#'   will call [d_single_t_t()] with the same arguments.
+#'
 #' - `"prop"` — independent proportions (binary outcome) using a
 #'   standardized mean difference (SMD) that treats each proportion as the
 #'   mean of a Bernoulli variable with pooled Bernoulli SD. Supply `p1`,
@@ -51,6 +60,8 @@
 #' @param m2 Means of the two conditions or measurements.
 #' @param sd1 Standard deviations for the two conditions or measurements.
 #' @param sd2 Standard deviations for the two conditions or measurements.
+#' @param u Population or comparison mean for one‑sample t‑designs,
+#'   used when `design = "single_t"`.
 #' @param p1 Proportion for group one (between 0 and 1), used in the
 #'   `"prop"` design.
 #' @param p2 Proportion for group two (between 0 and 1), used in the
@@ -65,7 +76,7 @@
 #' @param sddiff Standard deviation of the difference scores.
 #' @param t_value t statistic value for the test. Used in designs where the
 #'   effect size is derived directly from a reported t-value (e.g.,
-#'   `"dep_t_diff_t"` or `"ind_t_t"`).
+#'   `"dep_t_diff_t"`, `"ind_t_t"`, or `"single_t_t"`).
 #' @param n Sample size (number of paired observations).
 #' @param a Significance level used when computing confidence intervals.
 #'   Defaults to `0.05`.
@@ -88,7 +99,7 @@
 #' @examples
 #' # Paired/dependent t-test using average SD denominator
 #' # These arguments will route d() to d_dep_t_avg()
-#' d(
+#' d_effect(
 #'   m1 = 5.57, m2 = 4.43,
 #'   sd1 = 1.99, sd2 = 2.88,
 #'   n = 7, a = .05,
@@ -103,10 +114,11 @@
 #' )
 #'
 #' @export
-d <- function(m1 = NULL,
+d_effect <- function(m1 = NULL,
               m2 = NULL,
               sd1 = NULL,
               sd2 = NULL,
+              u = NULL,
               r = NULL,
               mdiff = NULL,
               sddiff = NULL,
@@ -130,7 +142,9 @@ d <- function(m1 = NULL,
       "ind_t",
       "ind_t_t",
       "prop",
-      "prop_h"
+      "prop_h",
+      "single_t",
+      "single_t_t"
     )
   )
 
@@ -289,6 +303,41 @@ d <- function(m1 = NULL,
         n1 = n1,
         n2 = n2,
         a  = a
+      )
+    )
+  }
+
+  if (design == "single_t") {
+    if (is.null(m1) || is.null(u) ||
+        is.null(sd1) || is.null(n)) {
+      stop(
+        "For design = 'single_t', you must supply m1 (sample mean), u (population mean), sd1, and n."
+      )
+    }
+
+    return(
+      d_single_t(
+        m  = m1,
+        u  = u,
+        sd = sd1,
+        n  = n,
+        a  = a
+      )
+    )
+  }
+
+  if (design == "single_t_t") {
+    if (is.null(t_value) || is.null(n)) {
+      stop(
+        "For design = 'single_t_t', you must supply t_value and n."
+      )
+    }
+
+    return(
+      d_single_t_t(
+        t = t_value,
+        n = n,
+        a = a
       )
     )
   }

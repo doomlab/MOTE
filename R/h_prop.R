@@ -42,9 +42,9 @@
 #'     proportions using a pooled-proportion standard error.
 #'   \item `z_value`, `p_value` – snake_case aliases for the z statistic
 #'     and p value.
-#'   \item `estimate`, `estimate_string` – APA-style formatted string for
+#'   \item `estimate` – APA-style formatted string for
 #'     Cohen's h and its confidence interval.
-#'   \item `statistic`, `statistic_string` – APA-style formatted string
+#'   \item `statistic` – APA-style formatted string
 #'     for the z test of the difference in proportions.
 #' }
 #'
