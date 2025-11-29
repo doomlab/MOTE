@@ -2,154 +2,228 @@
 #' Taken from MBESS by Ken Kelley
 #' Exported here to avoid importing a zillion package dependencies
 #'
-#' @param F.value the f-statistic found in the study
-#' @param conf.level the level of confidence for a symmetric confidence
+#' @param f_value the F statistic found in the study
+#' @param conf_level the level of confidence for a symmetric confidence
 #' interval.
-#' @param df.1 the first degrees of freedom from F
-#' @param df.2 the second degrees of freedom from F
-#' @param alpha.lower the proportion of values beyond the lower limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
-#' @param alpha.upper the proportion of values beyond the upper limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
-#' @param tol is the tolerance of the iterative method for determining
+#' @param df1 the first degrees of freedom from F
+#' @param df2 the second degrees of freedom from F
+#' @param alpha_lower the proportion of values beyond the lower limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
+#' @param alpha_upper the proportion of values beyond the upper limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
+#' @param tol the tolerance of the iterative method for determining
 #' the critical values.
-#' @param Jumping.Prop helps move up and down to find the right ncp limit
+#' @param jumping_prop helps move up and down to find the
+#' right noncentrality limit
 #'
 #' @noRd
 
 noncentral_f <-
-  function(F.value = NULL, conf.level = .95, df.1 = NULL,
-           df.2 = NULL, alpha.lower = NULL, alpha.upper = NULL,
-           tol = 1e-9, Jumping.Prop = .10)
-  {
-    if(Jumping.Prop <=  0 | Jumping.Prop >=   1) stop("The Jumping Proportion (\'Jumping.Prop\') must be between zero and one.")
-    if(is.null(F.value)) stop("Your \'F.value\' is not correctly specified.")
-    if(F.value < 0) stop("Your \'F.value\' is not correctly specified.")
-    if(is.null(df.1) | is.null(df.2)) stop("You must specify the degrees of freedom (\'df.1\' and \'df.2\').")
-    if(is.null(alpha.lower) & is.null(alpha.upper) & is.null(conf.level)) stop("You need to specify the confidence interval parameters.")
-    if((!is.null(alpha.lower) | !is.null(alpha.upper)) & !is.null(conf.level)) stop("You must specify only one method of defining the confidence limits.")
-
-    if(!is.null(conf.level))
-    {
-      if(conf.level >=  1 | conf.level <=   0) stop("Your confidence level (\'conf.level\') must be between 0 and 1.")
-      alpha.lower <- alpha.upper <- (1-conf.level)/2
+  function(f_value = NULL, conf_level = .95, df1 = NULL,
+           df2 = NULL, alpha_lower = NULL, alpha_upper = NULL,
+           tol = 1e-9, jumping_prop = .10) {
+    if (jumping_prop <= 0 || jumping_prop >= 1) {
+      stop("The jumping_prop value must be between zero and one.")
     }
 
-    if(alpha.lower == 0) alpha.lower <- NULL
-    if(alpha.upper == 0) alpha.upper <- NULL
+    if (is.null(f_value)) {
+      stop("Your 'f_value' is not correctly specified.")
+    }
+
+    if (f_value < 0) {
+      stop("Your 'f_value' is not correctly specified.")
+    }
+
+    if (is.null(df1) || is.null(df2)) {
+      stop("You must specify the degrees of freedom ('df1' and 'df2').")
+    }
+
+    if (is.null(alpha_lower) && is.null(alpha_upper) && is.null(conf_level)) {
+      stop("You need to specify the confidence interval parameters.")
+    }
+
+    if ((!is.null(alpha_lower) || !is.null(alpha_upper)) &&
+          !is.null(conf_level)) {
+      stop("You must specify only one method of 
+      defining the confidence limits.")
+    }
+
+    if (!is.null(conf_level)) {
+      if (conf_level >= 1 || conf_level <= 0) {
+        stop(
+          "Your confidence level ('conf_level') must be between 0 and 1."
+        )
+      }
+      alpha_lower <- alpha_upper <- (1 - conf_level) / 2
+    }
+
+    if (alpha_lower == 0) alpha_lower <- NULL
+    if (alpha_upper == 0) alpha_upper <- NULL
 
     # Critical value for lower tail.
-    ################################################################################################
-    FAILED <- NULL
-    if(!is.null(alpha.lower))
-    {
-      LL.0 <- qf(p = alpha.lower*.0005, df1 = df.1, df2 = df.2) # Obtain a lower value by using the central F distribution
-      Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.0) - (1-alpha.lower)
+    failed_lower <- NULL
+    if (!is.null(alpha_lower)) {
+      # Obtain a lower value by using the central F distribution
+      ll0 <- qf(p = alpha_lower * .0005, df1 = df1, df2 = df2)
+      diff_val <- pf(q = f_value, df1 = df1,
+                     df2 = df2, ncp = ll0) - (1 - alpha_lower)
 
-      if(pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.0) < (1-alpha.lower))
-      {
-        FAILED <- if(pf(q = F.value, df1 = df.1, df2 = df.2, ncp = 0) < 1-alpha.lower)
-          LL.0 <- .00000001
-        if(pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.0) < 1-alpha.lower) FAILED <- TRUE
-        #if(FAILED == TRUE) warning("The size of the effect combined with the degrees of freedom is too small to determine a lower confidence limit for the \'alpha.lower\' (or the (1/2)(1-\'conf.level\') symmetric) value specified (set to zero).", call.  =  FALSE)
+      if (
+        pf(q = f_value, df1 = df1, df2 = df2, ncp = ll0) <
+          (1 - alpha_lower)
+      ) {
+        failed_lower <-
+          if (
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = 0) <
+            (1 - alpha_lower)
+          ) {
+            ll0 <- .00000001
+          }
+
+        if (
+          pf(q = f_value, df1 = df1, df2 = df2, ncp = ll0) <
+            (1 - alpha_lower)
+        ) {
+          failed_lower <- TRUE
+        }
       }
 
-      if(is.null(FAILED))
-      {
-        LL.1 <- LL.2 <- LL.0 # Define both in case there is no need for the while loop (LL.2 is overwritten later if the while loop is used).
+      if (is.null(failed_lower)) {
+        # Start with the initial lambda estimate
+        ll1 <- ll2 <- ll0
 
-        while(Diff > tol) # Find a value that is too small and one that is too big.
-        {
-          LL.2 <- LL.1*(1+Jumping.Prop)
-          Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.2) - (1-alpha.lower)
-          LL.1 <- LL.2
+        # Find values that bracket the solution
+        while (diff_val > tol) {
+          ll2 <- ll1 * (1 + jumping_prop)
+          diff_val <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ll2) -
+            (1 - alpha_lower)
+          ll1 <- ll2
         }
-        LL.1 <- LL.2/(1+Jumping.Prop) # Produces the value directly before failure (a Lambda value that is too small.)
 
-        LL.Bounds <- c(LL.1, (LL.1+LL.2)/2, LL.2) # The middle value is in the middle.
+        # Value directly before failure (too small)
+        ll1 <- ll2 / (1 + jumping_prop)
 
-        Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.Bounds[2])-(1-alpha.lower)
-        while(abs(Diff) > tol) # Run the while loop to home in on the value satisfying the conditions (i.e., the lower limit).
-        {
-          Diff.1 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.Bounds[1])-(1-alpha.lower) > tol
-          Diff.2 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.Bounds[2])-(1-alpha.lower) > tol
-          Diff.3 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.Bounds[3])-(1-alpha.lower) > tol
+        # Create bounding values (lower, mid, upper)
+        ll_bounds <- c(ll1, (ll1 + ll2) / 2, ll2)
 
-          if(Diff.1 == TRUE & Diff.2 == TRUE & Diff.3 == FALSE)
-          {
-            LL.Bounds <- c(LL.Bounds[2], (LL.Bounds[2]+LL.Bounds[3])/2, LL.Bounds[3])
+        diff_val <-
+          pf(q = f_value, df1 = df1, df2 = df2, ncp = ll_bounds[2]) -
+          (1 - alpha_lower)
+
+        # Refine bounds to find lower confidence limit
+        while (abs(diff_val) > tol) {
+          diff1 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ll_bounds[1]) -
+            (1 - alpha_lower) > tol
+          diff2 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ll_bounds[2]) -
+            (1 - alpha_lower) > tol
+          diff3 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ll_bounds[3]) -
+            (1 - alpha_lower) > tol
+
+          if (diff1 == TRUE && diff2 == TRUE && diff3 == FALSE) {
+            ll_bounds <-
+              c(ll_bounds[2], (ll_bounds[2] + ll_bounds[3]) / 2, ll_bounds[3])
           }
 
-          if(Diff.1 == TRUE & Diff.2 == FALSE & Diff.3 == FALSE)
-          {
-            LL.Bounds <- c(LL.Bounds[1], (LL.Bounds[1]+LL.Bounds[2])/2, LL.Bounds[2])
+          if (diff1 == TRUE && diff2 == FALSE && diff3 == FALSE) {
+            ll_bounds <-
+              c(ll_bounds[1], (ll_bounds[1] + ll_bounds[2]) / 2, ll_bounds[2])
           }
 
-          Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL.Bounds[2])-(1-alpha.lower)
-
+          diff_val <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ll_bounds[2]) -
+            (1 - alpha_lower)
         }
-        LL <- LL.Bounds[2] # Confidence limit.
+
+        # Final lower confidence limit
+        ll <- ll_bounds[2]
       }
     }
-    if(!is.null(FAILED)) LL <- NA
-    ################################################################################################
+    if (!is.null(failed_lower)) ll <- NA
 
     # Critical value for upper tail.
-    ################################################################################################
-    if(!is.null(alpha.upper))
-    {
-      FAILED.Up <- NULL
-      UL.0 <- qf(p = 1-alpha.upper*.0005, df1 = df.1, df2 = df.2)
-      Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.0)-alpha.upper
+    if (!is.null(alpha_upper)) {
+      failed_upper <- NULL
+      ul0 <- qf(p = 1 - alpha_upper * .0005, df1 = df1, df2 = df2)
+      diff_val <- pf(q = f_value, df1 = df1, df2 = df2, ncp = ul0) - alpha_upper
 
-      if(Diff < 0) UL.0 <- .00000001
+      if (diff_val < 0) ul0 <- .00000001
 
-      Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.0)-alpha.upper
-      if(Diff < 0)
-      {
-        FAILED.Up <- TRUE
-        # warning("The size of the effect combined with the degrees of freedom is too small to determine an upper confidence limit for the \'alpha.upper\' (or (1/2)(1-\'conf.level\') symmetric) value specified.", call.  =  FALSE)
+      diff_val <- pf(q = f_value, df1 = df1, df2 = df2, ncp = ul0) - alpha_upper
+      if (diff_val < 0) {
+        failed_upper <- TRUE
       }
 
-      if(is.null(FAILED.Up))
-      {
-        UL.1 <- UL.2 <- UL.0
-        while(Diff > tol)
-        {
-          UL.2 <- UL.1*(1+Jumping.Prop)
-          Diff <-  pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.2) - alpha.upper
-          UL.1 <- UL.2
+      if (is.null(failed_upper)) {
+        ul1 <- ul2 <- ul0
+        while (diff_val > tol) {
+          ul2 <- ul1 * (1 + jumping_prop)
+          diff_val <- pf(q = f_value, df1 = df1,
+                         df2 = df2, ncp = ul2) - alpha_upper
+          ul1 <- ul2
         }
-        UL.1 <- UL.2/(1+Jumping.Prop)
+        ul1 <- ul2 / (1 + jumping_prop)
 
-        UL.Bounds <- c(UL.1, (UL.1+UL.2)/2, UL.2)
+        ul_bounds <- c(ul1, (ul1 + ul2) / 2, ul2)
 
-        Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.Bounds[2])-alpha.upper
-        while(abs(Diff) > tol)
-        {
-          Diff.1 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.Bounds[1])-alpha.upper > tol
-          Diff.2 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.Bounds[2])-alpha.upper > tol
-          Diff.3 <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.Bounds[3])-alpha.upper > tol
+        diff_val <-
+          pf(q = f_value, df1 = df1, df2 = df2, ncp = ul_bounds[2]) -
+          alpha_upper
+        while (abs(diff_val) > tol) {
+          diff1 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ul_bounds[1]) -
+            alpha_upper > tol
+          diff2 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ul_bounds[2]) -
+            alpha_upper > tol
+          diff3 <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ul_bounds[3]) -
+            alpha_upper > tol
 
-          if(Diff.1 == TRUE & Diff.2 == TRUE & Diff.3 == FALSE)
-          {
-            UL.Bounds <- c(UL.Bounds[2], (UL.Bounds[2]+UL.Bounds[3])/2, UL.Bounds[3])
+          if (diff1 == TRUE && diff2 == TRUE && diff3 == FALSE) {
+            ul_bounds <- c(ul_bounds[2],
+                           (ul_bounds[2] + ul_bounds[3]) / 2, ul_bounds[3])
           }
 
-          if(Diff.1 == TRUE & Diff.2 == FALSE & Diff.3 == FALSE)
-          {
-            UL.Bounds <- c(UL.Bounds[1], (UL.Bounds[1]+UL.Bounds[2])/2, UL.Bounds[2])
+          if (diff1 == TRUE && diff2 == FALSE && diff3 == FALSE) {
+            ul_bounds <- c(ul_bounds[1],
+                           (ul_bounds[1] + ul_bounds[2]) / 2, ul_bounds[2])
           }
 
-          Diff <- pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL.Bounds[2])-alpha.upper
+          diff_val <-
+            pf(q = f_value, df1 = df1, df2 = df2, ncp = ul_bounds[2]) -
+            alpha_upper
 
         }
-        UL <- UL.Bounds[2] # Confidence limit.
+        ul <- ul_bounds[2] # Confidence limit.
       }
-      if(!is.null(FAILED.Up)) UL <- NA
+      if (!is.null(failed_upper)) ul <- NA
     }
-    ################################################################################################
-    if(!is.null(alpha.lower) & !is.null(alpha.upper)) return(list(Lower.Limit = LL, Prob.Less.Lower = 1-pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL), Upper.Limit = UL, Prob.Greater.Upper = pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL)))
-    if(is.null(alpha.lower) & !is.null(alpha.upper)) return(list(Upper.Limit = UL, Prob.Greater.Upper = pf(q = F.value, df1 = df.1, df2 = df.2, ncp = UL)))
-    if(!is.null(alpha.lower) & is.null(alpha.upper)) return(list(Lower.Limit = LL, Prob.Less.Lower = 1-pf(q = F.value, df1 = df.1, df2 = df.2, ncp = LL)))
+    if (!is.null(alpha_lower) && !is.null(alpha_upper)) {
+      return(list(
+        lower_limit       = ll,
+        prob_less_lower   =
+          1 - pf(q = f_value, df1 = df1, df2 = df2, ncp = ll),
+        upper_limit       = ul,
+        prob_greater_upper =
+          pf(q = f_value, df1 = df1, df2 = df2, ncp = ul)
+      ))
+    }
+    if (is.null(alpha_lower) && !is.null(alpha_upper)) {
+      return(list(
+        upper_limit       = ul,
+        prob_greater_upper =
+          pf(q = f_value, df1 = df1, df2 = df2, ncp = ul)
+      ))
+    }
+    if (!is.null(alpha_lower) && is.null(alpha_upper)) {
+      return(list(
+        lower_limit     = ll,
+        prob_less_lower =
+          1 - pf(q = f_value, df1 = df1, df2 = df2, ncp = ll)
+      ))
+    }
   }

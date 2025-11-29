@@ -5,169 +5,366 @@
 #' @param ncp the noncentrality parameter (e.g., observed *t*-value)
 #' of interest.
 #' @param df the degrees of freedom.
-#' @param conf.level the level of confidence for a symmetric confidence
+#' @param conf_level the level of confidence for a symmetric confidence
 #' interval.
-#' @param alpha.lower the proportion of values beyond the lower limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
-#' @param alpha.upper the proportion of values beyond the upper limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
-#' @param t.value alias for \code{ncp}
+#' @param alpha_lower the proportion of values beyond the lower limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
+#' @param alpha_upper the proportion of values beyond the upper limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
+#' @param t_value alias for \code{ncp}
 #' @param tol is the tolerance of the iterative method for determining
 #' the critical values.
-#' @param sup.int.warns Suppress internal warnings (from internal functions):
+#' @param sup_int_warns Suppress internal warnings (from internal functions):
 #' \code{TRUE} or \code{FALSE}
 #' @param \dots allows one to potentially include parameter
 #' values for inner functions
 #' @noRd
+noncentral_t <- function(ncp, df, conf_level = .95, alpha_lower = NULL,
+                         alpha_upper = NULL, t_value, tol = 1e-9,
+                         sup_int_warns = TRUE, ...) {
 
-noncentral_t <- function(ncp, df, conf.level = .95, alpha.lower = NULL,
-                         alpha.upper = NULL, t.value, tol = 1e-9,
-                         sup.int.warns = TRUE, ...)
-{
-
-  if(missing(ncp))
-  {
-    if(missing(t.value)) stop("You need to specify either 'ncp' or its alias, 't.value,' you have not specified either")
-    ncp <- t.value
+  if (missing(ncp)) {
+    if (missing(t_value)) stop("You need to specify either 
+    'ncp' or its alias, 't.value,' you have not specified either")
+    ncp <- t_value
   }
 
   # General stop checks.
-  if(df <= 0) stop("The degrees of freedom must be some positive value.", call.=FALSE)
+  if (df <= 0) {
+    stop("The degrees of freedom must be some positive value.", call. = FALSE)
+  }
 
-  if(abs(ncp) > 37.62) print("The observed noncentrality parameter of the noncentral t-distribution has exceeded 37.62 in magnitude (R's limitation for accurate probabilities from the noncentral t-distribution) in the function's iterative search for the appropriate value(s). The results may be fine, but they might be inaccurate; use caution.")
+  if (abs(ncp) > 37.62) {
+    print(
+      paste(
+        "The observed noncentrality parameter of the noncentral t-distribution",
+        "has exceeded 37.62 in magnitude (R's limitation for accurate",
+        "probabilities from the noncentral t-distribution) in the function's",
+        "iterative search for the appropriate value(s). 
+        The results may be fine,",
+        "but they might be inaccurate; use caution."
+      )
+    )
+  }
 
-  if(sup.int.warns==TRUE) Orig.warn <- options()$warn; options(warn=-1)
+  if (sup_int_warns == TRUE) {
+    orig_warn <- options()$warn  # nolint: object_usage_linter
+    options(warn = -1)
+  }
 
-  if(!is.null(conf.level) & is.null(alpha.lower) & !is.null(alpha.upper)) stop("You must choose either to use \'conf.level\' or define the \'lower.alpha\' and \'upper.alpha\' values; here, \'upper.alpha\' is specified but \'lower.alpha\' is not", call.=FALSE)
-  if(!is.null(conf.level) & !is.null(alpha.lower) & is.null(alpha.upper)) stop("You must choose either to use \'conf.level\' or define the \'lower.alpha\' and \'upper.alpha\' values; here, \'lower.alpha\' is specified but \'upper.alpha\' is not", call.=FALSE)
+  if (!is.null(conf_level) && is.null(alpha_lower) && !is.null(alpha_upper)) {
+    stop(
+      "You must choose either to use 'conf_level' or define the 'lower.alpha' ",
+      "and 'upper.alpha' values; here, 'upper.alpha' is specified but ",
+      "'lower.alpha' is not",
+      call. = FALSE
+    )
+  }
+  if (!is.null(conf_level) && !is.null(alpha_lower) && is.null(alpha_upper)) {
+    stop(
+      "You must choose either to use 'conf_level' or define the 'lower.alpha' ",
+      "and 'upper.alpha' values; here, 'lower.alpha' is specified but ",
+      "'upper.alpha' is not",
+      call. = FALSE
+    )
+  }
 
-  if(!is.null(conf.level) & is.null(alpha.lower) & is.null(alpha.upper))
-  {
-    alpha.lower <- (1-conf.level)/2
-    alpha.upper <- (1-conf.level)/2
+  if (!is.null(conf_level) && is.null(alpha_lower) && is.null(alpha_upper)) {
+    alpha_lower <- (1 - conf_level) / 2
+    alpha_upper <- (1 - conf_level) / 2
   }
 
 
-  .conf.limits.nct.M1 <- function(ncp, df, conf.level=NULL, alpha.lower, alpha.upper, tol=1e-9, sup.int.warns=TRUE, ...)
-  {
+  conf_limits_nct_m1 <- function(ncp, df, conf_level = NULL,
+                                 alpha_lower, alpha_upper,
+                                 tol = 1e-9, sup_int_warns = TRUE, ...) {
 
-    if(sup.int.warns==TRUE) Orig.warn <- options()$warn; options(warn=-1)
-
-    min.ncp=min(-150, -5*ncp)
-    max.ncp=max(150, 5*ncp)
-
-    # Internal function for upper limit.
-    # Note the upper tail is used here, as we seek to find the NCP that has, in its upper tail (alpha.lower, for the lower limit), the specified value of the observed t/ncp.
-    ###########################
-    .ci.nct.lower <- function(val.of.interest, ...)
-    {
-      (qt(p=alpha.lower, df=df, ncp=val.of.interest, lower.tail = FALSE, log.p = FALSE) - ncp)^2
-    }
-    ###########################
-
-    # Internal function for lower limit.
-    # Note the lower tail is used here, as we seek to find the NCP that has, in its lower tail (alpha.upper, for the upper limit), the specified value of the observed t/ncp.
-    ###########################
-    .ci.nct.upper <- function(val.of.interest, ...)
-    {
-      (qt(p=alpha.upper, df=df, ncp=val.of.interest, lower.tail = TRUE, log.p = FALSE) - ncp)^2
+    if (sup_int_warns == TRUE) {
+      orig_warn <- options()$warn
+      options(warn = -1)
     }
 
-    if(alpha.lower!=0)
-    {
-      if(sup.int.warns==TRUE) Low.Lim <- suppressWarnings(optimize(f=.ci.nct.lower, interval=c(min.ncp, max.ncp), alpha.lower=alpha.lower, df=df, ncp=ncp, maximize=FALSE, tol=tol))
-      if(sup.int.warns==FALSE) Low.Lim <- optimize(f=.ci.nct.lower, interval=c(min.ncp, max.ncp), alpha.lower=alpha.lower, df=df, ncp=ncp, maximize=FALSE, tol=tol)
+    min_ncp <- min(-150, -5 * ncp)
+    max_ncp <- max(150, 5 * ncp)
+
+    # Internal function for lower limit (for upper CI bound).
+    # Uses the upper tail (alpha_lower) of the noncentral t.
+    ci_nct_lower <- function(val_of_interest, ...) {
+      (
+        qt(
+          p = alpha_lower,
+          df = df,
+          ncp = val_of_interest,
+          lower.tail = FALSE,
+          log.p = FALSE
+        ) - ncp
+      )^2
     }
 
-    if(alpha.upper!=0)
-    {
-      if(sup.int.warns==TRUE) Up.Lim <- suppressWarnings(optimize(f=.ci.nct.upper, interval=c(min.ncp, max.ncp), alpha.upper=alpha.upper, df=df, ncp=ncp, maximize=FALSE, tol=tol))
-      if(sup.int.warns==FALSE) Up.Lim <- optimize(f=.ci.nct.upper, interval=c(min.ncp, max.ncp), alpha.upper=alpha.upper, df=df, ncp=ncp, maximize=FALSE, tol=tol)
+    # Internal function for upper limit (for lower CI bound).
+    # Uses the lower tail (alpha_upper) of the noncentral t.
+    ci_nct_upper <- function(val_of_interest, ...) {
+      (
+        qt(
+          p = alpha_upper,
+          df = df,
+          ncp = val_of_interest,
+          lower.tail = TRUE,
+          log.p = FALSE
+        ) - ncp
+      )^2
     }
 
-    if(alpha.lower==0) Result <- list(Lower.Limit=-Inf, Prob.Less.Lower=0, Upper.Limit=Up.Lim$minimum, Prob.Greater.Upper=pt(q=ncp, ncp=Up.Lim$minimum, df=df))
-    if(alpha.upper==0) Result <- list(Lower.Limit=Low.Lim$minimum, Prob.Less.Lower=pt(q=ncp, ncp=Low.Lim$minimum, df=df, lower.tail=FALSE), Upper.Limit=Inf, Prob.Greater.Upper=0)
-    if(alpha.lower!=0 & alpha.upper!=0) Result <- list(Lower.Limit=Low.Lim$minimum, Prob.Less.Lower=pt(q=ncp, ncp=Low.Lim$minimum, df=df, lower.tail=FALSE), Upper.Limit=Up.Lim$minimum, Prob.Greater.Upper=pt(q=ncp, ncp=Up.Lim$minimum, df=df))
+    if (alpha_lower != 0) {
+      if (sup_int_warns == TRUE) {
+        low_lim <- suppressWarnings(
+          optimize(
+            f = ci_nct_lower,
+            interval = c(min_ncp, max_ncp),
+            alpha_lower = alpha_lower,
+            df = df,
+            ncp = ncp,
+            maximum = FALSE,
+            tol = tol
+          )
+        )
+      }
 
-    if(sup.int.warns==TRUE) options(warn=Orig.warn)
+      if (sup_int_warns == FALSE) {
+        low_lim <- optimize(
+          f = ci_nct_lower,
+          interval = c(min_ncp, max_ncp),
+          alpha_lower = alpha_lower,
+          df = df,
+          ncp = ncp,
+          maximum = FALSE,
+          tol = tol
+        )
+      }
+    }
 
-    return(Result)
+    if (alpha_upper != 0) {
+      if (sup_int_warns == TRUE) {
+        up_lim <- suppressWarnings(
+          optimize(
+            f = ci_nct_upper,
+            interval = c(min_ncp, max_ncp),
+            alpha_upper = alpha_upper,
+            df = df,
+            ncp = ncp,
+            maximum = FALSE,
+            tol = tol
+          )
+        )
+      }
+
+      if (sup_int_warns == FALSE) {
+        up_lim <- optimize(
+          f = ci_nct_upper,
+          interval = c(min_ncp, max_ncp),
+          alpha_upper = alpha_upper,
+          df = df,
+          ncp = ncp,
+          maximum = FALSE,
+          tol = tol
+        )
+      }
+    }
+
+    if (alpha_lower == 0) {
+      result <- list(
+        Lower.Limit        = -Inf,
+        Prob.Less.Lower    = 0,
+        Upper.Limit        = up_lim$minimum,
+        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
+      )
+    }
+
+    if (alpha_upper == 0) {
+      result <- list(
+        Lower.Limit        = low_lim$minimum,
+        Prob.Less.Lower    = pt(
+          q = ncp, ncp = low_lim$minimum, df = df, lower.tail = FALSE
+        ),
+        Upper.Limit        = Inf,
+        Prob.Greater.Upper = 0
+      )
+    }
+
+    if (alpha_lower != 0 && alpha_upper != 0) {
+      result <- list(
+        Lower.Limit        = low_lim$minimum,
+        Prob.Less.Lower    = pt(
+          q = ncp, ncp = low_lim$minimum, df = df, lower.tail = FALSE
+        ),
+        Upper.Limit        = up_lim$minimum,
+        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
+      )
+    }
+
+    if (sup_int_warns == TRUE) {
+      options(warn = orig_warn)
+    }
+
+    return(result)
   }
-  ################################################
-  .conf.limits.nct.M2 <- function(ncp, df, conf.level=NULL, alpha.lower, alpha.upper, tol=1e-9, sup.int.warns=TRUE, ...)
-  {
+  conf_limits_nct_m2 <- function(ncp, df, conf_level = NULL,
+                                 alpha_lower, alpha_upper,
+                                 tol = 1e-9, sup_int_warns = TRUE, ...) {
 
-    # Internal function for upper limit.
-    ###########################
-    .ci.nct.lower <- function(val.of.interest, ...)
-    {
-      (qt(p=alpha.lower, df=df, ncp=val.of.interest, lower.tail = FALSE, log.p = FALSE) - ncp)^2
-    }
-    ###########################
-
-    # Internal function for lower limit.
-    ###########################
-    .ci.nct.upper <- function(val.of.interest, ...)
-    {
-      (qt(p=alpha.upper, df=df, ncp=val.of.interest, lower.tail = TRUE, log.p = FALSE) - ncp)^2
+    # Internal function for lower limit (for upper CI bound).
+    ci_nct_lower <- function(val_of_interest, ...) {
+      (
+        qt(
+          p = alpha_lower,
+          df = df,
+          ncp = val_of_interest,
+          lower.tail = FALSE,
+          log.p = FALSE
+        ) - ncp
+      )^2
     }
 
-    if(sup.int.warns==TRUE)
-    {
-      Low.Lim <- suppressWarnings(nlm(f=.ci.nct.lower, p=ncp, ...))
-      Up.Lim <- suppressWarnings(nlm(f=.ci.nct.upper, p=ncp, ...))
+    # Internal function for upper limit (for lower CI bound).
+    ci_nct_upper <- function(val_of_interest, ...) {
+      (
+        qt(
+          p = alpha_upper,
+          df = df,
+          ncp = val_of_interest,
+          lower.tail = TRUE,
+          log.p = FALSE
+        ) - ncp
+      )^2
     }
 
-    if(sup.int.warns==FALSE)
-    {
-      Low.Lim <- nlm(f=.ci.nct.lower, p=ncp, ...)
-      Up.Lim <- nlm(f=.ci.nct.upper, p=ncp, ...)
+    if (sup_int_warns == TRUE) {
+      low_lim <- suppressWarnings(nlm(f = ci_nct_lower, p = ncp, ...))
+      up_lim  <- suppressWarnings(nlm(f = ci_nct_upper, p = ncp, ...))
     }
 
-    if(alpha.lower==0) Result <- list(Lower.Limit=-Inf, Prob.Less.Lower=0, Upper.Limit=Up.Lim$estimate, Prob.Greater.Upper=pt(q=ncp, ncp=Up.Lim$estimate, df=df))
-    if(alpha.upper==0) Result <- list(Lower.Limit=Low.Lim$estimate, Prob.Less.Lower=pt(q=ncp, ncp=Low.Lim$estimate, df=df, lower.tail=FALSE), Upper.Limit=Inf, Prob.Greater.Upper=0)
-    if(alpha.lower!=0 & alpha.upper!=0) Result <- list(Lower.Limit=Low.Lim$estimate, Prob.Less.Lower=pt(q=ncp, ncp=Low.Lim$estimate, df=df, lower.tail=FALSE), Upper.Limit=Up.Lim$estimate, Prob.Greater.Upper=pt(q=ncp, ncp=Up.Lim$estimate, df=df))
+    if (sup_int_warns == FALSE) {
+      low_lim <- nlm(f = ci_nct_lower, p = ncp, ...)
+      up_lim  <- nlm(f = ci_nct_upper, p = ncp, ...)
+    }
 
-    return(Result)
+    if (alpha_lower == 0) {
+      result <- list(
+        Lower.Limit        = -Inf,
+        Prob.Less.Lower    = 0,
+        Upper.Limit        = up_lim$estimate,
+        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
+      )
+    }
+
+    if (alpha_upper == 0) {
+      result <- list(
+        Lower.Limit        = low_lim$estimate,
+        Prob.Less.Lower    = pt(
+          q = ncp, ncp = low_lim$estimate, df = df, lower.tail = FALSE
+        ),
+        Upper.Limit        = Inf,
+        Prob.Greater.Upper = 0
+      )
+    }
+
+    if (alpha_lower != 0 && alpha_upper != 0) {
+      result <- list(
+        Lower.Limit        = low_lim$estimate,
+        Prob.Less.Lower    = pt(
+          q = ncp, ncp = low_lim$estimate, df = df, lower.tail = FALSE
+        ),
+        Upper.Limit        = up_lim$estimate,
+        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
+      )
+    }
+
+    return(result)
   }
 
   # Now, use the each of the two methods.
-  Res.M1 <- Res.M2 <- NULL
-  try(Res.M1 <- .conf.limits.nct.M1(ncp=ncp, df=df, conf.level=NULL, alpha.lower=alpha.lower, alpha.upper=alpha.upper, tol=tol, sup.int.warns=sup.int.warns), silent=TRUE)
-  if(length(Res.M1)!=4) Res.M1 <- NULL
+  res_m1 <- res_m2 <- NULL
 
-  try(Res.M2 <- .conf.limits.nct.M2(ncp=ncp, df=df, conf.level=NULL, alpha.lower=alpha.lower, alpha.upper=alpha.upper, tol=tol, sup.int.warns=sup.int.warns), silent=TRUE)
-  if(length(Res.M2)!=4) Res.M2 <- NULL
+  try(
+    res_m1 <- conf_limits_nct_m1(
+      ncp = ncp,
+      df = df,
+      conf_level = NULL,
+      alpha_lower = alpha_lower,
+      alpha_upper = alpha_upper,
+      tol = tol,
+      sup_int_warns = sup_int_warns
+    ),
+    silent = TRUE
+  )
+  if (length(res_m1) != 4) res_m1 <- NULL
+
+  try(
+    res_m2 <- conf_limits_nct_m2(
+      ncp = ncp,
+      df = df,
+      conf_level = NULL,
+      alpha_lower = alpha_lower,
+      alpha_upper = alpha_upper,
+      tol = tol,
+      sup_int_warns = sup_int_warns
+    ),
+    silent = TRUE
+  )
+  if (length(res_m2) != 4) res_m2 <- NULL
 
   # Now, set-up the test to find the best method.
-  Low.M1 <- Res.M1$Lower.Limit
-  Prob.Low.M1 <- Res.M1$Prob.Less.Lower
-  Upper.M1 <- Res.M1$Upper.Limit
-  Prob.Upper.M1 <- Res.M1$Prob.Greater.Upper
+  low_m1 <- res_m1$Lower.Limit
+  prob_low_m1 <- res_m1$Prob.Less.Lower
+  upper_m1 <- res_m1$Upper.Limit
+  prob_upper_m1 <- res_m1$Prob.Greater.Upper
 
-  Low.M2 <- Res.M2$Lower.Limit
-  Prob.Low.M2 <- Res.M2$Prob.Less.Lower
-  Upper.M2 <- Res.M2$Upper.Limit
-  Prob.Upper.M2 <- Res.M2$Prob.Greater.Upper
+  low_m2 <- res_m2$Lower.Limit
+  prob_low_m2 <- res_m2$Prob.Less.Lower
+  upper_m2 <- res_m2$Upper.Limit
+  prob_upper_m2 <- res_m2$Prob.Greater.Upper
 
   # Choose the best interval limits:
   ##Here low
-  Min.for.Best.Low <- min((c(Prob.Low.M1, Prob.Low.M2)-alpha.lower)^2)
+  min_for_best_low <- min((c(prob_low_m1, prob_low_m2) - alpha_lower)^2)
 
-  if(!is.null(Res.M1)){if(Min.for.Best.Low==(Prob.Low.M1-alpha.lower)^2) Best.Low <- 1}
-  if(!is.null(Res.M2)){if(Min.for.Best.Low==(Prob.Low.M2-alpha.lower)^2) Best.Low <- 2}
+  if (!is.null(res_m1)) {
+    if (min_for_best_low == (prob_low_m1 - alpha_lower)^2) best_low <- 1
+  }
+  if (!is.null(res_m2)) {
+    if (min_for_best_low == (prob_low_m2 - alpha_lower)^2) best_low <- 2
+  }
 
   ##Here high
-  Min.for.Best.Up <- min((c(Prob.Upper.M1, Prob.Upper.M2)-alpha.upper)^2)
+  min_for_best_up <- min((c(prob_upper_m1, prob_upper_m2) - alpha_upper)^2)
 
-  if(!is.null(Res.M1)){if(Min.for.Best.Up==(Prob.Upper.M1-alpha.upper)^2) Best.Up <- 1}
-  if(!is.null(Res.M2)){if(Min.for.Best.Up==(Prob.Upper.M2-alpha.upper)^2) Best.Up <- 2}
+  if (!is.null(res_m1)) {
+    if (min_for_best_up == (prob_upper_m1 - alpha_upper)^2) best_up <- 1
+  }
+  if (!is.null(res_m2)) {
+    if (min_for_best_up == (prob_upper_m2 - alpha_upper)^2) best_up <- 2
+  }
   #####################################
 
-  if(is.null(Res.M1)) {Low.M1 <- NA; Prob.Low.M1 <- NA; Upper.M1 <- NA; Prob.Upper.M1 <- NA}
-  if(is.null(Res.M2)) {Low.M2 <- NA; Prob.Low.M2 <- NA; Upper.M2 <- NA; Prob.Upper.M2 <- NA}
+  if (is.null(res_m1)) {
+    low_m1 <- NA
+    prob_low_m1 <- NA
+    upper_m1 <- NA
+    prob_upper_m1 <- NA
+  }
+  if (is.null(res_m2)) {
+    low_m2 <- NA
+    prob_low_m2 <- NA
+    upper_m2 <- NA
+    prob_upper_m2 <- NA
+  }
 
-  Result <- list(Lower.Limit=c(Low.M1, Low.M2)[Best.Low], Prob.Less.Lower=c(Prob.Low.M1, Prob.Low.M2)[Best.Low], Upper.Limit=c(Upper.M1, Upper.M2)[Best.Up], Prob.Greater.Upper=c(Prob.Upper.M1, Prob.Upper.M2)[Best.Up])
+  result <- list(
+    Lower.Limit = c(low_m1, low_m2)[best_low],
+    Prob.Less.Lower = c(prob_low_m1, prob_low_m2)[best_low],
+    Upper.Limit = c(upper_m1, upper_m2)[best_up],
+    Prob.Greater.Upper = c(prob_upper_m1, prob_upper_m2)[best_up]
+  )
 
-  return(Result)
+  return(result)
 }

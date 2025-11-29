@@ -2,157 +2,252 @@
 #' Taken from MBESS by Ken Kelley
 #' Exported here to avoid importing a zillion package dependencies
 #'
-#' @param chi.square the chi-square value found in the study
+#' @param chi_square the chi-square value found in the study
 #' @param df the degrees of freedom.
-#' @param conf.level the level of confidence for a symmetric confidence
+#' @param conf_level the level of confidence for a symmetric confidence
 #' interval.
-#' @param alpha.lower the proportion of values beyond the lower limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
-#' @param alpha.upper the proportion of values beyond the upper limit of
-#' the confidence interval (cannot be used with \code{conf.level}).
+#' @param alpha_lower the proportion of values beyond the lower limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
+#' @param alpha_upper the proportion of values beyond the upper limit of
+#' the confidence interval (cannot be used with \code{conf_level}).
 #' @param tol is the tolerance of the iterative method for determining
 #' the critical values.
-#' @param Jumping.Prop helps move up and down to find the right ncp limit
+#' @param jumping_prop helps move up and down to find
+#' the right noncentrality limit
 #' @noRd
 
-noncentral_x <- function(Chi.Square=NULL, conf.level=.95,
-                         df=NULL, alpha.lower=NULL, alpha.upper=NULL,
-                         tol=1e-9, Jumping.Prop=.10)
-{
-  if(Jumping.Prop <=0 | Jumping.Prop >= 1) stop("The Jumping Proportion (\'Jumping.Prop\') must be between zero and one.")
-  if(is.null(Chi.Square)) stop("Your \'Chi.Square\' is not correctly specified.")
-  if(Chi.Square < 0) stop("Your \'Chi.Square\' is not correctly specified.")
-  if(is.null(df)) stop("You must specify the degrees of freedom (\'df\').")
-  if(is.null(alpha.lower) & is.null(alpha.upper) & is.null(conf.level)) stop("You need to specify the confidence interval parameters.")
-  if((!is.null(alpha.lower) | !is.null(alpha.upper)) & !is.null(conf.level)) stop("You must specify only one method of defining the confidence limits.")
-  if(is.null(conf.level)) {if(alpha.lower<0 | alpha.upper<0) stop("The upper and lower confidence limits must be larger than 0.")}
-
-  if(!is.null(conf.level))
-  {
-    if(conf.level >=1 | conf.level <= 0) stop("Your confidence level (\'conf.level\') must be between 0 and 1.")
-    alpha.lower <- alpha.upper <- (1-conf.level)/2
+noncentral_x <- function(chi_square = NULL, conf_level = .95,
+                         df = NULL, alpha_lower = NULL, alpha_upper = NULL,
+                         tol = 1e-9, jumping_prop = .10) {
+  if (jumping_prop <= 0 || jumping_prop >= 1) {
+    stop("The jumping_prop value must be between zero and one.")
   }
 
-  if(alpha.lower==0) LL <- 0
-  if(alpha.upper==0) UL <- Inf
+  if (is.null(chi_square)) {
+    stop("Your 'chi_square' is not correctly specified.")
+  }
+
+  if (chi_square < 0) {
+    stop("Your 'chi_square' is not correctly specified.")
+  }
+
+  if (is.null(df)) {
+    stop("You must specify the degrees of freedom ('df').")
+  }
+
+  if (is.null(alpha_lower) && is.null(alpha_upper) && is.null(conf_level)) {
+    stop("You need to specify the confidence interval parameters.")
+  }
+
+  if ((!is.null(alpha_lower) || !is.null(alpha_upper)) &&
+        !is.null(conf_level)) {
+    stop("You must specify only one method of defining the confidence limits.")
+  }
+
+  if (is.null(conf_level)) {
+    if (alpha_lower < 0 || alpha_upper < 0) {
+      stop("The upper and lower confidence limits must be larger than 0.")
+    }
+  }
+
+  if (!is.null(conf_level)) {
+    if (conf_level >= 1 || conf_level <= 0) {
+      stop("Your confidence level ('conf_level') must be between 0 and 1.")
+    }
+    alpha_lower <- alpha_upper <- (1 - conf_level) / 2
+  }
+
+  if (alpha_lower == 0) ll <- 0
+  if (alpha_upper == 0) ul <- Inf
 
   # Critical value for lower tail.
-  ################################################################################################
-  FAILED <- NULL
+  failed_lower <- NULL
 
-  if(alpha.lower > 0)
-  {
-    LL.0 <- .01 # Obtain a lower value by using the central chi-square- distribution
-    Diff <- pchisq(q=Chi.Square, df=df, ncp=LL.0) - (1-alpha.lower)
+  if (alpha_lower > 0) {
+    # Start with a lower value using the central chi-square distribution
+    ll0 <- .01
+    diff_val <- pchisq(q = chi_square, df = df, ncp = ll0) - (1 - alpha_lower)
 
-    if(pchisq(q=Chi.Square, df=df, ncp=LL.0) < (1-alpha.lower))
-    {
-      FAILED <- if(pchisq(q=Chi.Square, df=df, ncp=0) < 1-alpha.lower)
-        LL.0 <- .00000001
-      if(pchisq(q=Chi.Square, df=df, ncp=LL.0) < 1-alpha.lower) FAILED <- TRUE
-      if(FAILED==TRUE) warning("The size of the effect combined with the degrees of freedom is too small to determine a lower confidence limit for the \'alpha.lower\' (or the (1/2)(1-\'conf.level\') symmetric) value specified (set to zero).", call. = FALSE)
+    if (pchisq(q = chi_square, df = df, ncp = ll0) < (1 - alpha_lower)) {
+      failed_lower <-
+        if (pchisq(q = chi_square, df = df, ncp = 0) < 1 - alpha_lower) {
+          ll0 <- .00000001
+        }
+
+      if (pchisq(q = chi_square, df = df, ncp = ll0) < 1 - alpha_lower) {
+        failed_lower <- TRUE
+      }
+
+      if (failed_lower == TRUE) {
+        warning(
+          "The size of the effect combined with the degrees of 
+          freedom is too small ",
+          "to determine a lower confidence limit for 'alpha_lower' (or the ",
+          "(1/2)(1 - 'conf_level') symmetric) value specified (set to zero).",
+          call. = FALSE
+        )
+      }
     }
 
-    if(is.null(FAILED))
-    {
-      LL.1 <- LL.2 <- LL.0 # Define both in case there is no need for the while loop (LL.2 is overwritten later if the while loop is used).
+    if (is.null(failed_lower)) {
+      # Define starting bounds; ll2 is overwritten later in the search
+      ll1 <- ll2 <- ll0
 
-      while(Diff > tol) # Find a value that is too small and one that is too big.
-      {
-        LL.2 <- LL.1*(1+Jumping.Prop)
-        Diff <- pchisq(q=Chi.Square, df=df, ncp=LL.2) - (1-alpha.lower)
-        LL.1 <- LL.2
+      # Find values that bracket the solution
+      while (diff_val > tol) {
+        ll2 <- ll1 * (1 + jumping_prop)
+        diff_val <-
+          pchisq(q = chi_square, df = df, ncp = ll2) - (1 - alpha_lower)
+        ll1 <- ll2
       }
-      LL.1 <- LL.2/(1+Jumping.Prop) # Produces the value directly before failure (a Lambda value that is too small.)
 
-      LL.Bounds <- c(LL.1, (LL.1+LL.2)/2, LL.2) # The middle value is in the middle.
+      # Value directly before failure (too small)
+      ll1 <- ll2 / (1 + jumping_prop)
 
-      Diff <- pchisq(q=Chi.Square, df=df, ncp=LL.Bounds[2])-(1-alpha.lower)
-      while(abs(Diff) > tol) # Run the while loop to home in on the value satisfying the conditions (i.e., the lower limit).
-      {
-        Diff.1 <- pchisq(q=Chi.Square, df=df, ncp=LL.Bounds[1])-(1-alpha.lower) > tol
-        Diff.2 <- pchisq(q=Chi.Square, df=df, ncp=LL.Bounds[2])-(1-alpha.lower) > tol
-        Diff.3 <- pchisq(q=Chi.Square, df=df, ncp=LL.Bounds[3])-(1-alpha.lower) > tol
+      # Create bounding values (lower, mid, upper)
+      ll_bounds <- c(ll1, (ll1 + ll2) / 2, ll2)
 
-        if(Diff.1==TRUE & Diff.2==TRUE & Diff.3==FALSE)
-        {
-          LL.Bounds <- c(LL.Bounds[2], (LL.Bounds[2]+LL.Bounds[3])/2, LL.Bounds[3])
+      diff_val <-
+        pchisq(q = chi_square, df = df, ncp = ll_bounds[2]) -
+        (1 - alpha_lower)
+
+      # Refine bounds to find lower confidence limit
+      while (abs(diff_val) > tol) {
+        diff1 <-
+          pchisq(q = chi_square, df = df, ncp = ll_bounds[1]) -
+          (1 - alpha_lower) > tol
+        diff2 <-
+          pchisq(q = chi_square, df = df, ncp = ll_bounds[2]) -
+          (1 - alpha_lower) > tol
+        diff3 <-
+          pchisq(q = chi_square, df = df, ncp = ll_bounds[3]) -
+          (1 - alpha_lower) > tol
+
+        if (diff1 == TRUE && diff2 == TRUE && diff3 == FALSE) {
+          ll_bounds <-
+            c(ll_bounds[2], (ll_bounds[2] + ll_bounds[3]) / 2, ll_bounds[3])
         }
 
-        if(Diff.1==TRUE & Diff.2==FALSE & Diff.3==FALSE)
-        {
-          LL.Bounds <- c(LL.Bounds[1], (LL.Bounds[1]+LL.Bounds[2])/2, LL.Bounds[2])
+        if (diff1 == TRUE && diff2 == FALSE && diff3 == FALSE) {
+          ll_bounds <-
+            c(ll_bounds[1], (ll_bounds[1] + ll_bounds[2]) / 2, ll_bounds[2])
         }
 
-        Diff <- pchisq(q=Chi.Square, df=df, ncp=LL.Bounds[2])-(1-alpha.lower)
-
+        diff_val <-
+          pchisq(q = chi_square, df = df, ncp = ll_bounds[2]) -
+          (1 - alpha_lower)
       }
-      LL <- LL.Bounds[2] # Confidence limit.
+
+      # Final lower confidence limit
+      ll <- ll_bounds[2]
     }
   }
 
-
-  if(!is.null(FAILED)) LL <- 0
-  ################################################################################################
+  if (!is.null(failed_lower)) {
+    ll <- 0
+  }
 
   # Critical value for upper tail.
-  ################################################################################################
-  if(alpha.upper > 0)
-  {
-    FAILED.Up <- NULL
-    #UL.0 <- qchisq(p=1-alpha.upper*.00005, df=df)
-    UL.0 <- LL + .01
+  if (alpha_upper > 0) {
+    failed_upper <- NULL
+    # Starting value for upper lambda (slightly above lower limit)
+    ul0 <- ll + .01
 
-    Diff <- pchisq(q=Chi.Square, df=df, ncp=UL.0)-alpha.upper
+    diff_val <- pchisq(q = chi_square, df = df, ncp = ul0) - alpha_upper
 
-    if(Diff < 0) UL.0 <- .00000001
-
-    Diff <- pchisq(q=Chi.Square, df=df, ncp=UL.0)-alpha.upper
-    if(Diff < 0)
-    {
-      FAILED.Up <- TRUE
-      warning("The size of the effect combined with the degrees of freedom is too small to determine an upper confidence limit for the \'alpha.upper\' (or (1/2)(1-\'conf.level\') symmetric) value specified.", call. = FALSE)
+    if (diff_val < 0) {
+      ul0 <- .00000001
     }
 
-    if(is.null(FAILED.Up))
-    {
-      UL.1 <- UL.2 <- UL.0
-      while(Diff > tol)
-      {
-        UL.2 <- UL.1*(1+Jumping.Prop)
-        Diff <-  pchisq(q=Chi.Square, df=df, ncp=UL.2) - alpha.upper
-        UL.1 <- UL.2
-      }
-      UL.1 <- UL.2/(1+Jumping.Prop)
-
-      UL.Bounds <- c(UL.1, (UL.1+UL.2)/2, UL.2)
-
-      Diff <- pchisq(q=Chi.Square, df=df, ncp=UL.Bounds[2])-alpha.upper
-      while(abs(Diff) > tol)
-      {
-        Diff.1 <- pchisq(q=Chi.Square, df=df, ncp=UL.Bounds[1])-alpha.upper > tol
-        Diff.2 <- pchisq(q=Chi.Square, df=df, ncp=UL.Bounds[2])-alpha.upper > tol
-        Diff.3 <- pchisq(q=Chi.Square, df=df, ncp=UL.Bounds[3])-alpha.upper > tol
-
-        if(Diff.1==TRUE & Diff.2==TRUE & Diff.3==FALSE)
-        {
-          UL.Bounds <- c(UL.Bounds[2], (UL.Bounds[2]+UL.Bounds[3])/2, UL.Bounds[3])
-        }
-
-        if(Diff.1==TRUE & Diff.2==FALSE & Diff.3==FALSE)
-        {
-          UL.Bounds <- c(UL.Bounds[1], (UL.Bounds[1]+UL.Bounds[2])/2, UL.Bounds[2])
-        }
-
-        Diff <- pchisq(q=Chi.Square, df=df, ncp=UL.Bounds[2])-alpha.upper
-
-      }
-      UL <- UL.Bounds[2] # Confidence limit.
+    diff_val <- pchisq(q = chi_square, df = df, ncp = ul0) - alpha_upper
+    if (diff_val < 0) {
+      failed_upper <- TRUE
+      warning(
+        "The size of the effect combined with the degrees of 
+        freedom is too small ",
+        "to determine an upper confidence limit for 'alpha_upper' ",
+        "(or (1/2)(1 - 'conf_level') symmetric) value specified.",
+        call. = FALSE
+      )
     }
-    if(!is.null(FAILED.Up)) UL <- NA
+
+    if (is.null(failed_upper)) {
+      ul1 <- ul2 <- ul0
+
+      # Find values that bracket the solution
+      while (diff_val > tol) {
+        ul2 <- ul1 * (1 + jumping_prop)
+        diff_val <-
+          pchisq(q = chi_square, df = df, ncp = ul2) - alpha_upper
+        ul1 <- ul2
+      }
+      ul1 <- ul2 / (1 + jumping_prop)
+
+      # Create bounding values (lower, mid, upper)
+      ul_bounds <- c(ul1, (ul1 + ul2) / 2, ul2)
+
+      diff_val <-
+        pchisq(q = chi_square, df = df, ncp = ul_bounds[2]) - alpha_upper
+
+      # Refine bounds to find upper confidence limit
+      while (abs(diff_val) > tol) {
+        diff1 <-
+          pchisq(q = chi_square, df = df, ncp = ul_bounds[1]) - alpha_upper >
+          tol
+        diff2 <-
+          pchisq(q = chi_square, df = df, ncp = ul_bounds[2]) - alpha_upper >
+          tol
+        diff3 <-
+          pchisq(q = chi_square, df = df, ncp = ul_bounds[3]) - alpha_upper >
+          tol
+
+        if (diff1 == TRUE && diff2 == TRUE && diff3 == FALSE) {
+          ul_bounds <-
+            c(ul_bounds[2], (ul_bounds[2] + ul_bounds[3]) / 2, ul_bounds[3])
+        }
+
+        if (diff1 == TRUE && diff2 == FALSE && diff3 == FALSE) {
+          ul_bounds <-
+            c(ul_bounds[1], (ul_bounds[1] + ul_bounds[2]) / 2, ul_bounds[2])
+        }
+
+        diff_val <-
+          pchisq(q = chi_square, df = df, ncp = ul_bounds[2]) - alpha_upper
+      }
+
+      # Final upper confidence limit
+      ul <- ul_bounds[2]
+    }
+
+    if (!is.null(failed_upper)) {
+      ul <- NA
+    }
   }
-  ################################################################################################
-  if(alpha.lower>0 & alpha.upper>0) return(list(Lower.Limit=LL, Prob.Less.Lower= alpha.lower, Upper.Limit=UL, Prob.Greater.Upper=alpha.upper))
-  if(alpha.lower==0 & alpha.upper>0) return(list(Conf.Interval.type="one-sided", Lower.Limit=0, Upper.Limit=UL, Prob.Greater.Upper= alpha.upper))
-  if(alpha.lower>0 & alpha.upper==0) return(list(Conf.Interval.type="one-sided", Lower.Limit=LL, Prob.Less.Lower= alpha.lower, Upper.Limit=Inf))
+
+  if (alpha_lower > 0 && alpha_upper > 0) {
+    return(list(
+      Lower.Limit        = ll,
+      Prob.Less.Lower    = alpha_lower,
+      Upper.Limit        = ul,
+      Prob.Greater.Upper = alpha_upper
+    ))
+  }
+
+  if (alpha_lower == 0 && alpha_upper > 0) {
+    return(list(
+      Conf.Interval.type = "one-sided",
+      Lower.Limit        = 0,
+      Upper.Limit        = ul,
+      Prob.Greater.Upper = alpha_upper
+    ))
+  }
+
+  if (alpha_lower > 0 && alpha_upper == 0) {
+    return(list(
+      Conf.Interval.type = "one-sided",
+      Lower.Limit        = ll,
+      Prob.Less.Lower    = alpha_lower,
+      Upper.Limit        = Inf
+    ))
+  }
 }
