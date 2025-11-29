@@ -28,15 +28,44 @@
 #'   measurements. Supply `m1`, `m2`, `sd1`, `sd2`, `r`, and `n`.
 #'   In this case, `d()` will call [d_dep_t_rm()] with the same arguments.
 #'
+#' - `"ind_t"` — independent-groups t-test using the pooled SD (\(d_s\)).
+#'   Supply `m1`, `m2`, `sd1`, `sd2`, `n1`, and `n2`. In this case, `d()` will
+#'   call [d_ind_t()] with the same arguments.
+#'
+#' - `"ind_t_t"` — independent-groups t-test where the *t* value is supplied
+#'   directly. Supply `t_value`, `n1`, and `n2`. In this case, `d()` will call
+#'   [d_ind_t_t()] with the same arguments.
+#'
+#' - `"prop"` — independent proportions (binary outcome) using a
+#'   standardized mean difference (SMD) that treats each proportion as the
+#'   mean of a Bernoulli variable with pooled Bernoulli SD. Supply `p1`,
+#'   `p2`, `n1`, and `n2`. In this case, `d()` will call [d_prop()] with
+#'   the same arguments.
+#'
+#' - `"prop_h"` — independent proportions (binary outcome) using Cohen's
+#'   \(h\) based on the arcsine-transformed difference between proportions.
+#'   Supply `p1`, `p2`, `n1`, and `n2`. In this case, `d()` will call
+#'   [h_prop()] with the same arguments.
+#'
 #' @param m1 Means of the two conditions or measurements.
 #' @param m2 Means of the two conditions or measurements.
 #' @param sd1 Standard deviations for the two conditions or measurements.
 #' @param sd2 Standard deviations for the two conditions or measurements.
+#' @param p1 Proportion for group one (between 0 and 1), used in the
+#'   `"prop"` design.
+#' @param p2 Proportion for group two (between 0 and 1), used in the
+#'   `"prop"` design.
+#' @param n1 Sample sizes for the two independent groups (used for
+#'   independent-groups designs such as `"ind_t"`).
+#' @param n2 Sample sizes for the two independent groups (used for
+#'   independent-groups designs such as `"ind_t"`).
 #' @param r Correlation between the paired measurements (used for
 #'   repeated-measures designs such as `"dep_t_rm"`).
 #' @param mdiff Mean difference between paired observations.
 #' @param sddiff Standard deviation of the difference scores.
-#' @param t_value t statistic value for the paired t-test.
+#' @param t_value t statistic value for the test. Used in designs where the
+#'   effect size is derived directly from a reported t-value (e.g.,
+#'   `"dep_t_diff_t"` or `"ind_t_t"`).
 #' @param n Sample size (number of paired observations).
 #' @param a Significance level used when computing confidence intervals.
 #'   Defaults to `0.05`.
@@ -82,6 +111,10 @@ d <- function(m1 = NULL,
               mdiff = NULL,
               sddiff = NULL,
               t_value = NULL,
+              p1 = NULL,
+              p2 = NULL,
+              n1 = NULL,
+              n2 = NULL,
               n = NULL,
               a = 0.05,
               design,
@@ -89,7 +122,16 @@ d <- function(m1 = NULL,
 
   design <- match.arg(
     design,
-    choices = c("dep_t_avg", "dep_t_diff", "dep_t_diff_t", "dep_t_rm")
+    choices = c(
+      "dep_t_avg",
+      "dep_t_diff",
+      "dep_t_diff_t",
+      "dep_t_rm",
+      "ind_t",
+      "ind_t_t",
+      "prop",
+      "prop_h"
+    )
   )
 
   if (design == "dep_t_avg") {
@@ -170,6 +212,83 @@ d <- function(m1 = NULL,
         r   = r,
         n   = n,
         a   = a
+      )
+    )
+  }
+
+  if (design == "ind_t") {
+    if (is.null(m1) || is.null(m2) ||
+        is.null(sd1) || is.null(sd2) ||
+        is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
+      )
+    }
+
+    return(
+      d_ind_t(
+        m1  = m1,
+        m2  = m2,
+        sd1 = sd1,
+        sd2 = sd2,
+        n1  = n1,
+        n2  = n2,
+        a   = a
+      )
+    )
+  }
+
+  if (design == "ind_t_t") {
+    if (is.null(t_value) || is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'ind_t_t', you must supply t_value, n1, and n2."
+      )
+    }
+
+    return(
+      d_ind_t_t(
+        t_value = t_value,
+        n1      = n1,
+        n2      = n2,
+        a       = a
+      )
+    )
+  }
+
+  if (design == "prop") {
+    if (is.null(p1) || is.null(p2) ||
+        is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'prop', you must supply p1, p2, n1, and n2."
+      )
+    }
+
+    return(
+      d_prop(
+        p1 = p1,
+        p2 = p2,
+        n1 = n1,
+        n2 = n2,
+        a  = a
+      )
+    )
+  }
+
+  if (design == "prop_h") {
+    if (is.null(p1) || is.null(p2) ||
+        is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'prop_h', you must supply p1, p2, n1, and n2."
+      )
+    }
+
+    return(
+      h_prop(
+        p1 = p1,
+        p2 = p2,
+        n1 = n1,
+        n2 = n2,
+        a  = a
       )
     )
   }
