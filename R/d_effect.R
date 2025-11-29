@@ -1,5 +1,10 @@
 #' General interface for Cohen's d
 #'
+#' - `"z_z"` — one-sample z-test effect size where the *z* value is supplied
+#'   directly along with the sample size `n`. Supply `z_value` and `n`. You
+#'   may optionally supply `sig` (population SD) for descriptive reporting.
+#'   In this case, `d_effect()` will call [d_z_z()] with the same arguments.
+#'
 #' @description
 #' `d_effect()` is a convenience wrapper that will route to the appropriate
 #' Cohen's *d* helper function based on the arguments supplied. This allows
@@ -85,6 +90,9 @@
 #' @param t_value t statistic value for the test. Used in designs where the
 #'   effect size is derived directly from a reported t-value (e.g.,
 #'   `"dep_t_diff_t"`, `"ind_t_t"`, or `"single_t_t"`).
+#' @param z_value z statistic value for the test. Used in designs where the
+#'   effect size is derived directly from a reported z-value (e.g.,
+#'   `"z_z"`).
 #' @param n Sample size (number of paired observations).
 #' @param a Significance level used when computing confidence intervals.
 #'   Defaults to `0.05`.
@@ -132,6 +140,7 @@ d_effect <- function(m1 = NULL,
               mdiff = NULL,
               sddiff = NULL,
               t_value = NULL,
+              z_value = NULL,
               p1 = NULL,
               p2 = NULL,
               n1 = NULL,
@@ -154,7 +163,8 @@ d_effect <- function(m1 = NULL,
       "prop_h",
       "single_t",
       "single_t_t",
-      "z_mean"
+      "z_mean",
+      "z_z"
     )
   )
 
@@ -369,6 +379,23 @@ d_effect <- function(m1 = NULL,
         sig = sig,
         n   = n,
         a   = a
+      )
+    )
+  }
+
+  if (design == "z_z") {
+    if (is.null(z_value) || is.null(n)) {
+      stop(
+        "For design = 'z_z', you must supply z_value and n."
+      )
+    }
+
+    return(
+      d_z_z(
+        z   = z_value,
+        n   = n,
+        a   = a,
+        sig = sig
       )
     )
   }
