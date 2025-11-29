@@ -16,10 +16,25 @@
 #'   independent groups. Supply `d`, `n1`, and `n2`. In this case,
 #'   `r_effect()` will call [d_to_r()] with the same arguments.
 #'
+#' - `"epsilon_full_ss"` — epsilon-squared (\eqn{\epsilon^2}) from an ANOVA
+#'   table using model and error mean squares and the total sum of squares.
+#'   Supply `dfm`, `dfe`, `msm`, `mse`, and `sst`. In this case,
+#'   `r_effect()` will call [epsilon_full_ss()] with the same arguments.
+#'
 #' @param d Cohen's d value for the contrast of interest (used when
 #'   `design = "d_to_r"`).
 #' @param n1 Sample size for group one (used when `design = "d_to_r"`).
 #' @param n2 Sample size for group two (used when `design = "d_to_r"`).
+#' @param dfm Degrees of freedom for the model term (used when
+#'   `design = "epsilon_full_ss"`).
+#' @param dfe Degrees of freedom for the error term (used when
+#'   `design = "epsilon_full_ss"`).
+#' @param msm Mean square for the model (used when
+#'   `design = "epsilon_full_ss"`).
+#' @param mse Mean square for the error (used when
+#'   `design = "epsilon_full_ss"`).
+#' @param sst Total sum of squares for the outcome (used when
+#'   `design = "epsilon_full_ss"`).
 #' @param a Significance level used for confidence intervals. Defaults to 0.05.
 #' @param design Character string indicating which r-family effect size
 #'   design to use. See **Supported designs**.
@@ -38,11 +53,16 @@
 r_effect <- function(d = NULL,
                      n1 = NULL,
                      n2 = NULL,
+                     dfm = NULL,
+                     dfe = NULL,
+                     msm = NULL,
+                     mse = NULL,
+                     sst = NULL,
                      a = 0.05,
                      design,
                      ...) {
 
-  design <- match.arg(design, choices = c("d_to_r"))
+  design <- match.arg(design, choices = c("d_to_r", "epsilon_full_ss"))
 
   if (design == "d_to_r") {
     if (is.null(d) || is.null(n1) || is.null(n2)) {
@@ -57,6 +77,27 @@ r_effect <- function(d = NULL,
         n1 = n1,
         n2 = n2,
         a  = a
+      )
+    )
+  }
+
+  if (design == "epsilon_full_ss") {
+    if (is.null(dfm) || is.null(dfe) ||
+        is.null(msm) || is.null(mse) ||
+        is.null(sst)) {
+      stop(
+        "For design = 'epsilon_full_ss', you must supply dfm, dfe, msm, mse, and sst."
+      )
+    }
+
+    return(
+      epsilon_full_ss(
+        dfm = dfm,
+        dfe = dfe,
+        msm = msm,
+        mse = mse,
+        sst = sst,
+        a   = a
       )
     )
   }
