@@ -146,24 +146,24 @@
 #'
 #' @export
 d_effect <- function(m1 = NULL,
-              m2 = NULL,
-              sd1 = NULL,
-              sd2 = NULL,
-              u = NULL,
-              sig = NULL,
-              r = NULL,
-              mdiff = NULL,
-              sddiff = NULL,
-              t_value = NULL,
-              z_value = NULL,
-              p1 = NULL,
-              p2 = NULL,
-              n1 = NULL,
-              n2 = NULL,
-              n = NULL,
-              a = 0.05,
-              design,
-              ...) {
+                     m2 = NULL,
+                     sd1 = NULL,
+                     sd2 = NULL,
+                     u = NULL,
+                     sig = NULL,
+                     r = NULL,
+                     mdiff = NULL,
+                     sddiff = NULL,
+                     t_value = NULL,
+                     z_value = NULL,
+                     p1 = NULL,
+                     p2 = NULL,
+                     n1 = NULL,
+                     n2 = NULL,
+                     n = NULL,
+                     a = 0.05,
+                     design,
+                     ...) {
 
   design <- match.arg(
     design,
@@ -186,10 +186,11 @@ d_effect <- function(m1 = NULL,
   )
   if (design == "delta_ind_t") {
     if (is.null(m1) || is.null(m2) ||
-        is.null(sd1) || is.null(sd2) ||
-        is.null(n1) || is.null(n2)) {
+          is.null(sd1) || is.null(sd2) ||
+          is.null(n1) || is.null(n2)) {
       stop(
-        "For design = 'delta_ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
+        "For design = 'delta_ind_t', you must supply m1, 
+        m2, sd1, sd2, n1, and n2."
       )
     }
 
@@ -229,7 +230,7 @@ d_effect <- function(m1 = NULL,
 
   if (design == "dep_t_diff") {
     if (is.null(m1) && is.null(m2) &&
-        is.null(sd1) && is.null(sd2)) {
+          is.null(sd1) && is.null(sd2)) {
       # This design uses mdiff and sddiff instead of m1/m2/sd1/sd2
       # Ensure required arguments exist
       if (is.null(mdiff) || is.null(sddiff) || is.null(n)) {
@@ -268,8 +269,8 @@ d_effect <- function(m1 = NULL,
 
   if (design == "dep_t_rm") {
     if (is.null(m1) || is.null(m2) ||
-        is.null(sd1) || is.null(sd2) ||
-        is.null(r)  || is.null(n)) {
+          is.null(sd1) || is.null(sd2) ||
+          is.null(r)  || is.null(n)) {
       stop(
         "For design = 'dep_t_rm', you must supply m1, m2, sd1, sd2, r, and n."
       )
@@ -290,8 +291,8 @@ d_effect <- function(m1 = NULL,
 
   if (design == "ind_t") {
     if (is.null(m1) || is.null(m2) ||
-        is.null(sd1) || is.null(sd2) ||
-        is.null(n1) || is.null(n2)) {
+          is.null(sd1) || is.null(sd2) ||
+          is.null(n1) || is.null(n2)) {
       stop(
         "For design = 'ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
       )
@@ -329,8 +330,8 @@ d_effect <- function(m1 = NULL,
 
   if (design == "g_ind_t") {
     if (is.null(m1) || is.null(m2) ||
-        is.null(sd1) || is.null(sd2) ||
-        is.null(n1) || is.null(n2)) {
+          is.null(sd1) || is.null(sd2) ||
+          is.null(n1) || is.null(n2)) {
       stop(
         "For design = 'g_ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
       )
@@ -351,7 +352,7 @@ d_effect <- function(m1 = NULL,
 
   if (design == "prop") {
     if (is.null(p1) || is.null(p2) ||
-        is.null(n1) || is.null(n2)) {
+          is.null(n1) || is.null(n2)) {
       stop(
         "For design = 'prop', you must supply p1, p2, n1, and n2."
       )
@@ -370,7 +371,7 @@ d_effect <- function(m1 = NULL,
 
   if (design == "prop_h") {
     if (is.null(p1) || is.null(p2) ||
-        is.null(n1) || is.null(n2)) {
+          is.null(n1) || is.null(n2)) {
       stop(
         "For design = 'prop_h', you must supply p1, p2, n1, and n2."
       )
@@ -389,9 +390,10 @@ d_effect <- function(m1 = NULL,
 
   if (design == "single_t") {
     if (is.null(m1) || is.null(u) ||
-        is.null(sd1) || is.null(n)) {
+          is.null(sd1) || is.null(n)) {
       stop(
-        "For design = 'single_t', you must supply m1 (sample mean), u (population mean), sd1, and n."
+        "For design = 'single_t', you must supply m1 
+        (sample mean), u (population mean), sd1, and n."
       )
     }
 
@@ -424,10 +426,11 @@ d_effect <- function(m1 = NULL,
 
   if (design == "z_mean") {
     if (is.null(m1) || is.null(u) ||
-        is.null(sd1) || is.null(sig) ||
-        is.null(n)) {
+          is.null(sd1) || is.null(sig) ||
+          is.null(n)) {
       stop(
-        "For design = 'z_mean', you must supply m1 (sample mean), u (population mean), sd1, sig (population SD), and n."
+        "For design = 'z_mean', you must supply m1 
+        (sample mean), u (population mean), sd1, sig (population SD), and n."
       )
     }
 
