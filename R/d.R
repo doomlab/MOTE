@@ -18,14 +18,22 @@
 #'   Supply `mdiff`, `sddiff`, and `n`. In this case, `d()` will call
 #'   [d_dep_t_diff()] with the same arguments.
 #'
-#' - `"dep_t_diff_t"` — paired/dependent t-test where the *t* value is supplied directly.
+#' - `"dep_t_diff_t"` — paired/dependent t-test where the
+#' *t* value is supplied directly.
 #'   Supply `t_value` and `n`. In this case, `d()` will call
 #'   [d_dep_t_diff_t()] with the same arguments.
+#'
+#' - `"dep_t_rm"` — paired/dependent t-test using the repeated-measures
+#'   effect size \(d_{rm}\), which adjusts for the correlation between
+#'   measurements. Supply `m1`, `m2`, `sd1`, `sd2`, `r`, and `n`.
+#'   In this case, `d()` will call [d_dep_t_rm()] with the same arguments.
 #'
 #' @param m1 Means of the two conditions or measurements.
 #' @param m2 Means of the two conditions or measurements.
 #' @param sd1 Standard deviations for the two conditions or measurements.
 #' @param sd2 Standard deviations for the two conditions or measurements.
+#' @param r Correlation between the paired measurements (used for
+#'   repeated-measures designs such as `"dep_t_rm"`).
 #' @param mdiff Mean difference between paired observations.
 #' @param sddiff Standard deviation of the difference scores.
 #' @param t_value t statistic value for the paired t-test.
@@ -70,6 +78,7 @@ d <- function(m1 = NULL,
               m2 = NULL,
               sd1 = NULL,
               sd2 = NULL,
+              r = NULL,
               mdiff = NULL,
               sddiff = NULL,
               t_value = NULL,
@@ -78,7 +87,10 @@ d <- function(m1 = NULL,
               design,
               ...) {
 
-  design <- match.arg(design, choices = c("dep_t_avg", "dep_t_diff", "dep_t_diff_t"))
+  design <- match.arg(
+    design,
+    choices = c("dep_t_avg", "dep_t_diff", "dep_t_diff_t", "dep_t_rm")
+  )
 
   if (design == "dep_t_avg") {
     if (is.null(m1) || is.null(m2) ||
@@ -136,6 +148,28 @@ d <- function(m1 = NULL,
         t_value = t_value,
         n       = n,
         a       = a
+      )
+    )
+  }
+
+  if (design == "dep_t_rm") {
+    if (is.null(m1) || is.null(m2) ||
+        is.null(sd1) || is.null(sd2) ||
+        is.null(r)  || is.null(n)) {
+      stop(
+        "For design = 'dep_t_rm', you must supply m1, m2, sd1, sd2, r, and n."
+      )
+    }
+
+    return(
+      d_dep_t_rm(
+        m1  = m1,
+        m2  = m2,
+        sd1 = sd1,
+        sd2 = sd2,
+        r   = r,
+        n   = n,
+        a   = a
       )
     )
   }
