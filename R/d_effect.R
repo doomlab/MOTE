@@ -1,5 +1,10 @@
 #' General interface for Cohen's d
 #'
+#' - `"delta_ind_t"` — independent-groups t-test using the delta effect size,
+#'   where the SD of group 1 is used as the denominator. Supply `m1`, `m2`,
+#'   `sd1`, `sd2`, `n1`, and `n2`. In this case, `d_effect()` will call
+#'   [delta.ind.t()] with the same arguments.
+#'
 #' - `"z_z"` — one-sample z-test effect size where the *z* value is supplied
 #'   directly along with the sample size `n`. Supply `z_value` and `n`. You
 #'   may optionally supply `sig` (population SD) for descriptive reporting.
@@ -159,6 +164,7 @@ d_effect <- function(m1 = NULL,
       "dep_t_rm",
       "ind_t",
       "ind_t_t",
+      "delta_ind_t",
       "prop",
       "prop_h",
       "single_t",
@@ -167,6 +173,27 @@ d_effect <- function(m1 = NULL,
       "z_z"
     )
   )
+  if (design == "delta_ind_t") {
+    if (is.null(m1) || is.null(m2) ||
+        is.null(sd1) || is.null(sd2) ||
+        is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'delta_ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
+      )
+    }
+
+    return(
+      delta.ind.t(
+        m1  = m1,
+        m2  = m2,
+        sd1 = sd1,
+        sd2 = sd2,
+        n1  = n1,
+        n2  = n2,
+        a   = a
+      )
+    )
+  }
 
   if (design == "dep_t_avg") {
     if (is.null(m1) || is.null(m2) ||

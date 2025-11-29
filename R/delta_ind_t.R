@@ -10,7 +10,8 @@
 #'
 #' \deqn{d_{\delta} = \frac{m_1 - m_2}{sd_1}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}
+#' {Learn more on our example page.}
 #'
 #' @param m1 mean from control group
 #' @param m2 mean from experimental group
@@ -19,8 +20,9 @@
 #' @param n1 sample size from control group
 #' @param n2 sample size from experimental group
 #' @param a significance level
-#' @return Provides the effect size (Cohen's d) with associated confidence intervals,
-#' the t-statistic, the confidence intervals associated with the means of each group, as well as the
+#' @return Provides the effect size (Cohen's d) with associated
+#' confidence intervals, the t-statistic, the confidence intervals
+#' associated with the means of each group, as well as the
 #' standard deviations and standard errors of the means for each group.
 #'
 #' \item{d}{d-delta effect size}
@@ -70,13 +72,13 @@
 #' # You can type in the numbers directly, or refer to the dataset,
 #' # as shown below.
 #'
-#'     delta.ind.t(m1 = 17.75, m2 = 23,
+#'     delta_ind_t(m1 = 17.75, m2 = 23,
 #'                sd1 = 3.30, sd2 = 2.16,
 #'                 n1 = 4, n2 = 4, a = .05)
 #'
-#'     delta.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
+#'     delta_ind_t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 #'
-#'     delta.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+#'     delta_ind_t(mean(indt_data$correctq[indt_data$group == 1]),
 #'             mean(indt_data$correctq[indt_data$group == 2]),
 #'             sd(indt_data$correctq[indt_data$group == 1]),
 #'             sd(indt_data$correctq[indt_data$group == 2]),
@@ -88,54 +90,87 @@
 #' # significantly less accurate while reporting facts than the control group
 #' # with a large effect size, t(6) = -2.66, p = .038, d_delta = 1.59.
 #'
+delta_ind_t <- function(m1, m2, sd1, sd2, n1, n2, a = .05) {
 
+  s_pooled <- sqrt(((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2) / (n1 + n2 - 2))
+  d_value <- (m1 - m2) / sd1
+  se_1 <- sd1 / sqrt(n1)
+  se_2 <- sd2 / sqrt(n2)
+  se_pooled <- sqrt((s_pooled^2 / n1 + s_pooled^2 / n2))
+  t_value <- (m1 - m2) / se_pooled
 
-delta.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
+  ncp_limits <- noncentral_t(t_value, (n1 - 1 + n2 - 1),
+                             conf_level = (1 - a), sup_int_warns = TRUE)
+  d_lower <- ncp_limits$lower_limit / sqrt((n1 * n2) / (n1 + n2))
+  d_upper <- ncp_limits$upper_limit / sqrt((n1 * n2) / (n1 + n2))
 
+  m1_lower <- m1 - se_1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
+  m1_upper <- m1 + se_1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
+  m2_lower <- m2 - se_2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
+  m2_upper <- m2 + se_2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
 
+  p_value <- pt(abs(t_value), (n1 - 1 + n2 - 1), lower.tail = FALSE) * 2
 
-  spooled <- sqrt(((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
-  d <- (m1 - m2) / sd1
-  se1 <- sd1 / sqrt(n1)
-  se2 <- sd2 / sqrt(n2)
-  sepooled <- sqrt((spooled ^ 2 / n1 + spooled ^ 2 / n2))
-  t <- (m1 - m2) / sepooled
-  ncpboth <- noncentral_t(t, (n1 - 1 + n2 - 1), conf.level = (1 - a), sup.int.warns = TRUE)
-  dlow <- ncpboth$Lower.Limit / sqrt(((n1 * n2) / (n1 + n2)))
-  dhigh <- ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2)))
-  M1low <- m1 - se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
-  M1high <- m1 + se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
-  M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
-  M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
-  p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = FALSE) * 2
+  if (p_value < .001) {
+    report_p <- "< .001"
+  } else {
+    report_p <- paste("= ", apa(p_value, 3, FALSE), sep = "")
+  }
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,FALSE), sep = "")}
+  output <- list(
+    # Legacy names
+    d       = d_value,
+    dlow    = d_lower,
+    dhigh   = d_upper,
+    M1      = m1,
+    sd1     = sd1,
+    se1     = se_1,
+    M1low   = m1_lower,
+    M1high  = m1_upper,
+    M2      = m2,
+    sd2     = sd2,
+    se2     = se_2,
+    M2low   = m2_lower,
+    M2high  = m2_upper,
+    spooled = s_pooled,
+    sepooled = se_pooled,
+    n1      = n1,
+    n2      = n2,
+    df      = (n1 - 1 + n2 - 1),
+    t       = t_value,
+    p       = p_value,
+    estimate = paste(
+      "$d_{delta}$ = ", apa(d_value, 2, TRUE), ", ", (1 - a) * 100,
+      "\\% CI [", apa(d_lower, 2, TRUE), ", ", apa(d_upper, 2, TRUE), "]",
+      sep = ""
+    ),
+    statistic = paste(
+      "$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t_value, 2, TRUE),
+      ", $p$ ", report_p,
+      sep = ""
+    ),
 
-  output = list("d" = d, #d stats
-                "dlow" = dlow,
-                "dhigh" = dhigh,
-                "M1" = m1, #control group stats
-                "sd1" = sd1,
-                "se1" = se1,
-                "M1low" = M1low,
-                "M1high" = M1high,
-                "M2" = m2, #experimental group stats
-                "sd2" = sd2,
-                "se2" = se2,
-                "M2low" = M2low,
-                "M2high" = M2high,
-                "spooled" = spooled,
-                "sepooled" = sepooled,
-                "n1" = n1, #sample stats
-                "n2" = n2,
-                "df" = (n1 - 1 + n2 - 1),
-                "t" = t, #sig stats,
-                "p" = p,
-                "estimate" = paste("$d_{delta}$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
-                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,TRUE), ", $p$ ", reportp, sep = "")
+    # Snake_case aliases
+    d_value        = d_value,
+    d_lower_limit  = d_lower,
+    d_upper_limit  = d_upper,
+    mean1_value    = m1,
+    mean1_lower    = m1_lower,
+    mean1_upper    = m1_upper,
+    mean2_value    = m2,
+    mean2_lower    = m2_lower,
+    mean2_upper    = m2_upper,
+    sample_sd1     = sd1,
+    sample_sd2     = sd2,
+    sample_se1     = se_1,
+    sample_se2     = se_2,
+    pooled_sd      = s_pooled,
+    pooled_se      = se_pooled,
+    sample_size1   = n1,
+    sample_size2   = n2,
+    t_value        = t_value,
+    p_value        = p_value
   )
 
   return(output)
 }
-
