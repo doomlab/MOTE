@@ -56,12 +56,20 @@
 #'   Supply `p1`, `p2`, `n1`, and `n2`. In this case, `d()` will call
 #'   [h_prop()] with the same arguments.
 #'
+#' - `"z_mean"` — one-sample z-test effect size using a known population
+#'   standard deviation. Supply `m1` (sample mean), `u` (population mean),
+#'   `sd1` (sample SD, used for descriptive CIs), `sig` (population SD),
+#'   and `n`. In this case, `d_effect()` will call [d.z.mean()] with the
+#'   same arguments.
+#'
 #' @param m1 Means of the two conditions or measurements.
 #' @param m2 Means of the two conditions or measurements.
 #' @param sd1 Standard deviations for the two conditions or measurements.
 #' @param sd2 Standard deviations for the two conditions or measurements.
 #' @param u Population or comparison mean for one‑sample t‑designs,
 #'   used when `design = "single_t"`.
+#' @param sig Population standard deviation for z-based designs, used when
+#'   `design = "z_mean"`.
 #' @param p1 Proportion for group one (between 0 and 1), used in the
 #'   `"prop"` design.
 #' @param p2 Proportion for group two (between 0 and 1), used in the
@@ -119,6 +127,7 @@ d_effect <- function(m1 = NULL,
               sd1 = NULL,
               sd2 = NULL,
               u = NULL,
+              sig = NULL,
               r = NULL,
               mdiff = NULL,
               sddiff = NULL,
@@ -144,7 +153,8 @@ d_effect <- function(m1 = NULL,
       "prop",
       "prop_h",
       "single_t",
-      "single_t_t"
+      "single_t_t",
+      "z_mean"
     )
   )
 
@@ -338,6 +348,27 @@ d_effect <- function(m1 = NULL,
         t = t_value,
         n = n,
         a = a
+      )
+    )
+  }
+
+  if (design == "z_mean") {
+    if (is.null(m1) || is.null(u) ||
+        is.null(sd1) || is.null(sig) ||
+        is.null(n)) {
+      stop(
+        "For design = 'z_mean', you must supply m1 (sample mean), u (population mean), sd1, sig (population SD), and n."
+      )
+    }
+
+    return(
+      d.z.mean(
+        m1  = m1,
+        mu  = u,
+        sd1 = sd1,
+        sig = sig,
+        n   = n,
+        a   = a
       )
     )
   }

@@ -17,6 +17,8 @@
 #' @keywords datasets
 #'
 #' @references Nolan and Heizen Statistics for the Behavioral Sciences
-#' (\href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link})
+#' (\href{https://www.macmillanlearning.com/Catalog/product/
+#' statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
+#' {Book Link})
 #'
 "dept_data"
