@@ -68,7 +68,7 @@ ci_r2 <- function(r2 = NULL,
   # Prefer explicit K/p handling (K is alias for p)
   if (!missing(k)) {
     if (!is.null(p) && p != k) {
-      stop("Specify 'p' or 'K', but not both (your 'p' and 'K' are different)")
+      stop("Specify 'p' or 'k', but not both (your 'p' and 'k' are different)")
     }
     p <- k
   }
@@ -76,9 +76,9 @@ ci_r2 <- function(r2 = NULL,
   # Back-compat alias between random_regressors and random_predictors
   if (!missing(random_regressors)) random_predictors <- random_regressors
 
-  # Derive df or N/p, but not both combinations
+  # Derive df or n/p, but not both combinations
   if (((!is.null(n) || !is.null(p)) && (!is.null(df1) || !is.null(df2)))) {
-    stop("Either specify 'df1' and 'df2' or 'n' and 'p', 
+    stop("Either specify 'df1' and 'df2' or 'n' and 'p',
     but not both combinations.")
   }
 
@@ -98,8 +98,8 @@ ci_r2 <- function(r2 = NULL,
       stop("'conf_level' must be between 0 and 1.")
     }
     if (!is.null(alpha_lower) || !is.null(alpha_upper)) {
-      stop("Since conf_level has been specified (the default), 
-      you cannot specify 'alpha_lower' and 'alpha_upper'. To specify 
+      stop("Since conf_level has been specified (the default),
+      you cannot specify 'alpha_lower' and 'alpha_upper'. To specify
       alpha directly, set 'conf_level = NULL'.")
     }
     alpha_lower <- alpha_upper <- (1 - conf_level) / 2
@@ -120,17 +120,19 @@ ci_r2 <- function(r2 = NULL,
                            alpha_lower = alpha_lower, alpha_upper = alpha_upper)
 
     if (length(limits) == 4) {
-      lower_limit_r2    <- lambda_to_r2(lambda = limits$Lower.Limit, n = n)
-      prob_less_lower   <- limits$Prob.Less.Lower
-      upper_limit_r2    <- lambda_to_r2(lambda = limits$Upper.Limit, n = n)
-      prob_greater_upper <- limits$Prob.Greater.Upper
+      lower_limit_r2    <- lambda_to_r2(lambda = limits$lower_limit,
+                                        n = n)
+      prob_less_lower   <- limits$prob_less_lower
+      upper_limit_r2    <- lambda_to_r2(lambda = limits$upper_limit,
+                                        n = n)
+      prob_greater_upper <- limits$prob_greater_upper
 
-      if (is.na(limits$Lower.Limit)) {
+      if (is.na(limits$lower_limit)) {
         lower_limit_r2  <- 0
         prob_less_lower <- 0
       }
 
-      if (is.na(limits$Upper.Limit)) {
+      if (is.na(limits$upper_limit)) {
         upper_limit_r2     <- 1
         prob_greater_upper <- 0
       }
@@ -141,18 +143,18 @@ ci_r2 <- function(r2 = NULL,
                   prob_greater_upper  = prob_greater_upper))
     }
 
-    if (length(limits) == 2 && is.null(limits$Upper.Limit)) {
+    if (length(limits) == 2 && is.null(limits$upper_limit)) {
       return(list(lower_conf_limit_r2 =
-                    lambda_to_r2(lambda = limits$Lower.Limit, n = n),
-                  prob_less_lower = limits$Prob.Less.Lower,
+                    lambda_to_r2(lambda = limits$lower_limit, n = n),
+                  prob_less_lower = limits$prob_less_lower,
                   upper_conf_limit_r2 = 1, prob_greater_upper = 0))
     }
 
-    if (length(limits) == 2 && is.null(limits$Lower.Limit)) {
+    if (length(limits) == 2 && is.null(limits$lower_limit)) {
       return(list(lower_conf_limit_r2 = 0, prob_less_lower = 0,
                   upper_conf_limit_r2 =
-                    lambda_to_r2(lambda = limits$Upper.Limit, n = n),
-                  prob_greater_upper = limits$Prob.Greater.Upper))
+                    lambda_to_r2(lambda = limits$upper_limit, n = n),
+                  prob_greater_upper = limits$prob_greater_upper))
     }
   }
 
@@ -250,8 +252,8 @@ ci_r2 <- function(r2 = NULL,
 
     if (pll == 1) llrhosq <- 0
     if (pul == 0) ulrhosq <- 1
-    if (llrhosq > ulrhosq) warning("There is a problem; the lower 
-    limit is greater than the upper limit (Are you at one of the 
+    if (llrhosq > ulrhosq) warning("There is a problem; the lower
+    limit is greater than the upper limit (Are you at one of the
     boundaries of Rho^2 or is alpha very large?).")
 
     if (pll == 1) return(list(lower_conf_limit_r2 = 0, prob_less_lower = 0,

@@ -45,31 +45,47 @@ ci_r <- function(r = NULL,
     }
   }
 
-  # If r is not supplied, derive df1 from k when possible
+  # Harmonize random_predictors and random_regressors as in MBESS
+  if (!missing(random_regressors)) {
+    random_predictors <- random_regressors
+  }
+  if (missing(random_regressors)) {
+    random_regressors <- random_predictors
+  }
+
+  # If r is not supplied, derive it from F, N, and k (MBESS logic)
   if (is.null(r)) {
+
     if (is.null(df1)) {
       if (is.null(k)) {
         stop("You need to specify 'k' or 'df1'.")
       }
       df1 <- k
     }
-  }
 
-  # If df2 is missing, derive it from n and k
-  if (is.null(df2)) {
-    if (is.null(n)) {
-      stop("You need to specify 'n' or 'df2'.")
+    if (is.null(df2)) {
+      if (is.null(n)) {
+        stop("You need to specify 'n' or 'df2'.")
+      }
+      if (is.null(k)) {
+        stop("You need to specify 'k' or 'df2'.")
+      }
+      df2 <- n - k - 1
     }
-    if (is.null(k)) {
-      stop("You need to specify 'k' or 'df2'.")
-    }
-    df2 <- n - k - 1
-  }
 
-  # Derive r from F if available; mirrors
-  # original behavior which relied on F2Rsquare
-  if (!is.null(f_value)) {
+    if (is.null(f_value)) {
+      stop(
+        "When 'r' is not supplied, you must provide 'f_value' along with ",
+        "'n' and 'k' (or 'df1' and 'df2')."
+      )
+    }
+
+    # Original MBESS computes R from F via F2Rsquare; we mirror with f_r_square
     r <- sqrt(f_r_square(f_value = f_value, df1 = df1, df2 = df2))
+
+    # After deriving r from F, N and K are not needed for ci_r2
+    n <- NULL
+    k <- NULL
   }
 
   limits <- ci_r2(
@@ -80,7 +96,7 @@ ci_r <- function(r = NULL,
     random_predictors = random_predictors,
     random_regressors = random_regressors,
     f_value           = NULL,
-    n                 = NULL,
+    n                 = n,
     p                 = k,
     alpha_lower       = alpha_lower,
     alpha_upper       = alpha_upper,

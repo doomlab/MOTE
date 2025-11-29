@@ -226,28 +226,28 @@ noncentral_x <- function(chi_square = NULL, conf_level = .95,
 
   if (alpha_lower > 0 && alpha_upper > 0) {
     return(list(
-      Lower.Limit        = ll,
-      Prob.Less.Lower    = alpha_lower,
-      Upper.Limit        = ul,
-      Prob.Greater.Upper = alpha_upper
+      lower_limit        = ll,
+      prob_less_lower    = alpha_lower,
+      upper_limit        = ul,
+      prob_greater_upper = alpha_upper
     ))
   }
 
   if (alpha_lower == 0 && alpha_upper > 0) {
     return(list(
-      Conf.Interval.type = "one-sided",
-      Lower.Limit        = 0,
-      Upper.Limit        = ul,
-      Prob.Greater.Upper = alpha_upper
+      conf_interval_type = "one-sided",
+      lower_limit        = 0,
+      upper_limit        = ul,
+      prob_greater_upper = alpha_upper
     ))
   }
 
   if (alpha_lower > 0 && alpha_upper == 0) {
     return(list(
-      Conf.Interval.type = "one-sided",
-      Lower.Limit        = ll,
-      Prob.Less.Lower    = alpha_lower,
-      Upper.Limit        = Inf
+      conf_interval_type = "one-sided",
+      lower_limit        = ll,
+      prob_less_lower    = alpha_lower,
+      upper_limit        = Inf
     ))
   }
 }

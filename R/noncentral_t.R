@@ -173,32 +173,32 @@ noncentral_t <- function(ncp, df, conf_level = .95, alpha_lower = NULL,
 
     if (alpha_lower == 0) {
       result <- list(
-        Lower.Limit        = -Inf,
+        lower_limit        = -Inf,
         Prob.Less.Lower    = 0,
-        Upper.Limit        = up_lim$minimum,
-        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
+        upper_limit        = up_lim$minimum,
+        prob_greater_upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
       )
     }
 
     if (alpha_upper == 0) {
       result <- list(
-        Lower.Limit        = low_lim$minimum,
+        lower_limit        = low_lim$minimum,
         Prob.Less.Lower    = pt(
           q = ncp, ncp = low_lim$minimum, df = df, lower.tail = FALSE
         ),
-        Upper.Limit        = Inf,
-        Prob.Greater.Upper = 0
+        upper_limit        = Inf,
+        prob_greater_upper = 0
       )
     }
 
     if (alpha_lower != 0 && alpha_upper != 0) {
       result <- list(
-        Lower.Limit        = low_lim$minimum,
+        lower_limit        = low_lim$minimum,
         Prob.Less.Lower    = pt(
           q = ncp, ncp = low_lim$minimum, df = df, lower.tail = FALSE
         ),
-        Upper.Limit        = up_lim$minimum,
-        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
+        upper_limit        = up_lim$minimum,
+        prob_greater_upper = pt(q = ncp, ncp = up_lim$minimum, df = df)
       )
     }
 
@@ -250,32 +250,32 @@ noncentral_t <- function(ncp, df, conf_level = .95, alpha_lower = NULL,
 
     if (alpha_lower == 0) {
       result <- list(
-        Lower.Limit        = -Inf,
+        lower_limit        = -Inf,
         Prob.Less.Lower    = 0,
-        Upper.Limit        = up_lim$estimate,
-        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
+        upper_limit        = up_lim$estimate,
+        prob_greater_upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
       )
     }
 
     if (alpha_upper == 0) {
       result <- list(
-        Lower.Limit        = low_lim$estimate,
+        lower_limit        = low_lim$estimate,
         Prob.Less.Lower    = pt(
           q = ncp, ncp = low_lim$estimate, df = df, lower.tail = FALSE
         ),
-        Upper.Limit        = Inf,
-        Prob.Greater.Upper = 0
+        upper_limit        = Inf,
+        prob_greater_upper = 0
       )
     }
 
     if (alpha_lower != 0 && alpha_upper != 0) {
       result <- list(
-        Lower.Limit        = low_lim$estimate,
+        lower_limit        = low_lim$estimate,
         Prob.Less.Lower    = pt(
           q = ncp, ncp = low_lim$estimate, df = df, lower.tail = FALSE
         ),
-        Upper.Limit        = up_lim$estimate,
-        Prob.Greater.Upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
+        upper_limit        = up_lim$estimate,
+        prob_greater_upper = pt(q = ncp, ncp = up_lim$estimate, df = df)
       )
     }
 
@@ -314,15 +314,15 @@ noncentral_t <- function(ncp, df, conf_level = .95, alpha_lower = NULL,
   if (length(res_m2) != 4) res_m2 <- NULL
 
   # Now, set-up the test to find the best method.
-  low_m1 <- res_m1$Lower.Limit
+  low_m1 <- res_m1$lower_limit
   prob_low_m1 <- res_m1$Prob.Less.Lower
-  upper_m1 <- res_m1$Upper.Limit
-  prob_upper_m1 <- res_m1$Prob.Greater.Upper
+  upper_m1 <- res_m1$upper_limit
+  prob_upper_m1 <- res_m1$prob_greater_upper
 
-  low_m2 <- res_m2$Lower.Limit
+  low_m2 <- res_m2$lower_limit
   prob_low_m2 <- res_m2$Prob.Less.Lower
-  upper_m2 <- res_m2$Upper.Limit
-  prob_upper_m2 <- res_m2$Prob.Greater.Upper
+  upper_m2 <- res_m2$upper_limit
+  prob_upper_m2 <- res_m2$prob_greater_upper
 
   # Choose the best interval limits:
   ##Here low
@@ -360,10 +360,10 @@ noncentral_t <- function(ncp, df, conf_level = .95, alpha_lower = NULL,
   }
 
   result <- list(
-    Lower.Limit = c(low_m1, low_m2)[best_low],
+    lower_limit = c(low_m1, low_m2)[best_low],
     Prob.Less.Lower = c(prob_low_m1, prob_low_m2)[best_low],
-    Upper.Limit = c(upper_m1, upper_m2)[best_up],
-    Prob.Greater.Upper = c(prob_upper_m1, prob_upper_m2)[best_up]
+    upper_limit = c(upper_m1, upper_m2)[best_up],
+    prob_greater_upper = c(prob_upper_m1, prob_upper_m2)[best_up]
   )
 
   return(result)
