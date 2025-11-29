@@ -173,4 +173,12 @@ delta_ind_t <- function(m1, m2, sd1, sd2, n1, n2, a = .05) {
   )
 
   return(output)
+
+}
+
+# Backward compatibility wrapper
+#' @rdname delta_ind_t
+#' @export
+delta.ind.t <- function(m1, m2, sd1, sd2, n1, n2, a = .05) { # nolint
+  delta_ind_t(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n1 = n1, n2 = n2, a = a)
 }

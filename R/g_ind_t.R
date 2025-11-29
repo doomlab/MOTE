@@ -8,11 +8,13 @@
 #'
 #' \deqn{\mathrm{correction} = 1 - \frac{3}{4(n_1 + n_2) - 9}}
 #'
-#' \eqn{d_g} is computed as the standardized mean difference multiplied by the correction:
+#' \eqn{d_g} is computed as the standardized mean difference multiplied
+#' by the correction:
 #'
 #' \deqn{d_g = \frac{m_1 - m_2}{s_{\mathrm{pooled}}} \times \mathrm{correction}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}
+#' {Learn more on our example page.}
 #'
 #' @param m1 mean group one
 #' @param m2 mean group two
@@ -43,7 +45,8 @@
 #'   \item{df}{degrees of freedom (\eqn{n_1 - 1 + n_2 - 1})}
 #'   \item{t}{\eqn{t}-statistic}
 #'   \item{p}{p-value}
-#'   \item{estimate}{the \eqn{d_g} statistic and confidence interval in APA style for markdown printing}
+#'   \item{estimate}{the \eqn{d_g} statistic and confidence interval
+#' in APA style for markdown printing}
 #'   \item{statistic}{the \eqn{t}-statistic in APA style for markdown printing}
 #' }
 #'
@@ -70,12 +73,12 @@
 #' # You can type in the numbers directly, or refer to the dataset,
 #' # as shown below.
 #'
-#'     g.ind.t(m1 = 17.75, m2 = 23, sd1 = 3.30,
+#'     g_ind_t(m1 = 17.75, m2 = 23, sd1 = 3.30,
 #'            sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
 #'
-#'     g.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
+#'     g_ind_t(17.75, 23, 3.30, 2.16, 4, 4, .05)
 #'
-#'     g.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
+#'     g_ind_t(mean(indt_data$correctq[indt_data$group == 1]),
 #'             mean(indt_data$correctq[indt_data$group == 2]),
 #'             sd(indt_data$correctq[indt_data$group == 1]),
 #'             sd(indt_data$correctq[indt_data$group == 2]),
@@ -88,29 +91,29 @@
 #' # with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
 #'
 
-g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
+g_ind_t <- function(m1, m2, sd1, sd2, n1, n2, a = .05) {
 
-  if (missing(m1)){
+  if (missing(m1)) {
     stop("Be sure to include m1 for the first mean.")
   }
 
-  if (missing(m2)){
+  if (missing(m2)) {
     stop("Be sure to include m2 for the second mean.")
   }
 
-  if (missing(sd1)){
+  if (missing(sd1)) {
     stop("Be sure to include sd1 for the first mean.")
   }
 
-  if (missing(sd2)){
+  if (missing(sd2)) {
     stop("Be sure to include sd2 for the second mean.")
   }
 
-  if (missing(n1)){
+  if (missing(n1)) {
     stop("Be sure to include the sample size n1 for the first group.")
   }
 
-  if (missing(n2)){
+  if (missing(n2)) {
     stop("Be sure to include the sample size n2 for the second group.")
   }
 
@@ -119,49 +122,123 @@ g.ind.t <- function (m1, m2, sd1, sd2, n1, n2, a = .05) {
   }
 
   correction <- 1 - (3 / (4 * (n1 + n2) - 9))
-  spooled <- sqrt( ((n1 - 1) * sd1 ^ 2 + (n2 - 1) * sd2 ^ 2) / (n1 + n2 - 2))
-  d <- ((m1 - m2) / spooled) * correction
-  se1 <- sd1 / sqrt(n1)
-  se2 <- sd2 / sqrt(n2)
-  sepooled <- sqrt((spooled ^ 2 / n1 + spooled ^ 2 / n2))
-  t <- (m1 - m2) / sepooled
-  ncpboth <- noncentral_t(t, (n1 - 1 + n2 - 1), conf.level = (1 - a), sup.int.warns = TRUE)
-  dlow <- correction * (ncpboth$Lower.Limit / sqrt(((n1 * n2) / (n1 + n2))))
-  dhigh <- correction * (ncpboth$Upper.Limit / sqrt(((n1 * n2) / (n1 + n2))))
-  M1low <- m1 - se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
-  M1high <- m1 + se1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
-  M2low <- m2 - se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
-  M2high <- m2 + se2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
-  p <- pt(abs(t), (n1 - 1 + n2 - 1), lower.tail = FALSE) * 2
+  s_pooled <- sqrt(((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2) / (n1 + n2 - 2))
 
-  if (p < .001) {reportp = "< .001"} else {reportp = paste("= ", apa(p,3,TRUE), sep = "")}
+  d_value <- ((m1 - m2) / s_pooled) * correction
 
-  output = list("d" = d, #d stats
-                "dlow" = dlow,
-                "dhigh" = dhigh,
-                "M1" = m1, #group 1 stats
-                "sd1" = sd1,
-                "se1" = se1,
-                "M1low" = M1low,
-                "M1high" = M1high,
-                "M2" = m2, #group 2 stats
-                "sd2" = sd2,
-                "se2" = se2,
-                "M2low" = M2low,
-                "M2high" = M2high,
-                "spooled" = spooled,
-                "sepooled" = sepooled,
-                "correction" = correction,
-                "n1" = n1, #sample stats
-                "n2" = n2,
-                "df" = (n1 - 1 + n2 - 1),
-                "t" = t, #sig stats,
-                "p" = p,
-                "estimate" = paste("$d_{g}$ = ", apa(d,2,TRUE), ", ", (1-a)*100, "\\% CI [",
-                                   apa(dlow,2,TRUE), ", ", apa(dhigh,2,TRUE), "]", sep = ""),
-                "statistic" = paste("$t$(", (n1 - 1 + n2 - 1), ") = ", apa(t,2,TRUE), ", $p$ ", reportp, sep = "")
+  se_1 <- sd1 / sqrt(n1)
+  se_2 <- sd2 / sqrt(n2)
+
+  se_pooled <- sqrt((s_pooled^2 / n1 + s_pooled^2 / n2))
+
+  t_value <- (m1 - m2) / se_pooled
+
+  ncp_limits <- noncentral_t(
+    t_value,
+    (n1 - 1 + n2 - 1),
+    conf_level = (1 - a),
+    sup_int_warns = TRUE
+  )
+
+  d_lower <- correction * (
+    ncp_limits$lower_limit / sqrt((n1 * n2) / (n1 + n2))
+  )
+  d_upper <- correction * (
+    ncp_limits$upper_limit / sqrt((n1 * n2) / (n1 + n2))
+  )
+
+  m1_lower <- m1 - se_1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
+  m1_upper <- m1 + se_1 * qt(a / 2, n1 - 1, lower.tail = FALSE)
+
+  m2_lower <- m2 - se_2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
+  m2_upper <- m2 + se_2 * qt(a / 2, n2 - 1, lower.tail = FALSE)
+
+  p_value <- pt(abs(t_value), (n1 - 1 + n2 - 1), lower.tail = FALSE) * 2
+
+  if (p_value < .001) {
+    report_p <- "< .001"
+  } else {
+    report_p <- paste("= ", apa(p_value, 3, TRUE), sep = "")
+  }
+
+  estimate <- paste(
+    "$d_{g}$ = ",
+    apa(d_value, 2, TRUE),
+    ", ",
+    (1 - a) * 100,
+    "\\% CI [",
+    apa(d_lower, 2, TRUE),
+    ", ",
+    apa(d_upper, 2, TRUE),
+    "]",
+    sep = ""
+  )
+
+  statistic <- paste(
+    "$t$(",
+    (n1 - 1 + n2 - 1),
+    ") = ",
+    apa(t_value, 2, TRUE),
+    ", $p$ ",
+    report_p,
+    sep = ""
+  )
+
+  output <- list(
+    # Legacy names
+    d        = d_value,
+    dlow     = d_lower,
+    dhigh    = d_upper,
+    M1       = m1,
+    sd1      = sd1,
+    se1      = se_1,
+    M1low    = m1_lower,
+    M1high   = m1_upper,
+    M2       = m2,
+    sd2      = sd2,
+    se2      = se_2,
+    M2low    = m2_lower,
+    M2high   = m2_upper,
+    spooled  = s_pooled,
+    sepooled = se_pooled,
+    correction = correction,
+    n1       = n1,
+    n2       = n2,
+    df       = (n1 - 1 + n2 - 1),
+    t        = t_value,
+    p        = p_value,
+    estimate = estimate,
+    statistic = statistic,
+
+    # Snake_case aliases
+    d_value        = d_value,
+    d_lower_limit  = d_lower,
+    d_upper_limit  = d_upper,
+    mean1_value    = m1,
+    mean1_lower    = m1_lower,
+    mean1_upper    = m1_upper,
+    mean2_value    = m2,
+    mean2_lower    = m2_lower,
+    mean2_upper    = m2_upper,
+    sample_sd1     = sd1,
+    sample_sd2     = sd2,
+    sample_se1     = se_1,
+    sample_se2     = se_2,
+    pooled_sd      = s_pooled,
+    pooled_se      = se_pooled,
+    correction_value = correction,
+    sample_size1   = n1,
+    sample_size2   = n2,
+    degrees_freedom = (n1 - 1 + n2 - 1),
+    t_value        = t_value,
+    p_value        = p_value
   )
   return(output)
 }
 
-
+# Backwards compatibility with previous naming convention
+#' @rdname g_ind_t
+#' @export
+g.ind.t <- function(m1, m2, sd1, sd2, n1, n2, a = .05) { #nolint 
+  g_ind_t(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n1 = n1, n2 = n2, a = a)
+}

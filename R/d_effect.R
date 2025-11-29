@@ -5,6 +5,11 @@
 #'   `sd1`, `sd2`, `n1`, and `n2`. In this case, `d_effect()` will call
 #'   [delta.ind.t()] with the same arguments.
 #'
+#' - `"g_ind_t"` — independent-groups t-test using Hedges' g, which applies
+#'   a small-sample correction to the standardized mean difference. Supply
+#'   `m1`, `m2`, `sd1`, `sd2`, `n1`, and `n2`. In this case, `d_effect()`
+#'   will call [g_ind_t()] with the same arguments.
+#'
 #' - `"z_z"` — one-sample z-test effect size where the *z* value is supplied
 #'   directly along with the sample size `n`. Supply `z_value` and `n`. You
 #'   may optionally supply `sig` (population SD) for descriptive reporting.
@@ -45,6 +50,11 @@
 #' - `"ind_t_t"` — independent-groups t-test where the *t* value is supplied
 #'   directly. Supply `t_value`, `n1`, and `n2`. In this case, `d()` will call
 #'   [d_ind_t_t()] with the same arguments.
+#'
+#' - `"g_ind_t"` — independent-groups t-test using Hedges' g, which applies
+#'   a small-sample correction to the standardized mean difference. Supply
+#'   `m1`, `m2`, `sd1`, `sd2`, `n1`, and `n2`. In this case, `d_effect()`
+#'   will call [g_ind_t()] with the same arguments.
 #'
 #' - `"single_t"` — one‑sample t‑test effect size using the sample mean,
 #'   population mean, sample SD, and sample size. Supply `m1` (sample mean),
@@ -164,6 +174,7 @@ d_effect <- function(m1 = NULL,
       "dep_t_rm",
       "ind_t",
       "ind_t_t",
+      "g_ind_t",
       "delta_ind_t",
       "prop",
       "prop_h",
@@ -312,6 +323,28 @@ d_effect <- function(m1 = NULL,
         n1      = n1,
         n2      = n2,
         a       = a
+      )
+    )
+  }
+
+  if (design == "g_ind_t") {
+    if (is.null(m1) || is.null(m2) ||
+        is.null(sd1) || is.null(sd2) ||
+        is.null(n1) || is.null(n2)) {
+      stop(
+        "For design = 'g_ind_t', you must supply m1, m2, sd1, sd2, n1, and n2."
+      )
+    }
+
+    return(
+      g_ind_t(
+        m1  = m1,
+        m2  = m2,
+        sd1 = sd1,
+        sd2 = sd2,
+        n1  = n1,
+        n2  = n2,
+        a   = a
       )
     )
   }
