@@ -18,6 +18,9 @@
 #'   Supply `mdiff`, `sddiff`, and `n`. In this case, `d()` will call
 #'   [d_dep_t_diff()] with the same arguments.
 #'
+#' - `"dep_t_diff_t"` — paired/dependent t-test where the *t* value is supplied directly.
+#'   Supply `t_value` and `n`. In this case, `d()` will call
+#'   [d_dep_t_diff_t()] with the same arguments.
 #'
 #' @param m1 Means of the two conditions or measurements.
 #' @param m2 Means of the two conditions or measurements.
@@ -25,6 +28,7 @@
 #' @param sd2 Standard deviations for the two conditions or measurements.
 #' @param mdiff Mean difference between paired observations.
 #' @param sddiff Standard deviation of the difference scores.
+#' @param t_value t statistic value for the paired t-test.
 #' @param n Sample size (number of paired observations).
 #' @param a Significance level used when computing confidence intervals.
 #'   Defaults to `0.05`.
@@ -68,12 +72,13 @@ d <- function(m1 = NULL,
               sd2 = NULL,
               mdiff = NULL,
               sddiff = NULL,
+              t_value = NULL,
               n = NULL,
               a = 0.05,
               design,
               ...) {
 
-  design <- match.arg(design, choices = c("dep_t_avg", "dep_t_diff"))
+  design <- match.arg(design, choices = c("dep_t_avg", "dep_t_diff", "dep_t_diff_t"))
 
   if (design == "dep_t_avg") {
     if (is.null(m1) || is.null(m2) ||
@@ -115,6 +120,22 @@ d <- function(m1 = NULL,
         sddiff = sddiff,
         n      = n,
         a      = a
+      )
+    )
+  }
+
+  if (design == "dep_t_diff_t") {
+    if (is.null(t_value) || is.null(n)) {
+      stop(
+        "For design = 'dep_t_diff_t', you must supply t_value and n."
+      )
+    }
+
+    return(
+      d_dep_t_diff_t(
+        t_value = t_value,
+        n       = n,
+        a       = a
       )
     )
   }
