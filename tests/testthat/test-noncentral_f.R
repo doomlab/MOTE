@@ -56,8 +56,8 @@ test_that("noncentral_f one-sided lower CI behaves as expected", {
     alpha_upper = 0.05
   )
 
-  expect_equal(res$lower_limit, 0)
-  expect_equal(res$prob_less_lower, 0)
+  expect_false("lower_limit" %in% names(res))
+  expect_false("prob_less_lower" %in% names(res))
 
   expect_true(is.finite(res$upper_limit))
   expect_equal(

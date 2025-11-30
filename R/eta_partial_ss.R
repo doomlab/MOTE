@@ -10,8 +10,7 @@
 #'
 #' \deqn{\eta^2_p = \frac{SS_M}{SS_M + SS_E}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/etapss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `eta_partial_ss()` to follow modern R
@@ -29,7 +28,10 @@
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between
 #' @param sse sum of squares for the error/residual/within
-#' @param Fvalue F statistic
+#' @param f_value F statistic
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). If supplied, it overrides `f_value`.
+#'   Included for users of the legacy `eta.partial.SS()`.
 #' @param a significance level
 #'
 #' @return Provides the effect size (\eqn{\eta^2_p}) with associated
@@ -97,7 +99,8 @@
 #'                ssm = 338057.9, sse = 32833499,
 #'                Fvalue = 2.548, a = .05)
 #' }
-eta_partial_ss <- function(dfm, dfe, ssm, sse, f_value, a = .05) {
+eta_partial_ss <- function(dfm, dfe, ssm, sse,
+                           f_value, a = .05, Fvalue) { #nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -113,6 +116,10 @@ eta_partial_ss <- function(dfm, dfe, ssm, sse, f_value, a = .05) {
 
   if (missing(sse)) {
     stop("Be sure to include the sum of squares for the error.")
+  }
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
   }
 
   if (missing(f_value)) {

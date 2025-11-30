@@ -10,8 +10,7 @@
 #' The \eqn{F}-statistic is the \eqn{t}-statistic squared:
 #' \deqn{F = t^2}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/rcorrel.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/rcorrel.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `r_correl()` to follow modern R style

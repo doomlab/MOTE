@@ -25,8 +25,7 @@
 #' \deqn{t = \frac{\bar{X}_D}{s_D / \sqrt{n}}}
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptdiffm.html}{Learn more on our example page.}
 #'
 #' @param mdiff Mean of the difference scores.
 #' @param sddiff Standard deviation of the difference scores.

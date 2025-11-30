@@ -13,8 +13,7 @@
 #'
 #' \deqn{d_g = \frac{m_1 - m_2}{s_{\mathrm{pooled}}} \times \mathrm{correction}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtg.html}{Learn more on our example page.}
 #'
 #' @param m1 mean group one
 #' @param m2 mean group two

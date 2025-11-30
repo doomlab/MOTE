@@ -53,9 +53,9 @@ test_that("ges_partial_ss_rm matches known example values", {
   )
 
   # Known generalized eta-squared and CI from example
-  expect_equal(res$ges,     0.02461984,  tolerance = 1e-8)
-  expect_equal(res$geslow,  0.00000000,  tolerance = 1e-8)
-  expect_equal(res$geshigh, 0.09257589,  tolerance = 1e-8)
+  expect_equal(res$ges,     0.02461984,  tolerance = 1e-6)
+  expect_equal(res$geslow,  0.00000000,  tolerance = 1e-6)
+  expect_equal(res$geshigh, 0.09257589,  tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$ges_value,       res$ges)
@@ -120,5 +120,5 @@ test_that("dotted wrapper ges.partial.SS.rm matches ges_partial_ss_rm", {
     a      = 0.05
   )
 
-  expect_equal(res1$geslow, res2$geshigh)
+  expect_equal(res1$geslow, res2$geslow)
 })

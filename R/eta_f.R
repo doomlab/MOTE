@@ -25,12 +25,12 @@
 #'
 #' \deqn{\eta^2 = \frac{df_m \cdot F}{df_m \cdot F + df_e}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/etaf.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/etaf.html}{Learn more on our example page.}
 #'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
-#' @param Fvalue F statistic
+#' @param f_value F statistic
+#' @param Fvalue F statistic only for older function
 #' @param a significance level
 #' @return Provides the effect size (\eqn{\eta^2}) with associated
 #' confidence intervals and relevant statistics.
@@ -72,7 +72,7 @@
 #' # Backwards-compatible dotted name (deprecated)
 #' eta.F(dfm = 2, dfe = 8,
 #'       Fvalue = 5.134, a = .05)
-eta_f <- function(dfm, dfe, f_value, a = .05) {
+eta_f <- function(dfm, dfe, f_value, a = .05, Fvalue) { # nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -80,6 +80,10 @@ eta_f <- function(dfm, dfe, f_value, a = .05) {
 
   if (missing(dfe)) {
     stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
   }
 
   if (missing(f_value)) {

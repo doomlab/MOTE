@@ -18,8 +18,7 @@
 #' purposes but is not required for computing confidence intervals for \eqn{d}.
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/zz.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/zz.html}{Learn more on our example page.}
 #'
 #' @param z z-statistic from a Z-test.
 #' @param sig Population standard deviation (\eqn{\sigma}). This value is

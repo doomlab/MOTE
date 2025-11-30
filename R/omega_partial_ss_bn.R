@@ -13,8 +13,7 @@
 #'
 #' \deqn{\omega^2_p = \frac{df_m (MS_M - MS_E)}{SS_M + (n - df_m) \times MS_E}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/omegapbnss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `omega_partial_ss_bn()` to follow modern R

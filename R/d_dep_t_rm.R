@@ -14,8 +14,7 @@
 #'  \sqrt{2(1-r)}.}
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptrm.html}{Learn more on our example page.}
 #'
 #' @param m1 Mean from the first level/occasion.
 #' @param m2 Mean from the second level/occasion.

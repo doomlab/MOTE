@@ -18,8 +18,7 @@
 #' \deqn{\omega^2_G = \frac{SS_M - (df_m \times MS_S)}{SS_T +
 #' SS_{M2} + j \times MS_S}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/gosrmss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `omega_g_ss_rm()` to follow modern R style
@@ -41,6 +40,10 @@
 #' @param mss mean square for the subject variance
 #' @param j number of levels in the OTHER IV
 #' @param f_value F statistic from the output for your IV
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). This argument is only used by the
+#'   wrapper function `omega.gen.SS.rm()`, which forwards `Fvalue` to the
+#'   `f_value` argument of `omega_g_ss_rm()`.
 #' @param a significance level
 #' @return \describe{
 #'   \item{omega}{\eqn{\omega^2_G} effect size (legacy name; see
@@ -109,7 +112,8 @@
 #'                             14336.07886, 8657.094, 71.07608)),
 #'                 mss = 30936.498 / 156,
 #'                 j = 2, Fvalue = 34.503746, a = .05)
-omega_g_ss_rm <- function(dfm, dfe, ssm, ssm2, sst, mss, j, f_value, a = .05) {
+omega_g_ss_rm <- function(dfm, dfe, ssm, ssm2, sst,
+                          mss, j, f_value, a = .05, Fvalue) { #nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -138,6 +142,10 @@ omega_g_ss_rm <- function(dfm, dfe, ssm, ssm2, sst, mss, j, f_value, a = .05) {
 
   if (missing(j)) {
     stop("Be sure to include the number of levels in the OTHER IV.")
+  }
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
   }
 
   if (missing(f_value)) {

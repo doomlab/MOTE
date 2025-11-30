@@ -15,8 +15,7 @@
 #'
 #' \deqn{\omega^2 = \frac{df_m (F - 1)}{df_m (F - 1) + n}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/omegaf.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `omega_f()` to follow modern R style
@@ -33,6 +32,9 @@
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param f_value F statistic
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). If supplied, it overrides `f_value`.
+#'   Included for users of the legacy `omega.F()`.
 #' @param n full sample size
 #' @param a significance level
 #' @return \describe{
@@ -89,7 +91,7 @@
 #' # Backwards-compatible dotted name (deprecated)
 #' omega.F(dfm = 2, dfe = 8,
 #'         Fvalue = 5.134, n = 11, a = .05)
-omega_f <- function(dfm, dfe, f_value, n, a = .05) {
+omega_f <- function(dfm, dfe, f_value, n, a = .05, Fvalue) { #nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -97,6 +99,10 @@ omega_f <- function(dfm, dfe, f_value, n, a = .05) {
 
   if (missing(dfe)) {
     stop("Be sure to include the degrees of freedom for the error.")
+  }
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
   }
 
   if (missing(f_value)) {

@@ -30,7 +30,7 @@
 #'
 #' @return
 #' A named list with the following elements:
-#' \itemize{
+#' \describe{
 #'   \item{\code{lower_conf_limit_r2}}{The lower confidence limit for R^2.}
 #'   \item{\code{prob_less_lower}}{Probability associated with values
 #' less than the lower limit.}

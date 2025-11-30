@@ -16,8 +16,7 @@
 #' \deqn{z = \frac{m_1 - \mu}{\sigma / \sqrt{n}}}
 #' where \eqn{n} is the sample size.
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/zm.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/zm.html}{Learn more on our example page.}
 #'
 #' @param mu The population mean.
 #' @param m1 The sample study mean.
@@ -147,4 +146,18 @@ d_z_mean <- function(mu, m1, sig, sd1, n, a = .05) {
   )
 
   return(output)
+}
+
+# Backward compatibility wrapper
+#' @rdname d_z_mean
+#' @export
+d.z.mean <- function(mu, m1, sig, sd1, n, a = .05) { # nolint
+  d_z_mean(
+    mu  = mu,
+    m1  = m1,
+    sig = sig,
+    sd1 = sd1,
+    n   = n,
+    a   = a
+  )
 }

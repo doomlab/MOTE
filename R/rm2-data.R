@@ -19,7 +19,7 @@
 #'
 #' @format A data frame with 6 variables:
 #' \describe{
-#'   \item{group}{Factor. Between-subjects variable indicating the 
+#'   \item{group}{Factor. Between-subjects variable indicating the
 #' type of instructions given.}
 #'   \item{subject}{Integer or factor. Subject identifier.}
 #'   \item{fsglobsglo}{Numeric. Low FSG, low BSG condition.}

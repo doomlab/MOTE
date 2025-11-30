@@ -98,7 +98,7 @@ test_that("dotted wrapper eta.full.SS matches eta_full_ss", {
     dfe    = 8,
     ssm    = 25.24,
     sst    = 25.24 + 19.67,
-    f_value = 5.134,
+    Fvalue = 5.134,
     a      = 0.05
   )
 

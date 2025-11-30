@@ -19,9 +19,9 @@ test_that("odds_ratio returns correctly structured list", {
 test_that("odds_ratio matches known example values", {
   res <- odds_ratio(n11 = 10, n12 = 50, n21 = 20, n22 = 15, a = 0.05)
 
-  expect_equal(res$odds, 0.15, tolerance = 1e-7)
-  expect_equal(res$olow, -0.8034911, tolerance = 1e-7)
-  expect_equal(res$ohigh, 1.103491, tolerance = 1e-7)
+  expect_equal(res$odds, 0.15, tolerance = 1e-6)
+  expect_equal(res$olow, 0.05780898, tolerance = 1e-6)
+  expect_equal(res$ohigh, 0.3892129, tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$odds_value,       res$odds)

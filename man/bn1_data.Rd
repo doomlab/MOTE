@@ -7,9 +7,15 @@
 \format{
 A data frame with *n* rows and 2 variables:
 \describe{
-  \item{group}{Factor with levels \code{"poor"}, \code{"fair"}, and \code{"excellent"}.}
+  \item{group}{Factor with levels
+     \code{"poor"}, \code{"fair"}, and \code{"excellent"}.}
   \item{friends}{Numeric rating of close interpersonal attachments.}
 }
+}
+\source{
+Simulated data inspired by Nolan & Heinzen (4th ed.),
+*Statistics for the Behavioral Sciences*. Generated for instructional
+examples in the MOTE package.
 }
 \usage{
 data(bn1_data)
@@ -23,7 +29,10 @@ This dataset is designed for use with functions such as
 and \code{\link{epsilon.full.SS}}.
 }
 \references{
-Nolan, S. A., & Heinzen, T. E. (*4th ed.*). *Statistics for the Behavioral Sciences*.
-Macmillan Learning. \url{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
+Nolan, S. A., & Heinzen, T. E. (*4th ed.*).
+*Statistics for the Behavioral Sciences*.
+Macmillan Learning. \url{https://www.macmillanlearning.com/
+Catalog/product/statisticsforthebehavioralsciences-
+rentalonly-fourthedition-nolan}
 }
 \keyword{datasets}

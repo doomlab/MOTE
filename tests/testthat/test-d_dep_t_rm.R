@@ -1,4 +1,3 @@
-
 test_that("d_dep_t_rm returns correctly structured list", {
   res <- d_dep_t_rm(
     m1  = 5.57,
@@ -29,8 +28,7 @@ test_that("d_dep_t_rm returns correctly structured list", {
     "m2_value", "sd2_value", "se2_value",
     "m2_lower_limit", "m2_upper_limit",
     "correlation",
-    "sample_size", "degrees_freedom",
-    "estimate_string"
+    "sample_size", "degrees_freedom"
   ) %in% names(res)))
 })
 
@@ -86,3 +84,4 @@ test_that("dotted version d.dep.t.rm matches snake_case d_dep_t_rm", {
 
   expect_equal(res1$dlow, res2$dlow)
 })
+

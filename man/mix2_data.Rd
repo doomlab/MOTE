@@ -9,8 +9,10 @@ A data frame with 3 variables:
 \describe{
   \item{group}{Factor indicating instruction condition with levels
     \code{"Regular JAM Task"} and \code{"Debiasing JAM task"}.}
-  \item{bsglo}{Numeric. Estimated response percentage in the Low BSG condition.}
-  \item{bsghi}{Numeric. Estimated response percentage in the High BSG condition.}
+  \item{bsglo}{Numeric. Estimated response percentage in the Low
+BSG condition.}
+  \item{bsghi}{Numeric. Estimated response percentage in the High
+BSG condition.}
 }
 }
 \usage{

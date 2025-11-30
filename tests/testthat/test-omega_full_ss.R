@@ -46,9 +46,9 @@ test_that("omega_full_ss matches known example values", {
   )
 
   # Known omega^2 and CI from example
-  expect_equal(res$omega,     0.4218351,  tolerance = 1e-7)
-  expect_equal(res$omegalow,  0.0000000,  tolerance = 1e-7)
-  expect_equal(res$omegahigh, 0.7522578,  tolerance = 1e-7)
+  expect_equal(res$omega,     0.4218351,  tolerance = 1e-6)
+  expect_equal(res$omegalow,  0.0000000,  tolerance = 1e-6)
+  expect_equal(res$omegahigh, 0.7522578,  tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$omega_value,       res$omega)

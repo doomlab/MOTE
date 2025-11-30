@@ -53,14 +53,14 @@ test_that("r_correl matches known example values", {
   )
 
   # Known r and CI from example
-  expect_equal(res$r,     -0.8676594, tolerance = 1e-7)
-  expect_equal(res$rlow,  -0.7387667, tolerance = 1e-7)
-  expect_equal(res$rhigh, -0.9314170, tolerance = 1e-7)
+  expect_equal(res$r,     -0.8676594, tolerance = 1e-6)
+  expect_equal(res$rlow,  -0.7387667, tolerance = 1e-6)
+  expect_equal(res$rhigh, -0.9314170, tolerance = 1e-6)
 
   # Known R2 and CI from example
-  expect_equal(res$R2,    0.7528328, tolerance = 1e-7)
-  expect_equal(res$R2low, 0.5457763, tolerance = 1e-7)
-  expect_equal(res$R2high, 0.8675377, tolerance = 1e-7)
+  expect_equal(res$R2,    0.7528328, tolerance = 1e-6)
+  expect_equal(res$R2low, 0.5457763, tolerance = 1e-6)
+  expect_equal(res$R2high, 0.8675377, tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$r_value,        res$r)

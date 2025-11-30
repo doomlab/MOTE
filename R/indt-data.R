@@ -3,8 +3,8 @@
 #' @description
 #' Example data for an independent-samples t-test examining whether a
 #' hypnotism intervention affects recall accuracy after witnessing a crime.
-#' Designed for use with functions such as \code{\link{d.ind.t}},
-#' \code{\link{d.ind.t.t}}, and \code{\link{delta.ind.t}}.
+#' Designed for use with functions such as \code{\link{d_ind_t}},
+#' \code{\link{d_ind_t_t}}, and \code{\link{delta_ind_t}}.
 #'
 #' @docType data
 #'

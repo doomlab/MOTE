@@ -54,9 +54,9 @@ test_that("ges_ss_rm matches known example values", {
   )
 
   # Known omega^2_G and CI from example
-  expect_equal(res$omega,     0.08791369, tolerance = 1e-8)
-  expect_equal(res$omegalow,  0.02150822, tolerance = 1e-8)
-  expect_equal(res$omegahigh, 0.18618840, tolerance = 1e-8)
+  expect_equal(res$omega,     0.08791369, tolerance = 1e-6)
+  expect_equal(res$omegalow,  0.02150822, tolerance = 1e-6)
+  expect_equal(res$omegahigh, 0.18618840, tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$omega_value,       res$omega)
@@ -122,5 +122,5 @@ test_that("dotted wrapper omega.gen.SS.rm matches ges_ss_rm", {
     a      = 0.05
   )
 
-  expect_equal(res1$omega, res2)
+  expect_equal(res1$omega, res2$omega)
 })

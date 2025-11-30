@@ -23,8 +23,7 @@
 #' \frac{s_2}{\sqrt{n}} \right) / 2}.}
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptavgm.html}{Learn more on our example page.}
 #'
 #' @param m1 Mean from the first level/occasion.
 #' @param m2 Mean from the second level/occasion.
@@ -63,12 +62,12 @@
 #'
 #' # Suppose seven people completed a measure of belief in the supernatural
 #' # before and after watching a sci-fi movie.
-#' Higher scores indicate stronger belief.
+#' # Higher scores indicate stronger belief.
 #'
 #'     t.test(dept_data$before, dept_data$after, paired = TRUE)
 #'
 #' # You can type in the numbers directly, or refer to the
-#' dataset, as shown below.
+#' # dataset, as shown below.
 #'
 #'     d_dep_t_avg(m1 = 5.57, m2 = 4.43, sd1 = 1.99,
 #'                 sd2 = 2.88, n = 7, a = .05)

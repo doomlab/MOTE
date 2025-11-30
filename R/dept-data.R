@@ -1,7 +1,7 @@
 #' Dependent t Example Data
 #'
-#' Dataset for use in \code{\link{d.dep.t.diff}}, \code{\link{d.dep.t.diff.t}},
-#' \code{\link{d.dep.t.avg}}, and \code{\link{d.dep.t.rm}} exploring the before
+#' Dataset for use in \code{\link{d_dep_t_diff}}, \code{\link{d_dep_t_diff_t}},
+#' \code{\link{d_dep_t_avg}}, and \code{\link{d_dep_t_rm}} exploring the before
 #' and after effects of scifi movies on supernatural beliefs.
 #'
 #' @docType data
@@ -17,8 +17,6 @@
 #' @keywords datasets
 #'
 #' @references Nolan and Heizen Statistics for the Behavioral Sciences
-#' (\href{https://www.macmillanlearning.com/Catalog/product/
-#' statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
-#' {Book Link})
+#' \href{https://www.macmillanlearning.com/Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}{Book Link}
 #'
 "dept_data"

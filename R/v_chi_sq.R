@@ -9,8 +9,7 @@
 #'
 #' \deqn{V = \sqrt{\frac{\chi^2}{n \times df_{\mathrm{small}}}}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/chiv.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `v_chi_sq()` to follow modern R style

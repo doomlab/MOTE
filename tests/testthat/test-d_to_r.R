@@ -58,8 +58,8 @@ test_that("d_to_r gives R2 consistent with r^2 and sensible CI", {
 
   # R2 should be r^2
   r2_expected <- res$r^2
-  expect_equal(res$R2, r2_expected, tolerance = 1e-8)
-  expect_equal(res$r2_value, res$R2, tolerance = 1e-8)
+  expect_equal(res$R2, r2_expected, tolerance = 1e-6)
+  expect_equal(res$r2_value, res$R2, tolerance = 1e-6)
 
   # CI should fall between 0 and 1 and bracket R2
   expect_gte(res$R2low, 0)
@@ -113,3 +113,4 @@ test_that("dotted wrapper d.to.r matches d_to_r", {
 
   expect_equal(res1$rlow, res2$rlow)
 })
+

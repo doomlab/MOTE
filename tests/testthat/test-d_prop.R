@@ -69,7 +69,7 @@ test_that("d_prop APA-style strings are correctly formed", {
   )
 
   expect_type(res$estimate, "character")
-  expect_true(grepl("d_{prop}", res$estimate))
+  expect_true(grepl("d_{prop}", res$estimate, fixed = TRUE))
   expect_true(grepl("CI", res$estimate))
 
   expect_true(grepl("Z", res$statistic))

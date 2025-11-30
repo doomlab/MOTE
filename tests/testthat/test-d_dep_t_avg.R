@@ -41,7 +41,7 @@ test_that("d_dep_t_avg APA estimate string is formatted", {
   )
 
   expect_type(res$estimate, "character")
-  expect_true(grepl("d_{av}", res$estimate))
+  expect_true(grepl("d_{av}", res$estimate, fixed = TRUE))
   expect_true(grepl("CI", res$estimate))
 })
 

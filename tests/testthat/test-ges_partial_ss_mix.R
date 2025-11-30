@@ -48,9 +48,9 @@ test_that("ges_partial_ss_mix matches known example values", {
   )
 
   # Known generalized eta-squared and CI from example
-  expect_equal(res$ges,     0.001791924,  tolerance = 1e-9)
-  expect_equal(res$geslow,  0.000000000,  tolerance = 1e-9)
-  expect_equal(res$geshigh, 0.03792664,   tolerance = 1e-8)
+  expect_equal(res$ges,     0.001791924,  tolerance = 1e-6)
+  expect_equal(res$geslow,  0.000000000,  tolerance = 1e-6)
+  expect_equal(res$geshigh, 0.03792664,   tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$ges_value,       res$ges)

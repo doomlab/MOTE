@@ -12,11 +12,10 @@
 #' noncentral t distribution for the observed \eqn{t} and df.
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/deptdifft.html}{Learn more on our example page.}
 #'
 #' @param t_value t-statistic from a paired-samples t-test.
-#' @param t for backwards compatability, you can also give t.
+#' @param t for backwards compatibility, you can also give t.
 #' @param n Sample size (number of paired observations).
 #' @param a Significance level (alpha) for the confidence interval.
 #' Must be in (0, 1).
@@ -54,11 +53,10 @@
 #' # The t-test value was 1.43. You can type in the numbers directly,
 #' # or refer to the dataset, as shown below.
 #'
-#'     d_dep_t_diff_t(t = 1.43, n = 7, a = .05)
+#'     d_dep_t_diff_t(t_value = 1.43, n = 7, a = .05)
 #'
-#'     d_dep_t_diff_t(1.43, 7, .05)
-#'
-#'     d_dep_t_diff_t(scifi$statistic, length(dept_data$before), .05)
+#'     d_dep_t_diff_t(t_value = scifi$statistic,
+#'         n = length(dept_data$before), a = .05)
 
 d_dep_t_diff_t <- function(t_value, t = NULL, n, a = .05) {
 

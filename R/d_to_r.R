@@ -23,8 +23,7 @@
 #'
 #' \deqn{r = \frac{d}{\sqrt{d^2 + \frac{(n_1 + n_2)^2}{n_1 n_2}}}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/dtor.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/dtor.html}{Learn more on our example page.}
 #'
 #' @param d Effect size statistic.
 #' @param n1 Sample size for group one.
@@ -75,28 +74,10 @@
 #' # participants in the control group received the same
 #' # questioning without hypnosis.
 #'
-#'     t.test(correctq ~ group, data = indt_data)
-#'
-#' # You can type in the numbers directly, or refer to the dataset,
-#' # as shown below.
-#'
-#'     d_ind_t(m1 = 17.75, m2 = 23, sd1 = 3.30,
-#'              sd2 = 2.16, n1 = 4, n2 = 4, a = .05)
-#'
-#'     d.ind.t(17.75, 23, 3.30, 2.16, 4, 4, .05)
-#'
-#'     d.ind.t(mean(indt_data$correctq[indt_data$group == 1]),
-#'             mean(indt_data$correctq[indt_data$group == 2]),
-#'             sd(indt_data$correctq[indt_data$group == 1]),
-#'             sd(indt_data$correctq[indt_data$group == 2]),
-#'             length(indt_data$correctq[indt_data$group == 1]),
-#'             length(indt_data$correctq[indt_data$group == 2]),
-#'             .05)
-#'
 #' # Contrary to the hypothesized result, the group that underwent
 #' # hypnosis were significantly less accurate while reporting
 #' # facts than the control group with a large effect size, t(6) = -2.66,
-#' # p = .038, d_s = 1.88.
+#' # p = .038, d_s = -1.88.
 #'
 #'      d_to_r(d = -1.88, n1 = 4, n2 = 4, a = .05)
 
@@ -136,11 +117,11 @@ d_to_r <- function(d, n1, n2, a = .05) {
 
   #deal with negative r / d values
   if (r < 0) {
-    rlow <- 0 - ciforr$lower_conf_limit_r2
-    rhigh <- 0 - ciforr$upper_conf_limit_r2
+    rlow <- 0 - ciforr$lower_conf_limit_r
+    rhigh <- 0 - ciforr$upper_conf_limit_r
   } else {
-    rlow <- ciforr$lower_conf_limit_r2
-    rhigh <- ciforr$upper_conf_limit_r2
+    rlow <- ciforr$lower_conf_limit_r
+    rhigh <- ciforr$upper_conf_limit_r
   }
 
   if (p < .001) {

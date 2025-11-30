@@ -26,8 +26,7 @@
 #' \deqn{t = \frac{m - \mu}{s/\sqrt{n}}.}
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/singletm.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/singletm.html}{Learn more on our example page.}
 #'
 #' @param m Sample mean.
 #' @param u Population (reference) mean \eqn{\mu}.

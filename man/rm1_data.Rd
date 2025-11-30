@@ -20,7 +20,7 @@ Example data for a repeated measures one-way ANOVA examining whether
 pulse rate differs across stimulus types. Participants were exposed to
 three categories of images: neutral (e.g., household objects like a toaster),
 positive (e.g., puppies, babies), and negative (e.g., mutilated faces,
-scenes of war). Pulse rate was measured for each participant under each condition.
-Designed for use with \code{\link{omega.F}}.
+scenes of war). Pulse rate was measured for each participant under each
+condition. Designed for use with \code{\link{omega.F}}.
 }
 \keyword{datasets}

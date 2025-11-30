@@ -90,5 +90,5 @@ test_that("eta.F wrapper matches eta_f", {
     a      = 0.05
   )
 
-  expect_equal(res1$etalow, res2$etahigh)
+  expect_equal(res1$etalow, res2$etalow)
 })

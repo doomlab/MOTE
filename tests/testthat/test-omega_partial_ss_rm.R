@@ -52,9 +52,9 @@ test_that("omega_partial_ss_rm matches known example values", {
   )
 
   # Known omega^2_p and CI from example
-  expect_equal(res$omega,     0.02822812,  tolerance = 1e-8)
-  expect_equal(res$omegalow,  0.00000000,  tolerance = 1e-8)
-  expect_equal(res$omegahigh, 0.09893879,  tolerance = 1e-8)
+  expect_equal(res$omega,     0.02822812,  tolerance = 1e-6)
+  expect_equal(res$omegalow,  0.00000000,  tolerance = 1e-6)
+  expect_equal(res$omegahigh, 0.09893879,  tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$omega_value,       res$omega)

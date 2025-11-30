@@ -24,8 +24,7 @@
 #'
 #' \deqn{\epsilon^2 = \frac{df_m (ms_m - ms_e)}{SS_T}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/epsilon.html}{Learn more on our example page.}
 #'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within

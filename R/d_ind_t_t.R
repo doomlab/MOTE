@@ -8,7 +8,7 @@
 #' object includes both the original element names (e.g., `d`, `dlow`,
 #' `dhigh`, `n1`, `n2`, `df`, `t`, `p`, `estimate`, `statistic`) and
 #' newer snake_case aliases (e.g., `d_lower_limit`, `d_upper_limit`,
-#' `sample_size_1`, `sample_size_2`, `degrees_freedom`, `t_value`,
+#' `sample_size_1`, `sample_size_2`, `degrees_freedom`, `t`,
 #' `p_value`). New code should
 #' prefer `d_ind_t_t()` and the snake_case output names, but existing
 #' code using the older names will continue to work.
@@ -27,10 +27,11 @@
 #' noncentral t distribution for the observed \eqn{t} and df.
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtt.html}{Learn more on our example page.}
 #'
 #' @param t_value t-statistic from an independent-samples t-test.
+#' @param t t-statistic from an independent-samples t-test.
+#' Used for backwards compatibility.
 #' @param n1 Sample size for group one.
 #' @param n2 Sample size for group two.
 #' @param a Significance level (alpha) for the confidence interval.
@@ -62,21 +63,21 @@
 #'     hyp <- t.test(correctq ~ group, data = indt_data)
 #'
 #' # Direct entry of the t-statistic and sample sizes:
-#'     d_ind_t_t(t_value = -2.6599, n1 = 4, n2 = 4, a = .05)
-#'
-#' # Equivalent shorthand:
-#'     d.ind.t.t(-2.6599, 4, 4, .05)
+#'     d_ind_t_t(t = -2.6599, n1 = 4, n2 = 4, a = .05)
 #'
 #' # Using the t-statistic from the model object:
 #'     d_ind_t_t(hyp$statistic, length(indt_data$group[indt_data$group == 1]),
 #'               length(indt_data$group[indt_data$group == 2]), .05)
 
-d_ind_t_t <- function(t_value, n1, n2, a = .05) {
+d_ind_t_t <- function(t_value, t = NULL, n1, n2, a = .05) {
 
   if (missing(t_value)) {
-    stop("Be sure to include the t-value found from your t-test.")
+    if (missing(t)) {
+      stop("Be sure to include your t-value from your dependent t-test.")
+    } else {
+      t_value <- t
+    }
   }
-
   if (missing(n1)) {
     stop("Be sure to include the sample size n1 for group 1.")
   }

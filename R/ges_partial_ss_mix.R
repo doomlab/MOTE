@@ -13,8 +13,7 @@
 #'
 #' \deqn{\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_E}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/gesmixss.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/gesmixss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `ges_partial_ss_mix()` to follow modern R
@@ -34,6 +33,9 @@
 #' @param sss sum of squares subject variance
 #' @param sse sum of squares for the error/residual/within
 #' @param f_value F statistic
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). If supplied, it overrides `f_value`.
+#'   Included for users of the legacy `ges.partial.SS.mix()` API.
 #' @param a significance level
 #'
 #' @return \describe{
@@ -81,7 +83,8 @@
 #'                    sse = 8657.094,
 #'                    Fvalue = 1.280784, a = .05)
 #'
-ges_partial_ss_mix <- function(dfm, dfe, ssm, sss, sse, f_value, a = .05) {
+ges_partial_ss_mix <- function(dfm, dfe, ssm, sss,
+                               sse, f_value, a = .05, Fvalue) { #nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -103,8 +106,12 @@ ges_partial_ss_mix <- function(dfm, dfe, ssm, sss, sse, f_value, a = .05) {
     stop("Be sure to include the sum of squares for your error for the model.")
   }
 
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
+  }
+
   if (missing(f_value)) {
-    stop("Be sure to include the Fvalue from your ANOVA.")
+    stop("Be sure to include the f_value from your ANOVA.")
   }
 
   if (a < 0 || a > 1) {

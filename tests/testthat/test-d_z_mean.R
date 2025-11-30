@@ -15,7 +15,7 @@ test_that("d_z_mean returns correctly structured list", {
     "d", "dlow", "dhigh",
     "M1", "sd1", "se1",
     "M1low", "M1high",
-    "Mu", "Sigma", "se2",
+    "mu", "sigma", "se2",
     "z", "p", "n",
     "estimate", "statistic"
   ) %in% names(res)))
@@ -100,3 +100,26 @@ test_that("d_z_mean APA-style strings are correctly formed", {
   expect_true(grepl("Z", res$statistic))
 }
 )
+
+
+test_that("dotted wrapper d.z.mean matches d_z_mean", {
+  res1 <- d_z_mean(
+    m1  = 10,
+    mu  = 8,
+    sd1 = 2.5,
+    sig = 2,
+    n   = 25,
+    a   = 0.05
+  )
+
+  res2 <- d.z.mean(
+    m1  = 10,
+    mu  = 8,
+    sd1 = 2.5,
+    sig = 2,
+    n   = 25,
+    a   = 0.05
+  )
+
+  expect_equal(res1$d, res2$d)
+})

@@ -10,8 +10,7 @@
 #'
 #' \deqn{d_{\delta} = \frac{m_1 - m_2}{sd_1}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/indtdelta.html}{Learn more on our example page.}
 #'
 #' @param m1 mean from control group
 #' @param m2 mean from experimental group

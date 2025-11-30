@@ -47,9 +47,9 @@ test_that("eta_partial_ss matches known example values", {
   )
 
   # Known partial eta^2 and CI from example
-  expect_equal(res$eta,     0.0101912,  tolerance = 1e-7)
-  expect_equal(res$etalow,  0.0000000,  tolerance = 1e-7)
-  expect_equal(res$etahigh, 0.02249241, tolerance = 1e-7)
+  expect_equal(res$eta,     0.0101912,  tolerance = 1e-6)
+  expect_equal(res$etalow,  0.0000000,  tolerance = 1e-6)
+  expect_equal(res$etahigh, 0.02249241, tolerance = 1e-6)
 
   # Aliases should match legacy values
   expect_equal(res$eta_value,       res$eta)

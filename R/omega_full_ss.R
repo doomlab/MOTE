@@ -12,8 +12,7 @@
 #'
 #' \deqn{\omega^2 = \frac{df_m (ms_m - ms_e)}{SS_T + ms_e}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/omegass.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/omegass.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `omega_full_ss()` to follow modern R style

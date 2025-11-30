@@ -82,3 +82,4 @@ test_that("dotted version d.ind.t.t matches snake_case d_ind_t_t", {
 
   expect_equal(res1$dlow, res2$dlow)
 })
+

@@ -21,14 +21,16 @@
 #' `p_value`). New code should prefer `eta_full_ss()` and the snake_case
 #' output names, but existing code using the older names will continue to work.
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/etass.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/etass.html}{Learn more on our example page.}
 #'
 #' @param dfm degrees of freedom for the model/IV/between
 #' @param dfe degrees of freedom for the error/residual/within
 #' @param ssm sum of squares for the model/IV/between
 #' @param sst sum of squares total
-#' @param Fvalue F statistic
+#' @param f_value F statistic
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). If supplied, it overrides
+#'   `f_value`. Included for users of the legacy `eta.full.SS()`.
 #' @param a significance level
 #' @return Provides the effect size (\eqn{\eta^2}) with associated
 #' confidence intervals and relevant statistics.
@@ -72,7 +74,15 @@
 #'             sst = (25.24 + 19.67), Fvalue = 5.134, a = .05)
 
 
-eta_full_ss <- function(dfm, dfe, ssm, sst, f_value, a = .05) {
+eta_full_ss <- function(dfm, dfe, ssm, sst, f_value, a = .05, Fvalue) { #nolint
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
+  }
+
+  if (missing(f_value)) {
+    stop("Be sure to include the F-statistic from your ANOVA.")
+  }
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -90,17 +100,13 @@ eta_full_ss <- function(dfm, dfe, ssm, sst, f_value, a = .05) {
     stop("Be sure to include the sum of squares total from your ANOVA.")
   }
 
-  if (missing(f_value)) {
-    stop("Be sure to include the F-statistic from your ANOVA.")
-  }
-
   if (a < 0 || a > 1) {
     stop("Alpha should be between 0 and 1.")
   }
 
   eta_value <- ssm / sst
 
-  limits <- ci_r2()(
+  limits <- ci_r2(
     r2 = eta_value,
     df1 = dfm,
     df2 = dfe,

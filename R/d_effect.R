@@ -39,7 +39,7 @@
 #'   [d_dep_t_diff_t()] with the same arguments.
 #'
 #' - `"dep_t_rm"` — paired/dependent t-test using the repeated-measures
-#'   effect size \(d_{rm}\), which adjusts for the correlation between
+#'   effect size \eqn{d_{rm}}, which adjusts for the correlation between
 #'   measurements. Supply `m1`, `m2`, `sd1`, `sd2`, `r`, and `n`.
 #'   In this case, `d()` will call [d_dep_t_rm()] with the same arguments.
 #'
@@ -79,7 +79,7 @@
 #' - `"z_mean"` — one-sample z-test effect size using a known population
 #'   standard deviation. Supply `m1` (sample mean), `u` (population mean),
 #'   `sd1` (sample SD, used for descriptive CIs), `sig` (population SD),
-#'   and `n`. In this case, `d_effect()` will call [d.z.mean()] with the
+#'   and `n`. In this case, `d_effect()` will call [d_z_mean()] with the
 #'   same arguments.
 #'
 #' @param m1 Means of the two conditions or measurements.
@@ -320,7 +320,7 @@ d_effect <- function(m1 = NULL,
 
     return(
       d_ind_t_t(
-        t_value = t_value,
+        t = t_value,
         n1      = n1,
         n2      = n2,
         a       = a
@@ -435,7 +435,7 @@ d_effect <- function(m1 = NULL,
     }
 
     return(
-      d.z.mean(
+      d_z_mean(
         m1  = m1,
         mu  = u,
         sd1 = sd1,

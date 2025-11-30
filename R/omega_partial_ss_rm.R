@@ -19,8 +19,7 @@
 #'
 #'      F = msm / mse
 #'
-#'\href{https://www.aggieerin.com/shiny-server/tests/omegaprmss.html}
-#' {Learn more on our example page.}
+#'\href{https://www.aggieerin.com/shiny-server/tests/omegaprmss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `omega_partial_ss_rm()` to follow modern R

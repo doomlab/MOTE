@@ -12,8 +12,7 @@
 #' derived from the noncentral t distribution.
 #'
 #' See the online example for additional context:
-#' \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/singlett.html}{Learn more on our example page.}
 #'
 #' @param t t-test value.
 #' @param n Sample size.

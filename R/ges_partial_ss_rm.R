@@ -14,8 +14,7 @@
 #'
 #' \deqn{\eta^2_{G} = \frac{SS_M}{SS_M + SS_S + SS_{E1} + SS_{E2} + SS_{E3}}}
 #'
-#' \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}
-#' {Learn more on our example page.}
+#' \href{https://www.aggieerin.com/shiny-server/tests/gesrmss.html}{Learn more on our example page.}
 #'
 #' **Note on function and output names:** This effect size is now implemented
 #' with the snake_case function name `ges_partial_ss_rm()` to follow modern R
@@ -36,6 +35,9 @@
 #' @param sse2 sum of squares for the error/residual/within for the second IV
 #' @param sse3 sum of squares for the error/residual/within for the interaction
 #' @param f_value F statistic
+#' @param Fvalue Backward-compatible argument for the F statistic
+#'   (deprecated; use `f_value` instead). If supplied, it overrides `f_value`.
+#'   Included for users of the legacy `ges.partial.SS.rm()` API.
 #' @param a significance level
 #' @return \describe{
 #'   \item{ges}{\eqn{\eta^2_{G}} effect size}
@@ -80,7 +82,8 @@
 #'                   sse1 = 5402.567, sse2 = 8318.75, sse3 = 6074.417,
 #'                   Fvalue = 70.9927, a = .05)
 ges_partial_ss_rm <- function(dfm, dfe, ssm, sss,
-                              sse1, sse2, sse3, f_value, a = .05) {
+                              sse1, sse2, sse3, f_value, a = .05,
+                              Fvalue) { #nolint
 
   if (missing(dfm)) {
     stop("Be sure to include the degrees of freedom for the model (IV).")
@@ -111,6 +114,10 @@ ges_partial_ss_rm <- function(dfm, dfe, ssm, sss,
   if (missing(sse3)) {
     stop("Be sure to include the sum of squares for your error
     for the interaction.")
+  }
+
+  if (!missing(Fvalue)) {
+    f_value <- Fvalue
   }
 
   if (missing(f_value)) {
