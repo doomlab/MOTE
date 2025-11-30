@@ -25,8 +25,7 @@
 #' Nolan, S. A., & Heinzen, T. E. (*4th ed.*).
 #' *Statistics for the Behavioral Sciences*.
 #' Macmillan Learning. \url{https://www.macmillanlearning.com/
-#' Catalog/product/statisticsforthebehavioralsciences-
-#' rentalonly-fourthedition-nolan}
+#' Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
 #' @source
 #' Simulated data inspired by Nolan & Heinzen (4th ed.),
 #' *Statistics for the Behavioral Sciences*. Generated for instructional

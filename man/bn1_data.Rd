@@ -32,7 +32,6 @@ and \code{\link{epsilon.full.SS}}.
 Nolan, S. A., & Heinzen, T. E. (*4th ed.*).
 *Statistics for the Behavioral Sciences*.
 Macmillan Learning. \url{https://www.macmillanlearning.com/
-Catalog/product/statisticsforthebehavioralsciences-
-rentalonly-fourthedition-nolan}
+Catalog/product/statisticsforthebehavioralsciences-rentalonly-fourthedition-nolan}
 }
 \keyword{datasets}

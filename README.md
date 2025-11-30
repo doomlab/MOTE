@@ -35,15 +35,3 @@ To install the development version of the package take the following steps:
 4) Enjoy MOTE. 
 
 You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)! 
-
-# Build information
-
-1.2 - updated without a dependency on `ez`, added new snake_case functionality, fixed examples, and added two overall wrappers. 
-
-1.1 - Removed dependencies to ensure easier maintenance and installation. Cleaned up formulas and help page consistency. 
-
-1.0.3 - Fixed a few typos
-
-1.0.2 - Updated mathematical error in `d.dep.t.rm` confidence interval calculation. 
-
-1.0.1 - Initial CRAN release

@@ -5,3 +5,6 @@
 ^docs$
 ^pkgdown$
 ^setup/
+inst/CITATION.cff
+^\.github/
+^cran-comments\.md$

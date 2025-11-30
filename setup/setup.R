@@ -26,3 +26,14 @@ pkgdown::build_site()
 # usethis::use_pkgdown_github_pages()
 
 devtools::install_github("doomlab/MOTE")
+
+
+## to submit
+roxygen2::roxygenize()
+devtools::check()
+devtools::spell_check()
+# devtools::check_rhub()
+devtools::check_win_devel()
+# revdepcheck::revdep_check()
+devtools::build()
+devtools::release()
