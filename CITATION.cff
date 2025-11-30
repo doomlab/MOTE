@@ -1,14 +1,17 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use MOTE, please cite it as below."
-title: "MOTE: Measure of the Effect"
-version: "1.2.0"
+title: 'MOTE: Measure of the Effect'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
 type: software
-
 authors:
-  - family-names: Buchanan
-    given-names: Erin M.
-    orcid: "https://orcid.org/0000-0002-7403-469X"
-
+  - given-names: Erin M.
+    family-names: Buchanan
+    email: buchananlab@gmail.com
+    orcid: 'https://orcid.org/0000-0002-7403-469X'
 contributors:
   - family-names: Gillenwaters
     given-names: Amber M.
@@ -19,27 +22,29 @@ contributors:
   - family-names: Valentine
     given-names: K. D.
     orcid: "https://orcid.org/0000-0001-6349-5395"
-
-repository-code: "https://github.com/doomlab/MOTE"
-license: "LGPL-3.0-or-later"
-
+repository-code: 'https://github.com/doomlab/MOTE'
+abstract: >-
+  Measure of the Effect (MOTE) is an effect size calculator,
+  including a wide variety of effect sizes in the mean
+  differences family (all versions of d) and the variance
+  overlap family (eta, omega, epsilon, r). MOTE provides
+  non-central confidence intervals for each effect size,
+  relevant test statistics, and output for reporting in APA
+  Style (American Psychological Association, 2010) with
+  LaTeX. In research, an over-reliance on p-values may
+  conceal the fact that a study is under-powered (Halsey et
+  al., 2015). A test may be statistically significant, yet
+  practically inconsequential (Fritz et al., 2012). Although
+  the American Psychological Association has long advocated
+  for the inclusion of effect sizes (Wilkinson, 1999), the
+  vast majority of peer-reviewed, published academic studies
+  stop short of reporting effect sizes and confidence
+  intervals (Cumming, 2013). MOTE simplifies the use and
+  interpretation of effect sizes and confidence intervals.
 keywords:
   - effect size
-  - statistical analysis
-  - psychology
   - R package
   - open science
-
-abstract: >
-  Measure of the Effect (MOTE) is an effect size calculator, including a wide variety of effect sizes in the mean differences family (all versions of d) and the variance overlap family (eta, omega, epsilon, r). MOTE provides non-central confidence intervals for each effect size, relevant test statistics, and output for reporting in APA Style (American Psychological Association, 2010) with LaTeX. In research, an over-reliance on p-values may conceal the fact that a study is under-powered (Halsey et al., 2015). A test may be statistically significant, yet practically inconsequential (Fritz et al., 2012). Although the American Psychological Association has long advocated for the inclusion of effect sizes (Wilkinson, 1999), the vast majority of peer-reviewed, published academic studies stop short of reporting effect sizes and confidence intervals (Cumming, 2013). MOTE simplifies the use and interpretation of effect sizes and confidence intervals. 
-
-preferred-citation:
-  type: software
-  authors:
-    - family-names: Buchanan
-      given-names: Erin M.
-      orcid: "https://orcid.org/0000-0002-7403-469X"
-  title: "MOTE: Measure of the Effect"
-  version: "1.2.0"
-  date-released: "2025-11-30"
-  url: "https://github.com/doomlab/MOTE"
+license: LGPL-3.0-or-later
+version: v1.2.0
+date-released: '2025-11-30'
