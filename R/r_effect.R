@@ -41,6 +41,12 @@
 #'   `dfm`, `dfe`, `n`, and `f_value`. In this case, `r_effect()` will call
 #'   [omega_f()] with the same arguments.
 #'
+#' - `"omega_full_ss"` — omega-squared (\eqn{\omega^2}) from ANOVA sums of
+#'   squares, using the model mean square, error mean square, and total sum of
+#'   squares along with the model and error degrees of freedom. Supply `dfm`,
+#'   `dfe`, `msm`, `mse`, and `sst`. In this case, `r_effect()` will call
+#'   [omega_full_ss()] with the same arguments.
+#'
 #' - `"eta_full_ss"` — eta-squared (\eqn{\eta^2}) from ANOVA sums of squares,
 #'   using the model sum of squares and total sum of squares along with the
 #'   model and error degrees of freedom. Supply `dfm`, `dfe`, `ssm`, `sst`,
@@ -85,19 +91,19 @@
 #' @param c Number of columns in the contingency table (used when
 #'   `design = "v_chi_sq"`).
 #' @param dfm Degrees of freedom for the model term (used when
-#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "eta_full_ss"`,
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "omega_full_ss"`, `design = "eta_full_ss"`,
 #'   `design = "eta_partial_ss"`, `design = "ges_partial_ss_mix"`, or
 #'   `design = "ges_partial_ss_rm"`).
 #' @param dfe Degrees of freedom for the error term (used when
-#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "eta_full_ss"`,
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "omega_full_ss"`, `design = "eta_full_ss"`,
 #'   `design = "eta_partial_ss"`, `design = "ges_partial_ss_mix"`, or
 #'   `design = "ges_partial_ss_rm"`).
 #' @param msm Mean square for the model (used when
-#'   `design = "epsilon_full_ss"`).
+#'   `design = "epsilon_full_ss"` or `design = "omega_full_ss"`).
 #' @param mse Mean square for the error (used when
-#'   `design = "epsilon_full_ss"`).
+#'   `design = "epsilon_full_ss"` or `design = "omega_full_ss"`).
 #' @param sst Total sum of squares for the outcome (used when
-#'   `design = "epsilon_full_ss"`).
+#'   `design = "epsilon_full_ss"` or `design = "omega_full_ss"`).
 #' @param ssm Sum of squares for the model term (used when
 #'   `design = "eta_full_ss"`, `design = "eta_partial_ss"`,
 #'   `design = "ges_partial_ss_mix"`, or `design = "ges_partial_ss_rm"`).
@@ -138,6 +144,16 @@
 #' r_effect(dfm = 2, dfe = 8, f_value = 5.134, a = .05, design = "eta_f")
 #' # From F, degrees of freedom, and N to omega^2
 #' r_effect(dfm = 2, dfe = 8, n = 11, f_value = 5.134, a = .05, design = "omega_f")
+#' # From sums of squares to omega^2
+#' r_effect(
+#'   dfm   = 2,
+#'   dfe   = 8,
+#'   msm   = 12.621,
+#'   mse   = 2.548,
+#'   sst   = (25.54 + 19.67),
+#'   a     = .05,
+#'   design = "omega_full_ss"
+#' )
 #' # From sums of squares to partial eta^2
 #' r_effect(
 #'   dfm    = 4,
@@ -206,6 +222,7 @@ r_effect <- function(d = NULL,
       "epsilon_full_ss",
       "eta_f",
       "omega_f",
+      "omega_full_ss",
       "eta_full_ss",
       "eta_partial_ss",
       "ges_partial_ss_mix",
@@ -319,6 +336,27 @@ r_effect <- function(d = NULL,
         f_value = f_value,
         n       = n,
         a       = a
+      )
+    )
+  }
+
+  if (design == "omega_full_ss") {
+    if (is.null(dfm) || is.null(dfe) ||
+        is.null(msm) || is.null(mse) ||
+        is.null(sst)) {
+      stop(
+        "For design = 'omega_full_ss', you must supply dfm, dfe, msm, mse, and sst."
+      )
+    }
+
+    return(
+      omega_full_ss(
+        dfm = dfm,
+        dfe = dfe,
+        msm = msm,
+        mse = mse,
+        sst = sst,
+        a   = a
       )
     )
   }
