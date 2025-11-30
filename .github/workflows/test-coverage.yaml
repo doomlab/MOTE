@@ -18,12 +18,19 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install dependencies
-        run: Rscript -e 'install.packages(c("remotes", "covr"))'
-
-      - name: Install package
-        run: R CMD INSTALL .
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: covr
+          needs: coverage
 
       - name: Run coverage
-        run: Rscript -e 'covr::codecov()'
+        shell: Rscript {0}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          covr::codecov()
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
