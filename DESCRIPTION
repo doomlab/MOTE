@@ -13,6 +13,9 @@ Authors@R: c(person("Erin M.", "Buchanan", role = c("aut", "cre"),
                     comment = c(ORCID = "0000-0001-6349-5395")))
 Depends: R (>= 3.1.0)
 Imports: stats
+Suggests: 
+    car,
+    testthat (>= 3.0.0)
 Description: Measure of the Effect ('MOTE') is an effect size calculator, including a 
     wide variety of effect sizes in the mean differences family (all versions of d) and 
     the variance overlap family (eta, omega, epsilon, r). 'MOTE' provides non-central 
@@ -33,4 +36,5 @@ Description: Measure of the Effect ('MOTE') is an effect size calculator, includ
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
+Config/testthat/edition: 3

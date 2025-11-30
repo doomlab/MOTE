@@ -1,7 +1,5 @@
 # MOTE
 
-[![Travis build status](https://travis-ci.org/doomlab/MOTE.svg?branch=master)](https://travis-ci.org/doomlab/MOTE)
-
 [![](https://cranlogs.r-pkg.org/badges/MOTE)](https://cran.r-project.org/package=MOTE)
 ![](http://cranlogs.r-pkg.org/badges/last-week/MOTE)
 ![](http://cranlogs.r-pkg.org/badges/last-day/MOTE)
@@ -30,6 +28,8 @@ To install the development version of the package take the following steps:
 You can also use the [Shiny App](http://aggieerin.com/shiny/mote/)! 
 
 # Build information
+
+1.5.1 - updated without a dependency on `ez` and fixed examples. 
 
 1.5 - Removed dependencies to ensure easier maintenance and installation. Cleaned up formulas and help page consistency. 
 
