@@ -21,6 +21,11 @@
 #'   correlation. Supply `r` and `n`. In this case, `r_effect()` will call
 #'   [r_correl()] with the same arguments.
 #'
+#' - `"v_chi_sq"` — Cramer's V from a chi-square test of association
+#'   for an r x c contingency table. Supply `x2`, `n`, `r`, and `c`. In
+#'   this case, `r_effect()` will call [v_chi_sq()] with the same
+#'   arguments.
+#'
 #' - `"epsilon_full_ss"` — epsilon-squared (\eqn{\epsilon^2}) from an ANOVA
 #'   table using model and error mean squares and the total sum of squares.
 #'   Supply `dfm`, `dfe`, `msm`, `mse`, and `sst`. In this case,
@@ -41,9 +46,15 @@
 #' @param n1 Sample size for group one (used when `design = "d_to_r"`).
 #' @param n2 Sample size for group two (used when `design = "d_to_r"`).
 #' @param r Sample Pearson correlation coefficient (used when
-#'   `design = "r_correl"`).
+#'   `design = "r_correl"`), or the number of rows in the contingency
+#'   table (used when `design = "v_chi_sq"`).
 #' @param n Sample size for the correlation (used when
-#'   `design = "r_correl"`).
+#'   `design = "r_correl"`), or the total sample size for the chi-square
+#'   test (used when `design = "v_chi_sq"`).
+#' @param x2 Chi-square test statistic for the contingency table (used
+#'   when `design = "v_chi_sq"`).
+#' @param c Number of columns in the contingency table (used when
+#'   `design = "v_chi_sq"`).
 #' @param dfm Degrees of freedom for the model term (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param dfe Degrees of freedom for the error term (used when
@@ -74,6 +85,8 @@
 #' r_effect(d = -1.88, n1 = 4, n2 = 4, a = .05, design = "d_to_r")
 #' # From a sample correlation to r and R^2
 #' r_effect(r = -0.8676594, n = 32, a = .05, design = "r_correl")
+#' # From a chi-square test of association to Cramer's V
+#' r_effect(x2 = 2.0496, n = 60, r = 3, c = 3, a = .05, design = "v_chi_sq")
 #' # From F and degrees of freedom to eta^2
 #' r_effect(dfm = 2, dfe = 8, f_value = 5.134, a = .05, design = "eta_f")
 #'
@@ -82,6 +95,8 @@ r_effect <- function(d = NULL,
                      n2 = NULL,
                      r = NULL,
                      n = NULL,
+                     x2 = NULL,
+                     c = NULL,
                      dfm = NULL,
                      dfe = NULL,
                      msm = NULL,
@@ -95,7 +110,8 @@ r_effect <- function(d = NULL,
 
   design <- match.arg(
     design,
-    choices = c("d_to_r", "r_correl", "epsilon_full_ss", "eta_f", "eta_full_ss")
+    choices = c("d_to_r", "r_correl", "v_chi_sq",
+                "epsilon_full_ss", "eta_f", "eta_full_ss")
   )
 
   if (design == "d_to_r") {
@@ -127,6 +143,25 @@ r_effect <- function(d = NULL,
         r = r,
         n = n,
         a = a
+      )
+    )
+  }
+
+  if (design == "v_chi_sq") {
+    if (is.null(x2) || is.null(n) ||
+        is.null(r)  || is.null(c)) {
+      stop(
+        "For design = 'v_chi_sq', you must supply x2, n, r, and c."
+      )
+    }
+
+    return(
+      v_chi_sq(
+        x2 = x2,
+        n  = n,
+        r  = r,
+        c  = c,
+        a  = a
       )
     )
   }
