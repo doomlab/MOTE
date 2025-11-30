@@ -8,8 +8,8 @@
 #' Currently, `r_effect()` supports effect sizes derived from Cohen's d,
 #' from correlations, and from ANOVA summaries via several designs (see
 #' **Supported designs**). These designs call lower-level functions such
-#' as [d_to_r()], [r_correl()], [epsilon_full_ss()], [eta_f()], and
-#' [eta_full_ss()] with the appropriate arguments.
+#' as [d_to_r()], [r_correl()], [epsilon_full_ss()], [eta_f()],
+#' [eta_full_ss()], and [eta_partial_ss()] with the appropriate arguments.
 #'
 #' @section Supported designs:
 #'
@@ -41,6 +41,12 @@
 #'   and `f_value`. In this case, `r_effect()` will call [eta_full_ss()] with
 #'   the same arguments.
 #'
+#' - `"eta_partial_ss"` — partial eta-squared (\eqn{\eta^2_p}) from ANOVA sums
+#'   of squares, using the model sum of squares and error sum of squares along
+#'   with the model and error degrees of freedom. Supply `dfm`, `dfe`, `ssm`,
+#'   `sse`, and `f_value`. In this case, `r_effect()` will call
+#'   [eta_partial_ss()] with the same arguments.
+#'
 #' @param d Cohen's d value for the contrast of interest (used when
 #'   `design = "d_to_r"`).
 #' @param n1 Sample size for group one (used when `design = "d_to_r"`).
@@ -56,9 +62,11 @@
 #' @param c Number of columns in the contingency table (used when
 #'   `design = "v_chi_sq"`).
 #' @param dfm Degrees of freedom for the model term (used when
-#'   `design = "epsilon_full_ss"`).
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
+#'   or `design = "eta_partial_ss"`).
 #' @param dfe Degrees of freedom for the error term (used when
-#'   `design = "epsilon_full_ss"`).
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
+#'   or `design = "eta_partial_ss"`).
 #' @param msm Mean square for the model (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param mse Mean square for the error (used when
@@ -66,9 +74,11 @@
 #' @param sst Total sum of squares for the outcome (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param ssm Sum of squares for the model term (used when
-#'   `design = "eta_full_ss"`).
+#'   `design = "eta_full_ss"` or `design = "eta_partial_ss"`).
+#' @param sse Sum of squares for the error term (used when
+#'   `design = "eta_partial_ss"`).
 #' @param f_value F statistic for the model term (used when
-#'   `design = "eta_f"` or `design = "eta_full_ss"`).
+#'   `design = "eta_f"` or `design = "eta_full_ss"` or `design = "eta_partial_ss"`).
 #' @param a Significance level used for confidence intervals. Defaults to 0.05.
 #' @param design Character string indicating which r-family effect size
 #'   design to use. See **Supported designs**.
@@ -89,6 +99,16 @@
 #' r_effect(x2 = 2.0496, n = 60, r = 3, c = 3, a = .05, design = "v_chi_sq")
 #' # From F and degrees of freedom to eta^2
 #' r_effect(dfm = 2, dfe = 8, f_value = 5.134, a = .05, design = "eta_f")
+#' # From sums of squares to partial eta^2
+#' r_effect(
+#'   dfm    = 4,
+#'   dfe    = 990,
+#'   ssm    = 338057.9,
+#'   sse    = 32833499,
+#'   f_value = 2.548,
+#'   a      = .05,
+#'   design = "eta_partial_ss"
+#' )
 #'
 r_effect <- function(d = NULL,
                      n1 = NULL,
@@ -103,6 +123,7 @@ r_effect <- function(d = NULL,
                      mse = NULL,
                      sst = NULL,
                      ssm = NULL,
+                     sse = NULL,
                      f_value = NULL,
                      a = 0.05,
                      design,
@@ -110,8 +131,15 @@ r_effect <- function(d = NULL,
 
   design <- match.arg(
     design,
-    choices = c("d_to_r", "r_correl", "v_chi_sq",
-                "epsilon_full_ss", "eta_f", "eta_full_ss")
+    choices = c(
+      "d_to_r",
+      "r_correl",
+      "v_chi_sq",
+      "epsilon_full_ss",
+      "eta_f",
+      "eta_full_ss",
+      "eta_partial_ss"
+    )
   )
 
   if (design == "d_to_r") {
@@ -198,7 +226,7 @@ r_effect <- function(d = NULL,
       eta_f(
         dfm    = dfm,
         dfe    = dfe,
-        Fvalue = f_value,
+        f_value = f_value,
         a      = a
       )
     )
@@ -219,7 +247,28 @@ r_effect <- function(d = NULL,
         dfe    = dfe,
         ssm    = ssm,
         sst    = sst,
-        Fvalue = f_value,
+        f_value = f_value,
+        a      = a
+      )
+    )
+  }
+
+  if (design == "eta_partial_ss") {
+    if (is.null(dfm) || is.null(dfe) ||
+        is.null(ssm) || is.null(sse) ||
+        is.null(f_value)) {
+      stop(
+        "For design = 'eta_partial_ss', you must supply dfm, dfe, ssm, sse, and f_value."
+      )
+    }
+
+    return(
+      eta_partial_ss(
+        dfm    = dfm,
+        dfe    = dfe,
+        ssm    = ssm,
+        sse    = sse,
+        f_value = f_value,
         a      = a
       )
     )
