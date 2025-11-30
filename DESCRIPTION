@@ -1,6 +1,6 @@
 Package: MOTE
-Version: 1.1.0
-Date: 2025-08-07
+Version: 1.2.0
+Date: 2025-11-23
 Title: Effect Size and Confidence Interval Calculator
 Authors@R: c(person("Erin M.", "Buchanan", role = c("aut", "cre"),
                      email = "buchananlab@gmail.com",
