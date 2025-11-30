@@ -1,12 +1,13 @@
 # MOTE
+[![Codecov test coverage](https://codecov.io/gh/doomlab/MOTE/branch/master/graph/badge.svg)](https://app.codecov.io/gh/doomlab/MOTE)
+![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
+![R-CMD-check](https://github.com/doomlab/MOTE/actions/workflows/R-CMD-check.yaml/badge.svg)
 
 [![CRAN status](https://www.r-pkg.org/badges/version/MOTE)](https://cran.r-project.org/package=MOTE)
-![R-CMD-check](https://github.com/doomlab/MOTE/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)
-![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![Dependencies](https://tinyverse.netlify.app/badge/MOTE)
 ![GitHub last commit](https://img.shields.io/github/last-commit/doomlab/MOTE.svg)
-![GitHub issues](https://img.shields.io/github/issues/doomlab/MOTE.svg)
+
 
 [![](https://cranlogs.r-pkg.org/badges/MOTE)](https://cran.r-project.org/package=MOTE)
 ![](http://cranlogs.r-pkg.org/badges/last-week/MOTE)
