@@ -21,7 +21,7 @@ contributors:
     orcid: "https://orcid.org/0000-0001-6349-5395"
 
 repository-code: "https://github.com/doomlab/MOTE"
-license: "GPL-3.0"
+license: "LGPL-3.0-or-later"
 
 keywords:
   - effect size
@@ -56,5 +56,5 @@ preferred-citation:
       orcid: "https://orcid.org/0000-0002-7403-469X"
   title: "MOTE: Measure of the Effect"
   version: "1.2.0"
-  date-released: "2025-02-01"
+  date-released: "2025-11-30"
   url: "https://github.com/doomlab/MOTE"
