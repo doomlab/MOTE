@@ -35,6 +35,8 @@ Description: Measure of the Effect ('MOTE') is an effect size calculator, includ
     information, visit <https://www.aggieerin.com/shiny-server>.
 License: LGPL-3
 Encoding: UTF-8
+URL: https://github.com/doomlab/MOTE
+BugReports: https://github.com/doomlab/MOTE/issues
 LazyData: true
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
