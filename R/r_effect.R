@@ -9,8 +9,8 @@
 #' from correlations, and from ANOVA summaries via several designs (see
 #' **Supported designs**). These designs call lower-level functions
 #' as [d_to_r()], [r_correl()], [epsilon_full_ss()], [eta_f()],
-#' [eta_full_ss()], [eta_partial_ss()], and [ges_partial_ss_mix()] with the
-#' appropriate arguments.
+#' [omega_f()], [eta_full_ss()], [eta_partial_ss()], [ges_partial_ss_mix()], and
+#' [ges_partial_ss_rm()] with the appropriate arguments.
 #'
 #' @section Supported designs:
 #'
@@ -36,6 +36,11 @@
 #'   its associated degrees of freedom. Supply `dfm`, `dfe`, and `f_value`.
 #'   In this case, `r_effect()` will call [eta_f()] with the same arguments.
 #'
+#' - `"omega_f"` — omega-squared (\eqn{\omega^2}) from an ANOVA F statistic,
+#'   its associated degrees of freedom, and the total sample size. Supply
+#'   `dfm`, `dfe`, `n`, and `f_value`. In this case, `r_effect()` will call
+#'   [omega_f()] with the same arguments.
+#'
 #' - `"eta_full_ss"` — eta-squared (\eqn{\eta^2}) from ANOVA sums of squares,
 #'   using the model sum of squares and total sum of squares along with the
 #'   model and error degrees of freedom. Supply `dfm`, `dfe`, `ssm`, `sst`,
@@ -55,6 +60,15 @@
 #'   `sse`, and `f_value`. In this case, `r_effect()` will call
 #'   [ges_partial_ss_mix()] with the same arguments.
 #'
+#' - `"ges_partial_ss_rm"` — partial generalized eta-squared
+#'   (\eqn{\eta^2_{G}}) for repeated-measures designs, using the model sum of
+#'   squares, between-subjects sum of squares, and multiple error sums of
+#'   squares (e.g., for each level or effect) along with the model and error
+#'   degrees of freedom. Supply `dfm`, `dfe`, `ssm`, `sss`, `sse1`,
+#'   `sse2`, `sse3`, and `f_value`. In this case, `r_effect()` will call
+#'   [ges_partial_ss_rm()] with the same arguments.
+#'
+#'
 #' @param d Cohen's d value for the contrast of interest (used when
 #'   `design = "d_to_r"`).
 #' @param n1 Sample size for group one (used when `design = "d_to_r"`).
@@ -63,18 +77,21 @@
 #'   `design = "r_correl"`), or the number of rows in the contingency
 #'   table (used when `design = "v_chi_sq"`).
 #' @param n Sample size for the correlation (used when
-#'   `design = "r_correl"`), or the total sample size for the chi-square
-#'   test (used when `design = "v_chi_sq"`).
+#'   `design = "r_correl"`), the total sample size for the chi-square
+#'   test (used when `design = "v_chi_sq"`), or the total sample size for
+#'   the ANOVA (used when `design = "omega_f"`).
 #' @param x2 Chi-square test statistic for the contingency table (used
 #'   when `design = "v_chi_sq"`).
 #' @param c Number of columns in the contingency table (used when
 #'   `design = "v_chi_sq"`).
 #' @param dfm Degrees of freedom for the model term (used when
-#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
-#'   `design = "eta_partial_ss"`, or `design = "ges_partial_ss_mix"`).
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "eta_full_ss"`,
+#'   `design = "eta_partial_ss"`, `design = "ges_partial_ss_mix"`, or
+#'   `design = "ges_partial_ss_rm"`).
 #' @param dfe Degrees of freedom for the error term (used when
-#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
-#'   `design = "eta_partial_ss"`, or `design = "ges_partial_ss_mix"`).
+#'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "omega_f"`, `design = "eta_full_ss"`,
+#'   `design = "eta_partial_ss"`, `design = "ges_partial_ss_mix"`, or
+#'   `design = "ges_partial_ss_rm"`).
 #' @param msm Mean square for the model (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param mse Mean square for the error (used when
@@ -82,15 +99,23 @@
 #' @param sst Total sum of squares for the outcome (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param ssm Sum of squares for the model term (used when
-#'   `design = "eta_full_ss"`, `design = "eta_partial_ss"`, or
-#'   `design = "ges_partial_ss_mix"`).
+#'   `design = "eta_full_ss"`, `design = "eta_partial_ss"`,
+#'   `design = "ges_partial_ss_mix"`, or `design = "ges_partial_ss_rm"`).
 #' @param sss Sum of squares for the subject or between-subjects term
-#'   (used when `design = "ges_partial_ss_mix"`).
+#'   (used when `design = "ges_partial_ss_mix"` or
+#'   `design = "ges_partial_ss_rm"`).
 #' @param sse Sum of squares for the error term (used when
 #'   `design = "eta_partial_ss"` or `design = "ges_partial_ss_mix"`).
+#' @param sse1 Sum of squares for the first error term (used when
+#'   `design = "ges_partial_ss_rm"`).
+#' @param sse2 Sum of squares for the second error term (used when
+#'   `design = "ges_partial_ss_rm"`).
+#' @param sse3 Sum of squares for the third error term (used when
+#'   `design = "ges_partial_ss_rm"`).
 #' @param f_value F statistic for the model term (used when
 #'   `design = "eta_f"`, `design = "eta_full_ss"`, `design = "eta_partial_ss"`,
-#'   or `design = "ges_partial_ss_mix"`).
+#'   `design = "ges_partial_ss_mix"`, `design = "ges_partial_ss_rm"`, or
+#'   `design = "omega_f"`).
 #' @param a Significance level used for confidence intervals. Defaults to 0.05.
 #' @param design Character string indicating which r-family effect size
 #'   design to use. See **Supported designs**.
@@ -111,6 +136,8 @@
 #' r_effect(x2 = 2.0496, n = 60, r = 3, c = 3, a = .05, design = "v_chi_sq")
 #' # From F and degrees of freedom to eta^2
 #' r_effect(dfm = 2, dfe = 8, f_value = 5.134, a = .05, design = "eta_f")
+#' # From F, degrees of freedom, and N to omega^2
+#' r_effect(dfm = 2, dfe = 8, n = 11, f_value = 5.134, a = .05, design = "omega_f")
 #' # From sums of squares to partial eta^2
 #' r_effect(
 #'   dfm    = 4,
@@ -133,6 +160,20 @@
 #'   design  = "ges_partial_ss_mix"
 #' )
 #'
+#' # From repeated-measures sums of squares to partial generalized eta^2
+#' r_effect(
+#'   dfm     = 1,
+#'   dfe     = 157,
+#'   ssm     = 2442.948,
+#'   sss     = 76988.13,
+#'   sse1    = 5402.567,
+#'   sse2    = 8318.75,
+#'   sse3    = 6074.417,
+#'   f_value = 70.9927,
+#'   a       = .05,
+#'   design  = "ges_partial_ss_rm"
+#' )
+#'
 r_effect <- function(d = NULL,
                      n1 = NULL,
                      n2 = NULL,
@@ -148,6 +189,9 @@ r_effect <- function(d = NULL,
                      ssm = NULL,
                      sss = NULL,
                      sse = NULL,
+                     sse1 = NULL,
+                     sse2 = NULL,
+                     sse3 = NULL,
                      f_value = NULL,
                      a = 0.05,
                      design,
@@ -161,9 +205,11 @@ r_effect <- function(d = NULL,
       "v_chi_sq",
       "epsilon_full_ss",
       "eta_f",
+      "omega_f",
       "eta_full_ss",
       "eta_partial_ss",
-      "ges_partial_ss_mix"
+      "ges_partial_ss_mix",
+      "ges_partial_ss_rm"
     )
   )
 
@@ -258,6 +304,25 @@ r_effect <- function(d = NULL,
     )
   }
 
+  if (design == "omega_f") {
+    if (is.null(dfm) || is.null(dfe) ||
+        is.null(n)   || is.null(f_value)) {
+      stop(
+        "For design = 'omega_f', you must supply dfm, dfe, n, and f_value."
+      )
+    }
+
+    return(
+      omega_f(
+        dfm     = dfm,
+        dfe     = dfe,
+        f_value = f_value,
+        n       = n,
+        a       = a
+      )
+    )
+  }
+
   if (design == "eta_full_ss") {
     if (is.null(dfm) || is.null(dfe) ||
         is.null(ssm) || is.null(sst) ||
@@ -321,6 +386,31 @@ r_effect <- function(d = NULL,
         sse    = sse,
         f_value = f_value,
         a      = a
+      )
+    )
+  }
+
+  if (design == "ges_partial_ss_rm") {
+    if (is.null(dfm)  || is.null(dfe)  ||
+        is.null(ssm)  || is.null(sss)  ||
+        is.null(sse1) || is.null(sse2) || is.null(sse3) ||
+        is.null(f_value)) {
+      stop(
+        "For design = 'ges_partial_ss_rm', you must supply dfm, dfe, ssm, sss, sse1, sse2, sse3, and f_value."
+      )
+    }
+
+    return(
+      ges_partial_ss_rm(
+        dfm     = dfm,
+        dfe     = dfe,
+        ssm     = ssm,
+        sss     = sss,
+        sse1    = sse1,
+        sse2    = sse2,
+        sse3    = sse3,
+        f_value = f_value,
+        a       = a
       )
     )
   }
