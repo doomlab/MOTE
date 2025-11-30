@@ -7,9 +7,10 @@
 #'
 #' Currently, `r_effect()` supports effect sizes derived from Cohen's d,
 #' from correlations, and from ANOVA summaries via several designs (see
-#' **Supported designs**). These designs call lower-level functions such
+#' **Supported designs**). These designs call lower-level functions
 #' as [d_to_r()], [r_correl()], [epsilon_full_ss()], [eta_f()],
-#' [eta_full_ss()], and [eta_partial_ss()] with the appropriate arguments.
+#' [eta_full_ss()], [eta_partial_ss()], and [ges_partial_ss_mix()] with the
+#' appropriate arguments.
 #'
 #' @section Supported designs:
 #'
@@ -47,6 +48,13 @@
 #'   `sse`, and `f_value`. In this case, `r_effect()` will call
 #'   [eta_partial_ss()] with the same arguments.
 #'
+#' - `"ges_partial_ss_mix"` — partial generalized eta-squared
+#'   (\eqn{\eta^2_{G}}) for mixed designs, using the model sum of squares,
+#'   between-subjects sum of squares, and error sum of squares along with the
+#'   model and error degrees of freedom. Supply `dfm`, `dfe`, `ssm`, `sss`,
+#'   `sse`, and `f_value`. In this case, `r_effect()` will call
+#'   [ges_partial_ss_mix()] with the same arguments.
+#'
 #' @param d Cohen's d value for the contrast of interest (used when
 #'   `design = "d_to_r"`).
 #' @param n1 Sample size for group one (used when `design = "d_to_r"`).
@@ -63,10 +71,10 @@
 #'   `design = "v_chi_sq"`).
 #' @param dfm Degrees of freedom for the model term (used when
 #'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
-#'   or `design = "eta_partial_ss"`).
+#'   `design = "eta_partial_ss"`, or `design = "ges_partial_ss_mix"`).
 #' @param dfe Degrees of freedom for the error term (used when
 #'   `design = "epsilon_full_ss"`, `design = "eta_f"`, `design = "eta_full_ss"`,
-#'   or `design = "eta_partial_ss"`).
+#'   `design = "eta_partial_ss"`, or `design = "ges_partial_ss_mix"`).
 #' @param msm Mean square for the model (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param mse Mean square for the error (used when
@@ -74,11 +82,15 @@
 #' @param sst Total sum of squares for the outcome (used when
 #'   `design = "epsilon_full_ss"`).
 #' @param ssm Sum of squares for the model term (used when
-#'   `design = "eta_full_ss"` or `design = "eta_partial_ss"`).
+#'   `design = "eta_full_ss"`, `design = "eta_partial_ss"`, or
+#'   `design = "ges_partial_ss_mix"`).
+#' @param sss Sum of squares for the subject or between-subjects term
+#'   (used when `design = "ges_partial_ss_mix"`).
 #' @param sse Sum of squares for the error term (used when
-#'   `design = "eta_partial_ss"`).
+#'   `design = "eta_partial_ss"` or `design = "ges_partial_ss_mix"`).
 #' @param f_value F statistic for the model term (used when
-#'   `design = "eta_f"` or `design = "eta_full_ss"` or `design = "eta_partial_ss"`).
+#'   `design = "eta_f"`, `design = "eta_full_ss"`, `design = "eta_partial_ss"`,
+#'   or `design = "ges_partial_ss_mix"`).
 #' @param a Significance level used for confidence intervals. Defaults to 0.05.
 #' @param design Character string indicating which r-family effect size
 #'   design to use. See **Supported designs**.
@@ -109,6 +121,17 @@
 #'   a      = .05,
 #'   design = "eta_partial_ss"
 #' )
+#' # From mixed-design sums of squares to partial generalized eta^2
+#' r_effect(
+#'   dfm     = 1,
+#'   dfe     = 156,
+#'   ssm     = 71.07608,
+#'   sss     = 30936.498,
+#'   sse     = 8657.094,
+#'   f_value = 1.280784,
+#'   a       = .05,
+#'   design  = "ges_partial_ss_mix"
+#' )
 #'
 r_effect <- function(d = NULL,
                      n1 = NULL,
@@ -123,6 +146,7 @@ r_effect <- function(d = NULL,
                      mse = NULL,
                      sst = NULL,
                      ssm = NULL,
+                     sss = NULL,
                      sse = NULL,
                      f_value = NULL,
                      a = 0.05,
@@ -138,7 +162,8 @@ r_effect <- function(d = NULL,
       "epsilon_full_ss",
       "eta_f",
       "eta_full_ss",
-      "eta_partial_ss"
+      "eta_partial_ss",
+      "ges_partial_ss_mix"
     )
   )
 
@@ -199,7 +224,8 @@ r_effect <- function(d = NULL,
         is.null(msm) || is.null(mse) ||
         is.null(sst)) {
       stop(
-        "For design = 'epsilon_full_ss', you must supply dfm, dfe, msm, mse, and sst."
+        "For design = 'epsilon_full_ss', you must supply dfm, 
+        dfe, msm, mse, and sst."
       )
     }
 
@@ -237,7 +263,8 @@ r_effect <- function(d = NULL,
         is.null(ssm) || is.null(sst) ||
         is.null(f_value)) {
       stop(
-        "For design = 'eta_full_ss', you must supply dfm, dfe, ssm, sst, and f_value."
+        "For design = 'eta_full_ss', you must supply dfm, dfe, 
+        ssm, sst, and f_value."
       )
     }
 
@@ -258,7 +285,8 @@ r_effect <- function(d = NULL,
         is.null(ssm) || is.null(sse) ||
         is.null(f_value)) {
       stop(
-        "For design = 'eta_partial_ss', you must supply dfm, dfe, ssm, sse, and f_value."
+        "For design = 'eta_partial_ss', you must supply dfm, dfe, 
+        ssm, sse, and f_value."
       )
     }
 
@@ -267,6 +295,29 @@ r_effect <- function(d = NULL,
         dfm    = dfm,
         dfe    = dfe,
         ssm    = ssm,
+        sse    = sse,
+        f_value = f_value,
+        a      = a
+      )
+    )
+  }
+
+  if (design == "ges_partial_ss_mix") {
+    if (is.null(dfm) || is.null(dfe) ||
+        is.null(ssm) || is.null(sss) ||
+        is.null(sse) || is.null(f_value)) {
+      stop(
+        "For design = 'ges_partial_ss_mix', you must supply dfm, 
+        dfe, ssm, sss, sse, and f_value."
+      )
+    }
+
+    return(
+      ges_partial_ss_mix(
+        dfm    = dfm,
+        dfe    = dfe,
+        ssm    = ssm,
+        sss    = sss,
         sse    = sse,
         f_value = f_value,
         a      = a
