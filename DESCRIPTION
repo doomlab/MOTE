@@ -1,6 +1,6 @@
 Package: MOTE
-Version: 1.2.0
-Date: 2025-11-23
+Version: 1.2.1
+Date: 2025-12-05
 Title: Effect Size and Confidence Interval Calculator
 Authors@R: c(person("Erin M.", "Buchanan", role = c("aut", "cre"),
                      email = "buchananlab@gmail.com",
@@ -31,8 +31,7 @@ Description: Measure of the Effect ('MOTE') is an effect size calculator, includ
     <doi:10.1037/0003-066X.54.8.594>), the vast majority of peer-reviewed, 
     published academic studies stop short of reporting effect sizes and confidence 
     intervals (Cumming, 2013, <doi:10.1177/0956797613504966>). 'MOTE' simplifies 
-    the use and interpretation of effect sizes and confidence intervals. For more 
-    information, visit <https://www.aggieerin.com/shiny-server>.
+    the use and interpretation of effect sizes and confidence intervals. 
 License: LGPL-3
 Encoding: UTF-8
 URL: https://github.com/doomlab/MOTE

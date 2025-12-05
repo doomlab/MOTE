@@ -1,0 +1,57 @@
+apa                     Format numbers for APA-style reporting
+bn1_data                Between-Subjects One-Way ANOVA Example Data
+bn2_data                Between-Subjects Two-Way ANOVA Example Data
+chisq_data              Chi-Square Test Example Data
+ci_r2                   Confidence interval for R^2 (exported helper)
+d_dep_t_avg             Cohen's d for Paired t Using the Average SD
+                        Denominator
+d_dep_t_diff            Cohen's d for Paired t Using the SD of
+                        Difference Scores
+d_dep_t_diff_t          Cohen's d from t for Paired Samples Using the
+                        SD of Difference Scores
+d_dep_t_rm              Cohen's d for Paired t Controlling for
+                        Correlation (Repeated Measures)
+d_effect                General interface for Cohen's d
+d_ind_t                 Cohen's d for Independent Samples Using the
+                        Pooled SD
+d_ind_t_t               Cohen's d from t for Independent Samples
+                        (Pooled SD)
+d_prop                  Cohen's d (SMD) for Independent Proportions
+                        (Binary Outcomes)
+d_single_t              Cohen's d for One-Sample t from Summary Stats
+d_single_t_t            Cohen's d from t for One-Sample t-Test
+d_to_r                  r and Coefficient of Determination (R2) from d
+d_z_mean                Cohen's d for Z-test from Population Mean and
+                        SD
+d_z_z                   Cohen's d from z-statistic for Z-test
+delta_ind_t             d_{delta} for Between Subjects with Control
+                        Group SD Denominator
+dept_data               Dependent t Example Data
+epsilon_full_ss         epsilon^2 for ANOVA from F and Sum of Squares
+eta_f                   eta^2 and Coefficient of Determination (R^2)
+                        for ANOVA from F
+eta_full_ss             eta^2 for ANOVA from F and Sum of Squares
+eta_partial_ss          eta^2_p for ANOVA from F and Sum of Squares
+g_ind_t                 d_g Corrected for Independent t
+ges_partial_ss_mix      eta^2_{G} (Partial Generalized Eta-Squared) for
+                        Mixed Design ANOVA from F
+ges_partial_ss_rm       eta^2_{G} (Partial Generalized Eta-Squared) for
+                        Repeated-Measures ANOVA from F
+h_prop                  Cohen's h for Independent Proportions
+indt_data               Independent-Samples t-Test Example Data
+mix2_data               Mixed Two-Way ANOVA Example Data
+odds_ratio              Odds Ratio from 2x2 Table
+omega_f                 omega^2 for ANOVA from F
+omega_full_ss           omega^2 for One-Way and Multi-Way ANOVA from F
+omega_g_ss_rm           omega^2_G (Generalized Omega Squared) for
+                        Multi-Way and Mixed ANOVA from F
+omega_partial_ss_bn     omega^2_p (Partial Omega Squared) for
+                        Between-Subjects ANOVA from F
+omega_partial_ss_rm     omega^2_p (Partial Omega Squared) for Repeated
+                        Measures ANOVA from F
+r_correl                r to Coefficient of Determination (R^2) from F
+r_effect                r-family effect size wrapper
+rm1_data                Repeated Measures One-Way ANOVA Example Data
+rm2_data                Repeated Measures Two-Way ANOVA Example Data
+singt_data              One-Sample t-Test Example Data
+v_chi_sq                V for Chi-Square

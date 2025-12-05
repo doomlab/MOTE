@@ -8,3 +8,4 @@
 inst/CITATION.cff
 ^\.github/
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
