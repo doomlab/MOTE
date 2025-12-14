@@ -19,12 +19,14 @@
 * A full set of unit tests has been added using **testthat**, providing >95% coverage across all effect size functions.
 * All examples run quickly, and documentation has been updated to meet current CRAN standards.
 
-## Reverse dependencies
+## revdepcheck results
 
-There is 1 reverse dependency. No breaking changes were introduced because:
-* Issue with tabledown figured out and fixed. 
+* Issue with tabledown discovered and fixed. 
 
-Reverse dependency checks show no issues.
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
 
 ## Additional comments
 
