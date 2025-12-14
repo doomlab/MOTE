@@ -30,7 +30,6 @@ devtools::install_github("doomlab/MOTE")
 
 ## to submit
 roxygen2::roxygenize()
-devtools::check()
 devtools::check(cran = TRUE, manual = TRUE)
 devtools::spell_check()
 revdepcheck::revdep_check()
