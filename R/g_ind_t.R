@@ -49,7 +49,7 @@
 #'   \item{statistic}{the \eqn{t}-statistic in APA style for markdown printing}
 #' }
 #'
-#' @keywords effect size#' @keywords effect size omega ANOVA independent t correction
+#' @keywords effect size omega ANOVA independent t correction
 #' @import stats
 #' @export
 #' @examples

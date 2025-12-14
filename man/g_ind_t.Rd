@@ -106,12 +106,10 @@ by the correction:
 # with a large effect size, t(6) = -2.66, p = .038, d_g = 1.64.
 
 }
-\keyword{@keywords}
 \keyword{ANOVA}
 \keyword{correction}
 \keyword{effect}
 \keyword{independent}
 \keyword{omega}
 \keyword{size}
-\keyword{size#'}
 \keyword{t}
