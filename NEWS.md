@@ -1,3 +1,7 @@
+## MOTE 1.2.2
+
+Fixed issue with `apa` return to ensure backwards compatibility with `tabledown`. 
+
 ## MOTE 1.2.1
 
 Update issues with commas and https links for submission. 

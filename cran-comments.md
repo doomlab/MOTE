@@ -22,9 +22,7 @@
 ## Reverse dependencies
 
 There is 1 reverse dependency. No breaking changes were introduced because:
-* All existing exported functions remain available under their original dotted names.
-* No arguments or return values of legacy functions were removed.
-* Only new, additional snake_case APIs were added.
+* Issue with tabledown figured out and fixed. 
 
 Reverse dependency checks show no issues.
 

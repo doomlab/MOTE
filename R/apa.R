@@ -33,39 +33,57 @@ apa <- function(value, decimals = 3, leading = TRUE) {
     stop("Be sure to include the numeric values you wish to format.")
   }
 
-  # Allow data frames with all-numeric columns; coerce to matrix
-  if (is.data.frame(value)) {
+  # Track input type
+  is_df  <- is.data.frame(value)
+  is_vec <- is.numeric(value) && is.null(dim(value))
+
+  # Validate value
+  if (is_df) {
     if (!all(vapply(value, is.numeric, logical(1)))) {
       stop("All columns in 'value' must be numeric.")
     }
+    value_mat <- as.matrix(value)
+  } else if (is.numeric(value)) {
+    value_mat <- as.matrix(value)
+  } else {
+    stop(
+      "'value' must be numeric (vector or matrix) ",
+      "or a data frame with all-numeric columns."
+    )
   }
 
-  if (!is.numeric(value) && !is.data.frame(value)) {
-    stop("'value' must be numeric (vector, matrix) 
-      or a data frame with all-numeric columns.")
-  }
-
-  # Validate 'decimals'
+  # Validate decimals
   if (!is.numeric(decimals) || length(decimals) != 1 ||
-        decimals < 0 || decimals != as.integer(decimals)) {
+      decimals < 0 || decimals != as.integer(decimals)) {
     stop("'decimals' must be a single non-negative integer.")
   }
   decimals <- as.integer(decimals)
 
-  # Validate 'leading'
+  # Validate leading
   if (!is.logical(leading) || length(leading) != 1) {
     stop("'leading' must be TRUE or FALSE.")
   }
 
-  # Base formatted string with fixed decimal places
-  base_fmt <- format(round(as.matrix(as.data.frame(value)), decimals),
-                     nsmall = decimals, trim = FALSE, scientific = FALSE)
+  # Format values
+  out <- format(
+    round(value_mat, decimals),
+    nsmall = decimals,
+    trim = FALSE,
+    scientific = FALSE
+  )
 
-  if (isTRUE(leading)) {
-    formnumber <- base_fmt
-  } else {
-    # Remove leading zero for values with absolute value < 1
-    formnumber <- sub("^(-?)0\\.", "\\1.", base_fmt)
+  if (!leading) {
+    out <- sub("^(-?)0\\.", "\\1.", out)
   }
-  return(formnumber)
+
+  # Restore original structure
+  if (is_df) {
+    out <- as.data.frame(out, stringsAsFactors = FALSE)
+    names(out) <- names(value)
+  } else if (is_vec) {
+    out <- as.vector(out)
+    names(out) <- NULL
+  }
+
+  out
 }

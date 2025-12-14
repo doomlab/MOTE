@@ -3,3 +3,5 @@
 .DS_Store
 no-sync
 docs
+MOTE.Rcheck
+revdep
